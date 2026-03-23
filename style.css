@@ -821,3 +821,15 @@ input{
     min-height:30px;
   }
 }
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(7,8,13,.56) 0%, rgba(7,8,13,.90) 82%, rgba(7,8,13,1) 100%),
+    url("../../assets/covers/la-ultima-conexion.jpg");
+  background-size:cover;
+  background-position:center;
+  opacity:.28;
+  filter:saturate(.95);
+}
