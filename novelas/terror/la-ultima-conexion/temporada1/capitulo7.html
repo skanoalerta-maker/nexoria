@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 7 | La última conexión</title>
+  <meta name="description" content="Capítulo 7 de La última conexión: Los fragmentos." />
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --bg2:#131722;
+      --card:rgba(20,24,35,.9);
+      --line:rgba(255,255,255,.08);
+      --text:#f7f7fb;
+      --muted:#b8bfd1;
+      --muted2:#8f98b0;
+      --accent:#b91c1c;
+      --accent2:#ef4444;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),
+        linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);
+      line-height:1.8;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(7,8,13,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));
+      border:1px solid rgba(239,68,68,.18);
+      box-shadow:0 0 24px rgba(185,28,28,.12);
+      font-weight:700;
+      color:#ffd2d2;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff1f1;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(185,28,28,.25);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#f2eaea;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,8,13,.56) 0%, rgba(7,8,13,.90) 82%, rgba(7,8,13,1) 100%),
+        url("../../assets/covers/la-ultima-conexion.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.95);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(185,28,28,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:#ffb1b1;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#eadede;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%,360px);
+      background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));
+      border:1px solid rgba(239,68,68,.16);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.14);
+      color:#ffbdbd;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#fff1f1;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 18px 70px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff7f7;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffe2e2;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:30px 24px 18px;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.85;
+      color:#fff1f1;
+      margin:0 0 24px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(239,68,68,.42);
+      background:rgba(239,68,68,.06);
+      border-radius:0 14px 14px 0;
+    }
+
+    .story p{
+      margin:0 0 20px;
+      color:#e7dede;
+      font-size:17px;
+      line-height:1.8;
+      letter-spacing:.01em;
+    }
+
+    .story .quote{
+      margin:30px 0;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));
+      border:1px solid rgba(239,68,68,.12);
+      color:#fff3f3;
+      font-size:18px;
+      line-height:1.6;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+      margin:30px auto;
+    }
+
+    .reader-bottom{
+      padding:22px 24px 26px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-space{height:20px}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{justify-content:flex-start}
+      .chapter-card{width:100%;max-width:unset}
+    }
+
+    @media (max-width:640px){
+      .topbar-inner{padding:14px}
+      .hero-inner{padding:30px 14px 20px}
+      .content-wrap{padding:16px 12px 50px}
+      .reader{border-radius:16px}
+      .reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}
+      .reader-body{padding-top:22px}
+      .hero-copy h1{font-size:30px}
+      .hero-copy p{font-size:15px;line-height:1.65}
+      .chapter-card{padding:16px}
+      .chapter-card h2{font-size:21px}
+      .meta{grid-template-columns:1fr}
+      .lead{font-size:16px;line-height:1.75}
+      .story p{font-size:15px;line-height:1.72}
+      .story .quote{font-size:16px;padding:16px}
+      .top-actions,.nav-actions{width:100%}
+      .btn,.nav-actions .btn{width:100%;flex:1 1 100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">T</div>
+          <div class="brand-text">
+            <p class="brand-title">La última conexión</p>
+            <p class="brand-sub">Historia de terror</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a href="../../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a href="capitulo8.html" class="btn btn-primary">Seguir con la historia →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Terror / Capítulo 7</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Terror psicológico</p>
+            <h1>La última conexión</h1>
+            <p>
+              Daniel destruyó el teléfono creyendo que así rompería la guía de la noche. Lo que logró fue algo peor: multiplicar su reflejo, dispersar la presencia y abrir una pregunta insoportable. Si cada fragmento devuelve una versión distinta de su cara, ¿cuál de todas sigue siendo la suya?
+            </p>
+          </div>
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Identidad</div>
+              <h2>Los fragmentos</h2>
+              <p>
+                La pantalla rota ya no muestra mensajes. Ahora devuelve algo mucho peor: copias mínimas, desfasadas, cada una con una expresión distinta. Y en medio de esa multiplicación, Daniel deberá enfrentar una prueba brutal para saber si todavía queda uno de él que siga siendo real.
+              </p>
+              <div class="meta">
+                <div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Premium</p></div>
+                <div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Descenso</p></div>
+                <div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Reflejo</p></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 7: Los fragmentos</h3>
+            <p>Terror · Cuando tu cara deja de coincidir contigo, el miedo cambia de nombre</p>
+          </div>
+          <div class="reader-badge">Capítulo bloqueado / premium</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Daniel no apartó la vista del teléfono roto. Los pedazos de vidrio seguían devolviéndole su rostro en ángulos mínimos, distorsionados, quebrados por líneas de luz blanca. Pero no era solo la multiplicación lo que lo estaba deshaciendo. Era la diferencia. Cada fragmento le devolvía una versión apenas distinta de sí mismo. En una sonreía. En otra parecía agotado. En otra tenía los ojos demasiado abiertos. En otra... no estaba mirando hacia el mismo lugar que él.
+            </p>
+
+            <div class="quote">
+              Y esa fue la primera vez que entendió que el reflejo no estaba roto.
+            </div>
+
+            <div class="quote">
+              El que se estaba rompiendo era él.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La risa del clóset se extinguió lentamente.</p>
+            <p>No de golpe.</p>
+            <p>No como un sonido que termina.</p>
+
+            <p>Más bien como algo que se retiró un paso para observar el efecto.</p>
+
+            <p>Daniel seguía de pie.</p>
+            <p>O eso creía.</p>
+
+            <p>Porque de pronto el cuerpo le pesó de una manera extraña, como si llevara un retraso de medio segundo respecto de sí mismo.</p>
+
+            <p>Levantó la mano derecha.</p>
+
+            <p>Los fragmentos del teléfono mostraron varias manos levantándose.</p>
+            <p>Ninguna exactamente al mismo tiempo.</p>
+
+            <div class="quote">
+              Una de ellas fue antes.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel retiró el pie del teléfono roto como si acabara de pisar algo vivo.</p>
+
+            <p>No podía seguir mirándolo.</p>
+            <p>Y sin embargo necesitaba hacerlo.</p>
+            <p>Porque ahora sabía que ahí había información.</p>
+            <p>Horrible.</p>
+            <p>Peligrosa.</p>
+            <p>Pero información al fin.</p>
+
+            <div class="quote">
+              En esa habitación, cualquier cosa que mostrara algo era automáticamente más valiosa que el vacío.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Se agachó muy despacio.</p>
+            <p>Tomó el celular con dos dedos por el borde menos astillado.</p>
+
+            <p>La pantalla siguió encendida.</p>
+            <p>No había chat ya.</p>
+            <p>No había texto.</p>
+            <p>No había interfaz.</p>
+
+            <p>Solo su reflejo dividido.</p>
+
+            <div class="quote">
+              Y, detrás de él, una oscuridad que no coincidía con la habitación real.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel levantó la vista de inmediato.</p>
+            <p>Miró el clóset verdadero.</p>
+            <p>La rendija seguía abierta apenas.</p>
+            <p>Todo quieto.</p>
+
+            <p>Bajó otra vez al teléfono.</p>
+
+            <p>En el reflejo, detrás de su hombro izquierdo, la oscuridad parecía más cerca.</p>
+            <p>Más alta.</p>
+            <p>Como si hubiera un pasillo donde no debía haber ninguno.</p>
+
+            <div class="quote">
+              Y algo esperando al fondo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>No era una figura completa.</p>
+            <p>No todavía.</p>
+
+            <p>Solo una impresión de volumen.</p>
+            <p>Una densidad de negro que sugería forma sin entregarla del todo.</p>
+
+            <p>Daniel quiso dejar el teléfono.</p>
+            <p>No pudo.</p>
+
+            <p>Algo en él —curiosidad, miedo, pura necesidad de certeza— lo obligó a seguir mirando.</p>
+
+            <div class="quote">
+              Y entonces el reflejo habló.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>No el clóset.</p>
+            <p>No una voz detrás.</p>
+            <p>No un susurro en la pieza.</p>
+
+            <p>Fue su propia boca en uno de los fragmentos.</p>
+            <p>Solo en uno.</p>
+
+            <p>El pedazo triangular más grande, cerca de la esquina inferior de la pantalla rota.</p>
+
+            <p>Su boca —o una boca con su forma— se movió apenas y dijo:</p>
+
+            <div class="quote">
+              —Todavía no.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel soltó el teléfono otra vez.</p>
+            <p>Esta vez no por sobresalto puro.</p>
+
+            <p>Lo soltó porque su cuerpo ya no soportó sostener un objeto que le devolvía la evidencia física de una descoordinación entre lo que él hacía y lo que su imagen decidía hacer por su cuenta.</p>
+
+            <p>El celular cayó.</p>
+            <p>La pantalla parpadeó.</p>
+
+            <p>Y durante un segundo todas las versiones de su cara desaparecieron.</p>
+
+            <div class="quote">
+              Ese segundo de oscuridad fue el único alivio real que sintió en toda la noche.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Luego la pantalla volvió.</p>
+            <p>Y esta vez ya no mostró su rostro completo.</p>
+
+            <p>Mostró solo un ojo.</p>
+            <p>Uno solo.</p>
+            <p>Muy abierto.</p>
+            <p>Mirándolo desde un ángulo que no correspondía con ninguna posición en la que él estuviera parado.</p>
+
+            <div class="quote">
+              Como si algo desde dentro del propio vidrio hubiera tomado distancia para observarlo mejor.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El clóset hizo un ruido mínimo otra vez.</p>
+            <p>No la puerta.</p>
+            <p>No la madera.</p>
+
+            <p>Tela.</p>
+
+            <p>Como si una camisa o un abrigo se hubiera corrido apenas entre los ganchos.</p>
+
+            <p>Daniel levantó la cabeza hacia esa oscuridad.</p>
+
+            <p>Y entonces lo supo con una certeza que no vino del razonamiento.</p>
+
+            <p>Vino del cuerpo.</p>
+
+            <div class="quote">
+              Si miraba demasiado tiempo una sola cosa, la otra avanzaba.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Teléfono.</p>
+            <p>Clóset.</p>
+            <p>Reflejos.</p>
+            <p>Rendija.</p>
+
+            <p>La habitación se había convertido en una trampa de atención.</p>
+
+            <p>Todo dependía de dónde posara la mirada.</p>
+
+            <div class="quote">
+              Y quizá también de cuál Daniel estaba mirando.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Le vino otro recuerdo sin permiso.</p>
+
+            <p>No una imagen ahora.</p>
+            <p>Una sensación.</p>
+
+            <p>Agua helada en la cara.</p>
+            <p>Su baño.</p>
+            <p>La mano apoyada en el lavamanos.</p>
+
+            <p>Él repitiéndose algo frente al espejo una y otra vez.</p>
+
+            <div class="quote">
+              No soy el que sigue despierto.
+            </div>
+
+            <div class="quote">
+              No soy el que sigue despierto.
+            </div>
+
+            <div class="quote">
+              No soy el que sigue despierto.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel abrió mucho los ojos.</p>
+
+            <p>Eso sí lo recordaba a medias.</p>
+            <p>Muy a medias.</p>
+
+            <p>Una noche de hacía algunos días.</p>
+            <p>O tal vez semanas.</p>
+            <p>Levantarse sobresaltado.</p>
+            <p>Ir al baño.</p>
+            <p>Sentir que había alguien con él dentro del pensamiento.</p>
+
+            <p>Y repetir esa frase sin saber de dónde salía.</p>
+
+            <div class="quote">
+              Como si alguna parte de sí mismo ya llevara tiempo intentando dejarse instrucciones.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Miró hacia la puerta de la pieza.</p>
+            <p>Sigue cerrada.</p>
+            <p>Miró la ventana.</p>
+            <p>Sigue inmóvil.</p>
+            <p>Miró el clóset.</p>
+            <p>La rendija no se había abierto más.</p>
+
+            <p>Y aun así supo que algo empeoraba.</p>
+
+            <p>No por movimiento.</p>
+            <p>Por estructura.</p>
+
+            <div class="quote">
+              La noche ya no lo estaba asustando.
+            </div>
+
+            <div class="quote">
+              Lo estaba organizando.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La idea fue tan repugnante que casi vomita.</p>
+
+            <p>Organizando su miedo.</p>
+            <p>Separando lo que era reflejo, memoria, voz, cuerpo.</p>
+            <p>Probando qué parte obedecía más rápido.</p>
+            <p>Qué parte dudaba.</p>
+            <p>Qué parte seguía siendo él.</p>
+
+            <div class="quote">
+              Como una prueba.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Entonces la voz regresó.</p>
+
+            <p>No desde el clóset esta vez.</p>
+            <p>No desde el teléfono tampoco.</p>
+
+            <p>Desde el televisor apagado.</p>
+
+            <p>Una vibración leve en el panel negro, seguida por su propia voz saliendo baja, contenida, como si hablara con la boca cerrada:</p>
+
+            <div class="quote">
+              —Dime algo que solo tú sepas.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel se quedó helado.</p>
+
+            <p>La frase no sonó como amenaza.</p>
+            <p>Ni como burla.</p>
+
+            <p>Sonó como una prueba real.</p>
+
+            <p>Peor todavía: sonó sensata.</p>
+
+            <div class="quote">
+              Porque, por primera vez, la voz no quería convencerlo de entregarse.
+            </div>
+
+            <div class="quote">
+              Quería que demostrara que seguía siendo alguien demostrable.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel tragó saliva.</p>
+            <p>No respondió en voz alta.</p>
+
+            <p>Pero la pregunta ya estaba adentro.</p>
+
+            <p><em>¿Qué sé yo que la otra cosa no sepa?</em></p>
+
+            <p>Y la respuesta no llegó rápido.</p>
+
+            <p>Su nombre no servía.</p>
+            <p>Su fecha de nacimiento tampoco.</p>
+            <p>La voz de su madre, sus rutinas, sus notas, sus reflejos… todo eso ya parecía haber sido aprendido, imitado o robado.</p>
+
+            <div class="quote">
+              Entonces entendió algo aterrador:
+            </div>
+
+            <div class="quote">
+              los datos no prueban identidad.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Lo íntimo quizá sí.</p>
+
+            <p>Pero lo íntimo de verdad.</p>
+            <p>No lo que se cuenta.</p>
+            <p>No lo que se registra.</p>
+            <p>No lo que puede copiarse.</p>
+
+            <p>Algo más profundo.</p>
+
+            <p>Una culpa.</p>
+            <p>Un recuerdo vergonzoso.</p>
+            <p>Una decisión que nunca verbalizó.</p>
+
+            <div class="quote">
+              Algo que solo existe cuando alguien lo siente por dentro, no cuando lo repite.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y entonces le vino uno.</p>
+
+            <p>No grande.</p>
+            <p>No heroico.</p>
+            <p>No cinematográfico.</p>
+
+            <p>Pequeño.</p>
+            <p>Ínfimo.</p>
+
+            <p>La noche en que su madre murió.</p>
+            <p>La última llamada perdida en el celular.</p>
+            <p>Él la vio.</p>
+            <p>No contestó.</p>
+            <p>Porque estaba cansado.</p>
+            <p>Porque pensó que hablarían al día siguiente.</p>
+
+            <p>Y jamás se lo dijo a nadie.</p>
+
+            <div class="quote">
+              Ni siquiera a sí mismo del todo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El recuerdo le atravesó el pecho con una violencia limpia.</p>
+            <p>Le subieron lágrimas a los ojos.</p>
+            <p>Auténticas.</p>
+            <p>Viejas.</p>
+
+            <p>El tipo de dolor que no depende del miedo actual, sino de una culpa que ya existía antes de esta noche.</p>
+
+            <div class="quote">
+              Eso sí era suyo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El televisor volvió a vibrar con su voz.</p>
+
+            <div class="quote">
+              —Dilo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel negó con la cabeza de inmediato.</p>
+
+            <p>No.</p>
+            <p>No iba a decirlo.</p>
+            <p>Ni a la pieza.</p>
+            <p>Ni al clóset.</p>
+            <p>Ni a los reflejos.</p>
+
+            <p>Pero en cuanto se negó, comprendió la segunda parte de la prueba.</p>
+
+            <div class="quote">
+              No se trataba de revelarlo.
+            </div>
+
+            <div class="quote">
+              Se trataba de ver si sabía proteger algo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La habitación se quedó inmóvil otra vez.</p>
+            <p>Como si hubiese recibido una respuesta silenciosa.</p>
+
+            <p>El clóset no avanzó.</p>
+            <p>El televisor no habló.</p>
+            <p>Los fragmentos del teléfono no cambiaron.</p>
+
+            <p>Durante unos segundos —solo unos pocos— Daniel sintió una diferencia mínima en el aire.</p>
+
+            <div class="quote">
+              Como si algo hubiera retrocedido para recalcular.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y entonces el alivio se quebró.</p>
+
+            <p>Porque desde uno de los fragmentos del teléfono, su boca —esa boca rota que ya se había movido antes— volvió a abrirse.</p>
+
+            <p>Y dijo la frase que nunca había dicho en voz alta.</p>
+
+            <div class="quote">
+              —Viste la llamada de tu mamá y no contestaste.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel dejó de respirar.</p>
+
+            <p>No gritó.</p>
+            <p>No se movió.</p>
+            <p>No pensó siquiera.</p>
+
+            <p>Solo quedó ahí, suspendido un segundo insoportable dentro de la evidencia.</p>
+
+            <p>Lo sabía.</p>
+            <p>También eso.</p>
+
+            <div class="quote">
+              Entonces no había recuerdo lo bastante profundo.
+            </div>
+
+            <div class="quote">
+              No había culpa lo bastante privada.
+            </div>
+
+            <div class="quote">
+              No había núcleo intacto.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La voz del televisor dijo, muy despacio:</p>
+
+            <div class="quote">
+              —Ya no puedes probarte con memoria.
+            </div>
+
+            <p>Luego el clóset, apenas abierto, respondió con su misma voz desde la oscuridad:</p>
+
+            <div class="quote">
+              —Solo con elección.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel comprendió entonces que la prueba brutal no consistía en recordar quién era.</p>
+
+            <p>Consistía en decidir qué haría cuando ya no pudiera demostrarlo.</p>
+
+            <div class="quote">
+              Y eso era peor.
+            </div>
+
+            <p>Mucho peor.</p>
+
+            <p>Porque un recuerdo puede robarse.</p>
+            <p>Una voz puede copiarse.</p>
+            <p>Un rostro puede desfasarse.</p>
+
+            <p>Pero una decisión en el instante exacto todavía no existía en ningún reflejo.</p>
+
+            <div class="quote">
+              Aún no.
+            </div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Lo más terrible no es que algo te robe la memoria. Es descubrir que también puede usarla mejor que tú.
+          </p>
+          <div class="nav-actions">
+            <a href="capitulo6.html" class="btn btn-ghost">← Capítulo 6</a>
+            <a href="capitulo8.html" class="btn btn-primary">Continuar al capítulo 8 →</a>
+          </div>
+        </div>
+      </article>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+</body>
+</html>
