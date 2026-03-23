@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 5 | No debí enamorarme de ti</title>
+  <meta name="description" content="Capítulo 5 de la Temporada 2 de No debí enamorarme de ti: Empezar a buscarte." />
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --bg2:#131722;
+      --card:rgba(20,24,35,.9);
+      --line:rgba(255,255,255,.08);
+      --text:#f7f7fb;
+      --muted:#b8bfd1;
+      --muted2:#8f98b0;
+      --accent:#b91c1c;
+      --accent2:#ef4444;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),
+        linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);
+      line-height:1.8;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(7,8,13,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));
+      border:1px solid rgba(239,68,68,.18);
+      box-shadow:0 0 24px rgba(185,28,28,.12);
+      font-weight:700;
+      color:#ffd2d2;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff1f1;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(185,28,28,.25);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#f2eaea;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,8,13,.56) 0%, rgba(7,8,13,.90) 82%, rgba(7,8,13,1) 100%),
+        url("../../../../assets/covers/temporada2-cover.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.95);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(185,28,28,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:#ffb1b1;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#eadede;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%,360px);
+      background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));
+      border:1px solid rgba(239,68,68,.16);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.14);
+      color:#ffbdbd;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#fff1f1;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 18px 70px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff7f7;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffe2e2;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:30px 24px 18px;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.85;
+      color:#fff1f1;
+      margin:0 0 24px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(239,68,68,.42);
+      background:rgba(239,68,68,.06);
+      border-radius:0 14px 14px 0;
+    }
+
+    .story p{
+      margin:0 0 20px;
+      color:#e7dede;
+      font-size:17px;
+      line-height:1.8;
+      letter-spacing:.01em;
+    }
+
+    .story .quote{
+      margin:30px 0;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));
+      border:1px solid rgba(239,68,68,.12);
+      color:#fff3f3;
+      font-size:18px;
+      line-height:1.6;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+      margin:30px auto;
+    }
+
+    .reader-bottom{
+      padding:22px 24px 26px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-space{height:20px}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{justify-content:flex-start}
+      .chapter-card{width:100%;max-width:unset}
+    }
+
+    @media (max-width:640px){
+      .topbar-inner{padding:14px}
+      .hero-inner{padding:30px 14px 20px}
+      .content-wrap{padding:16px 12px 50px}
+      .reader{border-radius:16px}
+      .reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}
+      .reader-body{padding-top:22px}
+      .hero-copy h1{font-size:30px}
+      .hero-copy p{font-size:15px;line-height:1.65}
+      .chapter-card{padding:16px}
+      .chapter-card h2{font-size:21px}
+      .meta{grid-template-columns:1fr}
+      .lead{font-size:16px;line-height:1.75}
+      .story p{font-size:15px;line-height:1.72}
+      .story .quote{font-size:16px;padding:16px}
+      .top-actions,.nav-actions{width:100%}
+      .btn,.nav-actions .btn{width:100%;flex:1 1 100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">R</div>
+          <div class="brand-text">
+            <p class="brand-title">No debí enamorarme de ti</p>
+            <p class="brand-sub">Temporada 2 · Historia de romance</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a href="../../../../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a href="capitulo6.html" class="btn btn-primary">Continuar →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Romance / Temporada 2 / Capítulo 5</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Segunda temporada</p>
+            <h1>No debí enamorarme de ti</h1>
+            <p>
+              Después de la verdad, vino algo todavía más difícil de negar: ya no solo pensaban el uno en el otro. Empezaban a buscarse en cosas mínimas, en tiempos muertos, en silencios, en pequeños gestos que ya no podían fingir casuales.
+            </p>
+          </div>
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Capítulo 5</div>
+              <h2>Empezar a buscarte</h2>
+              <p>
+                El problema ya no es qué sienten. El problema es que, sin decidirlo del todo, ambos están empezando a moverse dentro del día como si el otro fuera un destino secreto al que igual quieren llegar.
+              </p>
+              <div class="meta">
+                <div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Gratis</p></div>
+                <div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Adictivo</p></div>
+                <div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Búsqueda</p></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 5: Empezar a buscarte</h3>
+            <p>Romance · Temporada 2</p>
+          </div>
+          <div class="reader-badge">Capítulo abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Valentina tardó tres días en admitirlo con una honestidad suficiente como para que ya no pareciera una excusa temporal: estaba empezando a organizar el día alrededor de la posibilidad de verlo.
+            </p>
+
+            <p>No de una manera evidente.</p>
+            <p>No como alguien que pierde por completo el sentido de la medida.</p>
+            <p>No con gestos grandes.</p>
+
+            <p>Era peor que eso.</p>
+
+            <p>Más fino.</p>
+            <p>Más silencioso.</p>
+            <p>Más difícil de detectar desde afuera.</p>
+
+            <div class="quote">
+              Se estaba volviendo hábito.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Un retraso mínimo antes de ir a la sala de impresiones, justo cuando intuía que Martín podría pasar por ahí.</p>
+            <p>Una vuelta innecesaria por el pasillo del fondo antes de salir a almorzar.</p>
+            <p>La manera en que dejaba el café sobre el escritorio y levantaba la vista con demasiada frecuencia, como si su cuerpo ya hubiera aprendido a registrar la posibilidad de encontrarlo sin pedirle permiso a la cabeza.</p>
+
+            <p>Eso era lo más inquietante.</p>
+
+            <div class="quote">
+              No sentía que estuviera tomando decisiones.
+            </div>
+            <div class="quote">
+              Sentía que ciertas decisiones empezaban a tomarse solas.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín tampoco ayudaba.</p>
+            <p>No porque la buscara de manera descarada.</p>
+            <p>Justamente porque no.</p>
+
+            <p>Él seguía moviéndose con esa misma contención precisa que lo volvía insoportable.</p>
+            <p>No invadía.</p>
+            <p>No empujaba.</p>
+            <p>No convertía lo que había dicho en una especie de urgencia emocional permanente.</p>
+
+            <p>Y sin embargo…</p>
+
+            <div class="quote">
+              siempre terminaba apareciendo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>A veces con una pregunta de trabajo que otro también podría haber hecho.</p>
+            <p>A veces con una observación breve que no tenía nada de íntima en apariencia.</p>
+            <p>A veces solo quedando cerca el tiempo justo para que el cuerpo de Valentina recordara demasiado bien todo lo que ya sabían el uno del otro sin necesidad de repetirlo en voz alta.</p>
+
+            <p>Eso era lo verdaderamente difícil.</p>
+
+            <p>No había exageración.</p>
+            <p>No había escenas.</p>
+            <p>No había un romance desbordado avanzando a golpes de intensidad fácil.</p>
+
+            <div class="quote">
+              Había algo peor:
+            </div>
+            <div class="quote">
+              una construcción lenta, consciente y casi imposible de detener una vez que empieza a dar forma al día.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Esa semana, Valentina descubrió que la calma se había vuelto una actuación cada vez más exigente.</p>
+            <p>Podía hacerla.</p>
+            <p>Claro que podía.</p>
+            <p>Seguir trabajando, responder bien, mantener conversaciones normales, sostener reuniones, incluso bromear con alguien de la oficina si el contexto lo pedía.</p>
+
+            <p>Todo eso seguía intacto.</p>
+
+            <p>Lo que ya no estaba intacto era la distribución interior de su atención.</p>
+
+            <div class="quote">
+              Porque una parte de ella siempre estaba escuchando si Martín estaba cerca.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El sonido de su voz al fondo.</p>
+            <p>La dirección de sus pasos.</p>
+            <p>El modo en que el ambiente cambiaba apenas cuando él cruzaba una zona del espacio donde ella ya estaba.</p>
+
+            <p>No era imaginación.</p>
+            <p>O si lo era, estaba demasiado afinada para seguir tratándola como algo inofensivo.</p>
+
+            <div class="quote">
+              Se había vuelto un sistema de alerta.
+            </div>
+            <div class="quote">
+              Uno que no la protegía.
+            </div>
+            <div class="quote">
+              La acercaba.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El jueves, poco antes del almuerzo, Martín se acercó a su escritorio con una carpeta abierta en la mano.</p>
+
+            <p>—Necesito revisar contigo una parte del informe antes de enviarlo —dijo.</p>
+
+            <p>Valentina alzó la vista y por una fracción de segundo sintió el mismo efecto físico de siempre: ese pequeño ajuste interno, seco y preciso, como si algo en el cuerpo se enderezara de inmediato hacia él.</p>
+
+            <p>—Ahora o después de almuerzo —respondió, intentando sonar neutral.</p>
+
+            <p>Martín miró la carpeta, luego a ella.</p>
+            <p>—Después está bien.</p>
+
+            <div class="quote">
+              La frase era simple.
+            </div>
+            <div class="quote">
+              El problema fue la manera en que ambos supieron que acababan de posponer algo más que una revisión técnica.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina bajó otra vez la vista a la pantalla, pero ya estaba perdida.</p>
+            <p>No por la espera larga.</p>
+            <p>Por la anticipación exacta.</p>
+
+            <p>Después de almuerzo.</p>
+
+            <p>No parecía nada.</p>
+            <p>Y sin embargo, a esa altura, cualquier promesa mínima de tiempo compartido ya cargaba una gravedad extraña.</p>
+
+            <div class="quote">
+              Empezaban a vivir en los márgenes.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El almuerzo fue casi inútil.</p>
+            <p>Salió con dos compañeras, respondió lo justo, sonrió donde correspondía y fingió estar escuchando una anécdota sobre una clienta imposible que en otro momento le habría hecho gracia.</p>
+
+            <p>No pudo sostenerlo del todo.</p>
+            <p>No porque estuviera ausente.</p>
+            <p>Porque estaba dividida.</p>
+
+            <p>Una mitad sentada ahí, bajo el toldo del local.</p>
+            <p>La otra ya volviendo a la oficina.</p>
+
+            <div class="quote">
+              Volviendo a Martín.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Se odió un poco por eso.</p>
+            <p>No mucho.</p>
+            <p>Lo suficiente como para registrar que algo en ella ya había dejado de ofrecer resistencia con la firmeza de antes.</p>
+
+            <p>Cuando regresó, él estaba en la sala pequeña del final del pasillo.</p>
+            <p>La puerta abierta.</p>
+            <p>Una silla vacía frente a la mesa.</p>
+            <p>La carpeta extendida.</p>
+
+            <p>No la miró enseguida cuando apareció.</p>
+            <p>Solo pasó una página, como si de verdad todo pudiera todavía sostenerse dentro del marco profesional sin que se filtrara nada más.</p>
+
+            <div class="quote">
+              Eso duró menos de dos minutos.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Revisaron cifras.</p>
+            <p>Corrigieron dos frases.</p>
+            <p>Ajustaron una fecha.</p>
+            <p>Valentina incluso tomó el lápiz para tachar una línea que efectivamente convenía reformular.</p>
+
+            <p>Todo real.</p>
+            <p>Todo necesario.</p>
+
+            <p>Y aun así, debajo de esa superficie, seguía corriendo otra conversación muda, constante, casi física.</p>
+
+            <div class="quote">
+              Los dos sabían demasiado para que la proximidad volviera a ser neutra.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Fue Martín quien rompió primero esa capa, aunque de manera tan mínima que casi habría podido parecer casual si no fuera porque Valentina ya estaba demasiado sensible a cualquier variación en su tono.</p>
+
+            <p>—Estás más callada hoy —dijo, sin mirarla directamente todavía.</p>
+
+            <p>Valentina dejó el lápiz sobre la mesa.</p>
+            <p>—Estoy trabajando.</p>
+
+            <p>Él asintió apenas.</p>
+            <p>—Yo también.</p>
+
+            <p>La respuesta la obligó a alzar la vista.</p>
+
+            <div class="quote">
+              Ahí estaba esa forma suya de no empujar… y aun así dejar todo abierto.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>—¿Y entonces? —preguntó ella, sosteniéndolo con la mirada.</p>
+
+            <p>Martín apoyó el respaldo en la silla y se inclinó apenas hacia atrás, no relajado, sino medido.</p>
+            <p>—Entonces nada. Solo te noté distinta.</p>
+
+            <p>Valentina podría haberlo negado.</p>
+            <p>Debía haberlo negado.</p>
+            <p>Habría sido sensato.</p>
+            <p>Simple.</p>
+
+            <p>No lo hizo.</p>
+
+            <div class="quote">
+              —Te estoy evitando un poco.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La frase cayó entre ambos con una limpieza que hizo imposible retirarla después.</p>
+
+            <p>Martín no reaccionó con sorpresa.</p>
+            <p>No se movió siquiera.</p>
+            <p>Solo la miró de frente durante un segundo que se volvió demasiado largo para seguir fingiendo liviandad.</p>
+
+            <p>—Ya me había dado cuenta.</p>
+
+            <p>Valentina exhaló una risa mínima, sin humor.</p>
+            <p>—Bueno. Bien por tu capacidad de observación.</p>
+
+            <p>Él bajó la voz apenas.</p>
+            <p>—No te lo digo para dejarte incómoda.</p>
+
+            <div class="quote">
+              —Igual me dejas incómoda.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín asintió, aceptándolo sin defensa.</p>
+            <p>—Lo sé.</p>
+
+            <p>Y fue justamente esa falta de defensa la que volvió la incomodidad más difícil de sostener.</p>
+            <p>Porque si al menos él se hubiese puesto ligero, evasivo o innecesariamente seguro, Valentina habría encontrado algo contra qué pararse.</p>
+
+            <p>Pero no.</p>
+
+            <p>Martín seguía estando ahí con esa honestidad insoportable que dejaba pocas salidas elegantes.</p>
+
+            <div class="quote">
+              —Te evito porque si no, te busco —admitió ella antes de pensarlo demasiado.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El silencio posterior fue brutal.</p>
+
+            <p>No porque él pareciera triunfante.</p>
+            <p>No había nada de eso en su cara.</p>
+
+            <p>Fue brutal porque Valentina acababa de escuchar en su propia voz algo que hasta ese momento solo había tolerado como sospecha interna.</p>
+
+            <div class="quote">
+              Ya no estaba resistiéndose solo a sentir.
+            </div>
+            <div class="quote">
+              Estaba resistiéndose a actuar en función de eso.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín dejó pasar unos segundos antes de responder.</p>
+            <p>—Yo también te busco.</p>
+
+            <p>Nada más.</p>
+            <p>Ningún dramatismo.</p>
+            <p>Ninguna frase diseñada para hacerla perder pie.</p>
+
+            <p>Solo eso.</p>
+
+            <div class="quote">
+              Yo también te busco.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina apartó la mirada hacia la carpeta abierta entre los dos.</p>
+            <p>Las cifras empezaron a parecerle absurdas.</p>
+            <p>Todo el documento, una utilería torpe frente a lo que estaba ocurriendo realmente en esa sala.</p>
+
+            <p>—Esto se nos está yendo de las manos —murmuró.</p>
+
+            <p>Martín no negó.</p>
+            <p>—Sí.</p>
+            <p>—Y no pareces especialmente desesperado por corregirlo.</p>
+
+            <p>Él la sostuvo con una calma casi insoportable.</p>
+
+            <div class="quote">
+              —No lo estoy.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Ese fue el golpe.</p>
+            <p>No el más grande de todos los que le había dado últimamente.</p>
+            <p>Pero sí uno de los más precisos.</p>
+
+            <p>Porque decía algo terrible y limpio:</p>
+            <p>Martín no estaba luchando por volver a un lugar anterior.</p>
+
+            <div class="quote">
+              Estaba asumiendo que ese lugar ya no existía.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina sintió la necesidad de levantarse, salir, recuperar aire, ponerse a salvo de esa especie de verdad compartida que se estaba construyendo con demasiada naturalidad.</p>
+            <p>No se movió.</p>
+
+            <p>La inmovilidad ya empezaba a delatarla tanto como las frases.</p>
+
+            <p>—Eso debería preocuparme —dijo.</p>
+
+            <p>Martín inclinó apenas la cabeza.</p>
+            <p>—Probablemente.</p>
+            <p>—¿Y a ti te preocupa?</p>
+
+            <p>Él tardó un segundo.</p>
+            <p>Uno solo.</p>
+
+            <div class="quote">
+              —Me preocupa más mentirte.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina cerró los ojos un instante.</p>
+            <p>No para escapar.</p>
+            <p>Para soportar.</p>
+
+            <p>Porque la verdad es que eso era exactamente lo que la estaba dejando sin defensas: ya no había casi nada en él que pudiera leer como manipulación, impulso fácil o irresponsabilidad emocional.</p>
+
+            <p>Solo había verdad.</p>
+            <p>Y la verdad, cuando coincide demasiado con lo que una ya empezaba a sentir, se vuelve peligrosísima.</p>
+
+            <div class="quote">
+              —No sé cómo se hace esto —dijo, más bajo que antes.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín tampoco sonrió.</p>
+            <p>No la tranquilizó.</p>
+            <p>No simplificó.</p>
+
+            <p>—Yo tampoco.</p>
+            <p>—Entonces vamos pésimo.</p>
+
+            <p>Él exhaló una risa mínima, apenas visible.</p>
+            <p>—No sé si pésimo.</p>
+            <p>—¿Cómo le llamas tú?</p>
+
+            <p>Martín la miró con esa clase de gravedad que cada vez le afectaba más porque ya no se parecía a intensidad vacía, sino a algo verdaderamente involucrado.</p>
+
+            <div class="quote">
+              —Le llamo dejar de fingir.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y ahí estuvo el punto exacto en que Valentina entendió qué era lo que más la estaba arrastrando.</p>
+
+            <p>No el beso.</p>
+            <p>No las frases bonitas.</p>
+            <p>No siquiera la confesión.</p>
+
+            <p>Era esa otra cosa.</p>
+
+            <div class="quote">
+              La sensación de que con él no estaba entrando en una historia cómoda…
+            </div>
+            <div class="quote">
+              sino en una historia real.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Eso era muchísimo más difícil de resistir.</p>
+
+            <p>Cuando salieron de la sala, lo hicieron con dos minutos de diferencia.</p>
+            <p>No acordado.</p>
+            <p>No planificado.</p>
+            <p>Natural en apariencia.</p>
+
+            <p>Y aun así, Valentina sintió que el trayecto de regreso a su escritorio estaba cargado de una energía casi visible, como si el cuerpo entero siguiera procesando la conversación en vez de haberla dejado atrás apenas cruzó la puerta.</p>
+
+            <div class="quote">
+              El día ya no estaba dividido entre trabajo y lo demás.
+            </div>
+            <div class="quote">
+              Todo se estaba mezclando.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Esa tarde, por primera vez, no intentó resistirse tanto.</p>
+            <p>No dejó de buscarlo del todo.</p>
+            <p>No se corrigió cada vez que levantó la vista de forma casi automática para ubicarlo al otro lado de la oficina.</p>
+            <p>No se prohibió registrar cuándo estaba cerca.</p>
+
+            <p>Era una rendición mínima.</p>
+            <p>Pero rendición al fin.</p>
+
+            <div class="quote">
+              Empezaba a aceptar que sí:
+            </div>
+            <div class="quote">
+              una parte de ella ya vivía orientada hacia él.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y lo peor fue que, una vez admitido eso, sintió menos culpa que alivio.</p>
+
+            <p>No paz.</p>
+            <p>No todavía.</p>
+            <p>Pero sí una forma más honesta de respirar dentro del desorden.</p>
+
+            <p>Al final de la jornada, cuando todos empezaban a irse y el edificio volvía a entrar en esa especie de cansancio colectivo de las horas bajas, Valentina recibió un mensaje de Martín.</p>
+
+            <p><em>No tienes que dejar de buscarme si lo estás haciendo.</em></p>
+
+            <p>Se quedó inmóvil mirando la pantalla.</p>
+            <p>Debajo apareció la segunda línea.</p>
+
+            <div class="quote">
+              <em>Solo no me pidas que haga como si yo no estuviera haciendo exactamente lo mismo.</em>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina dejó escapar el aire muy despacio.</p>
+            <p>No respondió de inmediato.</p>
+            <p>No porque no quisiera.</p>
+            <p>Porque ya no se trataba de contestar rápido o no.</p>
+
+            <p>Se trataba de aceptar que algo entre los dos había cruzado una frontera menos visible, pero probablemente más peligrosa que todas las anteriores.</p>
+
+            <div class="quote">
+              Ya no se estaban encontrando por accidente.
+            </div>
+            <div class="quote">
+              Empezaban a dirigirse el uno hacia el otro.
+            </div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Lo más irreversible no siempre es una gran confesión. A veces empieza cuando dos personas dejan de fingir que los encuentros todavía son casuales.
+          </p>
+          <div class="nav-actions">
+            <a href="capitulo4.html" class="btn btn-ghost">← Capítulo 4</a>
+            <a href="capitulo6.html" class="btn btn-primary">Continuar al capítulo 6 →</a>
+          </div>
+        </div>
+      </article>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+</body>
+</html>
