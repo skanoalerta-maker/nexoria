@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 12 | No debí enamorarme de ti</title>
+  <meta name="description" content="Capítulo 12 de la Temporada 2 de No debí enamorarme de ti: El amor llegó a tiempo." />
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --bg2:#131722;
+      --card:rgba(20,24,35,.9);
+      --line:rgba(255,255,255,.08);
+      --text:#f7f7fb;
+      --muted:#b8bfd1;
+      --muted2:#8f98b0;
+      --accent:#b91c1c;
+      --accent2:#ef4444;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),
+        linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);
+      line-height:1.8;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(7,8,13,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));
+      border:1px solid rgba(239,68,68,.18);
+      box-shadow:0 0 24px rgba(185,28,28,.12);
+      font-weight:700;
+      color:#ffd2d2;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff1f1;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(185,28,28,.25);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#f2eaea;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,8,13,.56) 0%, rgba(7,8,13,.90) 82%, rgba(7,8,13,1) 100%),
+        url("../../../../assets/covers/temporada2-cover.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.95);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(185,28,28,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:#ffb1b1;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#eadede;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%,360px);
+      background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));
+      border:1px solid rgba(239,68,68,.16);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.14);
+      color:#ffbdbd;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#fff1f1;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 18px 70px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff7f7;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffe2e2;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:30px 24px 18px;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.85;
+      color:#fff1f1;
+      margin:0 0 24px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(239,68,68,.42);
+      background:rgba(239,68,68,.06);
+      border-radius:0 14px 14px 0;
+    }
+
+    .story p{
+      margin:0 0 20px;
+      color:#e7dede;
+      font-size:17px;
+      line-height:1.8;
+      letter-spacing:.01em;
+    }
+
+    .story .quote{
+      margin:30px 0;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));
+      border:1px solid rgba(239,68,68,.12);
+      color:#fff3f3;
+      font-size:18px;
+      line-height:1.6;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+      margin:30px auto;
+    }
+
+    .reader-bottom{
+      padding:22px 24px 26px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-space{height:20px}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{justify-content:flex-start}
+      .chapter-card{width:100%;max-width:unset}
+    }
+
+    @media (max-width:640px){
+      .topbar-inner{padding:14px}
+      .hero-inner{padding:30px 14px 20px}
+      .content-wrap{padding:16px 12px 50px}
+      .reader{border-radius:16px}
+      .reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}
+      .reader-body{padding-top:22px}
+      .hero-copy h1{font-size:30px}
+      .hero-copy p{font-size:15px;line-height:1.65}
+      .chapter-card{padding:16px}
+      .chapter-card h2{font-size:21px}
+      .meta{grid-template-columns:1fr}
+      .lead{font-size:16px;line-height:1.75}
+      .story p{font-size:15px;line-height:1.72}
+      .story .quote{font-size:16px;padding:16px}
+      .top-actions,.nav-actions{width:100%}
+      .btn,.nav-actions .btn{width:100%;flex:1 1 100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">R</div>
+          <div class="brand-text">
+            <p class="brand-title">No debí enamorarme de ti</p>
+            <p class="brand-sub">Temporada 2 · Historia de romance</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a href="../../../../index.html" class="btn btn-ghost">← Volver al inicio</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Romance / Temporada 2 / Capítulo 12</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Final de la historia</p>
+            <h1>No debí enamorarme de ti</h1>
+            <p>
+              Hay historias que terminan porque el amor no alcanza. Y hay otras que terminan cuando por fin el amor deja de llegar tarde. Este no es un final abierto. Es el instante exacto en que dos personas dejan de esquivarse y deciden, de una vez, quedarse.
+            </p>
+          </div>
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Final</div>
+              <h2>El amor llegó a tiempo</h2>
+              <p>
+                Después del miedo, de la distancia posible y de todas las formas en que casi se pierden antes de empezar del todo, llega la única pregunta que importa de verdad: si van a elegirse solo cuando duela o también cuando por fin toca quedarse.
+              </p>
+              <div class="meta">
+                <div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Final</p></div>
+                <div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Épico</p></div>
+                <div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Decisión</p></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 12: El amor llegó a tiempo</h3>
+            <p>Romance · Final definitivo</p>
+          </div>
+          <div class="reader-badge">Capítulo final</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              El lunes amaneció con una claridad insoportable. No por el clima. No por la luz. Por la certeza de que, al final del día, la historia entre Valentina y Martín iba a dejar de vivir en la zona donde todavía se puede posponer la verdad llamándola tiempo.
+            </p>
+
+            <p>Había dormido poco.</p>
+            <p>No por ansiedad desordenada, sino por ese tipo de espera que no deja a una girando por la cama, sino quieta, despierta, oyendo cómo el silencio de la madrugada se parece demasiado a una cuenta regresiva.</p>
+
+            <p>Antes del lunes.</p>
+            <p>Martín se lo había dicho con una gravedad tan limpia que desde entonces el tiempo dejó de ser tiempo normal.</p>
+
+            <div class="quote">
+              Se volvió frontera.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina no intentó engañarse esa mañana.</p>
+            <p>No buscó frases útiles para rebajar lo que estaba en juego.</p>
+            <p>No se dijo que, pasara lo que pasara, igual iba a estar bien.</p>
+            <p>No todavía.</p>
+
+            <p>No porque no fuese capaz de sobrevivir a una respuesta dolorosa.</p>
+            <p>Claro que lo era.</p>
+            <p>Lo sabía.</p>
+
+            <p>Pero ese ya no era el punto.</p>
+
+            <div class="quote">
+              El punto era que por primera vez no quería sobrevivir.
+            </div>
+            <div class="quote">
+              Quería quedarse.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Ahí estaba la diferencia final con todo lo anterior.</p>
+
+            <p>Durante meses —quizá incluso antes de darse cuenta del todo— había sido experta en sostenerse, en administrar el deseo, en racionalizar la intensidad, en ponerle estructura a lo que amenazaba con desbordarla, en sobrevivir con dignidad a emociones que no siempre llegaban en momentos convenientes.</p>
+
+            <p>Pero con Martín…</p>
+            <p>con Martín el deseo no había sido lo definitivo.</p>
+            <p>Tampoco la tensión, ni el beso, ni el miedo a la distancia.</p>
+
+            <p>Lo definitivo era otra cosa.</p>
+
+            <div class="quote">
+              Que ya no quería una versión de sí misma capaz de salir ilesa si eso significaba salir sola.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Esa fue la verdad con la que se vistió.</p>
+            <p>Con la que tomó café sin probarlo casi.</p>
+            <p>Con la que cerró la puerta de su departamento y bajó a la calle sintiendo que el cuerpo entero estaba demasiado consciente de su propio centro.</p>
+
+            <p>La ciudad se movía como siempre.</p>
+            <p>Micros llenas.</p>
+            <p>Semáforos.</p>
+            <p>Gente apurada.</p>
+            <p>Un lunes más.</p>
+
+            <p>Y sin embargo, para ella, ese día tenía la densidad exacta de esos momentos en que la vida cotidiana sigue usando los mismos objetos de siempre, pero una ya sabe que al terminar la jornada nada importante va a estar en el mismo lugar interior.</p>
+
+            <div class="quote">
+              La forma externa del día no cambia.
+            </div>
+            <div class="quote">
+              Cambia el lugar desde donde una lo atraviesa.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín no apareció durante la primera hora.</p>
+            <p>Eso la descolocó más de lo que quería admitir.</p>
+            <p>No por dependencia infantil.</p>
+            <p>Porque ya no estaba preparada para fingir naturalidad en la espera.</p>
+
+            <p>Miró el reloj más veces de las razonables.</p>
+            <p>Respondió un correo mal redactado y tuvo que corregirlo.</p>
+            <p>Abrió una planilla sin ver una sola cifra durante dos minutos enteros.</p>
+
+            <p>Se obligó a respirar hondo.</p>
+
+            <div class="quote">
+              El miedo no estaba en la ausencia.
+            </div>
+            <div class="quote">
+              Estaba en lo que esa ausencia podía estar decidiendo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Lo vio recién pasadas las diez.</p>
+
+            <p>No apareció desde lejos, como otras veces, en la periferia del espacio compartido.</p>
+            <p>Entró desde el pasillo lateral con una carpeta en la mano y la cara más quieta que de costumbre.</p>
+
+            <p>No tensa.</p>
+            <p>No dura.</p>
+            <p>Quieta.</p>
+
+            <p>Y esa quietud le golpeó el pecho a Valentina antes incluso de que él levantara la vista.</p>
+
+            <div class="quote">
+              Porque entendió que la decisión ya venía con él.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín la miró a la distancia.</p>
+            <p>No dijo nada.</p>
+            <p>No hizo ningún gesto que pudiera llamar la atención de nadie más.</p>
+            <p>Solo la sostuvo un segundo entero con una intensidad despojada de todo juego.</p>
+
+            <p>Y ella supo.</p>
+
+            <p>No el contenido exacto.</p>
+            <p>Pero sí que ya no quedaba nada pendiente entre la respuesta y el tiempo.</p>
+
+            <div class="quote">
+              Iba a decírselo hoy.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El resto de la mañana fue casi irreal.</p>
+            <p>No porque estuviera flotando.</p>
+            <p>Porque todo se volvió excesivamente concreto.</p>
+
+            <p>El sonido del teclado.</p>
+            <p>El vaso de agua a medio terminar.</p>
+            <p>La luz fría sobre las mesas.</p>
+            <p>Los pasos ajenos.</p>
+
+            <p>Todo parecía delineado con una precisión agotadora, como si el cuerpo hubiera decidido aferrarse a lo material mientras la emoción se preparaba para soportar algo demasiado grande.</p>
+
+            <div class="quote">
+              A veces el mundo se vuelve nítido justo antes de quebrarse.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El mensaje llegó a las doce y catorce.</p>
+
+            <p><em>Sube.</em></p>
+
+            <p>Solo eso.</p>
+            <p>No hacía falta más.</p>
+
+            <p>La terraza.</p>
+            <p>El lugar intermedio donde se habían dicho lo peor, lo más cierto, lo más difícil de administrar sin todavía quedar completamente encerrados.</p>
+            <p>El lugar donde el aire todavía existía, aunque ya no sirviera para proteger nada.</p>
+
+            <div class="quote">
+              Valentina se puso de pie sin volver a leer el mensaje.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>No le temblaron las manos.</p>
+            <p>No se sintió débil.</p>
+            <p>No se vio desde fuera en una escena melodramática.</p>
+
+            <p>Se sintió exactamente como alguien que está caminando hacia una verdad que puede cambiarle la forma de habitarse por completo.</p>
+
+            <p>Eso era más serio que el nervio.</p>
+
+            <div class="quote">
+              Era destino emocional.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La terraza estaba casi vacía.</p>
+            <p>El cielo tenía un gris claro, alto, y el viento arrastraba una frescura seca que cortaba apenas la cara.</p>
+            <p>Martín estaba junto a la baranda, de espaldas a la ciudad, esperando no al paisaje ni al tiempo, sino a ella.</p>
+
+            <p>Cuando la vio acercarse, no sonrió.</p>
+            <p>No porque no hubiera ternura.</p>
+            <p>Porque había algo más grande que eso ocupando todo el espacio.</p>
+
+            <div class="quote">
+              La decisión.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina se detuvo frente a él.</p>
+            <p>No a demasiada distancia.</p>
+            <p>No lo bastante cerca como para que el cuerpo hiciera el trabajo antes que las palabras.</p>
+
+            <p>—Hola —dijo.</p>
+
+            <p>Martín sostuvo su mirada.</p>
+            <p>—Hola.</p>
+
+            <p>Hubo un silencio corto.</p>
+            <p>No de vacilación.</p>
+            <p>De peso.</p>
+
+            <div class="quote">
+              Porque a veces el silencio no es falta de valor.
+            </div>
+            <div class="quote">
+              Es el lugar exacto donde una decisión termina de asentarse antes de ser dicha.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín fue quien habló primero.</p>
+
+            <p>—Ya respondí.</p>
+
+            <p>La frase le cruzó el cuerpo entera.</p>
+            <p>Valentina sintió una presión limpia, feroz, en el centro del pecho.</p>
+            <p>No pidió tiempo.</p>
+            <p>No quiso protegerse con rodeos.</p>
+
+            <p>—¿Y?</p>
+
+            <p>Martín no apartó la mirada ni un segundo.</p>
+
+            <div class="quote">
+              —Dije que no.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El mundo no explotó.</p>
+            <p>La ciudad siguió abajo.</p>
+            <p>El viento siguió cortando.</p>
+            <p>La terraza siguió siendo terraza.</p>
+
+            <p>Pero dentro de Valentina todo se desarmó de una forma tan instantánea y tan brutal que por un segundo no supo si el cuerpo estaba entrando en alivio o en una forma nueva de vértigo todavía más grande.</p>
+
+            <div class="quote">
+              No.
+            </div>
+
+            <div class="quote">
+              No se iba.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín siguió hablando antes de que ella encontrara una respiración estable.</p>
+
+            <p>—No porque no me importara la oportunidad.</p>
+            <p>—Martín…</p>
+            <p>—Déjame decirlo bien.</p>
+
+            <p>Su voz no fue dura.</p>
+            <p>Fue firme de una manera que a esas alturas ya no se parecía al control, sino a la necesidad de no dejar mal puesta una verdad demasiado importante.</p>
+
+            <div class="quote">
+              —No dije que no por impulso.
+            </div>
+            <div class="quote">
+              Dije que no porque me di cuenta de que estaba a punto de mover toda mi vida desde una lógica en la que tú tendrías que convertirte en una herida a distancia antes de que yo siquiera intentara darte una forma real aquí.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina sintió los ojos arderle por completo.</p>
+            <p>No fue por dramatismo.</p>
+            <p>Fue por precisión.</p>
+
+            <p>Porque eso era exactamente lo que más le había dolido en silencio desde que escuchó la posibilidad del traslado: no el cambio de ciudad, no la dificultad, ni siquiera la incertidumbre.</p>
+
+            <p>Lo que le había dolido era sentir que podía perder algo enorme antes de que ambos se atrevieran a darle el lugar que ya merecía.</p>
+
+            <div class="quote">
+              Martín había entendido eso.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>—No te quedaste solo por mí —murmuró, con la voz rota en un lugar nuevo.</p>
+
+            <p>Martín dio un paso más cerca.</p>
+            <p>No para corregirla con facilidad.</p>
+            <p>Para sostener la verdad entera.</p>
+
+            <p>—No —dijo—. Me quedé porque lo que me pasa contigo ya es parte de mi vida. Y porque seguir fingiendo que podía decidir como si no lo fuera, a estas alturas, habría sido mentirme demasiado.</p>
+
+            <div class="quote">
+              Ahí estuvo la épica real.
+            </div>
+
+            <div class="quote">
+              No en renunciar a una ciudad.
+            </div>
+            <div class="quote">
+              Sino en elegir no traicionar la verdad cuando por fin había llegado.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina bajó la vista un segundo.</p>
+            <p>No por vergüenza.</p>
+            <p>Porque necesitaba sostener en el cuerpo la dimensión completa de lo que acababa de oír antes de responder desde cualquier impulso menor.</p>
+
+            <p>Martín se había quedado.</p>
+            <p>Pero no como quien elige el camino fácil.</p>
+            <p>No como quien se deja arrastrar por una emoción sin entender el costo.</p>
+
+            <p>Se había quedado entendiendo exactamente lo que estaba haciendo.</p>
+
+            <div class="quote">
+              Y esa clase de elección cambia la forma en que te aman.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina levantó otra vez la mirada.</p>
+            <p>Ahora sí le temblaba apenas la respiración.</p>
+
+            <p>—No sé qué hacer con alguien que se queda así.</p>
+
+            <p>Martín dejó escapar una exhalación corta, casi una sonrisa herida, pero luminosa por primera vez en muchos días.</p>
+            <p>—No necesitas hacer nada complicado.</p>
+            <p>—¿No?</p>
+
+            <p>Él negó apenas con la cabeza.</p>
+
+            <div class="quote">
+              —Solo dejar de irte tú también.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La frase terminó de romper la última defensa inútil que seguía intacta.</p>
+
+            <p>Porque ese era el centro verdadero de la historia.</p>
+            <p>No si se querían.</p>
+            <p>No si dolía.</p>
+            <p>No si daba miedo.</p>
+
+            <p>Sino esto:</p>
+
+            <div class="quote">
+              si iban a dejar de vivir el amor como una retirada elegante.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Valentina dio un paso hacia él.</p>
+            <p>No mínimo.</p>
+            <p>No calculado.</p>
+            <p>Uno real.</p>
+
+            <p>Uno de esos pasos que no cambian solo la distancia física, sino la posición desde la que una se planta en la historia entera.</p>
+
+            <p>—No quiero seguir nombrando esto como si todavía estuviéramos a medio camino —dijo.</p>
+
+            <p>Martín no se movió.</p>
+            <p>La dejó llegar.</p>
+            <p>La sostuvo con los ojos de una forma tan completa que a Valentina le dolió y le dio paz al mismo tiempo.</p>
+
+            <p>—Entonces no lo hagamos.</p>
+
+            <div class="quote">
+              Y ahí, por fin, llegó la frase que la historia llevaba capítulos enteros buscando.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>No fue él.</p>
+            <p>Fue ella.</p>
+
+            <p>Quizá porque el miedo a perderlo había terminado de llevarla al lugar donde ya no quedaba nada más digno que decir la verdad completa.</p>
+            <p>Quizá porque a veces el amor no se reconoce cuando estalla, sino cuando una decide dejar de retrasarlo.</p>
+
+            <p>Valentina lo miró de frente, con la voz temblándole apenas en el borde donde el miedo y la certeza ya no sabían distinguirse.</p>
+
+            <div class="quote">
+              —Te amo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La terraza siguió siendo terraza.</p>
+            <p>El viento siguió.</p>
+            <p>La ciudad siguió abajo.</p>
+
+            <p>Y sin embargo, todo cambió.</p>
+
+            <p>No porque la frase fuese sorpresiva en el sentido simple.</p>
+            <p>Lo que había entre ellos llevaba mucho tiempo creciendo hacia ese lugar.</p>
+            <p>Lo que la volvió épica fue otra cosa.</p>
+
+            <div class="quote">
+              Llegó a tiempo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Martín cerró los ojos apenas un segundo, como si la frase le hubiera tocado un lugar tan hondo que necesitara respirar antes de poder sostenerla sin romperse del todo por dentro.</p>
+
+            <p>Cuando los abrió, ya no quedaba en su cara ni un resto de contención defensiva.</p>
+            <p>Solo verdad.</p>
+
+            <p>Solo una emoción tan limpia que por primera vez a Valentina no le pareció peligrosa.</p>
+            <p>Le pareció hogar.</p>
+
+            <p>—Yo también te amo —dijo él—. Hace rato. Solo que me demoré demasiado en dejar de luchar contra eso como si fuera el problema.</p>
+
+            <div class="quote">
+              Ahí terminó la guerra.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>No contra el mundo.</p>
+            <p>No contra la vida ni las decisiones difíciles ni las formas reales en que la adultez sigue poniendo condiciones incluso al amor más verdadero.</p>
+
+            <p>Terminó la guerra entre lo que sentían y la necesidad de esconderlo.</p>
+            <p>Entre el miedo y la elección.</p>
+            <p>Entre la verdad y el retraso.</p>
+
+            <div class="quote">
+              Ya no llegaban tarde.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Cuando Martín la besó, el beso no fue ni refugio ni confirmación ni urgencia.</p>
+            <p>Fue otra cosa.</p>
+
+            <p>Fue llegada.</p>
+
+            <div class="quote">
+              La llegada limpia de dos personas
+            </div>
+            <div class="quote">
+              que por fin dejan de tratar el amor
+            </div>
+            <div class="quote">
+              como un accidente hermoso y empiezan a vivirlo como una decisión.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Se quedaron en la terraza mucho rato después.</p>
+            <p>Hablando.</p>
+            <p>De verdad esta vez.</p>
+            <p>No del traslado solamente, que ya estaba resuelto.</p>
+            <p>Ni del miedo, aunque seguía ahí como una memoria reciente.</p>
+
+            <p>Hablaron del futuro.</p>
+            <p>No como quien hace promesas huecas para contener el temblor del momento.</p>
+            <p>Como dos adultos que, por primera vez, podían ponerse delante de su propia historia sin la necesidad de rebajarla.</p>
+
+            <div class="quote">
+              Qué querían.
+            </div>
+            <div class="quote">
+              Cómo querían vivirlo.
+            </div>
+            <div class="quote">
+              Qué cosas no estaban dispuestos a volver a perder por miedo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y ahí, en medio de esa conversación larga, sobria y luminosa a la vez, Valentina entendió por fin por qué la historia nunca había dejado espacio real para una tercera temporada.</p>
+
+            <p>No porque no hubiera vida después.</p>
+            <p>Claro que la había.</p>
+            <p>Mucha.</p>
+
+            <p>Con dificultades.</p>
+            <p>Con días malos.</p>
+            <p>Con decisiones difíciles.</p>
+            <p>Con la necesidad de construir de verdad lo que hasta entonces había sido deseo, miedo, verdad compartida y una especie de amor naciendo a golpes de lucidez.</p>
+
+            <p>Pero narrativamente, emocionalmente, esencialmente…</p>
+
+            <div class="quote">
+              la historia terminaba ahí.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Porque el conflicto central no era si podían amarse para siempre sin problemas.</p>
+            <p>No era si la vida se volvería fácil.</p>
+            <p>No era si todo después sería simple.</p>
+
+            <p>El conflicto central siempre fue este:</p>
+
+            <div class="quote">
+              si iban a llegar a tiempo al amor
+            </div>
+            <div class="quote">
+              antes de perderse por miedo,
+            </div>
+            <div class="quote">
+              por cobardía
+            </div>
+            <div class="quote">
+              o por decisiones tomadas demasiado tarde.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y la respuesta final ya estaba dada.</p>
+
+            <p>Sí.</p>
+
+            <div class="quote">
+              Sí llegaron.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Cuando bajaron de la terraza, la ciudad seguía intacta.</p>
+            <p>La oficina seguía siendo oficina.</p>
+            <p>La vida seguía teniendo toda su estructura obstinada, concreta, adulta.</p>
+
+            <p>Pero Valentina ya no caminaba hacia ella como alguien que estaba a punto de perder algo que recién empezaba.</p>
+            <p>Caminaba como alguien que había dejado de huir justo a tiempo.</p>
+
+            <p>Martín iba a su lado.</p>
+            <p>No delante.</p>
+            <p>No detrás.</p>
+
+            <div class="quote">
+              A su lado.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y en ese gesto simple, sin grandilocuencia y sin necesidad de ningún otro clímax adicional, se terminó de cerrar todo.</p>
+
+            <p>No porque el amor resolviera mágicamente el resto de la vida.</p>
+            <p>No porque una declaración cerrara todos los desafíos por venir.</p>
+            <p>Sino porque la historia ya había respondido la única pregunta que necesitaba responder.</p>
+
+            <div class="quote">
+              ¿Se eligieron a tiempo?
+            </div>
+
+            <div class="quote">
+              Sí.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Y esa respuesta, por primera vez desde el primer capítulo, no dolió.</p>
+
+            <div class="quote">
+              Por fin descansó.
+            </div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Final definitivo: no ganó la prudencia, no ganó la distancia y no ganó el miedo. Ganó lo único que de verdad importaba desde el principio: llegar a tiempo al amor y elegir quedarse.
+          </p>
+          <div class="nav-actions">
+            <a href="capitulo11.html" class="btn btn-ghost">← Capítulo 11</a>
+            <a href="../../../../index.html" class="btn btn-primary">Volver a Nébula →</a>
+          </div>
+        </div>
+      </article>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+</body>
+</html>
