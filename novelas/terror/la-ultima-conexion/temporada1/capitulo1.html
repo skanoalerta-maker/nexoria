@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 1 | La última conexión</title>
+  <meta name="description" content="Capítulo 1 de La última conexión: 02:17." />
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --bg2:#131722;
+      --card:rgba(20,24,35,.9);
+      --line:rgba(255,255,255,.08);
+      --text:#f7f7fb;
+      --muted:#b8bfd1;
+      --muted2:#8f98b0;
+      --accent:#b91c1c;
+      --accent2:#ef4444;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),
+        linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);
+      line-height:1.8;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(7,8,13,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));
+      border:1px solid rgba(239,68,68,.18);
+      box-shadow:0 0 24px rgba(185,28,28,.12);
+      font-weight:700;
+      color:#ffd2d2;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff1f1;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(185,28,28,.25);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#f2eaea;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,8,13,.56) 0%, rgba(7,8,13,.90) 82%, rgba(7,8,13,1) 100%),
+        url("../../assets/covers/la-ultima-conexion.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.95);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(185,28,28,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:#ffb1b1;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#eadede;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%,360px);
+      background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));
+      border:1px solid rgba(239,68,68,.16);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.14);
+      color:#ffbdbd;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#fff1f1;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 18px 70px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff7f7;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffe2e2;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:30px 24px 18px;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.85;
+      color:#fff1f1;
+      margin:0 0 24px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(239,68,68,.42);
+      background:rgba(239,68,68,.06);
+      border-radius:0 14px 14px 0;
+    }
+
+    .story p{
+      margin:0 0 20px;
+      color:#e7dede;
+      font-size:17px;
+      line-height:1.8;
+      letter-spacing:.01em;
+    }
+
+    .story .quote{
+      margin:30px 0;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));
+      border:1px solid rgba(239,68,68,.12);
+      color:#fff3f3;
+      font-size:18px;
+      line-height:1.6;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+      margin:30px auto;
+    }
+
+    .reader-bottom{
+      padding:22px 24px 26px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-space{height:20px}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{justify-content:flex-start}
+      .chapter-card{width:100%;max-width:unset}
+    }
+
+    @media (max-width:640px){
+      .topbar-inner{padding:14px}
+      .hero-inner{padding:30px 14px 20px}
+      .content-wrap{padding:16px 12px 50px}
+      .reader{border-radius:16px}
+      .reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}
+      .reader-body{padding-top:22px}
+      .hero-copy h1{font-size:30px}
+      .hero-copy p{font-size:15px;line-height:1.65}
+      .chapter-card{padding:16px}
+      .chapter-card h2{font-size:21px}
+      .meta{grid-template-columns:1fr}
+      .lead{font-size:16px;line-height:1.75}
+      .story p{font-size:15px;line-height:1.72}
+      .story .quote{font-size:16px;padding:16px}
+      .top-actions,.nav-actions{width:100%}
+      .btn,.nav-actions .btn{width:100%;flex:1 1 100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">T</div>
+          <div class="brand-text">
+            <p class="brand-title">La última conexión</p>
+            <p class="brand-sub">Historia de terror</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a href="../../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a href="capitulo2.html" class="btn btn-primary">Seguir con la historia →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Terror / Capítulo 1</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Terror psicológico</p>
+            <h1>La última conexión</h1>
+            <p>
+              A las 02:17 de la madrugada, Daniel recibe un mensaje en WhatsApp desde su propio número. Al principio parece una broma enferma. Después entiende que el verdadero problema no es quién escribe… sino cómo sabe lo que hay dentro de su pieza.
+            </p>
+          </div>
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Inicio</div>
+              <h2>02:17</h2>
+              <p>
+                Un mensaje. Su mismo número. Una advertencia imposible. Y una noche que se rompe en el instante exacto en que Daniel comprende que no está solo.
+              </p>
+              <div class="meta">
+                <div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Gratis</p></div>
+                <div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Tensión</p></div>
+                <div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Mensaje</p></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 1: 02:17</h3>
+            <p>Terror · Hay horas que no deberían traer mensajes</p>
+          </div>
+          <div class="reader-badge">Capítulo abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Daniel despertó sin saber por qué. No fue un ruido. No fue un sueño. No fue la sensación de haber olvidado algo importante. Fue peor: esa certeza irracional de que había algo mal en la habitación.
+            </p>
+
+            <p>Abrió los ojos lentamente y quedó inmóvil en la oscuridad, con el cuerpo tenso bajo las sábanas.</p>
+            <p>El techo apenas se distinguía entre sombras.</p>
+            <p>La ventana del dormitorio estaba cerrada.</p>
+            <p>Las cortinas no se movían.</p>
+            <p>Afuera, la ciudad parecía apagada.</p>
+
+            <div class="quote">
+              Entonces vibró el teléfono.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Una vez.</p>
+            <p>Seco.</p>
+            <p>Corto.</p>
+
+            <p>Daniel giró la cabeza hacia el velador.</p>
+            <p>La pantalla se encendió como un cuchillo en medio de la noche.</p>
+
+            <p><strong>02:17</strong></p>
+
+            <p>Tragó saliva, todavía con la respiración pesada, y estiró la mano.</p>
+            <p>El celular vibró otra vez antes de que lo tocara.</p>
+
+            <p>WhatsApp.</p>
+
+            <p>Frunció el ceño.</p>
+            <p>—¿Quién mierda escribe a esta hora…?</p>
+
+            <p>Desbloqueó la pantalla.</p>
+
+            <div class="quote">
+              Y se quedó helado.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El mensaje venía de su propio número.</p>
+
+            <p>No de un contacto con su nombre puesto como broma.</p>
+            <p>No de un chat archivado.</p>
+            <p>No de una copia extraña.</p>
+
+            <p>De su mismo número.</p>
+            <p>Su misma foto.</p>
+            <p>Su misma cuenta.</p>
+
+            <p>Abrió la conversación con el pulso latiéndole en los dedos.</p>
+
+            <p>Solo había un mensaje.</p>
+
+            <div class="quote">
+              No salgas de tu pieza.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel sintió un vacío súbito en el estómago.</p>
+
+            <p>Se quedó mirando la frase, esperando que de un segundo a otro apareciera la explicación lógica.</p>
+            <p>Un error.</p>
+            <p>Un hackeo.</p>
+            <p>Una idiotez de algún amigo.</p>
+            <p>Cualquier cosa.</p>
+
+            <p>Nada.</p>
+
+            <p>La hora del mensaje marcaba <strong>02:16</strong>.</p>
+
+            <div class="quote">
+              Un minuto antes.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Se incorporó en la cama y miró alrededor.</p>
+            <p>El clóset estaba cerrado.</p>
+            <p>La puerta del dormitorio también.</p>
+            <p>El ventilador en la esquina permanecía apagado.</p>
+            <p>No había nadie.</p>
+
+            <p>Se obligó a reír por lo bajo.</p>
+            <p>—Ya… buenísimo.</p>
+
+            <p>Escribió:</p>
+
+            <p><em>¿Quién chucha es?</em></p>
+
+            <p>Vio el “escribiendo…” aparecer al instante.</p>
+
+            <div class="quote">
+              Demasiado rápido.
+            </div>
+
+            <div class="quote">
+              Como si lo hubieran estado esperando.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La respuesta llegó de inmediato.</p>
+
+            <div class="quote">
+              No hagas ruido.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>El cuerpo se le endureció.</p>
+            <p>Una corriente helada le subió desde la espalda hasta la nuca.</p>
+
+            <p>Daniel levantó la vista hacia la puerta de su pieza.</p>
+
+            <p>No había sonido del otro lado.</p>
+            <p>Ni pasos.</p>
+            <p>Ni respiración.</p>
+            <p>Ni movimiento.</p>
+
+            <p>Escribió otra vez, ahora con las manos más torpes.</p>
+
+            <p><em>¿Dónde estás?</em></p>
+
+            <p>Los tres puntos aparecieron.</p>
+            <p>Se detuvieron.</p>
+            <p>Volvieron a aparecer.</p>
+
+            <p>Y finalmente leyó:</p>
+
+            <div class="quote">
+              Si miras debajo de la cama, te va a ver.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel soltó el teléfono.</p>
+
+            <p>No lo dejó caer por decisión.</p>
+            <p>Simplemente se le escapó de la mano y golpeó el colchón.</p>
+
+            <p>Durante varios segundos no pudo moverse.</p>
+
+            <p>Sintió el corazón golpeándole tan fuerte que pensó que ese ruido sí podía delatarlo.</p>
+            <p>La garganta se le secó.</p>
+            <p>Intentó convencerse de que era imposible, de que aquello era una estupidez, una coincidencia enferma, un truco idiota.</p>
+
+            <p>Pero no pudo evitarlo.</p>
+
+            <p>Muy despacio, muy lentamente, recogió el celular otra vez.</p>
+            <p>La conversación seguía ahí.</p>
+            <p>Los mensajes también.</p>
+
+            <p>Miró el borde de la cama.</p>
+            <p>La oscuridad debajo parecía más espesa que el resto de la habitación.</p>
+
+            <div class="quote">
+              Se obligó a no hacerlo.
+            </div>
+
+            <div class="quote">
+              A no mirar.
+            </div>
+
+            <div class="quote">
+              A no inclinarse.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Porque una parte de él, la parte más primitiva, más animal, ya sabía algo horrible:</p>
+
+            <div class="quote">
+              no quería comprobar si era mentira.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>La pantalla volvió a vibrar.</p>
+
+            <p>Otro mensaje.</p>
+
+            <div class="quote">
+              No mires. Escucha.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Daniel contuvo la respiración.</p>
+
+            <p>Al principio no oyó nada.</p>
+
+            <p>Y entonces sí.</p>
+
+            <p>Apenas.</p>
+
+            <p>Un roce.</p>
+            <p>Suave.</p>
+            <p>Lento.</p>
+
+            <p>Como uñas arrastrándose por la madera… justo debajo de él.</p>
+
+            <div class="quote">
+              El terror le paralizó cada músculo.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Se quedó tieso, sentado al centro de la cama, incapaz de pestañear.</p>
+
+            <p>El teléfono vibró otra vez.</p>
+
+            <p><em>Cuando cuente tres, corre hacia la puerta.</em></p>
+
+            <p>Los ojos se le llenaron de lágrimas involuntarias por el puro impacto del miedo.</p>
+
+            <p><em>Uno.</em></p>
+
+            <p>El roce bajo la cama se detuvo.</p>
+
+            <p><em>Dos.</em></p>
+
+            <p>Algo respiró abajo.</p>
+
+            <p>Daniel apretó los dientes, listo para saltar.</p>
+
+            <div class="quote">
+              No.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Parpadeó, confundido.</p>
+
+            <p>Y llegó el último mensaje:</p>
+
+            <div class="quote">
+              Ya sabe que estás despierto.
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Debajo de la cama, algo golpeó una vez desde adentro.</p>
+
+            <p>Y la puerta del dormitorio empezó a abrirse sola.</p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            A veces el horror no entra por la puerta. A veces primero te escribe.
+          </p>
+          <div class="nav-actions">
+            <a href="../../index.html" class="btn btn-ghost">← Volver al inicio</a>
+            <a href="capitulo2.html" class="btn btn-primary">Continuar al capítulo 2 →</a>
+          </div>
+        </div>
+      </article>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+</body>
+</html>
