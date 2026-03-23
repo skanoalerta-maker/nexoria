@@ -870,7 +870,7 @@
 
     /* Footer */
     .site-footer{
-      padding:42px 0 60px;
+      padding:42px 0 24px;
     }
 
     .footer-shell{
@@ -905,6 +905,77 @@
     .footer-links a{
       color:#dce7f8;
       font-weight:700;
+    }
+
+    .made-by{
+      padding:0 0 60px;
+    }
+
+    .made-by-shell{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+      padding:24px 26px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.06);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow:var(--shadow-soft);
+      flex-wrap:wrap;
+    }
+
+    .made-by-left{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      min-width:0;
+      flex:1;
+    }
+
+    .made-by-logo{
+      width:72px;
+      height:72px;
+      border-radius:20px;
+      object-fit:contain;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      padding:10px;
+      flex-shrink:0;
+      box-shadow:0 12px 28px rgba(0,0,0,.22);
+    }
+
+    .made-by-copy{
+      min-width:0;
+    }
+
+    .made-by-kicker{
+      display:block;
+      color:#9ccfff;
+      font-size:.8rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .made-by-copy h3{
+      font-size:clamp(1.1rem, 2vw, 1.6rem);
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+
+    .made-by-copy p{
+      color:var(--muted);
+      line-height:1.65;
+      max-width:720px;
+    }
+
+    .made-by-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
     /* Responsive */
@@ -974,6 +1045,10 @@
       .section-head{
         align-items:flex-start;
       }
+
+      .made-by-shell{
+        align-items:flex-start;
+      }
     }
 
     @media (max-width: 680px){
@@ -1023,13 +1098,15 @@
 
       .hero-actions,
       .story-actions,
-      .story-card-actions{
+      .story-card-actions,
+      .made-by-actions{
         flex-direction:column;
       }
 
       .hero-actions .btn,
       .story-actions .btn,
-      .story-card-actions .btn{
+      .story-card-actions .btn,
+      .made-by-actions .btn{
         width:100%;
       }
 
@@ -1066,8 +1143,14 @@
         width:100%;
       }
 
-      .footer-shell{
+      .footer-shell,
+      .made-by-shell{
         padding:20px 18px;
+      }
+
+      .made-by-left{
+        flex-direction:column;
+        align-items:flex-start;
       }
     }
 
@@ -1094,6 +1177,12 @@
       .hero-cover-wrap,
       .story-cover-shell{
         aspect-ratio:4 / 3;
+      }
+
+      .made-by-logo{
+        width:62px;
+        height:62px;
+        border-radius:18px;
       }
     }
   </style>
@@ -1290,6 +1379,36 @@
       </div>
     </div>
   </footer>
+
+  <section class="made-by">
+    <div class="container">
+      <div class="made-by-shell">
+        <div class="made-by-left">
+          <img
+            class="made-by-logo"
+            src="assets/logo-appfactory.png"
+            alt="Logo AppFactory"
+          />
+
+          <div class="made-by-copy">
+            <span class="made-by-kicker">Desarrollo digital</span>
+            <h3>Creado por AppFactory</h3>
+            <p>
+              Esta plataforma fue diseñada y desarrollada por AppFactory para ofrecer
+              una experiencia moderna, envolvente y optimizada en celular, tablet,
+              notebook y PC.
+            </p>
+          </div>
+        </div>
+
+        <div class="made-by-actions">
+          <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">
+            Ver AppFactory
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     const fallbackNovelas = [
