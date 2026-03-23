@@ -15,43 +15,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="cosmos">
+  <div class="cosmos" aria-hidden="true">
     <div class="stars stars-a"></div>
     <div class="stars stars-b"></div>
     <div class="nebula-glow glow-1"></div>
     <div class="nebula-glow glow-2"></div>
-
-    <svg class="constellations" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-      <g class="constellation-group group-1">
-        <line x1="120" y1="160" x2="220" y2="220"></line>
-        <line x1="220" y1="220" x2="300" y2="180"></line>
-        <line x1="300" y1="180" x2="360" y2="260"></line>
-        <circle cx="120" cy="160" r="3"></circle>
-        <circle cx="220" cy="220" r="3"></circle>
-        <circle cx="300" cy="180" r="3"></circle>
-        <circle cx="360" cy="260" r="3"></circle>
-      </g>
-
-      <g class="constellation-group group-2">
-        <line x1="980" y1="140" x2="1060" y2="210"></line>
-        <line x1="1060" y1="210" x2="1140" y2="170"></line>
-        <line x1="1140" y1="170" x2="1220" y2="250"></line>
-        <circle cx="980" cy="140" r="3"></circle>
-        <circle cx="1060" cy="210" r="3"></circle>
-        <circle cx="1140" cy="170" r="3"></circle>
-        <circle cx="1220" cy="250" r="3"></circle>
-      </g>
-
-      <g class="constellation-group group-3">
-        <line x1="420" y1="620" x2="520" y2="680"></line>
-        <line x1="520" y1="680" x2="610" y2="640"></line>
-        <line x1="610" y1="640" x2="700" y2="710"></line>
-        <circle cx="420" cy="620" r="3"></circle>
-        <circle cx="520" cy="680" r="3"></circle>
-        <circle cx="610" cy="640" r="3"></circle>
-        <circle cx="700" cy="710" r="3"></circle>
-      </g>
-    </svg>
+    <div class="nebula-glow glow-3"></div>
   </div>
 
   <header class="site-header">
@@ -65,8 +34,8 @@
       </a>
 
       <nav class="top-nav" aria-label="Principal">
-        <a href="#destacada">Destacada</a>
-        <a href="#catalogo">Catálogo</a>
+        <a href="#destacada">Inicio</a>
+        <a href="#catalogo">Historias</a>
         <a href="#generos">Géneros</a>
       </nav>
 
@@ -77,6 +46,7 @@
   </header>
 
   <main>
+    <!-- HERO PRINCIPAL -->
     <section class="hero" id="destacada">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -87,8 +57,9 @@
           </h1>
 
           <p>
-            Explora novelas por géneros, sigue tu progreso y descubre nuevas
-            historias en una experiencia visual más limpia, elegante y envolvente.
+            Explora novelas por géneros, guarda tu progreso y sigue leyendo desde
+            donde quedaste. Nébula está pensada para una experiencia envolvente,
+            moderna y visualmente potente.
           </p>
 
           <div class="hero-actions">
@@ -121,7 +92,7 @@
 
             <div class="feature-inline-meta">
               <span><strong id="featuredChapters">12</strong> capítulos</span>
-              <span><strong id="featuredViews">0</strong> vistas</span>
+              <span><strong id="featuredViews">200</strong> vistas</span>
               <span><strong id="featuredFree">3</strong> gratis</span>
             </div>
 
@@ -147,6 +118,7 @@
       </div>
     </section>
 
+    <!-- GÉNEROS -->
     <section class="section" id="generos">
       <div class="container">
         <div class="section-head">
@@ -163,7 +135,8 @@
       </div>
     </section>
 
-    <section class="section" id="catalogo">
+    <!-- NOVELAS ABAJO RECTANGULARES -->
+    <section class="section section-stories" id="catalogo">
       <div class="container">
         <div class="section-head">
           <div>
@@ -188,7 +161,8 @@
           </div>
         </div>
 
-        <div class="story-grid" id="storyGrid"></div>
+        <div class="story-list" id="storyGrid"></div>
+
         <div class="empty-state hidden" id="emptyState">
           No se encontraron historias con esa búsqueda.
         </div>
@@ -205,7 +179,7 @@
 
       <div class="footer-links">
         <a href="#destacada">Inicio</a>
-        <a href="#catalogo">Catálogo</a>
+        <a href="#catalogo">Historias</a>
         <a href="#generos">Géneros</a>
       </div>
     </div>
@@ -224,7 +198,7 @@
         carpeta: "codigo-nebula",
         temporada: "Temporada 1",
         capitulos: 12,
-        visitas: 1542,
+        visitas: 200,
         gratis: 3,
         destacada: true
       },
@@ -239,7 +213,7 @@
         carpeta: "no-debi-enamorarme",
         temporada: "Temporada 1",
         capitulos: 10,
-        visitas: 2984,
+        visitas: 200,
         gratis: 3,
         destacada: false
       },
@@ -254,7 +228,7 @@
         carpeta: "despues-de-tu-adios",
         temporada: "Temporada 1",
         capitulos: 8,
-        visitas: 1187,
+        visitas: 200,
         gratis: 3,
         destacada: false
       }
@@ -294,7 +268,7 @@
       document.getElementById("featuredGenreTag").textContent = capitalizar(destacada.genero);
       document.getElementById("featuredTitle").textContent = destacada.titulo;
       document.getElementById("featuredDescription").textContent = destacada.descripcion;
-      document.getElementById("featuredViews").textContent = destacada.visitas || 0;
+      document.getElementById("featuredViews").textContent = destacada.visitas || 200;
       document.getElementById("featuredChapters").textContent = destacada.capitulos || 0;
       document.getElementById("featuredFree").textContent = destacada.gratis || 3;
       document.getElementById("featuredReadLink").href = destacada.ruta;
@@ -337,34 +311,37 @@
       emptyState.classList.add("hidden");
 
       storyGrid.innerHTML = items.map(novela => `
-        <article class="story-card">
-          <div class="story-cover-shell">
-            <img class="story-cover" src="${novela.portada}" alt="${novela.titulo}" />
-            <div class="story-cover-shadow"></div>
-            <div class="story-badges">
-              <span>${capitalizar(novela.genero)}</span>
-            </div>
+        <article class="story-row">
+          <div class="story-row-cover-shell">
+            <img class="story-row-cover" src="${novela.portada}" alt="${novela.titulo}" />
+            <div class="story-row-cover-shadow"></div>
           </div>
 
-          <div class="story-body">
-            <div class="story-topline">
-              <h3>${novela.titulo}</h3>
+          <div class="story-row-body">
+            <div class="story-row-top">
+              <div class="story-row-headings">
+                <div class="story-row-badges">
+                  <span>${capitalizar(novela.genero)}</span>
+                  <span>${novela.temporada || "Temporada 1"}</span>
+                </div>
+                <h3>${novela.titulo}</h3>
+              </div>
             </div>
 
             <p>${novela.descripcion}</p>
 
-            <div class="story-footer-meta">
+            <div class="story-row-meta">
               <span>${novela.capitulos || 0} capítulos</span>
-              <span>${novela.visitas || 0} vistas</span>
+              <span>${novela.visitas || 200} vistas</span>
               <span>${novela.gratis || 3} gratis</span>
             </div>
 
-            <div class="story-card-actions">
+            <div class="story-row-actions">
               <a class="btn btn-primary" href="${novela.ruta}" data-read-id="${novela.id}">
-                Comenzar
+                Comenzar a leer
               </a>
               <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">
-                Seguir
+                Seguir leyendo
               </button>
             </div>
           </div>
