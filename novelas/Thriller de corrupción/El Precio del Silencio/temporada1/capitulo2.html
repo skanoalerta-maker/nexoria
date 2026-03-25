@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,11 +7,10 @@
   <title>Capítulo 2 | El Precio del Silencio</title>
   <meta
     name="description"
-    content="Capítulo 2 de El Precio del Silencio: El auto sin patente."
+    content="Capítulo 2 de El Precio del Silencio: el auto sin patente."
   />
 
   <style>
-    /* ⚠️ MISMO CSS EXACTO QUE TU ARCHIVO */
     :root{
       --bg:#05080f;
       --bg2:#0b1220;
@@ -28,8 +28,13 @@
       --max:860px;
     }
 
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
@@ -37,12 +42,20 @@
       color:var(--text);
       background:#04070d;
       line-height:1.8;
+      position:relative;
       overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
     #stars{
       position:fixed;
       inset:0;
+      width:100%;
+      height:100%;
       z-index:0;
       background:
         radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
@@ -50,11 +63,16 @@
         linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
     }
 
-    .page{ position:relative; z-index:1; }
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
 
     .topbar{
       position:sticky;
       top:0;
+      z-index:30;
       backdrop-filter:blur(14px);
       background:rgba(5,8,15,0.72);
       border-bottom:1px solid var(--line);
@@ -62,398 +80,1532 @@
 
     .topbar-inner{
       max-width:1100px;
-      margin:auto;
+      margin:0 auto;
       padding:16px 20px;
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
+      gap:14px;
     }
 
-    .brand{ display:flex; gap:10px; align-items:center; }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
     .brand-badge{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
       background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
       border:1px solid var(--line-strong);
-      color:var(--blue2);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
       font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
     .btn{
-      padding:10px 16px;
-      border-radius:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
       font-weight:700;
-      cursor:pointer;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
       border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
     }
 
     .btn-primary{
-      background:var(--blue);
-      color:#fff;
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
     }
 
     .btn-ghost{
-      border:1px solid var(--line);
       background:rgba(255,255,255,0.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
     }
 
     .content-wrap{
-      max-width:860px;
-      margin:auto;
-      padding:40px 20px;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
     }
 
-    .story p{
-      margin-bottom:22px;
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
       font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
     }
 
     .lead{
-      font-size:20px;
-      border-left:3px solid var(--blue2);
-      padding-left:14px;
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9, 18, 35, 0.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
     }
 
-    .quote{
-      margin:30px 0;
-      padding:18px;
-      border-radius:14px;
-      background:rgba(10,108,255,.1);
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
       text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
     }
 
-    .divider{
+    .story .divider{
+      width:86px;
       height:1px;
-      background:rgba(255,255,255,.1);
-      margin:30px 0;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
     }
   </style>
 </head>
-
 <body>
+  <canvas id="stars"></canvas>
 
-<canvas id="stars"></canvas>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El Precio del Silencio</p>
+            <p class="brand-sub">Thriller político y empresarial</p>
+          </div>
+        </div>
 
-<div class="page">
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <div class="brand-badge">N</div>
-      <div>
-        <p><strong>El Precio del Silencio</strong></p>
+        <div class="top-actions">
+          <a href="capitulo1.html" onclick="goBack(event, 'capitulo1.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo3.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <div>
-      <a href="capitulo1.html" onclick="goBack(event,'capitulo1.html')" class="btn btn-ghost">← Atrás</a>
-      <a href="capitulo3.html" class="btn btn-primary">Siguiente →</a>
-    </div>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 2</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 2</p>
+            <h1>El auto sin patente</h1>
+            <p>
+              La advertencia ya no era digital. Ahora estaba abajo, esperando en la calle,
+              con el motor encendido y una promesa muda: Tomás había sido visto.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">La amenaza se acerca</div>
+              <h2>Cuando ya no puedes fingir que fue una coincidencia</h2>
+              <p>
+                Después de descubrir el patrón, Tomás recibe una advertencia imposible de ignorar.
+                Lo que parecía una red de colusión empieza a mostrar su verdadero rostro: vigilancia,
+                poder territorial y mensajes enviados para quebrarlo antes de que hable.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Thriller</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">2 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 2: El auto sin patente</h3>
+            <p>Lectura gratuita · La red comienza a moverse</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Tomás no apartó la vista de la pantalla hasta que el punto rojo desapareció.
+              No sabía si el auto seguía abajo. No sabía si el corte de luz había afectado solo su edificio
+              o una cuadra completa. Lo único que sabía era que la advertencia había dejado de ser abstracta.
+              Ya no estaba frente a una hipótesis. Ahora estaba frente a una presencia.
+            </p>
+
+            <p>
+              Se levantó lentamente de la silla.
+            </p>
+
+            <p>
+              El living seguía apenas iluminado por la batería del notebook. El resto del departamento
+              era una caja negra: cocina, pasillo, dormitorio, todo devorado por una oscuridad que hacía
+              parecer el lugar más pequeño de lo que realmente era.
+            </p>
+
+            <p>
+              Durante unos segundos no hizo nada.
+            </p>
+
+            <p>
+              Solo escuchó.
+            </p>
+
+            <p>
+              Afuera, el silencio era demasiado limpio.
+            </p>
+
+            <p>
+              Ni ascensor.
+            </p>
+
+            <p>
+              Ni pasos.
+            </p>
+
+            <p>
+              Ni una puerta cerrándose en otro piso.
+            </p>
+
+            <div class="quote">Como si el edificio entero hubiera decidido contener la respiración.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás avanzó hasta la ventana sin separar completamente la cortina. Solo lo justo
+              para mirar desde una franja mínima, casi absurda.
+            </p>
+
+            <p>
+              El auto seguía ahí.
+            </p>
+
+            <p>
+              Sedán oscuro.
+            </p>
+
+            <p>
+              Vidrios negros.
+            </p>
+
+            <p>
+              Luces apagadas.
+            </p>
+
+            <p>
+              Motor encendido.
+            </p>
+
+            <p>
+              Y esa inmovilidad inquietante que tienen las cosas cuando están esperando una reacción.
+            </p>
+
+            <p><strong>No parecía estacionado. Parecía calculado.</strong></p>
+
+            <p>
+              Tomás volvió la vista al notebook.
+            </p>
+
+            <p>
+              La imagen en vivo ya no estaba.
+            </p>
+
+            <p>
+              La pantalla había quedado negra, salvo por un cursor blanco que parpadeaba
+              en el centro como si estuviera invitándolo a escribir algo.
+            </p>
+
+            <p>
+              No escribió.
+            </p>
+
+            <p>
+              Bajó la tapa.
+            </p>
+
+            <p>
+              El departamento quedó completamente oscuro.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Pensó en llamar a Carabineros.
+            </p>
+
+            <p>
+              Pensó en grabar el auto con el celular.
+            </p>
+
+            <p>
+              Pensó en mandar los archivos a todos sus contactos antes de que fuera demasiado tarde.
+            </p>
+
+            <p>
+              Pero cada plan nacía roto.
+            </p>
+
+            <p>
+              No tenía los archivos completos.
+            </p>
+
+            <p>
+              No conocía aún el tamaño de la red.
+            </p>
+
+            <p>
+              Y lo peor: no sabía en quién confiar.
+            </p>
+
+            <p>
+              Porque si dentro de esas planillas había validación política y contención mediática,
+              entonces la amenaza no era solo empresarial.
+            </p>
+
+            <p>
+              Era institucional.
+            </p>
+
+            <p>
+              Territorial.
+            </p>
+
+            <p>
+              Profunda.
+            </p>
+
+            <div class="quote">Lo suficientemente grande como para hablarle por teléfono y apagarle la cuadra.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              No recuerda cuánto tiempo pasó antes de que regresara la electricidad.
+            </p>
+
+            <p>
+              Quizás diez minutos.
+            </p>
+
+            <p>
+              Quizás veinte.
+            </p>
+
+            <p>
+              Cuando las luces volvieron, el refrigerador revivió con un zumbido brusco
+              y el router parpadeó como si no hubiera pasado nada.
+            </p>
+
+            <p>
+              Volvió a mirar la calle.
+            </p>
+
+            <p>
+              El auto seguía ahí.
+            </p>
+
+            <p>
+              Exactamente en el mismo lugar.
+            </p>
+
+            <p>
+              Eso fue, de alguna forma, peor.
+            </p>
+
+            <p>
+              Porque significaba que no se trataba de una amenaza rápida ni de una maniobra para asustarlo
+              y desaparecer. Significaba que podían quedarse el tiempo que quisieran.
+            </p>
+
+            <p>
+              Que no tenían apuro.
+            </p>
+
+            <p>
+              Que estaban seguros de dominar el ritmo.
+            </p>
+
+            <p><strong>Y que querían que él lo supiera.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás abrió el cajón de la cocina donde guardaba papeles viejos, cables,
+              boletas y llaves que ya no recordaba para qué servían. Sacó el pequeño pendrive
+              que había escondido en la taza vacía y lo apretó en la mano como si su peso ridículo
+              pudiera darle alguna seguridad.
+            </p>
+
+            <p>
+              El objeto parecía insignificante.
+            </p>
+
+            <p>
+              Plástico negro rayado.
+            </p>
+
+            <p>
+              Una tapa suelta.
+            </p>
+
+            <p>
+              Nada que, por sí solo, justificara el miedo que empezaba a instalarse en su pecho.
+            </p>
+
+            <p>
+              Y sin embargo ahí estaba:
+            </p>
+
+            <p>
+              la primera evidencia,
+            </p>
+
+            <p>
+              el primer gesto de desobediencia,
+            </p>
+
+            <p>
+              el primer error que la red no había logrado borrar.
+            </p>
+
+            <div class="quote">A veces una estructura gigantesca empieza a romperse por un archivo de menos de diez megas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Decidió no dormir.
+            </p>
+
+            <p>
+              Se vistió.
+            </p>
+
+            <p>
+              Jeans oscuros, polerón negro, chaqueta sin logo.
+            </p>
+
+            <p>
+              Metió el pendrive en la billetera, la billetera en el bolsillo interior de la chaqueta,
+              y el celular en modo silencio.
+            </p>
+
+            <p>
+              No sabía exactamente qué iba a hacer, pero sí sabía una cosa:
+            </p>
+
+            <p>
+              si esperaba al amanecer dentro del departamento, la red seguiría marcando el tablero.
+            </p>
+
+            <p>
+              Necesitaba moverse primero.
+            </p>
+
+            <p>
+              Necesitaba comprobar si el auto era un aviso…
+              o una jaula.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              A las 04:51 abrió la puerta del departamento.
+            </p>
+
+            <p>
+              El pasillo estaba vacío.
+            </p>
+
+            <p>
+              La luz del sensor demoró un segundo en encenderse, lo suficiente para que sintiera
+              una punzada absurda en el estómago, como si en la oscuridad pudiera haber habido alguien
+              esperando a que diera el primer paso.
+            </p>
+
+            <p>
+              Caminó hasta el ascensor y se arrepintió en el mismo instante de tocar el botón.
+            </p>
+
+            <p>
+              Demasiado lento.
+            </p>
+
+            <p>
+              Demasiado visible.
+            </p>
+
+            <p>
+              Dio media vuelta y bajó por la escalera.
+            </p>
+
+            <p>
+              Piso once.
+            </p>
+
+            <p>
+              Piso diez.
+            </p>
+
+            <p>
+              Piso nueve.
+            </p>
+
+            <p>
+              En cada descanso se obligó a escuchar antes de seguir.
+            </p>
+
+            <p>
+              Nada.
+            </p>
+
+            <p>
+              Solo su propia respiración, cada vez más consciente, cada vez más pesada.
+            </p>
+
+            <div class="quote">Piso seis. Piso cinco. Piso cuatro.</div>
+
+            <p>
+              Cuando llegó al primero, sus manos estaban heladas.
+            </p>
+
+            <p>
+              Se detuvo frente a la puerta de salida.
+            </p>
+
+            <p>
+              Miró por el vidrio angosto del acceso.
+            </p>
+
+            <p>
+              El auto seguía ahí.
+            </p>
+
+            <p>
+              Mismo ángulo.
+            </p>
+
+            <p>
+              Misma quietud.
+            </p>
+
+            <p>
+              Mismo desafío silencioso.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Empujó la puerta.
+            </p>
+
+            <p>
+              El aire helado de la madrugada lo golpeó de frente.
+            </p>
+
+            <p>
+              La ciudad tenía ese aspecto raro que a veces toma antes del amanecer:
+              demasiado vacía para ser normal, demasiado luminosa para parecer segura.
+            </p>
+
+            <p>
+              Tomás avanzó un paso fuera del edificio.
+            </p>
+
+            <p>
+              Luego otro.
+            </p>
+
+            <p>
+              El sedán no reaccionó.
+            </p>
+
+            <p>
+              No encendió luces.
+            </p>
+
+            <p>
+              No tocó bocina.
+            </p>
+
+            <p>
+              No bajó una ventana.
+            </p>
+
+            <p>
+              Solo siguió ahí, como si supiera que no hacía falta hacer más.
+            </p>
+
+            <p>
+              Tomás cruzó la vereda.
+            </p>
+
+            <p>
+              El corazón le golpeaba fuerte, demasiado fuerte, al punto de dolerle bajo la clavícula.
+            </p>
+
+            <p>
+              A dos metros del auto, se detuvo.
+            </p>
+
+            <p>
+              Miró la parte delantera.
+            </p>
+
+            <p>
+              No había patente.
+            </p>
+
+            <p>
+              Miró la trasera.
+            </p>
+
+            <p>
+              Tampoco.
+            </p>
+
+            <p>
+              Se inclinó apenas.
+            </p>
+
+            <p>
+              Vidrios polarizados.
+            </p>
+
+            <p>
+              Interior oscuro.
+            </p>
+
+            <p>
+              Ninguna silueta visible.
+            </p>
+
+            <div class="quote">Entonces el vidrio del copiloto bajó solo.</div>
+
+            <p>
+              Tomás retrocedió un paso.
+            </p>
+
+            <p>
+              Dentro no había nadie.
+            </p>
+
+            <p>
+              Ni conductor.
+            </p>
+
+            <p>
+              Ni pasajero.
+            </p>
+
+            <p>
+              Solo un sobre blanco, apoyado en el asiento, con su nombre escrito a mano
+              con una caligrafía demasiado limpia para ser improvisada.
+            </p>
+
+            <p>
+              TOMÁS RIVAS.
+            </p>
+
+            <p>
+              No “señor Rivas”.
+            </p>
+
+            <p>
+              No “Tomás”.
+            </p>
+
+            <p>
+              Nombre y apellido.
+            </p>
+
+            <p><strong>Como en una lista.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Miró alrededor una vez más.
+            </p>
+
+            <p>
+              La calle seguía vacía.
+            </p>
+
+            <p>
+              Ningún peatón.
+            </p>
+
+            <p>
+              Ningún portero fumando.
+            </p>
+
+            <p>
+              Ninguna ventana encendida desde donde alguien pudiera gritarle que se alejara.
+            </p>
+
+            <p>
+              Estiró la mano y tomó el sobre.
+            </p>
+
+            <p>
+              El papel estaba tibio.
+            </p>
+
+            <p>
+              Ese detalle mínimo le erizó la piel.
+            </p>
+
+            <p>
+              No sabía si por el motor del auto, por haber estado ahí mucho rato…
+              o porque alguien lo había dejado hace menos de un minuto.
+            </p>
+
+            <p>
+              Lo abrió.
+            </p>
+
+            <p>
+              Adentro había una fotografía.
+            </p>
+
+            <p>
+              Su edificio.
+            </p>
+
+            <p>
+              Su ventana.
+            </p>
+
+            <p>
+              La cortina corrida apenas por esa franja mínima desde donde había espiado.
+            </p>
+
+            <p>
+              La foto estaba tomada desde la calle, con zoom, perfecta.
+            </p>
+
+            <p>
+              Debajo venía una hoja doblada por la mitad.
+            </p>
+
+            <p>
+              La desplegó.
+            </p>
+
+            <div class="quote">Todavía estás a tiempo de no existir dentro de esto.</div>
+
+            <p>
+              Sintió un golpe seco en el estómago.
+            </p>
+
+            <p>
+              No era una amenaza gritona.
+            </p>
+
+            <p>
+              No era vulgar.
+            </p>
+
+            <p>
+              No necesitaba serlo.
+            </p>
+
+            <p>
+              Estaba escrita por alguien que sabía perfectamente cuánto miedo podía provocar
+              una frase calma.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Se quedó mirando el papel sin saber cuánto tiempo pasó.
+            </p>
+
+            <p>
+              Luego escuchó el ruido suave del seguro centralizado.
+            </p>
+
+            <p>
+              Clac.
+            </p>
+
+            <p>
+              El vidrio comenzó a subir lentamente.
+            </p>
+
+            <p>
+              Tomás dio dos pasos atrás.
+            </p>
+
+            <p>
+              El motor respondió con una vibración más profunda.
+            </p>
+
+            <p>
+              Y el sedán empezó a moverse.
+            </p>
+
+            <p>
+              Sin encender luces.
+            </p>
+
+            <p>
+              Sin apuro.
+            </p>
+
+            <p>
+              Avanzó por la calle desierta, dobló en la esquina y desapareció.
+            </p>
+
+            <p>
+              Ni siquiera intentó ocultarse.
+            </p>
+
+            <p>
+              Porque esa era precisamente la señal:
+            </p>
+
+            <p><strong>podían irse cuando quisieran porque ya habían entregado el mensaje.</strong></p>
+
+            <div class="quote">Te vemos. Te conocemos. Y elegimos hablarte antes de tocarte.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás volvió al edificio con la fotografía en una mano y la nota en la otra.
+            </p>
+
+            <p>
+              Sintió ganas de vomitar recién cuando entró al ascensor y las puertas se cerraron.
+            </p>
+
+            <p>
+              El espejo le devolvió una imagen que no reconoció al primer segundo:
+            </p>
+
+            <p>
+              rostro rígido,
+            </p>
+
+            <p>
+              mandíbula apretada,
+            </p>
+
+            <p>
+              ojos demasiado abiertos.
+            </p>
+
+            <p>
+              Parecía alguien a quien acababan de avisarle que el suelo bajo sus pies no era suelo,
+              sino una tapa.
+            </p>
+
+            <p>
+              Y que alguien ya estaba girando la llave desde arriba.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Una vez en el departamento, extendió la fotografía sobre la mesa
+              y la comparó con la vista real de la ventana.
+            </p>
+
+            <p>
+              No había duda.
+            </p>
+
+            <p>
+              La imagen había sido tomada esa misma noche.
+            </p>
+
+            <p>
+              Quizás en el mismo minuto en que él estaba detrás de la cortina creyendo
+              que observaba sin ser observado.
+            </p>
+
+            <p>
+              La humillación fue casi tan fuerte como el miedo.
+            </p>
+
+            <p>
+              Durante años había confiado en su capacidad para leer sistemas,
+              detectar inconsistencias y anticipar movimientos.
+            </p>
+
+            <p>
+              Y sin embargo, bastó una sola noche para que otros le demostraran
+              que llevaban mucha ventaja.
+            </p>
+
+            <p>
+              Ventaja técnica.
+            </p>
+
+            <p>
+              Ventaja operativa.
+            </p>
+
+            <p>
+              Ventaja psicológica.
+            </p>
+
+            <p><strong>Ventaja total.</strong></p>
+
+            <div class="quote">La red no solo protegía dinero. Protegía obediencia.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Se sirvió otro vaso de agua.
+            </p>
+
+            <p>
+              Esta vez logró no derramarlo.
+            </p>
+
+            <p>
+              Se obligó a respirar más lento.
+            </p>
+
+            <p>
+              A pensar.
+            </p>
+
+            <p>
+              Si habían querido asustarlo, lo habían conseguido.
+            </p>
+
+            <p>
+              Si habían querido frenarlo, aún no lo sabían.
+            </p>
+
+            <p>
+              Porque debajo del miedo empezaba a formarse algo más.
+            </p>
+
+            <p>
+              No valentía.
+            </p>
+
+            <p>
+              No todavía.
+            </p>
+
+            <p>
+              Más bien una rabia fría.
+            </p>
+
+            <p>
+              La rabia de entender que, mientras millones peleaban por llegar a fin de mes,
+              alguien manipulaba precios, coberturas, políticos y castigos desde una mesa
+              donde nunca faltaba nada.
+            </p>
+
+            <p>
+              La rabia de entender que la colusión, en su forma más perfecta,
+              no consistía solo en ganar más dinero.
+            </p>
+
+            <p>
+              Consistía en enseñarles a todos que resistirse no servía.
+            </p>
+
+            <p>
+              Que siempre habría un llamado.
+            </p>
+
+            <p>
+              Un auto.
+            </p>
+
+            <p>
+              Un corte de luz.
+            </p>
+
+            <p>
+              Una advertencia cordial.
+            </p>
+
+            <div class="quote">Y después, si era necesario, algo peor.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás tomó la nota, la dobló con cuidado y la metió dentro de un libro viejo
+              de economía regulatoria que tenía en el estante. No por estrategia brillante,
+              sino porque necesitaba convertir ese papel en una prueba y no en un objeto de pánico.
+            </p>
+
+            <p>
+              Luego sacó una libreta y escribió tres cosas:
+            </p>
+
+            <p>
+              1. No confiar en canales institucionales sin verificar.
+            </p>
+
+            <p>
+              2. Duplicar evidencia fuera del departamento.
+            </p>
+
+            <p>
+              3. Encontrar a alguien que ya haya intentado denunciar antes.
+            </p>
+
+            <p>
+              Se quedó mirando el tercer punto.
+            </p>
+
+            <p>
+              Porque una red tan aceitada no se había construido sin dejar cadáveres profesionales en el camino:
+              denunciantes desacreditados, periodistas silenciados, fiscales trasladados, analistas despedidos,
+              académicos comprados, consultores asustados.
+            </p>
+
+            <p>
+              Alguien tenía que haber visto una parte.
+            </p>
+
+            <p>
+              Alguien tenía que haber sobrevivido lo suficiente para contarla.
+            </p>
+
+            <p>
+              Y si lograba encontrarlo antes que la red lo encontrara a él,
+              todavía podía haber una salida.
+            </p>
+
+            <div class="quote">Entonces sonó su celular otra vez.</div>
+
+            <p>
+              No era número desconocido esta vez.
+            </p>
+
+            <p>
+              Era uno guardado desde hacía años y al que no le hablaba hace meses.
+            </p>
+
+            <p>
+              <strong>Laura Sanz.</strong>
+            </p>
+
+            <p>
+              Periodista.
+            </p>
+
+            <p>
+              Ex pareja.
+            </p>
+
+            <p>
+              La única persona que una vez le dijo, casi bromeando, que en Chile las cosas no se escondían:
+              se administraban.
+            </p>
+
+            <p>
+              Tomás respondió.
+            </p>
+
+            <p>
+              No alcanzó a decir “hola”.
+            </p>
+
+            <p>
+              Laura habló primero, sin respirar, con la voz tensa y baja.
+            </p>
+
+            <div class="quote">—Tomás, no sé qué encontraste, pero ya preguntaron por ti.</div>
+
+            <p>
+              Él sintió que el mundo se estrechaba otra vez.
+            </p>
+
+            <p>
+              —¿Quiénes?
+            </p>
+
+            <p>
+              Del otro lado hubo un silencio corto.
+            </p>
+
+            <p>
+              El suficiente para que entendiera que la respuesta iba a empeorarlo todo.
+            </p>
+
+            <p>
+              —Gente que no llama dos veces —dijo Laura—. Si me vas a contar algo, no lo hagas por teléfono.
+            </p>
+
+            <p>
+              La llamada se cortó.
+            </p>
+
+            <p>
+              Tomás se quedó inmóvil, con el celular pegado a la oreja, mirando la fotografía sobre la mesa.
+            </p>
+
+            <p>
+              Ya no era solo él.
+            </p>
+
+            <p>
+              Ya no era solo una noche rara ni una advertencia destinada a asustarlo dentro de su departamento.
+            </p>
+
+            <p>
+              La red ya había empezado a moverse alrededor.
+            </p>
+
+            <p>
+              Y por primera vez entendió lo más peligroso de todo:
+            </p>
+
+            <p><strong>quien quiera ayudarlo, también se convierte en objetivo.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir por qué Laura ya sabía su nombre antes de que amaneciera.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo1.html" onclick="goBack(event, 'capitulo1.html')" class="btn btn-ghost">← Capítulo 1</a>
+            <a href="capitulo3.html" class="btn btn-primary">Leer capítulo 3 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
   </div>
-</header>
 
-<main class="content-wrap">
-  <div class="story">
-
-    <p class="lead">
-      El auto no tenía patente.  
-      Y no estaba estacionado por casualidad.
-    </p>
-
-    <p>
-      Tomás no durmió.
-    </p>
-
-    <p>
-      Se quedó sentado en la oscuridad, mirando el reflejo tenue de su pantalla apagada,
-      escuchando cada ruido del edificio como si fuera una señal.
-    </p>
-
-    <p>
-      A las 04:12 AM el auto seguía ahí.
-    </p>
-
-    <p>
-      Motor encendido.
-    </p>
-
-    <p>
-      Sin luces.
-    </p>
-
-    <p><strong>Esperando.</strong></p>
-
-    <div class="divider"></div>
-
-    <p>
-      A las 05:03 decidió hacer algo estúpido.
-    </p>
-
-    <p>
-      Bajó.
-    </p>
-
-    <p>
-      No porque fuera valiente.
-    </p>
-
-    <p>
-      Sino porque necesitaba confirmar si aquello era real.
-    </p>
-
-    <p>
-      El ascensor parecía más lento que nunca.
-    </p>
-
-    <p>
-      Cada piso que pasaba sentía que alguien ya sabía que iba en camino.
-    </p>
-
-    <div class="quote">Piso 3… Piso 2… Piso 1…</div>
-
-    <p>
-      Cuando se abrieron las puertas, el aire frío de la madrugada lo golpeó en la cara.
-    </p>
-
-    <p>
-      Salió del edificio.
-    </p>
-
-    <p>
-      Miró a la derecha.
-    </p>
-
-    <p>
-      Nada.
-    </p>
-
-    <p>
-      Miró a la izquierda.
-    </p>
-
-    <p>
-      El auto seguía ahí.
-    </p>
-
-    <p>
-      Negro.
-    </p>
-
-    <p>
-      Vidrios polarizados.
-    </p>
-
-    <p>
-      Sin patente adelante.
-    </p>
-
-    <p>
-      Sin patente atrás.
-    </p>
-
-    <p><strong>Sin identidad.</strong></p>
-
-    <div class="divider"></div>
-
-    <p>
-      Tomás caminó lentamente hacia él.
-    </p>
-
-    <p>
-      Cada paso se sentía más pesado.
-    </p>
-
-    <p>
-      Como si cruzar esa distancia fuera cruzar una línea invisible.
-    </p>
-
-    <p>
-      A dos metros… se detuvo.
-    </p>
-
-    <p>
-      El motor seguía encendido.
-    </p>
-
-    <p>
-      Pero no se escuchaba radio.
-    </p>
-
-    <p>
-      No había movimiento.
-    </p>
-
-    <p>
-      No había nadie.
-    </p>
-
-    <p>
-      O eso creyó.
-    </p>
-
-    <div class="quote">Hasta que el vidrio del copiloto bajó solo.</div>
-
-    <p>
-      Tomás retrocedió un paso.
-    </p>
-
-    <p>
-      Adentro…
-    </p>
-
-    <p>
-      no había conductor.
-    </p>
-
-    <p>
-      No había nadie.
-    </p>
-
-    <p>
-      Solo un sobre.
-    </p>
-
-    <p>
-      Blanco.
-    </p>
-
-    <p>
-      Con su nombre escrito a mano.
-    </p>
-
-    <div class="divider"></div>
-
-    <p>
-      Lo tomó.
-    </p>
-
-    <p>
-      Dudó un segundo.
-    </p>
-
-    <p>
-      Lo abrió.
-    </p>
-
-    <p>
-      Dentro había una sola hoja.
-    </p>
-
-    <p>
-      Y una fotografía.
-    </p>
-
-    <div class="quote">Su departamento.</div>
-
-    <p>
-      Tomada desde la calle.
-    </p>
-
-    <p>
-      Hace minutos.
-    </p>
-
-    <p>
-      La hoja tenía una frase:
-    </p>
-
-    <div class="quote">
-      “Todavía estás a tiempo de no existir en esto.”
-    </div>
-
-    <div class="divider"></div>
-
-    <p>
-      El corazón le empezó a latir fuerte.
-    </p>
-
-    <p>
-      Miró alrededor.
-    </p>
-
-    <p>
-      La calle seguía vacía.
-    </p>
-
-    <p>
-      Silenciosa.
-    </p>
-
-    <p>
-      Normal.
-    </p>
-
-    <p>
-      Pero ya nada era normal.
-    </p>
-
-    <p>
-      Volvió a mirar el auto.
-    </p>
-
-    <p>
-      El vidrio subió solo.
-    </p>
-
-    <p>
-      El motor se aceleró suavemente.
-    </p>
-
-    <p>
-      Y el vehículo avanzó…
-    </p>
-
-    <p>
-      sin luces.
-    </p>
-
-    <p>
-      sin ruido.
-    </p>
-
-    <p>
-      sin dejar rastro.
-    </p>
-
-    <div class="divider"></div>
-
-    <p>
-      Tomás se quedó solo en la vereda.
-    </p>
-
-    <p>
-      Con el sobre en la mano.
-    </p>
-
-    <p>
-      Con la certeza absoluta de que ya no podía retroceder.
-    </p>
-
-    <p>
-      Porque si sabían dónde vivía…
-    </p>
-
-    <p><strong>también sabían todo lo demás.</strong></p>
-
-    <div class="quote">
-      Y lo peor… era que aún no entendía contra quién estaba jugando.
-    </div>
-
-  </div>
-</main>
-
-</div>
-
-<script>
-function goBack(e, url){
-  e.preventDefault();
-  if(history.length > 1){
-    history.back();
-  } else {
-    window.location.href = url;
-  }
-}
-</script>
-
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
 </body>
 </html>
