@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Perfil | Nébula</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0b0f1a;
+  color:#fff;
+}
+
+.container{
+  max-width:500px;
+  margin:60px auto;
+  background:rgba(255,255,255,0.05);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.avatar{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  margin-bottom:20px;
+  border:3px solid #0A6CFF;
+  object-fit:cover;
+}
+
+.subscription{
+  margin-top:20px;
+  padding:10px;
+  background:#0A6CFF;
+  border-radius:10px;
+}
+
+.avatars{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.avatars img{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <img id="avatar" class="avatar" src="https://i.pravatar.cc/150?img=3">
+
+  <h2 id="nombre">Cargando...</h2>
+  <p id="correo"></p>
+
+  <div class="subscription" id="plan">
+    Plan: Free
+  </div>
+
+  <h3>Elegir avatar</h3>
+
+  <div class="avatars">
+    <img src="https://i.pravatar.cc/150?img=1" onclick="cambiarAvatar(this.src)">
+    <img src="https://i.pravatar.cc/150?img=2" onclick="cambiarAvatar(this.src)">
+    <img src="https://i.pravatar.cc/150?img=3" onclick="cambiarAvatar(this.src)">
+    <img src="https://i.pravatar.cc/150?img=4" onclick="cambiarAvatar(this.src)">
+  </div>
+
+</div>
+
+<!-- 🔥 FIREBASE (AQUÍ VA TU CONFIG) -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
+  authDomain: "nebula-1955f.firebaseapp.com",
+  projectId: "nebula-1955f",
+  storageBucket: "nebula-1955f.firebasestorage.app",
+  messagingSenderId: "736722257829",
+  appId: "1:736722257829:web:605cab7fde553470454a4c",
+  measurementId: "G-BTF17CDGM7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// 🔥 CARGAR USUARIO
+onAuthStateChanged(auth, (user) => {
+  if(user){
+    document.getElementById("nombre").innerText = user.email.split("@")[0];
+    document.getElementById("correo").innerText = user.email;
+  } else {
+    document.getElementById("nombre").innerText = "No logueado";
+    document.getElementById("correo").innerText = "";
+  }
+});
+
+// 🔥 CAMBIAR AVATAR
+window.cambiarAvatar = function(src){
+  document.getElementById("avatar").src = src;
+  localStorage.setItem("avatar", src);
+}
+
+// 🔥 CARGAR AVATAR
+const avatarGuardado = localStorage.getItem("avatar");
+if(avatarGuardado){
+  document.getElementById("avatar").src = avatarGuardado;
+}
+
+</script>
+
+</body>
+</html>
