@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 3 | El Precio del Silencio</title>
+  <meta
+    name="description"
+    content="Capítulo 3 de El Precio del Silencio: Los nombres borrados."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,0.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,0.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,0.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9, 18, 35, 0.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El Precio del Silencio</p>
+            <p class="brand-sub">Thriller político y empresarial</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo2.html" onclick="goBack(event, 'capitulo2.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo4.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 3</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 3</p>
+            <h1>Los nombres borrados</h1>
+            <p>
+              Laura ya sabía que estaban preguntando por Tomás. Y si la red había empezado
+              a moverse tan rápido, significaba que no era la primera vez que alguien intentaba mirar demasiado cerca.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Nada desaparece solo</div>
+              <h2>La historia ya había dejado rastros antes</h2>
+              <p>
+                Una llamada inesperada abre una nueva posibilidad: Tomás no es el primero en encontrar
+                la grieta. Hubo otros. Personas que investigaron, preguntaron y luego dejaron de existir en los registros.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">3 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 3: Los nombres borrados</h3>
+            <p>Lectura gratuita · La red ya había actuado antes</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Tomás no volvió a llamar a Laura. No por desinterés, ni por miedo a escuchar algo peor.
+              Fue porque entendió de inmediato la gravedad de lo que significaba esa frase: ya habían preguntado por él.
+              No “podrían preguntar”. No “quizás sabían su nombre”. Ya lo estaban moviendo dentro de la red.
+            </p>
+
+            <p>
+              Se quedó sentado frente a la mesa, mirando la fotografía y la nota doblada dentro del libro,
+              mientras el amanecer comenzaba a limpiar lentamente la negrura de la ciudad.
+            </p>
+
+            <p>
+              La primera luz no trajo calma.
+            </p>
+
+            <p>
+              Solo hizo que todo pareciera más real.
+            </p>
+
+            <p>
+              La calle volvió a llenarse de autos.
+            </p>
+
+            <p>
+              Los primeros buses empezaron a pasar.
+            </p>
+
+            <p>
+              Algún perro ladró a lo lejos.
+            </p>
+
+            <p>
+              Un vecino abrió la ventana del edificio de enfrente como cualquier otro día.
+            </p>
+
+            <p>
+              Y sin embargo, Tomás seguía sintiendo que algo esencial había cambiado durante la noche.
+            </p>
+
+            <div class="quote">Las cosas peores no siempre llegan rompiendo la puerta. A veces llegan primero rompiendo la normalidad.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              A las 07:18 le llegó un mensaje de Laura.
+            </p>
+
+            <p>
+              No texto.
+            </p>
+
+            <p>
+              Solo una dirección.
+            </p>
+
+            <p>
+              Un café viejo en calle Londres, de esos que todavía conservaban
+              mesas pequeñas, espejos manchados y mozos capaces de escuchar sin mirar.
+            </p>
+
+            <p>
+              Debajo venía una sola instrucción:
+            </p>
+
+            <div class="quote">No lleves el celular prendido.</div>
+
+            <p>
+              Tomás leyó la pantalla tres veces.
+            </p>
+
+            <p>
+              Luego apagó el teléfono.
+            </p>
+
+            <p>
+              No en modo avión.
+            </p>
+
+            <p>
+              No en silencio.
+            </p>
+
+            <p>
+              Apagado.
+            </p>
+
+            <p>
+              Sintió algo casi ridículo al hacerlo, como si apagar el aparato le quitara
+              una parte de su vida corriente. Pero también sintió algo más: una precisión nueva.
+            </p>
+
+            <p>
+              La noche lo había sacado del terreno de las dudas.
+            </p>
+
+            <p><strong>Ahora cada gesto tenía que ser deliberado.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Llegó al café a las 08:06.
+            </p>
+
+            <p>
+              Laura ya estaba sentada al fondo, de espaldas a la pared, con vista directa a la entrada.
+            </p>
+
+            <p>
+              Lo primero que Tomás notó fue que había cambiado menos de lo que esperaba.
+            </p>
+
+            <p>
+              Seguía teniendo esa manera extraña de ocupar el espacio con sobriedad,
+              como si incluso sentada pudiera parecer lista para irse antes de que algo saliera mal.
+            </p>
+
+            <p>
+              Lo segundo que notó fue que estaba asustada.
+            </p>
+
+            <p>
+              No temblando.
+            </p>
+
+            <p>
+              No descompuesta.
+            </p>
+
+            <p>
+              Asustada de la forma más seria: atenta, precisa, controlando cada movimiento.
+            </p>
+
+            <p>
+              Eso lo inquietó más que cualquier dramatismo.
+            </p>
+
+            <p>
+              Tomás se sentó frente a ella.
+            </p>
+
+            <p>
+              Nadie sonrió.
+            </p>
+
+            <p>
+              Nadie preguntó “cómo estás”.
+            </p>
+
+            <p>
+              Laura habló primero.
+            </p>
+
+            <p>
+              —¿Qué encontraste?
+            </p>
+
+            <p>
+              Él la observó unos segundos antes de responder.
+            </p>
+
+            <p>
+              —¿Cómo supiste que estaban preguntando por mí?
+            </p>
+
+            <p>
+              Laura apoyó ambas manos en la mesa.
+            </p>
+
+            <p>
+              Tardó en contestar.
+            </p>
+
+            <p>
+              No por dudar.
+            </p>
+
+            <p>
+              Por escoger cuánto podía decir.
+            </p>
+
+            <div class="quote">—Porque hace años preguntaron por otras personas igual que ahora preguntan por ti.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás sintió un endurecimiento inmediato en la mandíbula.
+            </p>
+
+            <p>
+              —¿Qué personas?
+            </p>
+
+            <p>
+              Laura miró un segundo hacia la ventana, como comprobando que nadie
+              se hubiera sentado demasiado cerca.
+            </p>
+
+            <p>
+              —Gente que vio fragmentos de lo mismo. Un economista. Una abogada.
+              Un analista de abastecimiento. Un periodista regional. Ninguno tenía la película completa,
+              pero todos tropezaron con una parte.
+            </p>
+
+            <p>
+              Tomás no apartó la mirada.
+            </p>
+
+            <p>
+              —¿Y qué pasó con ellos?
+            </p>
+
+            <p>
+              Laura tragó saliva.
+            </p>
+
+            <p>
+              —Uno se retractó públicamente y desapareció del tema. A la abogada la cambiaron
+              de estudio y después se fue del país. El periodista tuvo un accidente.
+            </p>
+
+            <p>
+              —¿Accidente?
+            </p>
+
+            <p>
+              —Eso dijeron.
+            </p>
+
+            <p>
+              El mozo dejó dos cafés sobre la mesa.
+            </p>
+
+            <p>
+              Ninguno tocó la taza.
+            </p>
+
+            <div class="quote">—¿Y el analista? —preguntó Tomás.</div>
+
+            <p>
+              Laura lo miró por primera vez de frente, sin desviar ni un centímetro.
+            </p>
+
+            <p>
+              —Ese es el problema —dijo—. El analista dejó de existir en los registros.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás sintió un escalofrío limpio, instantáneo.
+            </p>
+
+            <p>
+              —¿Cómo que dejó de existir?
+            </p>
+
+            <p>
+              —Como suena. Su nombre desapareció de publicaciones internas, de informes,
+              de correos citados, de actas. No del Registro Civil. No de forma literal.
+              Pero en el ecosistema profesional, en el mundo donde importaba que hubiera estado,
+              lo borraron.
+            </p>
+
+            <p>
+              Laura tomó por fin la taza y bebió un sorbo breve.
+            </p>
+
+            <p>
+              —Si tú mirabas hacia atrás, era como si nunca hubiera participado en nada.
+              Sus hallazgos quedaron firmados por otros. Sus correos dejaron de figurar en cadenas.
+              Sus minutas aparecieron sin autor. Hasta las reuniones cambiaron de asistentes.
+            </p>
+
+            <p>
+              Tomás apretó el borde de la mesa.
+            </p>
+
+            <p>
+              —Eso no se puede hacer a ese nivel sin que alguien lo note.
+            </p>
+
+            <p>
+              Laura dejó la taza en su plato con un sonido seco.
+            </p>
+
+            <p>
+              —Claro que se puede, Tomás. Se puede si no estás borrando a una persona.
+              Se puede si estás disciplinando a todos los demás.
+            </p>
+
+            <div class="quote">No los eliminan solo para ocultar el rastro. Los eliminan para que el resto aprenda a no dejarlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Él entonces comprendió por qué Laura lo había citado sin teléfono y en un lugar viejo.
+            </p>
+
+            <p>
+              No estaba improvisando.
+            </p>
+
+            <p>
+              Esto no era un presentimiento.
+            </p>
+
+            <p>
+              Ella ya había orbitado antes alrededor de la misma sombra.
+            </p>
+
+            <p>
+              —¿Cómo conoces esta historia? —preguntó.
+            </p>
+
+            <p>
+              Laura apoyó los codos en la mesa y bajó la voz todavía más.
+            </p>
+
+            <p>
+              —Porque hace cuatro años intenté publicar algo sobre un patrón raro entre laboratorios,
+              medios locales y financiamiento cruzado en campañas. No era tu hallazgo. Era una pieza distinta.
+              Pero cuando empecé a avanzar, aparecieron nombres repetidos.
+            </p>
+
+            <p>
+              —¿Qué nombres?
+            </p>
+
+            <p>
+              Laura negó con la cabeza.
+            </p>
+
+            <p>
+              —Nombres parciales. Apellidos recortados. Siglas. Empresas que parecían competir,
+              pero compartían asesores, abogados y operadores. Lo importante no eran las marcas.
+              Lo importante era la arquitectura.
+            </p>
+
+            <p>
+              Hizo una pausa.
+            </p>
+
+            <p>
+              —Y entonces conocí al analista.
+            </p>
+
+            <p>
+              Tomás se inclinó apenas hacia adelante.
+            </p>
+
+            <p>
+              —¿El que borraron?
+            </p>
+
+            <p>
+              Laura asintió.
+            </p>
+
+            <p>
+              —Se llamaba Gabriel Mena.
+            </p>
+
+            <p>
+              El nombre quedó suspendido entre ambos como algo delicado y peligroso.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Laura abrió su cartera y sacó una libreta pequeña, gastada en los bordes.
+              No se la entregó de inmediato. La sostuvo con dos dedos, como si el solo hecho
+              de exhibirla ya implicara una concesión.
+            </p>
+
+            <p>
+              —Anoté esto después de hablar con él —dijo—. Nunca grabé la conversación.
+              Él no quiso. Pero tomé notas apenas salí.
+            </p>
+
+            <p>
+              Tomás bajó la mirada hacia la libreta.
+            </p>
+
+            <p>
+              Laura la abrió en una página marcada con un trozo de papel doblado.
+            </p>
+
+            <p>
+              Letras rápidas. Fechas. Flechas. Subrayados violentos.
+            </p>
+
+            <p>
+              En medio de todo, una frase rodeada tres veces con tinta azul:
+            </p>
+
+            <div class="quote">“No es una colusión. Es un sistema de obediencia con apariencia de mercado.”</div>
+
+            <p>
+              Tomás sintió el golpe de esa línea en el pecho.
+            </p>
+
+            <p>
+              Porque era exactamente lo que había empezado a comprender, pero sin haber logrado todavía decirlo así.
+            </p>
+
+            <p>
+              Laura continuó:
+            </p>
+
+            <p>
+              —Gabriel no estaba investigando una sola industria. Estaba mirando los puntos donde distintas industrias
+              se tocaban sin razón visible. Seguros con energía. Energía con transporte. Transporte con distribución.
+              Distribución con medios. Medios con campañas. Campañas con reguladores. Decía que el negocio real
+              no era fijar un precio.
+            </p>
+
+            <p>
+              Tomás completó la idea antes de darse cuenta.
+            </p>
+
+            <p>
+              —Era fijar un comportamiento.
+            </p>
+
+            <p>
+              Laura levantó los ojos y asintió.
+            </p>
+
+            <p>
+              —Exacto.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Hubo un silencio largo.
+            </p>
+
+            <p>
+              El tipo de silencio que no enfría la conversación, sino que la vuelve más densa.
+            </p>
+
+            <p>
+              Tomás se pasó una mano por la frente.
+            </p>
+
+            <p>
+              —¿Qué le pasó a Gabriel?
+            </p>
+
+            <p>
+              Laura cerró la libreta despacio.
+            </p>
+
+            <p>
+              —Lo fui a buscar dos semanas después de esa conversación.
+            </p>
+
+            <p>
+              —¿Y?
+            </p>
+
+            <p>
+              —La oficina donde trabajaba ya no tenía su nombre en la puerta. Sus correos rebotaban.
+              Sus perfiles profesionales habían sido eliminados. Y cuando pregunté por él,
+              dos personas distintas me respondieron exactamente lo mismo:
+            </p>
+
+            <div class="quote">“Debe estar confundida. Aquí nunca trabajó alguien con ese nombre.”</div>
+
+            <p>
+              Tomás dejó caer la espalda contra el respaldo de la silla.
+            </p>
+
+            <p>
+              El café seguía intacto.
+            </p>
+
+            <p>
+              Empezaba a entibiarse.
+            </p>
+
+            <p>
+              Todo en la mesa parecía ridículamente normal para una conversación que lo estaba empujando
+              más adentro de algo inmenso.
+            </p>
+
+            <p>
+              —¿Y tú por qué seguiste viva? —preguntó al fin.
+            </p>
+
+            <p>
+              Laura sonrió sin humor.
+            </p>
+
+            <p>
+              —Porque no publiqué. Porque entendí antes de tiempo que me faltaba demasiado.
+              Porque me hicieron saber, de una manera bastante elegante, que si insistía
+              iba a perder más que una nota.
+            </p>
+
+            <p>
+              Se inclinó sobre la mesa.
+            </p>
+
+            <p>
+              —Y porque creo que en ese momento todavía no había llegado tan cerca como tú.
+            </p>
+
+            <div class="quote">Eso fue lo peor que Tomás escuchó en toda la mañana.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              No era una exageración amable.
+            </p>
+
+            <p>
+              No era dramatismo para retenerlo allí.
+            </p>
+
+            <p>
+              Laura estaba diciéndole que él había entrado más hondo de lo que otros habían logrado.
+            </p>
+
+            <p>
+              Y eso cambiaba todo.
+            </p>
+
+            <p>
+              Porque significaba que la red lo veía no solo como un curioso,
+              sino como un riesgo concreto.
+            </p>
+
+            <p>
+              Tomás se obligó a ordenar las ideas.
+            </p>
+
+            <p>
+              —Necesito saber qué buscaba Gabriel. Exactamente.
+            </p>
+
+            <p>
+              Laura negó apenas.
+            </p>
+
+            <p>
+              —No lo sé completo. Pero sí sé que dejó una pista.
+            </p>
+
+            <p>
+              Metió otra vez la mano en la cartera y esta vez sacó una fotocopia doblada.
+            </p>
+
+            <p>
+              Era una página de algo más grande, recortada de forma irregular.
+            </p>
+
+            <p>
+              Arriba se veía parte de un membrete corporativo.
+            </p>
+
+            <p>
+              Abajo, una tabla incompleta.
+            </p>
+
+            <p>
+              Y en el margen, escrita a mano con tinta negra:
+            </p>
+
+            <div class="quote">Buscar la versión anterior. Los nombres reales estaban ahí.</div>
+
+            <p>
+              Tomás sintió un chispazo inmediato.
+            </p>
+
+            <p>
+              —¿Versión anterior de qué?
+            </p>
+
+            <p>
+              —No lo sé —dijo Laura—. Gabriel nunca alcanzó a explicarlo.
+              Pero estaba obsesionado con documentos reemplazados. Archivos que seguían existiendo,
+              pero ya “limpios”. Actas rehechas. Minutas reemitidas. Versiones finales donde los nombres
+              sensibles desaparecían y solo quedaban iniciales, cargos o terceros que firmaban por otros.
+            </p>
+
+            <p>
+              Él bajó la vista a la fotocopia.
+            </p>
+
+            <p>
+              Una columna tenía tres líneas ennegrecidas con marcador.
+            </p>
+
+            <p>
+              Otra mostraba códigos alfanuméricos.
+            </p>
+
+            <p>
+              En una celda, apenas visible, se leía algo que reconoció de inmediato:
+            </p>
+
+            <p><strong>Validación política</strong>.</p>
+
+            <div class="divider"></div>
+
+            <p>
+              El mismo lenguaje.
+            </p>
+
+            <p>
+              La misma lógica.
+            </p>
+
+            <p>
+              La misma arquitectura.
+            </p>
+
+            <p>
+              Ya no había duda de que lo suyo y lo de Gabriel eran partes del mismo cuerpo.
+            </p>
+
+            <p>
+              —Necesito una copia de esto —dijo Tomás.
+            </p>
+
+            <p>
+              Laura negó con firmeza.
+            </p>
+
+            <p>
+              —No todavía.
+            </p>
+
+            <p>
+              Él frunció el ceño.
+            </p>
+
+            <p>
+              —¿No confías en mí?
+            </p>
+
+            <p>
+              —No confío en los tiempos —respondió ella—. Si te siguen, te quitan esto en una hora.
+              Si me lo quitan a mí, todavía no saben cuánto te conté.
+            </p>
+
+            <p>
+              La frase era dura, pero impecable.
+            </p>
+
+            <p>
+              Tomás lo entendió.
+            </p>
+
+            <p>
+              La desconfianza ya no era ofensa.
+            </p>
+
+            <p>
+              Era método.
+            </p>
+
+            <div class="quote">Cuando el enemigo tiene acceso a todo, la confianza deja de ser emocional. Se vuelve táctica.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Laura entonces sacó un papel pequeño y escribió una dirección.
+            </p>
+
+            <p>
+              No era una casa.
+            </p>
+
+            <p>
+              No era una oficina.
+            </p>
+
+            <p>
+              Era una bodega documental en Independencia, una de esas empresas que guardan archivos físicos,
+              respaldos, cajas de contabilidad vieja, contratos muertos y papeles que nadie quiere destruir
+              por miedo a necesitarlos después.
+            </p>
+
+            <p>
+              —Gabriel me dijo una vez que los documentos digitales se limpian primero —dijo Laura—.
+              Pero los físicos cuestan más. No siempre se borran a tiempo.
+            </p>
+
+            <p>
+              Tomás tomó aire.
+            </p>
+
+            <p>
+              —¿Crees que ahí está la versión anterior?
+            </p>
+
+            <p>
+              Laura se encogió de hombros con cansancio.
+            </p>
+
+            <p>
+              —Creo que si vas a encontrar algo, va a ser donde la red no alcanzó a llegar tan prolija.
+            </p>
+
+            <p>
+              Guardó la libreta.
+            </p>
+
+            <p>
+              Miró la hora.
+            </p>
+
+            <p>
+              Y por primera vez desde que Tomás se sentó, mostró un gesto inequívoco de urgencia.
+            </p>
+
+            <p>
+              —Tenemos que irnos.
+            </p>
+
+            <p>
+              —¿Por qué?
+            </p>
+
+            <p>
+              Laura no respondió de inmediato.
+            </p>
+
+            <p>
+              Solo desvió la mirada hacia el espejo del fondo.
+            </p>
+
+            <p>
+              Tomás siguió la dirección con discreción.
+            </p>
+
+            <p>
+              Reflejado en el cristal, cerca de la entrada, había un hombre de traje gris revisando un diario
+              que no pasaba de página desde hacía varios minutos.
+            </p>
+
+            <p>
+              No parecía policía.
+            </p>
+
+            <p>
+              No parecía detective.
+            </p>
+
+            <p>
+              Parecía algo peor: alguien profesionalmente aburrido, entrenado para no llamar la atención.
+            </p>
+
+            <p>
+              Laura dejó unos billetes sobre la mesa.
+            </p>
+
+            <p>
+              —No mires de nuevo —dijo en voz baja.
+            </p>
+
+            <p>
+              Tomás sostuvo el impulso de girar.
+            </p>
+
+            <p>
+              —¿Nos está mirando?
+            </p>
+
+            <p>
+              Laura se puso de pie.
+            </p>
+
+            <p>
+              —No. Está esperando ver si nosotros cometemos el error de hacerlo evidente.
+            </p>
+
+            <div class="quote">Y en ese segundo Tomás entendió la diferencia entre ser amenazado y ser seguido.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Salieron separados.
+            </p>
+
+            <p>
+              Primero Laura.
+            </p>
+
+            <p>
+              Después Tomás, contando mentalmente hasta quince antes de ponerse de pie.
+            </p>
+
+            <p>
+              Cuando pasó junto al espejo, alcanzó a ver el reflejo del hombre del diario.
+            </p>
+
+            <p>
+              No levantó la cabeza.
+            </p>
+
+            <p>
+              No hizo nada.
+            </p>
+
+            <p>
+              Pero en el reflejo había un detalle mínimo, devastador:
+            </p>
+
+            <p>
+              su taza de café estaba completamente vacía,
+              y sin embargo el mozo jamás había pasado a servirle nada.
+            </p>
+
+            <p><strong>Estaba ahí solo para estar ahí.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Afuera, la ciudad ya había despertado del todo.
+            </p>
+
+            <p>
+              Bocinas.
+            </p>
+
+            <p>
+              Gente apurada.
+            </p>
+
+            <p>
+              Oficinistas cruzando la calle con cara de lunes incluso si no lo era.
+            </p>
+
+            <p>
+              Tomás apretó el papel con la dirección dentro del bolsillo y siguió caminando
+              sin mirar atrás.
+            </p>
+
+            <p>
+              A unos metros, Laura dobló por otra calle y desapareció entre la gente.
+            </p>
+
+            <p>
+              Él siguió solo.
+            </p>
+
+            <p>
+              No sabía aún si el hombre del café saldría detrás.
+            </p>
+
+            <p>
+              No sabía si la bodega de Independencia era una pista real o una trampa tardía.
+            </p>
+
+            <p>
+              No sabía si Gabriel Mena seguía vivo, escondido en algún lugar,
+              o si su nombre borrado era lo único que quedaba de él.
+            </p>
+
+            <p>
+              Pero sí sabía algo nuevo, algo irreversible:
+            </p>
+
+            <p>
+              la red tenía memoria,
+            </p>
+
+            <p>
+              tenía método,
+            </p>
+
+            <p>
+              y llevaba años ensayando la forma perfecta de hacer desaparecer gente sin necesidad de matarla primero.
+            </p>
+
+            <div class="quote">En Chile, a veces basta con borrar el nombre correcto para que el resto aprenda a callar.</div>
+
+            <p>
+              Tomás cruzó la avenida, se mezcló con la multitud y sintió por primera vez una urgencia distinta al miedo.
+            </p>
+
+            <p>
+              Necesitaba llegar a la versión anterior de esos documentos.
+            </p>
+
+            <p>
+              Necesitaba saber quiénes eran los nombres reales antes de que también empezaran a borrar el suyo.
+            </p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué encontró Gabriel en la versión anterior de los documentos.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo2.html" onclick="goBack(event, 'capitulo2.html')" class="btn btn-ghost">← Capítulo 2</a>
+            <a href="capitulo4.html" class="btn btn-primary">Leer capítulo 4 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
