@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 2 | El Precio del Silencio</title>
+  <meta
+    name="description"
+    content="Capítulo 2 de El Precio del Silencio: El auto sin patente."
+  />
+
+  <style>
+    /* ⚠️ MISMO CSS EXACTO QUE TU ARCHIVO */
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,0.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      overflow-x:hidden;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{ position:relative; z-index:1; }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,0.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:auto;
+      padding:16px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .brand{ display:flex; gap:10px; align-items:center; }
+    .brand-badge{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      color:var(--blue2);
+      font-weight:700;
+    }
+
+    .btn{
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:var(--blue);
+      color:#fff;
+    }
+
+    .btn-ghost{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.03);
+    }
+
+    .content-wrap{
+      max-width:860px;
+      margin:auto;
+      padding:40px 20px;
+    }
+
+    .story p{
+      margin-bottom:22px;
+      font-size:18px;
+    }
+
+    .lead{
+      font-size:20px;
+      border-left:3px solid var(--blue2);
+      padding-left:14px;
+    }
+
+    .quote{
+      margin:30px 0;
+      padding:18px;
+      border-radius:14px;
+      background:rgba(10,108,255,.1);
+      text-align:center;
+    }
+
+    .divider{
+      height:1px;
+      background:rgba(255,255,255,.1);
+      margin:30px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="page">
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-badge">N</div>
+      <div>
+        <p><strong>El Precio del Silencio</strong></p>
+      </div>
+    </div>
+
+    <div>
+      <a href="capitulo1.html" onclick="goBack(event,'capitulo1.html')" class="btn btn-ghost">← Atrás</a>
+      <a href="capitulo3.html" class="btn btn-primary">Siguiente →</a>
+    </div>
+  </div>
+</header>
+
+<main class="content-wrap">
+  <div class="story">
+
+    <p class="lead">
+      El auto no tenía patente.  
+      Y no estaba estacionado por casualidad.
+    </p>
+
+    <p>
+      Tomás no durmió.
+    </p>
+
+    <p>
+      Se quedó sentado en la oscuridad, mirando el reflejo tenue de su pantalla apagada,
+      escuchando cada ruido del edificio como si fuera una señal.
+    </p>
+
+    <p>
+      A las 04:12 AM el auto seguía ahí.
+    </p>
+
+    <p>
+      Motor encendido.
+    </p>
+
+    <p>
+      Sin luces.
+    </p>
+
+    <p><strong>Esperando.</strong></p>
+
+    <div class="divider"></div>
+
+    <p>
+      A las 05:03 decidió hacer algo estúpido.
+    </p>
+
+    <p>
+      Bajó.
+    </p>
+
+    <p>
+      No porque fuera valiente.
+    </p>
+
+    <p>
+      Sino porque necesitaba confirmar si aquello era real.
+    </p>
+
+    <p>
+      El ascensor parecía más lento que nunca.
+    </p>
+
+    <p>
+      Cada piso que pasaba sentía que alguien ya sabía que iba en camino.
+    </p>
+
+    <div class="quote">Piso 3… Piso 2… Piso 1…</div>
+
+    <p>
+      Cuando se abrieron las puertas, el aire frío de la madrugada lo golpeó en la cara.
+    </p>
+
+    <p>
+      Salió del edificio.
+    </p>
+
+    <p>
+      Miró a la derecha.
+    </p>
+
+    <p>
+      Nada.
+    </p>
+
+    <p>
+      Miró a la izquierda.
+    </p>
+
+    <p>
+      El auto seguía ahí.
+    </p>
+
+    <p>
+      Negro.
+    </p>
+
+    <p>
+      Vidrios polarizados.
+    </p>
+
+    <p>
+      Sin patente adelante.
+    </p>
+
+    <p>
+      Sin patente atrás.
+    </p>
+
+    <p><strong>Sin identidad.</strong></p>
+
+    <div class="divider"></div>
+
+    <p>
+      Tomás caminó lentamente hacia él.
+    </p>
+
+    <p>
+      Cada paso se sentía más pesado.
+    </p>
+
+    <p>
+      Como si cruzar esa distancia fuera cruzar una línea invisible.
+    </p>
+
+    <p>
+      A dos metros… se detuvo.
+    </p>
+
+    <p>
+      El motor seguía encendido.
+    </p>
+
+    <p>
+      Pero no se escuchaba radio.
+    </p>
+
+    <p>
+      No había movimiento.
+    </p>
+
+    <p>
+      No había nadie.
+    </p>
+
+    <p>
+      O eso creyó.
+    </p>
+
+    <div class="quote">Hasta que el vidrio del copiloto bajó solo.</div>
+
+    <p>
+      Tomás retrocedió un paso.
+    </p>
+
+    <p>
+      Adentro…
+    </p>
+
+    <p>
+      no había conductor.
+    </p>
+
+    <p>
+      No había nadie.
+    </p>
+
+    <p>
+      Solo un sobre.
+    </p>
+
+    <p>
+      Blanco.
+    </p>
+
+    <p>
+      Con su nombre escrito a mano.
+    </p>
+
+    <div class="divider"></div>
+
+    <p>
+      Lo tomó.
+    </p>
+
+    <p>
+      Dudó un segundo.
+    </p>
+
+    <p>
+      Lo abrió.
+    </p>
+
+    <p>
+      Dentro había una sola hoja.
+    </p>
+
+    <p>
+      Y una fotografía.
+    </p>
+
+    <div class="quote">Su departamento.</div>
+
+    <p>
+      Tomada desde la calle.
+    </p>
+
+    <p>
+      Hace minutos.
+    </p>
+
+    <p>
+      La hoja tenía una frase:
+    </p>
+
+    <div class="quote">
+      “Todavía estás a tiempo de no existir en esto.”
+    </div>
+
+    <div class="divider"></div>
+
+    <p>
+      El corazón le empezó a latir fuerte.
+    </p>
+
+    <p>
+      Miró alrededor.
+    </p>
+
+    <p>
+      La calle seguía vacía.
+    </p>
+
+    <p>
+      Silenciosa.
+    </p>
+
+    <p>
+      Normal.
+    </p>
+
+    <p>
+      Pero ya nada era normal.
+    </p>
+
+    <p>
+      Volvió a mirar el auto.
+    </p>
+
+    <p>
+      El vidrio subió solo.
+    </p>
+
+    <p>
+      El motor se aceleró suavemente.
+    </p>
+
+    <p>
+      Y el vehículo avanzó…
+    </p>
+
+    <p>
+      sin luces.
+    </p>
+
+    <p>
+      sin ruido.
+    </p>
+
+    <p>
+      sin dejar rastro.
+    </p>
+
+    <div class="divider"></div>
+
+    <p>
+      Tomás se quedó solo en la vereda.
+    </p>
+
+    <p>
+      Con el sobre en la mano.
+    </p>
+
+    <p>
+      Con la certeza absoluta de que ya no podía retroceder.
+    </p>
+
+    <p>
+      Porque si sabían dónde vivía…
+    </p>
+
+    <p><strong>también sabían todo lo demás.</strong></p>
+
+    <div class="quote">
+      Y lo peor… era que aún no entendía contra quién estaba jugando.
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<script>
+function goBack(e, url){
+  e.preventDefault();
+  if(history.length > 1){
+    history.back();
+  } else {
+    window.location.href = url;
+  }
+}
+</script>
+
+</body>
+</html>
