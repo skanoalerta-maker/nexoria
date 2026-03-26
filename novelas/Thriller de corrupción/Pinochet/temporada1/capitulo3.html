@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 3 | La conspiración deja de esconderse</title>
+  <meta
+    name="description"
+    content="Capítulo 3 de la temporada 1 de Pinochet: la crisis se vuelve quiebre, la conspiración se hace visible y Chile se acerca al punto de no retorno."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,80,80,.22);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --red:#9d1111;
+      --red2:#ff5c5c;
+      --red-soft:rgba(255,92,92,.12);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(157,17,17,.10), transparent 24%),
+        radial-gradient(circle at top right, rgba(255,92,92,.08), transparent 22%),
+        linear-gradient(180deg, #04070d 0%, #0a0d14 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(157,17,17,.24), rgba(255,92,92,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(157,17,17,.14);
+      font-weight:700;
+      color:#ffd3d3;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#f0e9ea;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--red) 0%, #c21818 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(157,17,17,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #7f0f0f 0%, #b51515 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#f0dede;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.56) 0%, rgba(5,8,15,.88) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/pinochet-portada.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.26;
+      filter:saturate(.9) contrast(1.04);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(157,17,17,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--red2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#e3d7d7;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(18,14,18,.76), rgba(10,10,16,.90));
+      border:1px solid rgba(255,92,92,.16);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--red-soft);
+      border:1px solid rgba(255,92,92,.18);
+      color:#ffb3b3;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#f7eaea;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(14,12,16,.62), rgba(10,10,16,.74));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff3f3;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffdede;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#fff0f0;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(255,92,92,.42);
+      background:rgba(25,11,14,.58);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e9e6ec;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(157,17,17,.14), rgba(255,92,92,.06));
+      border:1px solid rgba(255,92,92,.14);
+      color:#fff3f3;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,92,92,.58), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El uniforme y la sombra</p>
+            <p class="brand-sub">Drama histórico chileno</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo2.html" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo4.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Historia de Chile / Temporada 1 / Capítulo 3</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Temporada 1 · Capítulo 3</p>
+            <h1>La conspiración deja de esconderse</h1>
+            <p>
+              Lo que durante meses se insinuó en rumores, presiones y gestos ambiguos,
+              comienza a tomar forma concreta. Ya no se trata solo de miedo:
+              se trata de preparación.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Quiebre inminente</div>
+              <h2>El país entra en zona irreversible</h2>
+              <p>
+                La conspiración ya no es solo una sospecha. Empieza a sentirse en el ambiente,
+                en los silencios, en las lealtades que se rompen y en la certeza de que algo grande se está preparando.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Histórico</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">3 de 12</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 3: La conspiración deja de esconderse</h3>
+            <p>Lectura gratuita · El momento en que el quiebre empieza a volverse visible</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Hay un instante en toda crisis en que el país deja de preguntarse si algo va a pasar
+              y comienza a preguntarse cuándo.
+              Ese cambio parece pequeño, pero no lo es.
+              Porque una vez que la amenaza deja de parecer lejana,
+              la vida entera empieza a moverse bajo otra lógica:
+              la de la espera, la sospecha y el miedo anticipado.
+            </p>
+
+            <p>
+              Chile entró en ese instante.
+            </p>
+
+            <p>
+              Ya no bastaban los discursos sobre desorden.
+            </p>
+
+            <p>
+              Ya no bastaban las insinuaciones sobre el agotamiento del sistema.
+            </p>
+
+            <p>
+              La presión había madurado lo suficiente como para que la ruptura comenzara a parecer una operación real.
+            </p>
+
+            <div class="quote">El golpe no aparece de repente. Primero se siente como una corriente en el aire: nadie puede tocarla, pero todos empiezan a respirar distinto.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En las semanas anteriores, el país había acumulado demasiados signos.
+            </p>
+
+            <p>
+              La institucionalidad seguía funcionando,
+              pero ya no transmitía la misma autoridad.
+            </p>
+
+            <p>
+              El gobierno seguía ejerciendo,
+              pero cada vez más cercado.
+            </p>
+
+            <p>
+              La oposición seguía declarando principios democráticos,
+              pero una parte de sus actores comenzaba a mirar con menos pudor la opción militar.
+            </p>
+
+            <p>
+              Y dentro de las Fuerzas Armadas, el problema ya no era solo la obediencia formal al mando civil.
+            </p>
+
+            <p>
+              El problema era que una porción creciente del aparato se convencía de que obedecer a la democracia
+              podía equivaler a dejar morir el país tal como ellos lo entendían.
+            </p>
+
+            <p><strong>Cuando una institución armada empieza a creer que su interpretación de la patria vale más que el voto popular, la democracia entra en su hora más vulnerable.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Pinochet ya no se movía únicamente como un hombre de carrera.
+            </p>
+
+            <p>
+              La atmósfera a su alrededor empezaba a cargarse de una gravedad distinta.
+            </p>
+
+            <p>
+              La prudencia que antes parecía simple perfil militar comenzaba a leerse como cálculo.
+            </p>
+
+            <p>
+              El silencio dejaba de parecer neutral.
+            </p>
+
+            <p>
+              La espera dejaba de ser pasividad.
+            </p>
+
+            <p>
+              En tiempos normales, eso quizás habría pasado desapercibido.
+            </p>
+
+            <p>
+              Pero ya no eran tiempos normales.
+            </p>
+
+            <p>
+              Cada gesto importaba.
+            </p>
+
+            <p>
+              Cada omisión también.
+            </p>
+
+            <p>
+              Y en la medida en que la posibilidad de intervención crecía,
+              los hombres del uniforme comenzaban a ser observados ya no como servidores del Estado,
+              sino como potenciales dueños de su próximo capítulo.
+            </p>
+
+            <div class="quote">El poder verdadero no siempre se anuncia. A veces espera en silencio hasta que el miedo colectivo le despeja el camino.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En las calles, la fractura era visible.
+            </p>
+
+            <p>
+              No solo en las marchas.
+            </p>
+
+            <p>
+              También en el modo en que la gente se miraba.
+            </p>
+
+            <p>
+              En el modo en que una conversación cotidiana podía convertirse en acusación.
+            </p>
+
+            <p>
+              En la facilidad con que la sospecha reemplazaba a la escucha.
+            </p>
+
+            <p>
+              Cada grupo sentía que el otro no solo estaba equivocado,
+              sino que amenazaba algo esencial.
+            </p>
+
+            <p>
+              Esa es una de las peores derrotas de una república:
+              cuando la diferencia deja de percibirse como disputa legítima
+              y empieza a vivirse como una forma de guerra previa.
+            </p>
+
+            <p>
+              En ese clima, la conspiración encontró terreno fértil.
+            </p>
+
+            <p>
+              Porque una conspiración no avanza solo por la inteligencia de quienes la organizan.
+            </p>
+
+            <p>
+              Avanza también por el desgaste de la sociedad que la rodea.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Ya había conversaciones que no podían describirse simplemente como prevención.
+            </p>
+
+            <p>
+              Había coordinación.
+            </p>
+
+            <p>
+              Había tanteos.
+            </p>
+
+            <p>
+              Había lealtades que empezaban a reordenarse.
+            </p>
+
+            <p>
+              Había hombres midiendo no si el golpe era conveniente en abstracto,
+              sino qué condiciones concretas hacían falta para ejecutarlo y legitimarlo después.
+            </p>
+
+            <p>
+              La pregunta ya no era “¿sería posible?”.
+            </p>
+
+            <p>
+              La pregunta era “¿cuándo conviene más?”.
+            </p>
+
+            <p>
+              Esa diferencia cambia toda la historia.
+            </p>
+
+            <p><strong>Cuando el cálculo reemplaza a la duda, el quiebre deja de ser una amenaza y se convierte en plan.</strong></p>
+
+            <div class="quote">No todos sabían cada detalle. Pero muchos empezaban a sentir que el país estaba siendo empujado hacia una decisión tomada en otra parte.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El lenguaje público también se endureció.
+            </p>
+
+            <p>
+              Ya no se discutía únicamente la gestión del gobierno.
+            </p>
+
+            <p>
+              Se discutía su legitimidad histórica.
+            </p>
+
+            <p>
+              Se insinuaba que el experimento democrático había fracasado en sí mismo.
+            </p>
+
+            <p>
+              Se repetía que el país había cruzado un límite.
+            </p>
+
+            <p>
+              Y cuando esa idea se vuelve dominante,
+              lo que sigue es siempre peligroso:
+              empieza a parecer razonable que alguien venga a corregir la historia por la fuerza.
+            </p>
+
+            <p>
+              Pinochet, en este punto,
+              aparece menos como una figura secundaria que como alguien que ya comprende el tamaño de la oportunidad.
+            </p>
+
+            <p>
+              No necesita exhibir entusiasmo.
+            </p>
+
+            <p>
+              Le basta con estar disponible.
+            </p>
+
+            <p>
+              Le basta con no oponerse.
+            </p>
+
+            <p>
+              Le basta con entender que el momento se acerca y que, cuando llegue,
+              la velocidad será más importante que cualquier escrúpulo tardío.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Había todavía quienes creían que el país podría retroceder del abismo.
+            </p>
+
+            <p>
+              Que la negociación aún era posible.
+            </p>
+
+            <p>
+              Que la institucionalidad encontraría una salida.
+            </p>
+
+            <p>
+              Que las Fuerzas Armadas respetarían en último término la línea constitucional.
+            </p>
+
+            <p>
+              Esa esperanza no era ingenua por completo.
+            </p>
+
+            <p>
+              Era también el reflejo de una tradición chilena que había confiado durante décadas
+              en ciertas formas de continuidad republicana.
+            </p>
+
+            <p>
+              Pero justamente por eso el golpe, cuando llegara, sería aún más devastador:
+              no solo rompería un gobierno, rompería una confianza histórica.
+            </p>
+
+            <div class="quote">Lo que estaba por quebrarse no era solo la estabilidad del presente. Era la idea misma de que Chile podía resolver sus conflictos sin volverse contra sí mismo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En las casas, la ansiedad cambió de forma.
+            </p>
+
+            <p>
+              Antes había rabia, cansancio, frustración.
+            </p>
+
+            <p>
+              Ahora empezaba a aparecer otra cosa:
+              presentimiento.
+            </p>
+
+            <p>
+              Esa sensación áspera de que los acontecimientos estaban a punto de acelerarse.
+            </p>
+
+            <p>
+              De que algo grande y oscuro se estaba alineando detrás del ruido cotidiano.
+            </p>
+
+            <p>
+              Las radios seguían encendidas.
+            </p>
+
+            <p>
+              Los diarios seguían interpretando el país.
+            </p>
+
+            <p>
+              Las conversaciones seguían intentando entender.
+            </p>
+
+            <p>
+              Pero el tiempo empezaba a sentirse más corto.
+            </p>
+
+            <p>
+              Más tenso.
+            </p>
+
+            <p>
+              Más cargado.
+            </p>
+
+            <p>
+              Como si cada día fuera menos un día común
+              y más una antesala.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Los conspiradores, por su parte, dependían de algo más que de armas o contactos.
+            </p>
+
+            <p>
+              Dependían de una condición emocional:
+              que suficientes personas estuvieran dispuestas a aceptar lo excepcional.
+            </p>
+
+            <p>
+              Que el miedo siguiera haciendo su trabajo.
+            </p>
+
+            <p>
+              Que la crisis siguiera desgastando la defensa de la democracia.
+            </p>
+
+            <p>
+              Que la urgencia desplazara a la legitimidad.
+            </p>
+
+            <p>
+              Por eso el deterioro del país no era solo contexto.
+            </p>
+
+            <p>
+              También era insumo.
+            </p>
+
+            <p>
+              Y esa es una de las verdades más incómodas del periodo:
+              la fractura no solo fue sufrida por quienes la padecieron.
+            </p>
+
+            <p>
+              También fue aprovechada por quienes esperaban convertirla en poder.
+            </p>
+
+            <p><strong>El caos dejó de ser solo una crisis. Se volvió la materia prima del quiebre.</strong></p>
+
+            <div class="quote">Las conspiraciones exitosas no necesitan que todo el país las apoye. Solo necesitan que el país llegue lo bastante agotado como para no poder detenerlas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Pinochet aparece así en una posición decisiva:
+              no como el único arquitecto,
+              no como el único actor,
+              pero sí como uno de los hombres que empieza a ubicarse donde la historia va a descargar su peso.
+            </p>
+
+            <p>
+              El oportunismo, en estos casos,
+              no es menor que la ideología.
+            </p>
+
+            <p>
+              A veces incluso la supera.
+            </p>
+
+            <p>
+              Porque quien entiende que el momento llegó y decide no frenarlo,
+              aunque pudiera hacerlo,
+              ya está participando plenamente de la tragedia.
+            </p>
+
+            <p>
+              El gran problema con las figuras de este tipo
+              es que suelen presentarse después como si solo hubieran respondido a una necesidad.
+            </p>
+
+            <p>
+              Como si el poder les hubiera caído encima.
+            </p>
+
+            <p>
+              Como si ellos no hubieran elegido quedarse con él.
+            </p>
+
+            <p>
+              Pero la historia seria no funciona con excusas retrospectivas.
+            </p>
+
+            <p>
+              Funciona con decisiones, contextos y responsabilidades.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Mientras tanto, el gobierno constitucional seguía resistiendo.
+            </p>
+
+            <p>
+              Con errores, con presiones, con límites reales.
+            </p>
+
+            <p>
+              Pero seguía siendo gobierno legítimo.
+            </p>
+
+            <p>
+              Y esa legitimidad era precisamente lo que la conspiración necesitaba romper.
+            </p>
+
+            <p>
+              No bastaba con desplazar al presidente.
+            </p>
+
+            <p>
+              Había que destruir la idea de que ese desplazamiento sería una agresión contra la democracia.
+            </p>
+
+            <p>
+              Había que convencer a una parte del país
+              de que el acto violento que se preparaba sería, en realidad, una forma de rescate nacional.
+            </p>
+
+            <p>
+              Ahí estaba la batalla de fondo:
+              no solo por el control del Estado,
+              sino por el significado moral de lo que venía.
+            </p>
+
+            <div class="quote">Antes de romper una democracia, hay que debilitar en la mente de la gente la certeza de que merece ser defendida.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Y así, casi sin que el calendario pudiera expresar la magnitud del cambio,
+              Chile empezó a moverse hacia una zona donde las decisiones ya no serían reversibles.
+            </p>
+
+            <p>
+              Los rumores se hicieron más densos.
+            </p>
+
+            <p>
+              Los gestos, más reveladores.
+            </p>
+
+            <p>
+              Los silencios, más elocuentes.
+            </p>
+
+            <p>
+              La conspiración ya no estaba completamente oculta.
+            </p>
+
+            <p>
+              Se dejaba sentir como una estructura en formación.
+            </p>
+
+            <p>
+              Como una máquina que todavía no arrancaba del todo,
+              pero cuyos engranajes ya estaban puestos en posición.
+            </p>
+
+            <p>
+              El país aún podía respirar.
+            </p>
+
+            <p>
+              Pero respiraba distinto.
+            </p>
+
+            <p>
+              Con el pecho más tenso.
+            </p>
+
+            <p>
+              Con la intuición cada vez más clara
+              de que el siguiente movimiento no sería un episodio más de la crisis,
+              sino el comienzo de otra época.
+            </p>
+
+            <p><strong>La pregunta ya no era si venía algo grave. La verdadera pregunta era cuánto de Chile sobreviviría cuando eso empezara.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa al capítulo 4 para entrar en la antesala del golpe, el colapso de las certezas y el momento en que la historia empieza a moverse con velocidad de desastre.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo2.html" class="btn btn-ghost">← Capítulo 2</a>
+            <a href="capitulo4.html" class="btn btn-primary">Leer capítulo 4 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
