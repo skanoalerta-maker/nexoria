@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 9 | El Precio del Silencio</title>
+  <meta
+    name="description"
+    content="Capítulo 9 de El Precio del Silencio: El hombre de la llamada."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El Precio del Silencio</p>
+            <p class="brand-sub">Thriller político y empresarial</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo8.html" onclick="goBack(event, 'capitulo8.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo10.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 9</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 9</p>
+            <h1>El hombre de la llamada</h1>
+            <p>
+              Los mensajes no vienen de un desconocido cualquiera. Vienen de alguien que ha estado
+              orbitando la investigación desde el principio, alguien que conoce a Laura, conoce a la red
+              y parece decidido a empujar a Tomás justo hasta el borde.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">La voz ya tiene rostro</div>
+              <h2>No siempre te vigilan para detenerte. A veces te vigilan para llevarte a un lugar.</h2>
+              <p>
+                Tras abrir el pendrive y descubrir el costo real de una portada, Tomás sigue el rastro
+                del número desconocido. Lo que encuentra no es un sicario ni un operador menor: es un hombre
+                que lleva años jugando en ambos lados de la red.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">9 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 9: El hombre de la llamada</h3>
+            <p>Lectura gratuita · La red empieza a hablarle con nombre propio</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Tomás no apagó el teléfono después del tercer mensaje. Por primera vez desde que todo empezó,
+              no sintió solo el impulso de esconderse. Sintió otra cosa. Una sospecha afilada. Si la red hubiera querido
+              quebrarlo de inmediato, ya lo habría hecho. En cambio, seguía escribiéndole. Mostrándole archivos.
+              Soltándole pruebas como anzuelos. Eso significaba que alguien, desde adentro o desde un borde muy extraño del sistema,
+              no estaba intentando solo asustarlo. Estaba conduciéndolo.
+            </p>
+
+            <p>
+              Caminó tres cuadras sin mirar el mapa.
+            </p>
+
+            <p>
+              Doblando donde el ruido era mayor.
+            </p>
+
+            <p>
+              Metiéndose donde la gente hacía de cortina.
+            </p>
+
+            <p>
+              Una feria de repuestos.
+            </p>
+
+            <p>
+              Un pasillo de locales de celulares.
+            </p>
+
+            <p>
+              Un supermercado pequeño con música demasiado fuerte.
+            </p>
+
+            <p>
+              Solo al entrar a una farmacia abierta las veinticuatro horas se permitió revisar de nuevo el número.
+            </p>
+
+            <p>
+              No estaba oculto.
+            </p>
+
+            <p>
+              Era un móvil normal.
+            </p>
+
+            <p>
+              Eso también le heló la sangre.
+            </p>
+
+            <p>
+              La gente realmente poderosa rara vez llama desde números imposibles de rastrear.
+            </p>
+
+            <p><strong>Prefiere llamar desde algo tan corriente que nadie se atreva a creer que sea real.</strong></p>
+
+            <div class="quote">El mejor escondite no siempre es lo secreto. A veces es lo ordinario.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Marcó.
+            </p>
+
+            <p>
+              No pensó demasiado antes de hacerlo.
+            </p>
+
+            <p>
+              Si pensaba, quizá no lo haría nunca.
+            </p>
+
+            <p>
+              Sonó una vez.
+            </p>
+
+            <p>
+              Dos.
+            </p>
+
+            <p>
+              Tres.
+            </p>
+
+            <p>
+              Después, una respiración.
+            </p>
+
+            <p>
+              No hubo “aló”.
+            </p>
+
+            <p>
+              Solo una presencia calma al otro lado.
+            </p>
+
+            <p>
+              Tomás habló primero.
+            </p>
+
+            <p>
+              —¿Quién eres?
+            </p>
+
+            <p>
+              Del otro lado, la voz llegó sin apuro.
+            </p>
+
+            <div class="quote">—Alguien que cometió el error de entender demasiado temprano cómo funciona este país.</div>
+
+            <p>
+              Tomás sintió una tensión instantánea en la nuca.
+            </p>
+
+            <p>
+              Conocía ese tono.
+            </p>
+
+            <p>
+              No la voz exacta, pero sí la clase de voz:
+              la de alguien que no necesita levantarla para dominar el espacio.
+            </p>
+
+            <p>
+              —Si quieres ayudar, deja de jugar.
+            </p>
+
+            <p>
+              Hubo una pausa.
+            </p>
+
+            <p>
+              Luego una respuesta que cayó como una hoja afilada:
+            </p>
+
+            <div class="quote">—Si quisiera jugar, ya te habría dicho dónde está Laura.</div>
+
+            <p>
+              Tomás sintió un vacío súbito en el estómago.
+            </p>
+
+            <p>
+              —¿Qué significa eso?
+            </p>
+
+            <p>
+              —Significa que todavía sigues pensando en líneas simples. Bueno, malo. adentro, afuera. víctima, verdugo.
+              Ese lujo se acaba rápido cuando la red entra a la vida real.
+            </p>
+
+            <p>
+              Tomás apretó el teléfono con fuerza.
+            </p>
+
+            <p>
+              —¿La tienen?
+            </p>
+
+            <p>
+              —No te llamé para responder preguntas que todavía no sabes formular.
+            </p>
+
+            <p>
+              —Entonces ¿para qué?
+            </p>
+
+            <p>
+              Esta vez la pausa fue más larga.
+            </p>
+
+            <p>
+              Tan larga que Tomás pensó que la llamada se había cortado.
+            </p>
+
+            <p>
+              Después, la voz dijo:
+            </p>
+
+            <div class="quote">—Para saber si ya estás listo para escuchar lo que Gabriel entendió antes de desaparecer.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El nombre golpeó con precisión quirúrgica.
+            </p>
+
+            <p>
+              Gabriel.
+            </p>
+
+            <p>
+              No “Mena”.
+            </p>
+
+            <p>
+              No “el analista”.
+            </p>
+
+            <p>
+              Gabriel.
+            </p>
+
+            <p>
+              La voz lo conocía.
+            </p>
+
+            <p>
+              O al menos quería que Tomás creyera eso.
+            </p>
+
+            <p>
+              —¿Lo conociste?
+            </p>
+
+            <p>
+              —Más de lo que me convino.
+            </p>
+
+            <p>
+              —¿Quién eres?
+            </p>
+
+            <p>
+              —Alguien a quien Laura ya vio caer una vez.
+            </p>
+
+            <p>
+              La frase dejó a Tomás inmóvil.
+            </p>
+
+            <p>
+              Laura.
+            </p>
+
+            <p>
+              El hombre del café.
+            </p>
+
+            <p>
+              La pareja.
+            </p>
+
+            <p>
+              El operador.
+            </p>
+
+            <p>
+              Todas las piezas empezaron a moverse a la vez.
+            </p>
+
+            <p>
+              —Eres él —dijo Tomás en voz baja.
+            </p>
+
+            <p>
+              No fue pregunta.
+            </p>
+
+            <p>
+              Del otro lado hubo una exhalación casi imperceptible.
+            </p>
+
+            <div class="quote">—Tardaste menos de lo que pensé.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás miró alrededor por puro reflejo.
+            </p>
+
+            <p>
+              La farmacia seguía con su fluorescencia triste, una cajera contando monedas,
+              una mujer revisando jarabes infantiles, un guardia aburrido frente a la puerta automática.
+            </p>
+
+            <p>
+              Todo normal.
+            </p>
+
+            <p>
+              Y él, en medio de la normalidad, hablando por teléfono con el hombre que había marcado la vida de Laura,
+              orbitado el Senado, vigilado el archivo y quizá también intervenido en la caída del reportaje.
+            </p>
+
+            <p>
+              —Si eres quien creo, ¿por qué me estás escribiendo? —preguntó.
+            </p>
+
+            <p>
+              La respuesta llegó inmediata.
+            </p>
+
+            <div class="quote">—Porque los hombres útiles envejecen mal dentro de sistemas que necesitan rostros nuevos para hacer el mismo trabajo.</div>
+
+            <p>
+              Tomás no contestó.
+            </p>
+
+            <p>
+              La voz siguió:
+            </p>
+
+            <p>
+              —Durante años hice lo que me correspondía. Abrí puertas, cerré rutas, moví advertencias,
+              desvié conversaciones, protegí lo que me dijeron que había que proteger. Siempre con una justificación elegante:
+              estabilidad, empleo, inversión, prudencia institucional.
+            </p>
+
+            <p>
+              Hubo una risa mínima.
+            </p>
+
+            <p>
+              —Palabras bonitas para cosas muy sucias.
+            </p>
+
+            <p>
+              Tomás sintió algo inesperado:
+            </p>
+
+            <p>
+              no compasión,
+            </p>
+
+            <p>
+              no confianza,
+            </p>
+
+            <p>
+              sino una especie de incomodidad intelectual.
+            </p>
+
+            <p>
+              Porque la voz no sonaba como la de un villano disfrutando su revelación.
+            </p>
+
+            <p>
+              Sonaba como la de alguien que llevaba tiempo justificándose ante sí mismo y recién ahora
+              empezaba a quedarse sin argumentos.
+            </p>
+
+            <div class="quote">Las peores maquinarias rara vez funcionan con monstruos absolutos. Funcionan con personas que aprenden a llamar deber a lo que saben que está mal.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Dime tu nombre —exigió Tomás.
+            </p>
+
+            <p>
+              Esta vez sí hubo silencio.
+            </p>
+
+            <p>
+              Un silencio real.
+            </p>
+
+            <p>
+              Después, al fin:
+            </p>
+
+            <p><strong>—Nicolás Ferrer.</strong></p>
+
+            <p>
+              Tomás repitió mentalmente el nombre.
+            </p>
+
+            <p>
+              Nicolás Ferrer.
+            </p>
+
+            <p>
+              Ningún archivo lo había mostrado completo todavía.
+            </p>
+
+            <p>
+              Ninguna lista lo había entregado así.
+            </p>
+
+            <p>
+              Y sin embargo, en cuanto lo escuchó, supo que encajaba.
+            </p>
+
+            <p>
+              Sonaba exactamente como alguien que podía pasar años sin firma visible y aun así estar en todas partes.
+            </p>
+
+            <p>
+              —¿Qué quieres?
+            </p>
+
+            <p>
+              —Que llegues al jueves vivo.
+            </p>
+
+            <p>
+              La respuesta fue tan simple que resultó más inquietante que cualquier rodeo.
+            </p>
+
+            <p>
+              —¿Por qué?
+            </p>
+
+            <p>
+              —Porque si tú no llegas, el comité sigue siendo una leyenda útil. Si llegas y ves, deja de ser un rumor y pasa a ser una sala con cuerpos dentro.
+            </p>
+
+            <p>
+              —¿Y tú no puedes mostrarla?
+            </p>
+
+            <p>
+              Nicolás Ferrer soltó una exhalación áspera.
+            </p>
+
+            <p>
+              —No. Yo todavía soy parte de la arquitectura. Si aparezco mal, no caigo solo yo. Cierran todas las capas debajo.
+              Tú, en cambio, todavía no perteneces por completo a ningún lado. Eres una anomalía. Y las anomalías ven cosas que los demás ya no pueden ver sin quedar pegados.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás caminó hacia el fondo del local, junto al refrigerador de bebidas, intentando alejarse de la entrada.
+            </p>
+
+            <p>
+              —Eso no responde por qué me ayudas.
+            </p>
+
+            <p>
+              Nicolás respondió sin cambiar el tono:
+            </p>
+
+            <p>
+              —No te ayudo. Estoy intentando reordenar una caída.
+            </p>
+
+            <p>
+              —¿La tuya?
+            </p>
+
+            <p>
+              —La de todos.
+            </p>
+
+            <p>
+              Tomás casi soltó una carcajada amarga.
+            </p>
+
+            <p>
+              —¿Ahora te importa la moral?
+            </p>
+
+            <p>
+              La respuesta tardó un segundo demasiado humano.
+            </p>
+
+            <p>
+              —La moral me empezó a importar el día en que entendí que el comité ya no protegía empresas. Protegía su propia continuidad.
+            </p>
+
+            <p>
+              —¿No es lo mismo?
+            </p>
+
+            <p>
+              —No. Cuando una red madura, deja de servir a los dueños que la crearon. Empieza a servirse a sí misma.
+            </p>
+
+            <p>
+              Esa frase se clavó en Tomás con una fuerza distinta a todo lo anterior.
+            </p>
+
+            <p>
+              Porque explicaba algo que venía intuyendo desde la matriz de obedientes:
+              ya no se trataba solo de defender negocios.
+            </p>
+
+            <p>
+              La estructura misma se había convertido en negocio.
+            </p>
+
+            <p>
+              Un organismo que necesitaba seguir produciendo silencio para existir.
+            </p>
+
+            <div class="quote">Algunas redes empiezan robando para conservar poder. Las peores terminan conservando poder solo para poder seguir robando.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Dónde está Laura? —preguntó otra vez.
+            </p>
+
+            <p>
+              Nicolás no esquivó la pregunta esta vez.
+            </p>
+
+            <p>
+              —No la tienen. Todavía.
+            </p>
+
+            <p>
+              Tomás sintió cómo el cuerpo se le aflojaba apenas.
+            </p>
+
+            <p>
+              Apenas.
+            </p>
+
+            <p>
+              —¿Qué significa “todavía”?
+            </p>
+
+            <p>
+              —Que si sigue usando el mismo circuito de refugios, la encuentran antes de la noche.
+            </p>
+
+            <p>
+              —¿Cómo sabes eso?
+            </p>
+
+            <p>
+              Nicolás respondió con una calma insoportable.
+            </p>
+
+            <p>
+              —Porque yo ayudé a diseñar esos circuitos.
+            </p>
+
+            <p>
+              Tomás quedó en silencio.
+            </p>
+
+            <p>
+              Ahí estaba la dimensión íntima del daño.
+            </p>
+
+            <p>
+              No solo había sido su pareja.
+            </p>
+
+            <p>
+              Había sido también el hombre que conocía los mecanismos que luego se volverían contra ella.
+            </p>
+
+            <p><strong>La red no le había quitado a Laura solo una historia. Le había contaminado la memoria completa.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Dónde te encuentro? —dijo Tomás.
+            </p>
+
+            <p>
+              Nicolás no respondió de inmediato.
+            </p>
+
+            <p>
+              —No todavía.
+            </p>
+
+            <p>
+              —No voy a seguir tus mensajes como un idiota a oscuras.
+            </p>
+
+            <p>
+              —No necesitas seguirme a mí. Necesitas seguir una factura.
+            </p>
+
+            <p>
+              Tomás frunció el ceño.
+            </p>
+
+            <p>
+              —¿Qué factura?
+            </p>
+
+            <p>
+              Nicolás bajó aún más la voz.
+            </p>
+
+            <p>
+              —En el pendrive, dentro de “COSTOS”, hay un PDF que no abriste. Se llama
+              <strong>servicios_evento_q4.pdf</strong>. Léelo completo. No es un gasto de catering.
+              Es la cobertura de fachada del comité.
+            </p>
+
+            <p>
+              Tomás hizo memoria.
+            </p>
+
+            <p>
+              No había llegado a ese archivo.
+            </p>
+
+            <p>
+              —¿Qué voy a encontrar?
+            </p>
+
+            <p>
+              —Una razón social falsa, un proveedor real, una dirección operativa y el nombre del evento que usan para justificar la ocupación del lugar todos los jueves.
+            </p>
+
+            <p>
+              Tomás sintió la descarga inmediata de una pista concreta.
+            </p>
+
+            <p>
+              —¿CN-7?
+            </p>
+
+            <p>
+              Nicolás se quedó en silencio.
+            </p>
+
+            <p>
+              Luego:
+            </p>
+
+            <p>
+              —Vas más rápido de lo que conviene.
+            </p>
+
+            <p>
+              No lo negó.
+            </p>
+
+            <p>
+              Tampoco lo confirmó del todo.
+            </p>
+
+            <p>
+              Pero era suficiente.
+            </p>
+
+            <div class="quote">La verdad rara vez llega en una confesión limpia. A veces llega en las cosas que el otro elige no desmentir.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Por qué me mostraste la portada de Laura? —preguntó Tomás.
+            </p>
+
+            <p>
+              Nicolás tardó más en responder esta vez.
+            </p>
+
+            <p>
+              Cuando habló, el tono había cambiado apenas.
+            </p>
+
+            <p>
+              No más suave.
+            </p>
+
+            <p>
+              Más viejo.
+            </p>
+
+            <p>
+              —Porque necesitabas entender que nada de lo que la red destruye desaparece. Todo se archiva.
+              El poder no guarda solo contratos o pagos. Guarda también las versiones enteras de lo que logró aplastar.
+            </p>
+
+            <p>
+              Tomás lo escuchó sin moverse.
+            </p>
+
+            <p>
+              —¿Por culpa?
+            </p>
+
+            <p>
+              Nicolás soltó una risa mínima, seca.
+            </p>
+
+            <p>
+              —No. Por método. Un archivo sirve para dos cosas: repetir una operación… o recordarles a los demás que ya se hizo antes.
+            </p>
+
+            <p>
+              La brutalidad racional de esa frase le dolió más que cualquier amenaza explícita.
+            </p>
+
+            <p>
+              Porque explicaba por qué cada nueva presión se sentía tan afinada:
+              la red no improvisaba sobre personas.
+            </p>
+
+            <p>
+              Reutilizaba casos.
+            </p>
+
+            <p>
+              Afinaba protocolos.
+            </p>
+
+            <p>
+              Aprendía del miedo ajeno como una empresa aprende de su historial de ventas.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —Escucha bien —dijo Nicolás al fin—. El jueves no vas a encontrar una sala con humo y hombres viejos decidiendo el país como caricatura de novela. Vas a encontrar algo peor.
+            </p>
+
+            <p>
+              —¿Qué cosa?
+            </p>
+
+            <p>
+              —Normalidad. Gente entrando con acreditación. Coffee break. un evento que parece legítimo. Una agenda profesional.
+              Y dentro de esa normalidad, una secuencia de encuentros cortos, discretos, donde se define quién demora qué, quién publica qué y quién recibe qué.
+            </p>
+
+            <p>
+              Tomás sintió una claridad helada.
+            </p>
+
+            <p>
+              El comité no iba a parecer clandestino.
+            </p>
+
+            <p>
+              Iba a parecer razonable.
+            </p>
+
+            <p>
+              Y esa era la forma más estable del poder sucio: parecer normal.
+            </p>
+
+            <div class="quote">Lo verdaderamente peligroso no es la sala cerrada. Es la sala que podría estar ocurriendo al lado tuyo sin que la distingas de una reunión más.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Nicolás volvió a hablar, más rápido ahora.
+            </p>
+
+            <p>
+              —Si entras, no busques el centro. Busca las transferencias humanas.
+              El que entrega una carpeta y no se queda. El que entra cinco minutos y sale sin café.
+              La periodista que no cubre nada, pero aparece igual. El asesor sin credencial visible.
+              El parlamentario que no figura en el programa. El proveedor que entra por acceso interno.
+            </p>
+
+            <p>
+              Tomás respiró hondo.
+            </p>
+
+            <p>
+              Estaba recibiendo una instrucción táctica completa.
+            </p>
+
+            <p>
+              No de un héroe.
+            </p>
+
+            <p>
+              No de un aliado limpio.
+            </p>
+
+            <p>
+              Sino de alguien que conocía el sistema porque lo había hecho funcionar.
+            </p>
+
+            <p>
+              Eso lo volvía útil.
+            </p>
+
+            <p>
+              Y profundamente peligroso.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Por qué no te entregas? —preguntó Tomás.
+            </p>
+
+            <p>
+              Nicolás guardó silencio.
+            </p>
+
+            <p>
+              Uno largo.
+            </p>
+
+            <p>
+              Luego dijo:
+            </p>
+
+            <p>
+              —Porque todavía no estoy seguro de si quiero derribar la red… o simplemente sobrevivir a cuando empiece a comerse a los que ya no necesita.
+            </p>
+
+            <p>
+              La honestidad fue casi peor que una mentira.
+            </p>
+
+            <p>
+              Tomás cerró los ojos un instante.
+            </p>
+
+            <p>
+              Ahí estaba la verdad más desagradable hasta ahora:
+              el hombre que podía abrirle la puerta al comité no era un redimido,
+              sino un sobreviviente calculando su próximo movimiento.
+            </p>
+
+            <p>
+              Y quizá eso mismo lo hacía creíble.
+            </p>
+
+            <div class="quote">La red no produce traidores limpios. Produce gente que decide moverse cuando entiende que el siguiente expendable será ella.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Vas a volver a llamarme —dijo Nicolás.
+            </p>
+
+            <p>
+              —No asumas eso.
+            </p>
+
+            <p>
+              —Claro que sí. Porque cuando abras “servicios_evento_q4.pdf” vas a entender que el comité del jueves no usa solo una fachada.
+              Usa también un anfitrión visible.
+            </p>
+
+            <p>
+              Tomás apretó el teléfono.
+            </p>
+
+            <p>
+              —¿Quién?
+            </p>
+
+            <p>
+              —Alguien que sale en televisión hablando de innovación, transparencia y desarrollo.
+            </p>
+
+            <p>
+              —Dame el nombre.
+            </p>
+
+            <p>
+              —Todavía no.
+            </p>
+
+            <p>
+              —Basta de “todavía no”.
+            </p>
+
+            <p>
+              Nicolás no se alteró.
+            </p>
+
+            <p>
+              —Aprende esto ahora, Tomás: en sistemas como este, si recibes toda la información en el orden incorrecto, te matan antes de que sepas usarla.
+            </p>
+
+            <p>
+              La frase dejó el aire quieto entre ambos.
+            </p>
+
+            <p>
+              No sonaba a manipulación improvisada.
+            </p>
+
+            <p>
+              Sonaba a protocolo.
+            </p>
+
+            <p>
+              A algo aprendido con sangre ajena.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —Una última cosa —dijo Nicolás.
+            </p>
+
+            <p>
+              Tomás no respondió.
+            </p>
+
+            <p>
+              —No vuelvas a usar la ruta habitual hacia tu departamento.
+              Ya no te están validando solo a ti.
+            </p>
+
+            <p>
+              —¿Qué significa eso?
+            </p>
+
+            <p>
+              —Que la línea cambió hace una hora.
+            </p>
+
+            <p>
+              Tomás sintió el cuerpo entero tensarse.
+            </p>
+
+            <p>
+              —¿Qué línea?
+            </p>
+
+            <p>
+              Del otro lado, la voz bajó apenas más.
+            </p>
+
+            <div class="quote">—Tu nombre ya no está en “validación en curso”. Está en “contención prioritaria”.</div>
+
+            <p>
+              El sonido de la farmacia volvió de golpe a sus oídos:
+              la caja registradora,
+              el plástico de una bolsa,
+              la puerta automática abriéndose.
+            </p>
+
+            <p>
+              Todo demasiado normal para la frase que acababa de escuchar.
+            </p>
+
+            <p>
+              —¿Quién lo decidió?
+            </p>
+
+            <p>
+              La respuesta llegó seca:
+            </p>
+
+            <p>
+              —El hombre que no llama dos veces.
+            </p>
+
+            <p>
+              Tomás recordó de inmediato la frase de Laura.
+            </p>
+
+            <p>
+              Gente que no llama dos veces.
+            </p>
+
+            <p>
+              El mismo código.
+            </p>
+
+            <p>
+              La misma jerarquía no dicha.
+            </p>
+
+            <p>
+              —¿Valdés?
+            </p>
+
+            <p>
+              Nicolás no contestó.
+            </p>
+
+            <p>
+              La llamada se cortó.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás se quedó quieto un segundo demasiado largo, con el teléfono aún pegado a la oreja,
+              como si el cuerpo necesitara unos instantes para aceptar que la conversación ya no podía darle nada más.
+            </p>
+
+            <p>
+              Luego guardó el celular.
+            </p>
+
+            <p>
+              Salió de la farmacia.
+            </p>
+
+            <p>
+              Y recién al volver a tocar la calle comprendió la mutación exacta del peligro.
+            </p>
+
+            <p>
+              Hasta ahora la red lo estaba estudiando.
+            </p>
+
+            <p>
+              Midiendo si servía.
+            </p>
+
+            <p>
+              Si se quebraba.
+            </p>
+
+            <p>
+              Si podía desviarse.
+            </p>
+
+            <p>
+              Ahora ya no.
+            </p>
+
+            <p>
+              Contención prioritaria.
+            </p>
+
+            <p>
+              Eso ya no sonaba a evaluación.
+            </p>
+
+            <p>
+              Sonaba a decisión.
+            </p>
+
+            <div class="quote">Y en una red donde todo se presupuestaba, una decisión así significaba que alguien ya había empezado a calcular cuánto costaba apagarlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Caminó sin rumbo fijo durante varios minutos hasta que encontró una plaza angosta con árboles secos
+              y bancas metálicas pintadas demasiadas veces.
+            </p>
+
+            <p>
+              Se sentó.
+            </p>
+
+            <p>
+              Sacó el notebook.
+            </p>
+
+            <p>
+              Volvió a abrir el pendrive.
+            </p>
+
+            <p>
+              Entró a “COSTOS”.
+            </p>
+
+            <p>
+              Y esta vez sí vio el archivo que Nicolás había nombrado:
+              <strong>servicios_evento_q4.pdf</strong>.
+            </p>
+
+            <p>
+              Lo abrió con las manos tensas.
+            </p>
+
+            <p>
+              La primera página parecía una factura corporativa cualquiera.
+            </p>
+
+            <p>
+              Arriendo de salón.
+            </p>
+
+            <p>
+              Logística.
+            </p>
+
+            <p>
+              Coffee break.
+            </p>
+
+            <p>
+              Equipamiento audiovisual.
+            </p>
+
+            <p>
+              Servicios de acreditación.
+            </p>
+
+            <p>
+              Todo limpio.
+            </p>
+
+            <p>
+              Profesional.
+            </p>
+
+            <p>
+              Legítimo.
+            </p>
+
+            <p>
+              Hasta que leyó el nombre del evento:
+            </p>
+
+            <div class="quote">Foro Nacional de Innovación y Transparencia Pública.</div>
+
+            <p>
+              Tomás sintió una carcajada amarga queriendo subirle por la garganta.
+            </p>
+
+            <p>
+              Innovación y transparencia.
+            </p>
+
+            <p>
+              La máscara ya ni siquiera intentaba ser creativa.
+            </p>
+
+            <p>
+              Bajó la vista a la razón social proveedora.
+            </p>
+
+            <p>
+              Luego a la dirección del recinto.
+            </p>
+
+            <p>
+              Y ahí se le congeló el pulso.
+            </p>
+
+            <p>
+              El lugar no quedaba escondido en una parcela lejana ni en una oficina opaca.
+            </p>
+
+            <p>
+              Quedaba en el centro financiero, a pasos de torres corporativas, hoteles y restaurantes caros.
+            </p>
+
+            <p>
+              Un edificio donde cualquier encuentro podía pasar por networking, desarrollo, gobernanza o simple vanidad de elite.
+            </p>
+
+            <p>
+              Abajo, en una observación técnica de acceso, leyó la línea final:
+            </p>
+
+            <p><strong>Ingreso proveedores y coordinación: Acceso interno CN-7.</strong></p>
+
+            <div class="quote">La puerta existía. El lugar existía. Y el jueves ya tenía dirección.</div>
+
+            <p>
+              Tomás cerró el notebook con una certeza nueva y terrible:
+            </p>
+
+            <p><strong>ya no estaba persiguiendo una hipótesis. Ya estaba contando las horas para entrar al corazón de la red.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué ocurre cuando Tomás llega al lugar del foro y entiende que el comité no solo lo esperaba: ya lo tenía considerado en la agenda.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo8.html" onclick="goBack(event, 'capitulo8.html')" class="btn btn-ghost">← Capítulo 8</a>
+            <a href="capitulo10.html" class="btn btn-primary">Leer capítulo 10 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
