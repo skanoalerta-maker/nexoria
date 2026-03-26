@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 4 | La Vía y la Ruptura</title>
+  <meta
+    name="description"
+    content="Capítulo 4 de La Vía y la Ruptura: La institucionalidad comienza a crujir. Lo que antes parecía tensión política ahora empieza a sentirse como antesala del quiebre."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/allende-portada.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">La Vía y la Ruptura</p>
+            <p class="brand-sub">Drama histórico chileno</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo3.html" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo5.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Corrupción y poder / Capítulo 4</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 4</p>
+            <h1>La democracia empieza a crujir por dentro</h1>
+            <p>
+              El conflicto ya no se expresa solo en las calles. Ahora penetra la institucionalidad,
+              debilita la confianza y transforma a la propia democracia en terreno de disputa.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">El quiebre interior</div>
+              <h2>Cuando las reglas dejan de sentirse suficientes</h2>
+              <p>
+                El país aún conserva sus formas republicanas, pero bajo esa apariencia algo se desgasta.
+                Las instituciones siguen en pie, aunque cada día cuesta más creer que podrán contener lo que viene.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Histórico</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">4 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 4: La democracia empieza a crujir por dentro</h3>
+            <p>Lectura gratuita · El desgaste institucional ya no puede ocultarse</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Las democracias no siempre caen cuando se derriban sus edificios.
+              A veces empiezan a caer mucho antes, cuando sus reglas siguen existiendo
+              pero dejan de ofrecer confianza, cuando sus instituciones continúan funcionando
+              en apariencia mientras por dentro se llenan de sospecha, cálculo y hostilidad.
+            </p>
+
+            <p>
+              Chile empezó a entrar en esa zona.
+            </p>
+
+            <p>
+              Una zona más peligrosa que el conflicto abierto.
+            </p>
+
+            <p>
+              Porque en el conflicto visible todavía hay bandos claros, consignas, plazas, discursos.
+            </p>
+
+            <p>
+              En cambio, cuando el desgaste se instala en la institucionalidad,
+              lo que se rompe es algo más profundo:
+              la idea compartida de que las reglas todavía sirven para contener el choque.
+            </p>
+
+            <div class="quote">El verdadero peligro aparece cuando un país deja de discutir solo qué quiere y empieza a dudar de si aún tiene un marco común para decidirlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El Congreso seguía sesionando.
+            </p>
+
+            <p>
+              Los tribunales seguían existiendo.
+            </p>
+
+            <p>
+              Los ministerios seguían emitiendo comunicados, las radios seguían repitiendo declaraciones,
+              los diarios seguían saliendo cada mañana como si el país todavía se pareciera al de siempre.
+            </p>
+
+            <p>
+              Pero bajo ese ritual de normalidad había otra cosa.
+            </p>
+
+            <p>
+              Una sensación creciente de que cada institución estaba siendo forzada a elegir,
+              de que ya no bastaba con cumplir su rol:
+              ahora debía ubicarse frente al conflicto.
+            </p>
+
+            <p>
+              Lo que antes era contrapeso comenzaba a parecer trinchera.
+            </p>
+
+            <p><strong>Y cuando las instituciones se convierten en trincheras, la democracia deja de ser un sistema compartido y empieza a parecer un botín en disputa.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              La oposición ya no actuaba únicamente como oposición.
+            </p>
+
+            <p>
+              Una parte de ella empezó a comportarse como si el objetivo no fuera corregir al gobierno,
+              sino volverlo inviable.
+            </p>
+
+            <p>
+              Eso cambió el tono de todo.
+            </p>
+
+            <p>
+              Cada error gubernamental se amplificaba como si fuese prueba final.
+            </p>
+
+            <p>
+              Cada tropiezo económico se convertía en argumento absoluto.
+            </p>
+
+            <p>
+              Cada conflicto administrativo era presentado como síntoma terminal.
+            </p>
+
+            <p>
+              No se trataba solo de disputar el poder en el marco republicano.
+            </p>
+
+            <p>
+              Se trataba de erosionar la legitimidad del proceso entero.
+            </p>
+
+            <p>
+              Y cuando la legitimidad de un gobierno elegido empieza a ser atacada de manera sistemática,
+              la institucionalidad no actúa en vacío:
+              absorbe esa presión, la reproduce, la devuelve amplificada.
+            </p>
+
+            <div class="quote">Primero se dijo que el gobierno gobernaba mal. Después se instaló que ya no debía gobernar. Entre ambas frases cabía todo el abismo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Allende insistía en sostener el camino legal.
+            </p>
+
+            <p>
+              Lo hacía con una mezcla de convicción y necesidad.
+            </p>
+
+            <p>
+              Sabía que ceder completamente a la confrontación significaba perder el alma del proyecto.
+            </p>
+
+            <p>
+              Pero también sabía que cada gesto moderado era leído por sus adversarios como señal de debilidad
+              y por algunos de sus propios partidarios como insuficiencia.
+            </p>
+
+            <p>
+              Ese era el centro de su tragedia política:
+              defender la institucionalidad mientras esa misma institucionalidad empezaba a cerrarse sobre él.
+            </p>
+
+            <p>
+              En otro contexto, la legalidad habría sido protección.
+            </p>
+
+            <p>
+              En ese contexto, empezaba a ser también cerco.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              La desconfianza se volvió un principio organizador.
+            </p>
+
+            <p>
+              Ya nadie suponía buena fe en el otro.
+            </p>
+
+            <p>
+              Cada acto era interpretado como maniobra.
+            </p>
+
+            <p>
+              Cada acuerdo parecía contener una trampa.
+            </p>
+
+            <p>
+              Cada palabra pública era escuchada buscando la intención oculta.
+            </p>
+
+            <p>
+              Eso afectó la política de manera brutal.
+            </p>
+
+            <p>
+              Pero también afectó a las instituciones mismas, porque una democracia vive no solo de normas,
+              sino de cierta confianza mínima entre actores que reconocen que seguirán coexistiendo al día siguiente.
+            </p>
+
+            <p>
+              Cuando esa certeza se pierde, todo se endurece.
+            </p>
+
+            <p>
+              Las sesiones se vuelven teatro hostil.
+            </p>
+
+            <p>
+              Los procedimientos se usan como armas.
+            </p>
+
+            <p>
+              La ley deja de sentirse casa común y empieza a parecer instrumento táctico.
+            </p>
+
+            <div class="quote">No fue solo una disputa por el poder. Fue una lenta demolición de la confianza necesaria para ejercerlo sin destruir el marco que lo hacía posible.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Afuera, el pueblo seguía mirando hacia arriba esperando alguna señal de contención.
+            </p>
+
+            <p>
+              Pero desde arriba ya no bajaba contención.
+            </p>
+
+            <p>
+              Bajaban declaraciones cruzadas, acusaciones, bloqueos y una creciente incapacidad de ofrecer horizonte.
+            </p>
+
+            <p>
+              La gente seguía viviendo.
+            </p>
+
+            <p>
+              Seguía haciendo filas.
+            </p>
+
+            <p>
+              Seguía buscando alimentos, trabajo, transporte, calma.
+            </p>
+
+            <p>
+              Pero cada vez se hacía más evidente que la crisis no se resolvería solo con esfuerzo cotidiano.
+            </p>
+
+            <p>
+              Había algo más grande avanzando.
+            </p>
+
+            <p>
+              Algo que ya no dependía únicamente de la administración del presente,
+              sino de la decisión de ciertos sectores de empujar al país hasta donde las reglas dejaran de bastar.
+            </p>
+
+            <p><strong>La institucionalidad no estaba colapsada. Estaba siendo empujada hacia su límite.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Y en toda democracia hay un momento especialmente delicado:
+              cuando las instituciones siguen de pie pero comienzan a ser usadas para preparar un desenlace que las contradice.
+            </p>
+
+            <p>
+              No se las derriba aún.
+            </p>
+
+            <p>
+              Se las ocupa.
+            </p>
+
+            <p>
+              Se las presiona.
+            </p>
+
+            <p>
+              Se las coloca frente a decisiones imposibles.
+            </p>
+
+            <p>
+              Se las obliga a responder a una crisis que otros alimentan con paciencia.
+            </p>
+
+            <p>
+              Entonces, incluso cuando actúan según procedimiento,
+              lo hacen en un campo contaminado por la intención de ruptura.
+            </p>
+
+            <p>
+              Eso fue parte del drama chileno.
+            </p>
+
+            <p>
+              Que el quiebre no llegó solo desde fuera del sistema.
+            </p>
+
+            <p>
+              También fue incubado usando el sistema como escenario y presión.
+            </p>
+
+            <div class="quote">La democracia empezó a ser herida con sus propias herramientas, mientras una parte del país todavía creía que el solo respeto a las formas bastaría para salvarla.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En los cuarteles, en los despachos, en los círculos donde se hablaba de orden con voz baja y segura,
+              la situación se observaba con una mezcla de atención y cálculo.
+            </p>
+
+            <p>
+              Todavía no todo era decisión abierta.
+            </p>
+
+            <p>
+              Pero la idea de una intervención dejaba de ser fantasía marginal.
+            </p>
+
+            <p>
+              Iba ganando densidad.
+            </p>
+
+            <p>
+              Ya no sonaba impensable.
+            </p>
+
+            <p>
+              Ya no provocaba escándalo instantáneo en todos los espacios.
+            </p>
+
+            <p>
+              Empezaba a flotar como posibilidad dura, incómoda, pero cada vez más presente.
+            </p>
+
+            <p>
+              Y eso alteraba todo, incluso antes de que ocurriera nada visible.
+            </p>
+
+            <p>
+              Porque cuando la sola idea de la fuerza empieza a organizar las expectativas,
+              la política cambia su textura.
+            </p>
+
+            <p>
+              Se vuelve más tensa, más táctica, más breve.
+            </p>
+
+            <p>
+              Se empieza a hablar como si el tiempo se agotara.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              La prensa ayudó a fijar ese clima.
+            </p>
+
+            <p>
+              Titulares, editoriales, columnas y rumores repetidos fueron moldeando una percepción precisa:
+              la de una democracia exhausta, incapaz de contener el conflicto por sí sola.
+            </p>
+
+            <p>
+              Esa percepción era decisiva.
+            </p>
+
+            <p>
+              Porque cuando se instala que el marco republicano ya no basta,
+              se empieza a preparar psicológicamente a la sociedad para aceptar que alguien intervenga “desde fuera”
+              para devolverle eficacia.
+            </p>
+
+            <p>
+              Ese es uno de los grandes engaños de la historia.
+            </p>
+
+            <p>
+              Presentar la ruptura como solución cuando en realidad ha sido cuidadosamente trabajada como desenlace.
+            </p>
+
+            <div class="quote">Nadie entrega la democracia diciendo que quiere destruirla. Antes la declara insuficiente.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Dentro del propio campo popular también aparecieron tensiones.
+            </p>
+
+            <p>
+              Era inevitable.
+            </p>
+
+            <p>
+              Algunos querían acelerar.
+            </p>
+
+            <p>
+              Otros insistían en cuidar las formas.
+            </p>
+
+            <p>
+              Algunos sentían que retroceder era traición.
+            </p>
+
+            <p>
+              Otros temían que avanzar sin cálculo facilitara exactamente el desenlace que los adversarios buscaban.
+            </p>
+
+            <p>
+              Esa discusión, profunda y dolorosa, revelaba la magnitud del momento.
+            </p>
+
+            <p>
+              No se trataba solo de defender un gobierno.
+            </p>
+
+            <p>
+              Se trataba de decidir cómo defenderlo sin precipitar la catástrofe.
+            </p>
+
+            <p>
+              Pero a esas alturas, el margen de maniobra ya se había estrechado.
+            </p>
+
+            <p>
+              Cada camino parecía costoso.
+            </p>
+
+            <p>
+              Cada vacilación parecía fatal.
+            </p>
+
+            <p><strong>La tragedia se intensifica cuando ninguna decisión promete salvarlo todo.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              En las casas, la gente comenzó a hablar de las instituciones de otro modo.
+            </p>
+
+            <p>
+              Ya no como certezas.
+            </p>
+
+            <p>
+              Como interrogantes.
+            </p>
+
+            <p>
+              ¿Podrán contener esto?
+            </p>
+
+            <p>
+              ¿Querrán hacerlo?
+            </p>
+
+            <p>
+              ¿Responderán a la ley o a la presión?
+            </p>
+
+            <p>
+              ¿Seguirán siendo de todos o terminarán inclinándose?
+            </p>
+
+            <p>
+              Esas preguntas, repetidas en miles de mesas y conversaciones, marcan un punto decisivo.
+            </p>
+
+            <p>
+              Porque una democracia puede sobrevivir a conflictos muy duros.
+            </p>
+
+            <p>
+              Lo que no sobrevive fácilmente es la pérdida masiva de fe en su capacidad de arbitrar.
+            </p>
+
+            <p>
+              Una vez que esa fe se debilita, el terreno queda preparado para algo peor que la crisis:
+              el consentimiento resignado ante la ruptura.
+            </p>
+
+            <div class="quote">El quiebre se acerca de verdad cuando demasiadas personas empiezan a pensar que las reglas ya no alcanzan, incluso antes de que alguien las rompa abiertamente.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Allende aún hablaba al país como si todavía pudiera convocarlo entero.
+            </p>
+
+            <p>
+              Esa persistencia tenía algo admirable y algo doloroso.
+            </p>
+
+            <p>
+              Admirable, porque se negaba a abandonar la idea de Chile como comunidad política compartida.
+            </p>
+
+            <p>
+              Dolorosa, porque cada vez resultaba más evidente que una parte poderosa del país
+              ya no quería convivir dentro de ese marco si no podía dominarlo por completo.
+            </p>
+
+            <p>
+              Allí se encuentra uno de los nudos de esta historia:
+              la defensa democrática de un proyecto popular enfrentada a sectores que comenzaron a aceptar,
+              con creciente naturalidad, una salida no democrática para derrotarlo.
+            </p>
+
+            <p>
+              Esa asimetría fue devastadora.
+            </p>
+
+            <p>
+              Porque un actor aún creía en el marco común.
+            </p>
+
+            <p>
+              El otro empezaba a considerar que ese marco era prescindible.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Esa noche, mientras en una oficina se revisaban documentos y se medían movimientos con precisión fría,
+              en una casa cualquiera una familia escuchó la radio con el volumen bajo,
+              como si ya intuyera que el país estaba entrando en una zona donde incluso oír podía ser una forma de vigilia.
+            </p>
+
+            <p>
+              Nadie sabía aún la fecha exacta del quiebre.
+            </p>
+
+            <p>
+              Pero muchos empezaban a sentir su lógica.
+            </p>
+
+            <p>
+              La lógica del desgaste.
+            </p>
+
+            <p>
+              La lógica del aislamiento.
+            </p>
+
+            <p>
+              La lógica de convertir a la democracia en un cuerpo cansado,
+              demasiado exhausto para defenderse con toda la fuerza que aún decía representar.
+            </p>
+
+            <p>
+              El país seguía teniendo instituciones.
+            </p>
+
+            <p>
+              Seguía teniendo procedimientos.
+            </p>
+
+            <p>
+              Seguía teniendo formalidades republicanas.
+            </p>
+
+            <p>
+              Pero empezaba a perder algo más importante:
+              la confianza de que todo eso todavía bastaría.
+            </p>
+
+            <p><strong>Y cuando una democracia pierde esa confianza, el ruido del futuro comienza a oírse mucho antes de que llegue.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa al capítulo 5 para entrar en la asfixia final, el agotamiento nacional y el momento en que el país empieza a sentir que el desenlace ya no es una posibilidad lejana.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo3.html" class="btn btn-ghost">← Capítulo 3</a>
+            <a href="capitulo5.html" class="btn btn-primary">Leer capítulo 5 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
