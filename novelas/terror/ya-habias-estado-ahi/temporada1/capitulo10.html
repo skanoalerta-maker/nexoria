@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 10 | Ya habías estado ahí</title>
+  <meta
+    name="description"
+    content="Capítulo 10 de Ya habías estado ahí: La fotografía de la Generación 1 no abre una teoría. Abre una genealogía del horror. Y por primera vez, Adrián entiende que su madre no estaba escondiendo un crimen, sino una herencia."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">Ya habías estado ahí</p>
+            <p class="brand-sub">Thriller psicológico y misterio</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo9.html" onclick="goBack(event, 'capitulo9.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo11.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 10</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 10</p>
+            <h1>La herencia del primer experimento</h1>
+            <p>
+              La fotografía de la Generación 1 abre una grieta mayor que cualquier recuerdo personal.
+              Por primera vez, Adrián y Elías entienden que el programa no fue creado para fabricar sujetos útiles.
+              Fue creado para fabricar linajes enteros de obediencia.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">El horror sube de categoría</div>
+              <h2>No estaban escondiendo un crimen aislado. Estaban protegiendo la continuidad de una casta humana diseñada para sobrevivir a la verdad.</h2>
+              <p>
+                Mientras el núcleo materno empieza a revelar el modelo completo, Adrián y Elías descubren que la Generación 1 no es solo un antecedente.
+                Es el origen de una genealogía que todavía respira por encima del sistema, mezclada con el poder, el dinero y los nombres que nadie se atrevería a mirar dos veces.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Thriller</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">10 de 14</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 10: La herencia del primer experimento</h3>
+            <p>Lectura gratuita · A veces el secreto peor no es lo que hicieron contigo, sino la clase de mundo que construyeron después gracias a eso</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              La fotografía permaneció entre ellos como una detonación sin sonido. Adrián no apartó la vista del rótulo mecanografiado —<strong>PROGRAMA PILOTO DE CONTINUIDAD COGNITIVA / GENERACIÓN 1</strong>— porque sabía que, si lo hacía demasiado rápido, el cerebro todavía intentaría defenderse degradándolo a archivo histórico, a antecedente horrible pero remoto, a cosa clausurada por el tiempo. Pero no era eso. Lo sentía con el cuerpo. No era pasado muerto. Era raíz viva. Y la nota escrita a mano por su madre debajo de la imagen —<strong>“Ustedes no fueron los primeros”</strong>— no estaba puesta para escandalizarlos. Estaba puesta para corregir una escala. Hasta ese momento Adrián había pensado el horror como un sistema que lo alcanzó a él y a Elías. Ahora empezaba a entender algo muchísimo peor: ellos no eran el centro del experimento. Eran solo una de sus generaciones funcionales.
+            </p>
+
+            <p>
+              Elías fue el primero en romper el silencio.
+            </p>
+
+            <p>
+              No con una pregunta.
+            </p>
+
+            <p>
+              Con una negación.
+            </p>
+
+            <p>
+              —No puede ser.
+            </p>
+
+            <p>
+              La frase salió baja.
+            </p>
+
+            <p>
+              No como incredulidad pura.
+            </p>
+
+            <p>
+              Como alguien que reconoce de inmediato la lógica de lo que ve,
+              pero necesita todavía unos segundos más para soportar el peso total de su consecuencia.
+            </p>
+
+            <p>
+              Adrián siguió mirando la fotografía.
+            </p>
+
+            <p>
+              Niños sentados.
+            </p>
+
+            <p>
+              Hombres detrás del vidrio.
+            </p>
+
+            <p>
+              Arturo Vial mucho más joven,
+              pero ya con esa misma postura insoportable de quien mira personas como estructuras de aprovechamiento.
+            </p>
+
+            <p>
+              Lo perturbador no era solo la imagen.
+            </p>
+
+            <p>
+              Era la antigüedad.
+            </p>
+
+            <p>
+              El desgaste del papel.
+            </p>
+
+            <p>
+              El estilo de las sillas.
+            </p>
+
+            <p>
+              La tipografía del rótulo.
+            </p>
+
+            <p>
+              El laboratorio en su fase casi primitiva.
+            </p>
+
+            <p>
+              Todo gritaba lo mismo:
+            </p>
+
+            <p><strong>esto llevaba más tiempo del que cualquiera razonable estaría dispuesto a creer.</strong></p>
+
+            <div class="quote">Cuando un horror es demasiado antiguo, deja de parecer un accidente. Empieza a parecer una tradición.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La consola del núcleo emitió un sonido breve.
+            </p>
+
+            <p>
+              No de alarma.
+            </p>
+
+            <p>
+              De continuidad.
+            </p>
+
+            <p>
+              Como si la fotografía no fuera el contenido principal,
+              sino apenas la primera capa necesaria para reconfigurar su comprensión antes de mostrar lo realmente insoportable.
+            </p>
+
+            <p>
+              Un segundo compartimento se abrió junto a la cápsula.
+            </p>
+
+            <p>
+              Dentro había un sobre sellado con una banda gris y una inscripción en relieve:
+            </p>
+
+            <div class="quote"><strong>TRAZABILIDAD VERTICAL / ACCESO SOLO SI YA ENTENDIERON QUE NO EMPEZÓ CON USTEDES</strong></div>
+
+            <p>
+              Adrián lo tomó.
+            </p>
+
+            <p>
+              El papel era grueso,
+              técnico,
+              no doméstico.
+            </p>
+
+            <p>
+              Su madre no había escondido recuerdos sentimentales.
+            </p>
+
+            <p>
+              Había escondido un expediente para después del shock.
+            </p>
+
+            <p>
+              Lo abrió.
+            </p>
+
+            <p>
+              La primera hoja no tenía prosa.
+            </p>
+
+            <p>
+              Tenía una tabla genealógica.
+            </p>
+
+            <p>
+              No familiar en el sentido clásico.
+            </p>
+
+            <p>
+              Funcional.
+            </p>
+
+            <p>
+              Columnas.
+            </p>
+
+            <p>
+              Flechas.
+            </p>
+
+            <p>
+              Códigos de generación.
+            </p>
+
+            <p>
+              Transferencias de protocolo.
+            </p>
+
+            <p>
+              Líneas de continuidad entre sujetos,
+              tutores,
+              financiadores,
+              instituciones médicas,
+              fundaciones,
+              apellidos empresariales
+              y nodos políticos.
+            </p>
+
+            <p>
+              A la izquierda,
+              en la parte más antigua del esquema,
+              figuraba el origen:
+            </p>
+
+            <p><strong>G1 / PRUEBA PILOTO / PERMANENCIA COGNITIVA EN ENTORNOS DE PODER</strong></p>
+
+            <p>
+              A medida que la tabla descendía,
+              aparecían nuevas ramas:
+            </p>
+
+            <p>
+              G2.
+            </p>
+
+            <p>
+              G3.
+            </p>
+
+            <p>
+              G4.
+            </p>
+
+            <p>
+              Hasta llegar a una zona resaltada con otro color:
+            </p>
+
+            <p><strong>G7 / ARQUITECTURA DISOCIADA DE ALMACENAMIENTO HUMANO</strong></p>
+
+            <p>
+              Y debajo,
+              enlazados por una línea directa:
+            </p>
+
+            <p><strong>A.V.M. / ADRIÁN</strong></p>
+            <p><strong>A.V.M. / GAEL</strong></p>
+            <p><strong>E.R. / ELÍAS</strong></p>
+
+            <div class="quote">Ellos no eran la anomalía. Eran el refinamiento.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías se acercó hasta quedar hombro con hombro junto a Adrián.
+            </p>
+
+            <p>
+              Leyó en silencio,
+              demasiado rápido para alguien que quisiera demorarse.
+            </p>
+
+            <p>
+              Luego su dedo se detuvo en una columna específica.
+            </p>
+
+            <p>
+              —Mira esto.
+            </p>
+
+            <p>
+              Adrián siguió la línea.
+            </p>
+
+            <p>
+              Había un encabezado lateral:
+            </p>
+
+            <p><strong>DESTINO DE CONTINUIDAD</strong></p>
+
+            <p>
+              Debajo,
+              tres categorías:
+            </p>
+
+            <p>
+              <strong>Integración corporativa</strong>
+            </p>
+            <p>
+              <strong>Integración estatal</strong>
+            </p>
+            <p>
+              <strong>Custodia de herencia</strong>
+            </p>
+
+            <p>
+              Adrián frunció el ceño.
+            </p>
+
+            <p>
+              —¿Qué significa “custodia de herencia”?
+            </p>
+
+            <p>
+              Elías no respondió de inmediato.
+            </p>
+
+            <p>
+              Estaba leyendo más abajo,
+              donde algunos sujetos de la Generación 1 y 2 aparecían marcados no como fallidos,
+              sino como <strong>insertados</strong>.
+            </p>
+
+            <p>
+              Insertados en directorios,
+              estudios jurídicos,
+              fundaciones culturales,
+              clínicas privadas,
+              equipos legislativos,
+              think tanks,
+              holdings familiares.
+            </p>
+
+            <p>
+              La tabla no describía supervivientes.
+            </p>
+
+            <p>
+              Describía linajes de infiltración estabilizada.
+            </p>
+
+            <div class="quote">No estaban criando herramientas para una operación puntual. Estaban sembrando generaciones útiles dentro de las estructuras que después definirían la realidad pública.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián levantó lentamente la vista.
+            </p>
+
+            <p>
+              La sala circular ya no parecía un escondite.
+            </p>
+
+            <p>
+              Parecía el mausoleo documental de algo que había aprendido a mezclarse con la normalidad chilena durante décadas.
+            </p>
+
+            <p>
+              Todo cambió de escala en ese instante.
+            </p>
+
+            <p>
+              El laboratorio.
+            </p>
+
+            <p>
+              Arturo.
+            </p>
+
+            <p>
+              Su madre.
+            </p>
+
+            <p>
+              Gael.
+            </p>
+
+            <p>
+              Nada de eso había existido para producir solo sujetos secretos.
+            </p>
+
+            <p>
+              Todo eso era infraestructura para crear adultos perfectamente funcionales,
+              emocionalmente modulados,
+              memorísticamente intervenidos,
+              capaces de habitar el poder sin delatar la ingeniería que los había formado.
+            </p>
+
+            <p>
+              —No estaban fabricando archivos humanos —murmuró.
+            </p>
+
+            <p>
+              Elías lo entendió antes de que terminara.
+            </p>
+
+            <p>
+              —Estaban fabricando continuidad.
+            </p>
+
+            <p>
+              Adrián apretó la hoja con fuerza.
+            </p>
+
+            <p>
+              Porque ahí estaba el verdadero monstruo:
+            </p>
+
+            <p>
+              no una ciencia de la memoria,
+              sino una ciencia de la herencia estratégica.
+            </p>
+
+            <div class="quote">La obediencia más perfecta no es la que impones. Es la que logras que nazca dentro de familias, instituciones y apellidos que después parecerán legítimos por costumbre.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Pasó la página.
+            </p>
+
+            <p>
+              La siguiente hoja sí tenía nombres.
+            </p>
+
+            <p>
+              No todos.
+            </p>
+
+            <p>
+              Algunos estaban redactados parcialmente.
+            </p>
+
+            <p>
+              Otros solo figuraban con iniciales y rangos.
+            </p>
+
+            <p>
+              Pero los suficientes estaban completos como para que el aire del lugar cambiara.
+            </p>
+
+            <p>
+              Había apellidos reconocibles.
+            </p>
+
+            <p>
+              No solo del mundo clínico o técnico.
+            </p>
+
+            <p>
+              También del empresarial.
+            </p>
+
+            <p>
+              Del político.
+            </p>
+
+            <p>
+              Del mediático.
+            </p>
+
+            <p>
+              No como beneficiarios periféricos.
+            </p>
+
+            <p>
+              Como nodos de recepción.
+            </p>
+
+            <p>
+              Algunos de esos nombres todavía seguían activos en el país.
+            </p>
+
+            <p>
+              Otros habían muerto dejando descendencia pública.
+            </p>
+
+            <p>
+              Otros aparecían enlazados a fundaciones que hoy hablaban de ética, memoria, desarrollo, innovación, infancia vulnerable.
+            </p>
+
+            <p>
+              Adrián sintió una repulsión tan intensa que tuvo que apoyar la hoja sobre la mesa auxiliar.
+            </p>
+
+            <p>
+              No porque fuera difícil de creer.
+            </p>
+
+            <p>
+              Porque empezaba a volverse terriblemente verosímil.
+            </p>
+
+            <div class="quote">La peor conspiración no es la que parece imposible. Es la que, una vez vista, reordena demasiadas piezas del mundo real con una naturalidad insoportable.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías seguía leyendo.
+            </p>
+
+            <p>
+              Más abajo apareció una nota técnica con la letra de la madre de Adrián al costado:
+            </p>
+
+            <div class="quote"><strong>“No confundir sujetos creados con herederos integrados. Los segundos son los más peligrosos. Nunca se sienten víctimas. Se sienten legítimos.”</strong></div>
+
+            <p>
+              La precisión de esa frase hizo que Adrián levantara la cabeza de golpe.
+            </p>
+
+            <p>
+              Ahí estaba el salto de nivel.
+            </p>
+
+            <p>
+              Generación 1 no había sido simplemente una prueba para refinar técnicas sobre niños capturados por instituciones grises.
+            </p>
+
+            <p>
+              Había sido el origen de otra cosa:
+            </p>
+
+            <p>
+              una clase de descendencia insertada que ya no necesitaba laboratorios visibles.
+            </p>
+
+            <p>
+              Personas criadas con ventajas cognitivas,
+              con entrenamiento emocional selectivo,
+              con huecos diseñados,
+              con inmunidades narrativas.
+            </p>
+
+            <p>
+              Personas que podían ocupar el poder sin saber del todo cómo habían sido hechas para él.
+            </p>
+
+            <p>
+              O sabiéndolo,
+              pero llamándolo herencia,
+              mérito,
+              educación,
+              tradición familiar.
+            </p>
+
+            <div class="quote">Los primeros sujetos fueron experimento. Los herederos fueron estrategia social.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías encontró otra sección.
+            </p>
+
+            <p>
+              Esta vez no hablaba de inserción.
+            </p>
+
+            <p>
+              Hablaba de crisis.
+            </p>
+
+            <p>
+              <strong>PROTOCOLOS DE FALLA ÉTICA / EVENTOS DE CONSCIENCIA</strong>
+            </p>
+
+            <p>
+              Debajo se listaban casos donde ciertos sujetos,
+              o ciertos descendientes,
+              habían desarrollado rechazo espontáneo al sistema.
+            </p>
+
+            <p>
+              Algunos eran derivados a reajuste.
+            </p>
+
+            <p>
+              Otros a reprogramación.
+            </p>
+
+            <p>
+              Otros a desaparición narrativa.
+            </p>
+
+            <p>
+              Pero una categoría estaba marcada con una anotación posterior,
+              escrita con la letra de la madre:
+            </p>
+
+            <div class="quote"><strong>“No todos fallan por debilidad. Algunos fallan porque todavía conservan vergüenza.”</strong></div>
+
+            <p>
+              Adrián cerró los ojos un instante.
+            </p>
+
+            <p>
+              Vergüenza.
+            </p>
+
+            <p>
+              No compasión.
+            </p>
+
+            <p>
+              No trauma.
+            </p>
+
+            <p>
+              Vergüenza.
+            </p>
+
+            <p>
+              La palabra tenía filo político, moral y humano al mismo tiempo.
+            </p>
+
+            <p>
+              Era la grieta capaz de romper una élite fabricada.
+            </p>
+
+            <p>
+              Y de pronto comprendió algo con una claridad que casi le dolió físicamente:
+            </p>
+
+            <p><strong>Gael no había dejado la ruta 9 solo para impedir su recuperación. La había dejado porque había alcanzado vergüenza.</strong></p>
+
+            <div class="quote">No fue un acto de miedo. Fue un acto de límite moral de alguien que ya había visto demasiado de sí mismo funcionando para ellos.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La comprensión le cambió el peso de la culpa.
+            </p>
+
+            <p>
+              No la borró.
+            </p>
+
+            <p>
+              La desplazó.
+            </p>
+
+            <p>
+              Si Gael había actuado desde vergüenza,
+              entonces no era solo la versión utilitaria y despiadada que Adrián temía.
+            </p>
+
+            <p>
+              Había sido también la parte capaz de mirar el monstruo desde dentro y, al final, decidir cortarse a sí mismo antes de servirle otra vez.
+            </p>
+
+            <p>
+              Eso no lo absolvía.
+            </p>
+
+            <p>
+              Pero lo complejizaba de una forma devastadora.
+            </p>
+
+            <p>
+              Porque significaba que su enemigo interior no era puro enemigo.
+            </p>
+
+            <p>
+              Era también el último traidor eficaz del sistema.
+            </p>
+
+            <div class="quote">A veces la parte de ti que más temes fue la única que tuvo la fuerza de mutilarse para que el resto pudiera seguir siendo humano.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Un nuevo módulo se abrió en la consola.
+            </p>
+
+            <p>
+              Esta vez no entregó papel ni imagen.
+            </p>
+
+            <p>
+              Entregó un dispositivo de almacenamiento pequeño
+              y una hoja con apenas tres líneas mecanografiadas:
+            </p>
+
+            <div class="quote"><strong>1. EL MODELO ESTÁ COMPLETO.</strong></div>
+            <div class="quote"><strong>2. LA PRUEBA NO SIRVE SI QUEDA EN MANOS DE UNA SOLA CONCIENCIA.</strong></div>
+            <div class="quote"><strong>3. SI LLEGARON HASTA AQUÍ, YA NO PUEDEN SALIR SIENDO SOLO SOBREVIVIENTES.</strong></div>
+
+            <p>
+              Debajo,
+              escrito a mano:
+            </p>
+
+            <div class="quote"><strong>“Van a tener que elegir entre denunciar el sistema... o convertirse en el próximo custodio de su negación.”</strong></div>
+
+            <p>
+              Adrián leyó la frase dos veces.
+            </p>
+
+            <p>
+              Elías también.
+            </p>
+
+            <p>
+              Ninguno habló durante varios segundos.
+            </p>
+
+            <p>
+              Porque acababan de llegar al punto donde toda historia buena se vuelve más cruel:
+            </p>
+
+            <p>
+              la verdad ya no solo pesa por lo que revela,
+              sino por la responsabilidad que impone a quien la conoce.
+            </p>
+
+            <p>
+              No bastaba con salir vivos.
+            </p>
+
+            <p>
+              No bastaba con escapar de Arturo.
+            </p>
+
+            <p>
+              No bastaba con impedir la reintegración de Gael.
+            </p>
+
+            <p>
+              Ahora cargaban con el modelo completo.
+            </p>
+
+            <p>
+              Y el modelo completo no servía para sanar una vida rota.
+            </p>
+
+            <p>
+              Servía para reventar la legitimidad de una parte del país.
+            </p>
+
+            <div class="quote">El núcleo no los había convertido en víctimas finales. Los había ascendido a problema histórico.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías fue el primero en decir lo que ambos ya sabían.
+            </p>
+
+            <p>
+              —Si esto sale, no cae solo Arturo.
+            </p>
+
+            <p>
+              —No —dijo Adrián.
+            </p>
+
+            <p>
+              —Caen familias.
+            </p>
+
+            <p>
+              —Sí.
+            </p>
+
+            <p>
+              —Caen instituciones que jamás se van a dejar vincular con esto sin destruir todo a su paso.
+            </p>
+
+            <p>
+              Adrián lo miró.
+            </p>
+
+            <p>
+              —También.
+            </p>
+
+            <p>
+              Elías sostuvo su mirada.
+            </p>
+
+            <p>
+              No con miedo cobarde.
+            </p>
+
+            <p>
+              Con la lucidez brutal de quien por fin dimensiona que la verdad completa ya no es un acto íntimo de reparación.
+            </p>
+
+            <p>
+              Es guerra.
+            </p>
+
+            <div class="quote">Y las guerras reales empiezan exactamente cuando descubres que el monstruo tiene apellido, descendencia y acceso al horario central.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La sala vibró.
+            </p>
+
+            <p>
+              Muy levemente.
+            </p>
+
+            <p>
+              No como fallo estructural.
+            </p>
+
+            <p>
+              Como impacto a distancia.
+            </p>
+
+            <p>
+              Elías giró hacia la compuerta por donde habían entrado.
+            </p>
+
+            <p>
+              —Nos encontraron el descenso.
+            </p>
+
+            <p>
+              Adrián sostuvo el dispositivo pequeño en la mano.
+            </p>
+
+            <p>
+              —¿Puedes leer qué contiene?
+            </p>
+
+            <p>
+              Elías lo tomó.
+            </p>
+
+            <p>
+              Miró el puerto,
+              la carcasa,
+              el tipo de interfaz.
+            </p>
+
+            <p>
+              Su expresión cambió enseguida.
+            </p>
+
+            <p>
+              —No aquí.
+            </p>
+
+            <p>
+              —¿Por qué?
+            </p>
+
+            <p>
+              —Porque esto no es solo copia.
+            </p>
+
+            <p>
+              Levantó la vista lentamente.
+            </p>
+
+            <p>
+              —Esto es un disparador de publicación por contacto múltiple.
+            </p>
+
+            <p>
+              Adrián sintió el aire quedarse quieto.
+            </p>
+
+            <p>
+              —¿Qué significa?
+            </p>
+
+            <p>
+              Elías tragó saliva.
+            </p>
+
+            <p>
+              —Tu madre no quería que una sola persona pudiera decidir qué hacer con esto.
+            </p>
+
+            <p>
+              Miró otra vez el dispositivo.
+            </p>
+
+            <p>
+              —Si se conecta mal, puede enviarlo a destinos preconfigurados.
+            </p>
+
+            <p>
+              —¿Qué destinos?
+            </p>
+
+            <p>
+              La respuesta de Elías cambió el cuarto entero:
+            </p>
+
+            <div class="quote"><strong>—Prensa, fiscalía, regulación internacional... y al menos dos directorios privados.</strong></div>
+
+            <div class="divider"></div>
+
+            <p>
+              Ya no estaban sosteniendo prueba.
+            </p>
+
+            <p>
+              Estaban sosteniendo detonación.
+            </p>
+
+            <p>
+              Una cápsula política,
+              jurídica,
+              mediática y económica de escala impredecible.
+            </p>
+
+            <p>
+              Eso explicaba por qué la madre había exigido dos custodios.
+            </p>
+
+            <p>
+              No por romanticismo testimonial.
+            </p>
+
+            <p>
+              Porque la decisión sobre cuándo, cómo y si aquello debía salir no podía recaer jamás en una sola conciencia herida.
+            </p>
+
+            <div class="quote">No había escondido una bomba para que la encendieran por rabia. Había escondido un mecanismo para obligarlos a volverse responsables antes de tocar el mundo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La compuerta exterior recibió otro golpe.
+            </p>
+
+            <p>
+              Esta vez más nítido.
+            </p>
+
+            <p>
+              Más cerca.
+            </p>
+
+            <p>
+              No tenían mucho tiempo.
+            </p>
+
+            <p>
+              Adrián volvió a mirar la fotografía de la Generación 1.
+            </p>
+
+            <p>
+              Los niños.
+            </p>
+
+            <p>
+              El vidrio.
+            </p>
+
+            <p>
+              Arturo joven.
+            </p>
+
+            <p>
+              El rótulo mecánico.
+            </p>
+
+            <p>
+              Y entendió algo final, duro, casi insoportable:
+            </p>
+
+            <p><strong>si el programa había llegado a siete generaciones funcionales, entonces una parte del país contemporáneo ya estaba construida sobre los residuos invisibles de esa ingeniería.</strong></p>
+
+            <p>
+              No se trataba solo de denunciar culpables.
+            </p>
+
+            <p>
+              Se trataba de exponer que la legitimidad de ciertos triunfos,
+              ciertas fortunas,
+              ciertas carreras impecables,
+              ciertas decisiones públicas,
+              podía haber sido abonada durante décadas con personas convertidas en arquitectura cognitiva.
+            </p>
+
+            <div class="quote">Ya no estaban frente al secreto de un laboratorio. Estaban frente al subsuelo moral de una élite entera.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián guardó la fotografía.
+            </p>
+
+            <p>
+              Luego tomó el dispositivo,
+              la caja negra
+              y el resto del expediente central.
+            </p>
+
+            <p>
+              Miró a Elías.
+            </p>
+
+            <p>
+              —No salimos de aquí para sobrevivir.
+            </p>
+
+            <p>
+              Elías sostuvo la mirada.
+            </p>
+
+            <p>
+              —No.
+            </p>
+
+            <p>
+              —Salimos para decidir cómo va a caer esto.
+            </p>
+
+            <p>
+              La frase no fue heroica.
+            </p>
+
+            <p>
+              Fue exacta.
+            </p>
+
+            <p>
+              Y quizás por eso dio más miedo.
+            </p>
+
+            <p>
+              Porque ambos comprendieron que ya habían cruzado el umbral donde la vida anterior dejaba de ser recuperable.
+            </p>
+
+            <p>
+              Lo que siguiera después no iba a parecerse a reparación.
+            </p>
+
+            <p>
+              Iba a parecerse a operación.
+            </p>
+
+            <div class="quote">El problema es que una vez que decides derribar una arquitectura así, también debes aceptar que puedes quedar sepultado bajo ella.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La consola emitió un último sonido.
+            </p>
+
+            <p>
+              No de apertura.
+            </p>
+
+            <p>
+              De mensaje final.
+            </p>
+
+            <p>
+              Una pantalla secundaria se iluminó sola,
+              revelando un texto que hasta entonces había permanecido bloqueado.
+            </p>
+
+            <p>
+              No era técnico.
+            </p>
+
+            <p>
+              Era personal.
+            </p>
+
+            <p>
+              Su madre otra vez.
+            </p>
+
+            <div class="quote"><strong>“Si están leyendo esto, entonces Arturo todavía sigue intentando administrar la verdad como si fuera su propiedad. No dejen que convierta el origen en una anécdota de laboratorio.”</strong></div>
+
+            <p>
+              Abajo aparecía una línea más.
+            </p>
+
+            <div class="quote"><strong>“La Generación 1 no fue un inicio experimental. Fue una limpieza de herederos defectuosos.”</strong></div>
+
+            <p>
+              Adrián sintió que el mundo se abría otra vez.
+            </p>
+
+            <p>
+              Elías dio un paso atrás.
+            </p>
+
+            <p>
+              Ambos leyeron la frase dos veces.
+            </p>
+
+            <p>
+              Limpieza.
+            </p>
+
+            <p>
+              Herederos defectuosos.
+            </p>
+
+            <p>
+              De pronto la fotografía inicial dejó de parecer una prueba piloto académica.
+            </p>
+
+            <p>
+              Empezó a parecer otra cosa:
+            </p>
+
+            <p>
+              selección.
+            </p>
+
+            <p>
+              Corrección.
+            </p>
+
+            <p>
+              Reemplazo.
+            </p>
+
+            <p>
+              Arturo Vial no había querido solo fabricar continuidad cognitiva.
+            </p>
+
+            <p>
+              Había querido corregir linajes,
+              optimizar descendencias,
+              intervenir herencias familiares desde adentro.
+            </p>
+
+            <p>
+              Y el sistema completo tal vez había nacido no de una obsesión técnica,
+              sino de una guerra silenciosa por decidir qué clase de sangre, memoria y obediencia merecía sobrevivir al poder.
+            </p>
+
+            <div class="quote"><strong>El verdadero origen no estaba en la ciencia. Estaba en la eugenesia del poder.</strong></div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué significa realmente “limpieza de herederos defectuosos”, quiénes fueron los primeros niños de la Generación 1 y por qué el origen del sistema podría vincularse no solo a laboratorios clandestinos, sino a familias poderosas que decidieron corregir su propia descendencia.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo9.html" onclick="goBack(event, 'capitulo9.html')" class="btn btn-ghost">← Capítulo 9</a>
+            <a href="capitulo11.html" class="btn btn-primary">Leer capítulo 11 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
