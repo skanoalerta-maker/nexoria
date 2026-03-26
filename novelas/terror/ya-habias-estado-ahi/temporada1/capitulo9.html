@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 9 | Ya habías estado ahí</title>
+  <meta
+    name="description"
+    content="Capítulo 9 de Ya habías estado ahí: La salida real no conduce a la libertad. Conduce al lugar donde su madre escondió la única verdad capaz de destruir el sistema desde dentro."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">Ya habías estado ahí</p>
+            <p class="brand-sub">Thriller psicológico y misterio</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo8.html" onclick="goBack(event, 'capitulo8.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo10.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 9</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 9</p>
+            <h1>Debajo del mapa</h1>
+            <p>
+              La ruta 9 no lleva a la superficie. Lleva al lugar que su madre escondió fuera del sistema:
+              un nivel más antiguo, más profundo y más peligroso, donde la verdad ya no está fragmentada en recuerdos...
+              sino convertida en prueba viva.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">La verdad cambia de forma</div>
+              <h2>No todos los secretos se entierran para que nadie los encuentre. Algunos se entierran para que solo una persona pueda soportar hallarlos.</h2>
+              <p>
+                Mientras Arturo queda atrás y la ruta 9 los arrastra más allá del nivel 17, Adrián y Elías descubren que la madre de Adrián no escondió solo una salida. Escondió un núcleo: algo tan demoledor que, si sale a la luz, puede derribar todo el sistema... o terminar de romperlos a ambos.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">9 de 14</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 9: Debajo del mapa</h3>
+            <p>Lectura gratuita · La salida auténtica no conduce afuera. Conduce al lugar donde alguien ocultó la evidencia imposible</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              El corredor oscuro no se parecía a nada del sistema visible. No tenía la frialdad limpia del laboratorio, ni el orden clínico del nivel 17, ni la geometría arrogante de las zonas diseñadas para controlar personas sin dejar huella emocional. Esto era otra cosa. Concreto desnudo. Tuberías viejas. Luz de emergencia a ras del suelo. Humedad atrapada en la pared como si ese tramo hubiera sido excavado antes de que todo lo demás aprendiera a fingir elegancia. Adrián corría con la respiración rota, sosteniendo la caja negra y la tarjeta reactiva, mientras Elías lo seguía apenas medio paso detrás. Pero cada metro hacia abajo producía un efecto extraño: el miedo no desaparecía, solo cambiaba de calidad. Dejaba de parecer persecución y empezaba a parecer aproximación. Como si no estuvieran huyendo de Arturo Vial. Como si los estuvieran conduciendo al punto que su madre había elegido para que nada más pudiera ser tergiversado.
+            </p>
+
+            <p>
+              La voz de ella seguía resonando en su cabeza.
+            </p>
+
+            <p>
+              No desde un altavoz ya.
+            </p>
+
+            <p>
+              Desde algo más adentro.
+            </p>
+
+            <p>
+              <strong>“Ya no estoy tratando de sacarte del sistema. Estoy tratando de mostrarte dónde lo escondí.”</strong>
+            </p>
+
+            <p>
+              No “qué”.
+            </p>
+
+            <p>
+              “Dónde”.
+            </p>
+
+            <p>
+              Eso significaba ubicación.
+            </p>
+
+            <p>
+              Materia.
+            </p>
+
+            <p>
+              Algo físico.
+            </p>
+
+            <p>
+              No un simple recuerdo maternal disfrazado de despedida.
+            </p>
+
+            <p>
+              Adrián sintió el corazón golpearle distinto.
+            </p>
+
+            <p>
+              No por esperanza.
+            </p>
+
+            <p>
+              Por escala.
+            </p>
+
+            <p>
+              Si su madre había escondido algo “debajo del sistema”, entonces no estaba intentando salvar solo a su hijo.
+            </p>
+
+            <p>
+              Estaba intentando sabotear la arquitectura entera desde su base.
+            </p>
+
+            <div class="quote">De pronto el laboratorio ya no parecía el centro del horror. Parecía apenas la parte visible de algo mucho más antiguo y mucho más grande.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El corredor dobló a la izquierda.
+            </p>
+
+            <p>
+              Luego descendió en una rampa corta.
+            </p>
+
+            <p>
+              Después volvió a estrecharse hasta obligarlos a correr de lado por algunos segundos.
+            </p>
+
+            <p>
+              Elías fue el primero en notar el cambio.
+            </p>
+
+            <p>
+              —Escucha.
+            </p>
+
+            <p>
+              Adrián frenó apenas.
+            </p>
+
+            <p>
+              Entre el sonido de sus propios pasos y el zumbido lejano de la estructura,
+              había otra cosa.
+            </p>
+
+            <p>
+              Un murmullo grave.
+            </p>
+
+            <p>
+              Constante.
+            </p>
+
+            <p>
+              No mecánico del todo.
+            </p>
+
+            <p>
+              Más parecido a una corriente de aire enorme atravesando una cavidad sellada.
+            </p>
+
+            <p>
+              O a un generador antiguo trabajando muy por debajo de su límite visible.
+            </p>
+
+            <p>
+              Elías levantó la vista hacia el techo del pasillo.
+            </p>
+
+            <p>
+              —Esto no es de la ruta 9.
+            </p>
+
+            <p>
+              —¿Qué quieres decir?
+            </p>
+
+            <p>
+              —La ruta 9 era un protocolo. No una infraestructura tan larga.
+            </p>
+
+            <p>
+              Adrián lo entendió de inmediato.
+            </p>
+
+            <p>
+              El corredor no era la ruta.
+            </p>
+
+            <p>
+              La ruta solo estaba usando un lugar que ya existía.
+            </p>
+
+            <p>
+              Un lugar previo al laboratorio.
+            </p>
+
+            <div class="quote">No estaban entrando a una salida improvisada. Estaban descendiendo hacia una capa del sistema que el sistema moderno probablemente ya no reconocía como propia.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El pasillo terminó abruptamente en una compuerta redonda.
+            </p>
+
+            <p>
+              No como las puertas del nivel 17.
+            </p>
+
+            <p>
+              Más vieja.
+            </p>
+
+            <p>
+              Industrial.
+            </p>
+
+            <p>
+              Pesada.
+            </p>
+
+            <p>
+              El metal estaba manchado de oxidación,
+              pero en el centro había un pequeño panel táctil sorprendentemente intacto.
+            </p>
+
+            <p>
+              Sin números.
+            </p>
+
+            <p>
+              Sin instrucciones.
+            </p>
+
+            <p>
+              Solo una superficie opaca y una ranura del tamaño exacto de la tarjeta blanca.
+            </p>
+
+            <p>
+              Adrián se quedó quieto.
+            </p>
+
+            <p>
+              Elías lo miró.
+            </p>
+
+            <p>
+              —Tu madre la dejó para esto.
+            </p>
+
+            <p>
+              No era pregunta.
+            </p>
+
+            <p>
+              Adrián observó la tarjeta otra vez.
+            </p>
+
+            <p>
+              La tinta reactiva ya se había apagado casi por completo.
+            </p>
+
+            <p>
+              Pero no hacía falta otra instrucción.
+            </p>
+
+            <p>
+              La ranura,
+              el lugar,
+              la secuencia,
+              todo parecía converger en una lógica brutalmente simple.
+            </p>
+
+            <p>
+              Deslizó la tarjeta.
+            </p>
+
+            <p>
+              Nada ocurrió durante un segundo.
+            </p>
+
+            <p>
+              Luego otro.
+            </p>
+
+            <p>
+              Después el panel emitió una luz tenue.
+            </p>
+
+            <p>
+              No azul.
+            </p>
+
+            <p>
+              No roja.
+            </p>
+
+            <p>
+              Ámbar.
+            </p>
+
+            <p>
+              Casi cálida.
+            </p>
+
+            <p>
+              Y una línea de texto apareció,
+              no electrónica del todo,
+              sino formada por una matriz vieja de puntos luminosos:
+            </p>
+
+            <div class="quote"><strong>ACCESO NÚCLEO / CUSTODIA MATERNA / VALIDACIÓN PENDIENTE</strong></div>
+
+            <p>
+              El aire se le fue del pecho.
+            </p>
+
+            <p>
+              Custodia materna.
+            </p>
+
+            <p>
+              No era un escondite casual.
+            </p>
+
+            <p>
+              Era un recinto reconfigurado formalmente por su madre.
+            </p>
+
+            <p>
+              Una jurisdicción robada dentro de la maquinaria.
+            </p>
+
+            <div class="quote">Ella no solo había escondido algo. Había fundado una excepción dentro del sistema.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El panel pidió una segunda validación.
+            </p>
+
+            <p>
+              No una clave.
+            </p>
+
+            <p>
+              No una huella.
+            </p>
+
+            <p>
+              Una frase.
+            </p>
+
+            <p>
+              Apareció escrita con letras pálidas:
+            </p>
+
+            <div class="quote">IDENTIFICAR CUSTODIO SECUNDARIO</div>
+
+            <p>
+              Adrián y Elías se miraron.
+            </p>
+
+            <p>
+              Ambos comprendieron lo mismo al mismo tiempo:
+            </p>
+
+            <p>
+              ella había previsto que su hijo no llegaría solo.
+            </p>
+
+            <p>
+              O, más exactamente,
+              había previsto a quién esperaba que trajera consigo si aún quedaba algo rescatable en él.
+            </p>
+
+            <p>
+              Elías tragó saliva.
+            </p>
+
+            <p>
+              —No puede ser.
+            </p>
+
+            <p>
+              —¿Qué?
+            </p>
+
+            <p>
+              —Nunca me vio como variable estable.
+            </p>
+
+            <p>
+              La frase sonó demasiado técnica para el temblor que cargaba.
+            </p>
+
+            <p>
+              Adrián entendió:
+            </p>
+
+            <p>
+              para una mujer que había vivido dentro de esa lógica,
+              convertir a alguien en “custodio secundario” equivalía a confiarle algo más valioso que una vida.
+            </p>
+
+            <p>
+              Equivalía a confiarle continuidad.
+            </p>
+
+            <div class="quote">El gesto no era sentimental. Era estratégico. Y precisamente por eso, para Elías, valía más que cualquier consuelo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El panel volvió a parpadear.
+            </p>
+
+            <p>
+              Como si el tiempo allí abajo no fuese ilimitado,
+              aunque siguiera fuera del mapa principal.
+            </p>
+
+            <p>
+              Adrián no dudó más.
+            </p>
+
+            <p>
+              —Elías.
+            </p>
+
+            <p>
+              Su voz quedó suspendida entre ambos.
+            </p>
+
+            <p>
+              No como una llamada.
+            </p>
+
+            <p>
+              Como una nominación.
+            </p>
+
+            <p>
+              El panel absorbió el sonido.
+            </p>
+
+            <p>
+              Una luz ámbar recorrió el borde de la compuerta.
+            </p>
+
+            <p>
+              Después apareció una segunda línea:
+            </p>
+
+            <div class="quote"><strong>CUSTODIO SECUNDARIO ACEPTADO</strong></div>
+
+            <p>
+              Elías cerró los ojos un instante.
+            </p>
+
+            <p>
+              No lloró.
+            </p>
+
+            <p>
+              Pero el golpe fue visible igual,
+              como una onda corta atravesándole la mandíbula,
+              el pecho,
+              la postura entera.
+            </p>
+
+            <p>
+              Quizá esa era la primera vez en años que alguien dentro de esa arquitectura no lo definía como residuo, espejo, soporte o variable degradada.
+            </p>
+
+            <p>
+              Por primera vez lo aceptaban como custodio.
+            </p>
+
+            <p>
+              La compuerta comenzó a girar.
+            </p>
+
+            <p>
+              Lenta.
+            </p>
+
+            <p>
+              Pesada.
+            </p>
+
+            <p>
+              Con el tipo de sonido que solo hacen los mecanismos diseñados para durar más que las personas que los construyeron.
+            </p>
+
+            <p>
+              El aire que emergió del otro lado era distinto.
+            </p>
+
+            <p>
+              Más frío.
+            </p>
+
+            <p>
+              Más seco.
+            </p>
+
+            <p>
+              Con un olor leve a papel antiguo, metal limpio y electricidad dormida.
+            </p>
+
+            <div class="quote">No olía a tumba. Olía a archivo sagrado.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Entraron.
+            </p>
+
+            <p>
+              Y Adrián sintió que el mundo se reorganizaba una vez más.
+            </p>
+
+            <p>
+              El lugar no era una bóveda convencional.
+            </p>
+
+            <p>
+              Tampoco un laboratorio.
+            </p>
+
+            <p>
+              Era una sala circular de gran altura,
+              con muros de hormigón antiguo revestidos en placas metálicas,
+              anaqueles sellados,
+              módulos de almacenamiento,
+              consolas dormidas
+              y, en el centro,
+              una estructura vertical transparente que subía desde el piso como una columna de vidrio reforzado.
+            </p>
+
+            <p>
+              Dentro de esa columna había algo suspendido.
+            </p>
+
+            <p>
+              Al principio pensó que era un conjunto de discos o cápsulas.
+            </p>
+
+            <p>
+              Cuando se acercó un paso más,
+              se le heló la sangre.
+            </p>
+
+            <p>
+              No eran objetos.
+            </p>
+
+            <p>
+              Eran cintas.
+            </p>
+
+            <p>
+              Cientos.
+            </p>
+
+            <p>
+              Etiquetadas con nombres,
+              códigos,
+              fechas,
+              rangos de edad,
+              estados de activación.
+            </p>
+
+            <p>
+              Algunas tenían marcas rojas.
+            </p>
+
+            <p>
+              Otras negras.
+            </p>
+
+            <p>
+              Otras blancas.
+            </p>
+
+            <p>
+              Y entre todas ellas,
+              agrupadas en una sección distinta,
+              reconoció dos rótulos que le arrancaron el aire:
+            </p>
+
+            <p><strong>A.V.M. / ADRIÁN</strong></p>
+
+            <p><strong>A.V.M. / GAEL</strong></p>
+
+            <p>
+              Y justo debajo,
+              una tercera:
+            </p>
+
+            <p><strong>E.R. / ELÍAS</strong></p>
+
+            <div class="quote">No habían sido solo sujetos. Habían sido series completas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías se quedó inmóvil.
+            </p>
+
+            <p>
+              No avanzó más.
+            </p>
+
+            <p>
+              Sus ojos se clavaron en la columna central con una mezcla insoportable de horror y comprensión tardía.
+            </p>
+
+            <p>
+              —No...
+            </p>
+
+            <p>
+              Adrián no apartó la vista.
+            </p>
+
+            <p>
+              —¿Qué?
+            </p>
+
+            <p>
+              Elías habló sin despegar los labios del todo,
+              como si cualquier volumen de voz pudiera volver aquello más real:
+            </p>
+
+            <p>
+              —Pensé que nos dividían por capas.
+            </p>
+
+            <p>
+              —¿Y no?
+            </p>
+
+            <p>
+              Elías tragó saliva.
+            </p>
+
+            <p>
+              —No solo. Nos clonaban funcionalmente por trayectos completos.
+            </p>
+
+            <p>
+              Adrián frunció el ceño.
+            </p>
+
+            <p>
+              Elías levantó una mano hacia la columna.
+            </p>
+
+            <p>
+              —Esto no es respaldo de memoria. Es arquitectura de reemplazo.
+            </p>
+
+            <p>
+              La frase cayó con un peso monstruoso.
+            </p>
+
+            <p>
+              Porque revelaba algo todavía peor que el laboratorio:
+            </p>
+
+            <p>
+              no estaban fragmentando personas únicamente para usar su memoria.
+            </p>
+
+            <p>
+              Estaban construyendo variantes completas,
+              rutas enteras de personalidad,
+              modelos humanos entrenables,
+              reemplazables,
+              activables según necesidad.
+            </p>
+
+            <div class="quote">Gael no había sido un accidente psicológico. Había sido una línea de producción íntima.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En una consola lateral,
+              una luz se encendió sola al reconocer su presencia.
+            </p>
+
+            <p>
+              El sistema del núcleo no habló con voz neutra.
+            </p>
+
+            <p>
+              Esta vez, apareció texto:
+            </p>
+
+            <div class="quote"><strong>NÚCLEO DE CONTINGENCIA MATERNA / ESTADO: INTACTO</strong></div>
+
+            <p>
+              Debajo:
+            </p>
+
+            <div class="quote"><strong>ÚNICA APERTURA DISPONIBLE CON TESTIGO VIVO</strong></div>
+
+            <p>
+              Adrián y Elías se miraron.
+            </p>
+
+            <p>
+              La última condición era brutal en su claridad.
+            </p>
+
+            <p>
+              Su madre no había dejado esto para que un sobreviviente heroico llegara solo y decidiera todo desde su propio dolor.
+            </p>
+
+            <p>
+              Había exigido testigo.
+            </p>
+
+            <p>
+              Otro cuerpo.
+            </p>
+
+            <p>
+              Otra memoria.
+            </p>
+
+            <p>
+              Otra conciencia capaz de impedir que una sola versión del pasado monopolizara la verdad.
+            </p>
+
+            <div class="quote">Ni siquiera al final ella confió en la memoria individual. Confió en la fricción entre dos sobrevivientes.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián apoyó la caja negra sobre una mesa secundaria.
+            </p>
+
+            <p>
+              Sentía el pulso en la garganta.
+            </p>
+
+            <p>
+              No por miedo puro.
+            </p>
+
+            <p>
+              Por anticipación de escala.
+            </p>
+
+            <p>
+              Aquello ya no iba a aclarar una noche,
+              ni una traición,
+              ni siquiera la historia de dos niños convertidos en sistema.
+            </p>
+
+            <p>
+              Aquello podía derribar la lógica entera sobre la que Arturo Vial había construido todo.
+            </p>
+
+            <p>
+              Y eso significaba otra cosa:
+            </p>
+
+            <p>
+              si estaban ahí,
+              todavía podían perderlo.
+            </p>
+
+            <p>
+              Todo.
+            </p>
+
+            <p>
+              En cualquier segundo.
+            </p>
+
+            <p>
+              —¿Qué crees que escondió? —preguntó.
+            </p>
+
+            <p>
+              Elías miró la columna.
+            </p>
+
+            <p>
+              Luego el módulo central de la consola,
+              donde una ranura más amplia esperaba algo mayor que una tarjeta.
+            </p>
+
+            <p>
+              Después volvió la vista a Adrián.
+            </p>
+
+            <p>
+              —No una prueba aislada.
+            </p>
+
+            <p>
+              —Entonces ¿qué?
+            </p>
+
+            <p>
+              Elías respiró hondo.
+            </p>
+
+            <p>
+              Y lo dijo con la clase de claridad que solo aparece cuando uno comprende que la pesadilla era más ambiciosa de lo que temía:
+            </p>
+
+            <div class="quote">—El modelo completo.</div>
+
+            <p>
+              Adrián se quedó inmóvil.
+            </p>
+
+            <p>
+              —¿Modelo de qué?
+            </p>
+
+            <p>
+              Elías lo sostuvo con una gravedad absoluta.
+            </p>
+
+            <div class="quote">—Del sistema para fabricar personas útiles, intercambiables y obedientes sin que ninguna recuerde del todo quién decidió por ellas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La frase le abrió el suelo bajo los pies.
+            </p>
+
+            <p>
+              Porque ya no hablaban de un experimento aislado.
+            </p>
+
+            <p>
+              Hablaban de una tecnología humana replicable.
+            </p>
+
+            <p>
+              De una doctrina con método.
+            </p>
+
+            <p>
+              De un patrón.
+            </p>
+
+            <p>
+              Y si su madre había escondido el modelo completo,
+              eso significaba que también había escondido lo único capaz de demostrar que Arturo Vial no había sido un monstruo singular,
+              sino el arquitecto de algo reproducible.
+            </p>
+
+            <div class="quote">No estaban frente a la historia de Adrián. Estaban frente al manual del horror.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La consola pidió validación final.
+            </p>
+
+            <p>
+              Dos círculos luminosos aparecieron.
+            </p>
+
+            <p>
+              Uno etiquetado:
+            </p>
+
+            <p><strong>CUSTODIO PRIMARIO</strong></p>
+
+            <p>
+              El otro:
+            </p>
+
+            <p><strong>CUSTODIO SECUNDARIO</strong></p>
+
+            <p>
+              No podían abrirlo separados.
+            </p>
+
+            <p>
+              Tenían que hacerlo juntos.
+            </p>
+
+            <p>
+              Adrián apoyó la mano en el primer círculo.
+            </p>
+
+            <p>
+              Elías dudó una fracción de segundo frente al segundo.
+            </p>
+
+            <p>
+              No por miedo a la máquina.
+            </p>
+
+            <p>
+              Por el peso exacto de lo que significaba tocarla:
+            </p>
+
+            <p>
+              convertirse formalmente en testigo de algo que ya no permitiría volver a vivir como antes.
+            </p>
+
+            <p>
+              La apoyó.
+            </p>
+
+            <p>
+              Las luces se volvieron blancas.
+            </p>
+
+            <p>
+              La columna central vibró.
+            </p>
+
+            <p>
+              Las cintas suspendidas empezaron a descender lentamente dentro del cilindro.
+            </p>
+
+            <p>
+              Como si el núcleo entero se estuviera reordenando para entregar no una pieza,
+              sino un relato integral.
+            </p>
+
+            <p>
+              En la consola apareció una última línea:
+            </p>
+
+            <div class="quote"><strong>ADVERTENCIA: APERTURA DE MODELO NÚCLEO ANULA TODA POSIBILIDAD DE CONTENCIÓN POSTERIOR</strong></div>
+
+            <p>
+              Debajo:
+            </p>
+
+            <div class="quote"><strong>UNA VEZ VISTO, NO PODRÁ VOLVER A SER SOLO HISTORIA PERSONAL</strong></div>
+
+            <p>
+              Adrián sintió el golpe completo de esa frase.
+            </p>
+
+            <p>
+              Ahí estaba el verdadero abismo.
+            </p>
+
+            <p>
+              Hasta ese momento aún era posible pensarse como víctima central de un sistema monstruoso.
+            </p>
+
+            <p>
+              Abrir el núcleo significaba renunciar a eso.
+            </p>
+
+            <p>
+              Significaba aceptar que lo que les pasó no era solo suyo.
+            </p>
+
+            <p>
+              Que pertenecía a una escala mucho mayor.
+            </p>
+
+            <p>
+              Que si lo veían completo,
+              ya no podrían elegir callarlo sin convertirse también en custodios culpables.
+            </p>
+
+            <div class="quote">La verdad final no prometía alivio. Prometía responsabilidad.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Elías miró a Adrián.
+            </p>
+
+            <p>
+              —Si abrimos esto, Arturo no va a venir por nosotros.
+            </p>
+
+            <p>
+              —¿Entonces por qué?
+            </p>
+
+            <p>
+              —Porque va a saber que ya no tiene que recuperar sujetos.
+            </p>
+
+            <p>
+              Hizo una pausa mínima.
+            </p>
+
+            <p>
+              —Va a tener que destruir testigos.
+            </p>
+
+            <p>
+              Adrián sostuvo la mirada.
+            </p>
+
+            <p>
+              Por primera vez desde que todo había empezado,
+              la claridad no le vino de Gael,
+              ni de la culpa,
+              ni del miedo.
+            </p>
+
+            <p>
+              Le vino de una especie de alineación seca,
+              adulta,
+              irreversible.
+            </p>
+
+            <p>
+              —Entonces abrimos igual.
+            </p>
+
+            <p>
+              Elías lo observó un segundo más.
+            </p>
+
+            <p>
+              Luego asintió.
+            </p>
+
+            <p>
+              No como quien sigue.
+            </p>
+
+            <p>
+              Como quien consiente entrar en una verdad que va a costar todo.
+            </p>
+
+            <p>
+              La consola aceptó la decisión.
+            </p>
+
+            <p>
+              La columna central se abrió lentamente.
+            </p>
+
+            <p>
+              Desde el centro emergió una cápsula cilíndrica de metal oscuro,
+              sin marcas externas,
+              salvo una inscripción diminuta grabada a mano,
+              distinta a todas las demás tipografías del lugar.
+            </p>
+
+            <p>
+              No institucional.
+            </p>
+
+            <p>
+              No técnica.
+            </p>
+
+            <p>
+              Personal.
+            </p>
+
+            <p>
+              Adrián se acercó.
+            </p>
+
+            <p>
+              Leyó.
+            </p>
+
+            <div class="quote"><strong>“Para cuando ya no puedan seguir creyendo que esto empezó con ustedes.”</strong></div>
+
+            <p>
+              Era la letra de su madre.
+            </p>
+
+            <p>
+              Reconocible incluso a través del tiempo y la ausencia.
+            </p>
+
+            <p>
+              La cápsula emitió un clic interno.
+            </p>
+
+            <p>
+              La tapa comenzó a abrirse sola.
+            </p>
+
+            <p>
+              Adrián sintió a Elías acercarse a su lado.
+            </p>
+
+            <p>
+              Ambos miraron el interior al mismo tiempo.
+            </p>
+
+            <p>
+              Y lo que vieron les vació el aire del cuerpo.
+            </p>
+
+            <p>
+              No era una cinta.
+            </p>
+
+            <p>
+              No era un documento.
+            </p>
+
+            <p>
+              No era una lista de nombres.
+            </p>
+
+            <p>
+              Era una fotografía.
+            </p>
+
+            <p>
+              Grande.
+            </p>
+
+            <p>
+              Antigua.
+            </p>
+
+            <p>
+              En blanco y negro.
+            </p>
+
+            <p>
+              Tomada muchos años antes de que ellos nacieran.
+            </p>
+
+            <p>
+              En ella aparecía una sala de observación primitiva,
+              una hilera de niños sentados frente a escritorios metálicos,
+              varios hombres de traje detrás de un vidrio,
+              y al centro,
+              mucho más joven,
+              un Arturo Vial irreconociblemente temprano.
+            </p>
+
+            <p>
+              Pero no fue eso lo que los destruyó.
+            </p>
+
+            <p>
+              Fue el encabezado mecanografiado al pie de la imagen:
+            </p>
+
+            <div class="quote"><strong>PROGRAMA PILOTO DE CONTINUIDAD COGNITIVA / GENERACIÓN 1</strong></div>
+
+            <p>
+              Y debajo,
+              escrito a mano por la madre de Adrián:
+            </p>
+
+            <div class="quote"><strong>“Ustedes no fueron los primeros.”</strong></div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué revela el núcleo sobre la Generación 1, cuántas versiones del programa existieron antes de Adrián y Elías, y por qué la madre de Adrián decidió que la prueba inicial del sistema no debía comenzar con nombres... sino con una fotografía.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo8.html" onclick="goBack(event, 'capitulo8.html')" class="btn btn-ghost">← Capítulo 8</a>
+            <a href="capitulo10.html" class="btn btn-primary">Leer capítulo 10 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
