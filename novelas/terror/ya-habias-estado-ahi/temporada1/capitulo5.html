@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 5 | Ya habías estado ahí</title>
+  <meta
+    name="description"
+    content="Capítulo 5 de Ya habías estado ahí: La puerta del nivel 17 no guarda un monstruo. Guarda una versión de Adrián que todavía sabe abrir lo que los demás no pueden tocar."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">Ya habías estado ahí</p>
+            <p class="brand-sub">Thriller psicológico y misterio</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo4.html" onclick="goBack(event, 'capitulo4.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo6.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 5</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 5</p>
+            <h1>El nombre que no debía responder</h1>
+            <p>
+              Detrás de la puerta del nivel 17 no espera un secreto quieto. Espera una voz que conoce la forma exacta de entrar en él. Y lo peor no es que diga cosas que nadie debería saber. Lo peor es que las dice como si fueran compartidas.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">La profundidad empieza a hablar</div>
+              <h2>No todos los encierros guardan algo monstruoso. Algunos guardan una versión de ti que aprendió a sobrevivir sin pedir permiso.</h2>
+              <p>
+                Mientras arriba la casa cae en manos ajenas, Adrián desciende hacia la puerta de acero, con la llave 17, una caja negra y una advertencia demasiado específica para ignorarla. Allí abajo descubrirá que su peor enemigo quizá no sea quien lo persigue... sino quien todavía lo recuerda por otro nombre.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Misterio</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">5 de 12</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 5: El nombre que no debía responder</h3>
+            <p>Lectura gratuita · Algunas puertas no se abren con una llave, sino con una identidad</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Adrián no tocó la puerta de acero de inmediato. Se quedó frente al círculo rojo del centro, con la linterna levantada y el cuerpo suspendido en una tensión insoportable. Arriba, la casa ya no le pertenecía al silencio. Abajo, el aire olía a metal frío, humedad vieja y algo más difícil de nombrar: la sensación concreta de haber regresado a un sitio donde una parte de él seguía despierta. La advertencia grabada en la base seguía ahí, brutal y específica: <strong>“SI BAJAS SOLO, NO LE RESPONDAS CUANDO DIGA TU OTRO NOMBRE.”</strong> La pregunta correcta dejó de ser qué había detrás de la puerta. La pregunta verdadera era qué parte de Adrián estaba siendo esperada al otro lado.
+            </p>
+
+            <p>
+              Bajó la linterna.
+            </p>
+
+            <p>
+              Miró la llave 17.
+            </p>
+
+            <p>
+              Miró la caja negra.
+            </p>
+
+            <p>
+              Miró otra vez la puerta.
+            </p>
+
+            <p>
+              No había cerradura visible.
+            </p>
+
+            <p>
+              Solo el círculo rojo.
+            </p>
+
+            <p>
+              Liso.
+            </p>
+
+            <p>
+              Opaco.
+            </p>
+
+            <p>
+              Como un sensor antiguo o una marca hecha para una mano concreta.
+            </p>
+
+            <p>
+              Le tembló el pulso por una razón que no quiso aceptar:
+            </p>
+
+            <p>
+              sentía que sabía exactamente cómo abrirla.
+            </p>
+
+            <p>
+              Y sin embargo no recordaba haber aprendido.
+            </p>
+
+            <div class="quote">Lo más perturbador no es desconocer un mecanismo. Es sentir que tu cuerpo lo conoce antes que tú.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Probó primero con la lógica.
+            </p>
+
+            <p>
+              Apoyó la linterna entre el brazo y el pecho,
+              sostuvo la caja negra bajo una axila
+              y pasó la yema de los dedos por el borde del círculo.
+            </p>
+
+            <p>
+              Nada.
+            </p>
+
+            <p>
+              Luego buscó una ranura oculta.
+            </p>
+
+            <p>
+              Un panel.
+            </p>
+
+            <p>
+              Un resorte.
+            </p>
+
+            <p>
+              Algo.
+            </p>
+
+            <p>
+              Nada.
+            </p>
+
+            <p>
+              El silencio del nivel 17 empezó a volverse ofensivo.
+            </p>
+
+            <p>
+              No era un silencio vacío.
+            </p>
+
+            <p>
+              Era un silencio que parecía contener expectativa.
+            </p>
+
+            <p>
+              Como si supiera que él iba a tardar exactamente eso en dejar de fingir que aún podía resolverlo desde afuera.
+            </p>
+
+            <p>
+              Adrián alzó la llave otra vez.
+            </p>
+
+            <p>
+              La base metálica reflejó apenas el haz de la linterna.
+            </p>
+
+            <p>
+              En el borde, casi imperceptible, descubrió un grabado que no había visto antes:
+            </p>
+
+            <p><strong>A.V.M. / 17 / AUTORIZACIÓN DEPTH</strong></p>
+
+            <p>
+              Sintió un vacío súbito en el estómago.
+            </p>
+
+            <p>
+              A.V.M.
+            </p>
+
+            <p>
+              Sus iniciales.
+            </p>
+
+            <p>
+              No improvisadas.
+            </p>
+
+            <p>
+              No caseras.
+            </p>
+
+            <p>
+              Grabadas como parte de un sistema.
+            </p>
+
+            <div class="quote">De pronto ya no estaba huyendo de un pasado violento. Estaba parado dentro de una estructura que lo había considerado pieza oficial.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Apoyó la llave sobre el círculo rojo.
+            </p>
+
+            <p>
+              No encajó en ninguna parte.
+            </p>
+
+            <p>
+              Solo tocó la superficie.
+            </p>
+
+            <p>
+              Un segundo.
+            </p>
+
+            <p>
+              Dos.
+            </p>
+
+            <p>
+              Tres.
+            </p>
+
+            <p>
+              Entonces la puerta emitió un sonido interno.
+            </p>
+
+            <p>
+              Bajo.
+            </p>
+
+            <p>
+              Profundo.
+            </p>
+
+            <p>
+              Como si un mecanismo enorme hubiese despertado varios metros más adentro.
+            </p>
+
+            <p>
+              La luz roja cambió.
+            </p>
+
+            <p>
+              No a verde.
+            </p>
+
+            <p>
+              A un rojo más vivo.
+            </p>
+
+            <p>
+              Más cálido.
+            </p>
+
+            <p>
+              Más cercano a algo orgánico que tecnológico.
+            </p>
+
+            <p>
+              Y entonces ocurrió.
+            </p>
+
+            <p>
+              Una voz.
+            </p>
+
+            <p>
+              Desde detrás de la puerta.
+            </p>
+
+            <p>
+              No desde un parlante visible.
+            </p>
+
+            <p>
+              No amplificada.
+            </p>
+
+            <p>
+              No metálica.
+            </p>
+
+            <p>
+              Una voz humana.
+            </p>
+
+            <p>
+              Cercana.
+            </p>
+
+            <p>
+              Serena.
+            </p>
+
+            <p>
+              Como si hubiera estado esperando en silencio a centímetros de él.
+            </p>
+
+            <div class="quote">—Pensé que tardarías más en volver, Gael.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El nombre no entró por el oído.
+            </p>
+
+            <p>
+              Entró por el pecho.
+            </p>
+
+            <p>
+              Adrián retrocedió un paso tan brusco que casi soltó la caja.
+            </p>
+
+            <p>
+              No respondió.
+            </p>
+
+            <p>
+              No porque recordara la advertencia.
+            </p>
+
+            <p>
+              Sino porque el impacto le dejó el cuerpo sin habla.
+            </p>
+
+            <p>
+              <strong>Gael.</strong>
+            </p>
+
+            <p>
+              No reconocía el nombre.
+            </p>
+
+            <p>
+              Y, al mismo tiempo,
+              algo muy adentro reaccionó con una violencia íntima,
+              como un músculo que llevaba años atrofiado y de pronto fuese obligado a moverse.
+            </p>
+
+            <p>
+              La voz del otro lado no se alteró.
+            </p>
+
+            <p>
+              —Si no me respondes, asumo que todavía sigues obedeciendo la primera capa.
+            </p>
+
+            <p>
+              Adrián apretó la mandíbula.
+            </p>
+
+            <p>
+              Primera capa.
+            </p>
+
+            <p>
+              Otra expresión dicha como si él tuviera que entenderla.
+            </p>
+
+            <p>
+              Otra prueba de que ese lugar no estaba hecho para revelaciones limpias,
+              sino para activar conocimientos ya sembrados.
+            </p>
+
+            <div class="quote">Algunas verdades no se enseñan. Se desencadenan.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —No soy Gael —dijo al fin.
+            </p>
+
+            <p>
+              Apenas habló, sintió el error antes de comprenderlo.
+            </p>
+
+            <p>
+              No por la respuesta.
+            </p>
+
+            <p>
+              Por el acto mismo de responder.
+            </p>
+
+            <p>
+              Del otro lado hubo un silencio mínimo.
+            </p>
+
+            <p>
+              Después, una exhalación que sonó peligrosamente parecida a una sonrisa triste.
+            </p>
+
+            <p>
+              —Entonces ya te reescribieron mejor de lo que esperaba.
+            </p>
+
+            <p>
+              La puerta emitió otro clic interno.
+            </p>
+
+            <p>
+              Más alto esta vez.
+            </p>
+
+            <p>
+              Un pestillo.
+            </p>
+
+            <p>
+              Luego otro.
+            </p>
+
+            <p>
+              Luego uno más.
+            </p>
+
+            <p>
+              Adrián se quedó inmóvil.
+            </p>
+
+            <p>
+              Acababa de contestar.
+            </p>
+
+            <p>
+              Acababa de validar algo.
+            </p>
+
+            <p>
+              No sabía qué.
+            </p>
+
+            <p>
+              Pero lo sabía suficiente para odiarse por haber abierto la boca.
+            </p>
+
+            <div class="quote">No todas las cerraduras piden una llave. Algunas piden confirmar que sigues siendo la persona equivocada.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La puerta se abrió apenas diez centímetros.
+            </p>
+
+            <p>
+              Ni más.
+            </p>
+
+            <p>
+              Como si no invitara a entrar,
+              sino a comprobar primero si él se atrevía a cruzar.
+            </p>
+
+            <p>
+              Adrián alzó la linterna.
+            </p>
+
+            <p>
+              El haz cortó la oscuridad interior y encontró una habitación estrecha,
+              rectangular,
+              de paredes grises,
+              sin ventanas,
+              sin adornos,
+              sin nada que indicara propósito humano.
+            </p>
+
+            <p>
+              Solo una mesa metálica.
+            </p>
+
+            <p>
+              Dos sillas.
+            </p>
+
+            <p>
+              Y, al fondo,
+              alguien sentado.
+            </p>
+
+            <p>
+              No amarrado.
+            </p>
+
+            <p>
+              No inmóvil.
+            </p>
+
+            <p>
+              Quieto por voluntad.
+            </p>
+
+            <p>
+              Esperando.
+            </p>
+
+            <p>
+              Era un hombre joven.
+            </p>
+
+            <p>
+              No mucho mayor que él.
+            </p>
+
+            <p>
+              Tal vez su misma edad.
+            </p>
+
+            <p>
+              Delgado.
+            </p>
+
+            <p>
+              Ojeroso.
+            </p>
+
+            <p>
+              Con el cabello demasiado largo para un encierro ordenado
+              y los ojos puestos en Adrián con una intensidad insoportable.
+            </p>
+
+            <p>
+              No parecía un guardia.
+            </p>
+
+            <p>
+              No parecía un científico.
+            </p>
+
+            <p>
+              No parecía un enemigo tradicional.
+            </p>
+
+            <p>
+              Parecía alguien que había esperado muchísimo tiempo la aparición exacta de ese rostro.
+            </p>
+
+            <div class="quote">Lo más perturbador fue que no lo miró como a un desconocido. Lo miró como a alguien que lo había abandonado.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Cierra la puerta cuando entres —dijo el hombre.
+            </p>
+
+            <p>
+              Adrián no se movió.
+            </p>
+
+            <p>
+              —No.
+            </p>
+
+            <p>
+              —Entonces no entres todavía.
+            </p>
+
+            <p>
+              La calma del tono lo irritó de inmediato.
+            </p>
+
+            <p>
+              No era superioridad.
+            </p>
+
+            <p>
+              Era intimidad.
+            </p>
+
+            <p>
+              Como si entre ambos existiera una conversación interrumpida años atrás,
+              una que el otro daba por reanudada sin necesidad de explicaciones.
+            </p>
+
+            <p>
+              Adrián sostuvo la caja más fuerte.
+            </p>
+
+            <p>
+              —¿Quién eres?
+            </p>
+
+            <p>
+              El hombre inclinó apenas la cabeza.
+            </p>
+
+            <p>
+              —Depende de cuál de los dos nombres viniste a buscar.
+            </p>
+
+            <p>
+              La frase le heló la sangre.
+            </p>
+
+            <p>
+              —No juegues conmigo.
+            </p>
+
+            <p>
+              El hombre sostuvo su mirada sin pestañear.
+            </p>
+
+            <div class="quote">—Tú me enseñaste a no hacerlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El dolor de cabeza volvió de golpe.
+            </p>
+
+            <p>
+              No como punzada.
+            </p>
+
+            <p>
+              Como presión.
+            </p>
+
+            <p>
+              Como si la base del cráneo intentara abrir una compuerta atascada.
+            </p>
+
+            <p>
+              Adrián apoyó una mano en el marco de la puerta.
+            </p>
+
+            <p>
+              Entonces la imagen apareció.
+            </p>
+
+            <p>
+              No fragmentada esta vez.
+            </p>
+
+            <p>
+              Más nítida.
+            </p>
+
+            <p>
+              Él, adolescente,
+              en esa misma habitación.
+            </p>
+
+            <p>
+              La mesa.
+            </p>
+
+            <p>
+              Las dos sillas.
+            </p>
+
+            <p>
+              Un vidrio oscuro donde ahora solo había pared.
+            </p>
+
+            <p>
+              Frente a él, un niño más pequeño con la nariz sangrando.
+            </p>
+
+            <p>
+              Y su propia voz,
+              más fría de lo que creía posible:
+            </p>
+
+            <div class="quote">“No importa si lloras. Igual vas a recordar por mí.”</div>
+
+            <p>
+              Adrián soltó el marco como si quemara.
+            </p>
+
+            <p>
+              El hombre sentado lo vio todo en su cara.
+            </p>
+
+            <p>
+              No sonrió.
+            </p>
+
+            <p>
+              No celebró.
+            </p>
+
+            <p>
+              Solo dijo:
+            </p>
+
+            <p>
+              —Eso. Ya estás tocando el borde.
+            </p>
+
+            <p>
+              Adrián sintió náusea.
+            </p>
+
+            <p>
+              No por la violencia del recuerdo.
+            </p>
+
+            <p>
+              Por la voz.
+            </p>
+
+            <p>
+              La voz de la memoria era suya.
+            </p>
+
+            <p>
+              No manipulada.
+            </p>
+
+            <p>
+              No sugerida.
+            </p>
+
+            <p>
+              Suya.
+            </p>
+
+            <div class="quote">El verdadero horror no fue recordar que había estado allí. Fue recordar cómo había hablado.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Entró.
+            </p>
+
+            <p>
+              No porque confiara.
+            </p>
+
+            <p>
+              Porque quedarse en el umbral ya no lo protegía de nada.
+            </p>
+
+            <p>
+              Cerró la puerta a su espalda.
+            </p>
+
+            <p>
+              El sonido del cierre fue seco,
+              hermético,
+              demasiado parecido al de una cámara sellándose.
+            </p>
+
+            <p>
+              La habitación no cambió.
+            </p>
+
+            <p>
+              Pero el silencio sí.
+            </p>
+
+            <p>
+              Ahora era un silencio interior.
+            </p>
+
+            <p>
+              Sin arriba.
+            </p>
+
+            <p>
+              Sin persecución inmediata.
+            </p>
+
+            <p>
+              Sin excusas.
+            </p>
+
+            <p>
+              El hombre señaló la silla frente a él.
+            </p>
+
+            <p>
+              —Siéntate.
+            </p>
+
+            <p>
+              Adrián dejó la caja negra sobre la mesa sin apartar la mano.
+            </p>
+
+            <p>
+              No se sentó.
+            </p>
+
+            <p>
+              —Primero dime tu nombre.
+            </p>
+
+            <p>
+              El hombre bajó la vista a la caja.
+            </p>
+
+            <p>
+              Luego a la llave 17.
+            </p>
+
+            <p>
+              Cuando volvió a mirarlo, había algo mucho más peligroso que emoción en sus ojos:
+            </p>
+
+            <p>
+              familiaridad total.
+            </p>
+
+            <div class="quote">—Mi nombre no importa tanto como el tuyo verdadero.</div>
+
+            <p>
+              Adrián dio un golpe seco a la mesa con la palma libre.
+            </p>
+
+            <p>
+              —Basta.
+            </p>
+
+            <p>
+              La palabra rebotó en las paredes y volvió más pequeña.
+            </p>
+
+            <p>
+              El hombre no se inmutó.
+            </p>
+
+            <p>
+              —Bien. Entonces vamos por partes.
+            </p>
+
+            <p>
+              Se acomodó en la silla.
+            </p>
+
+            <p>
+              Las muñecas mostraban marcas viejas.
+            </p>
+
+            <p>
+              No recientes.
+            </p>
+
+            <p>
+              No teatrales.
+            </p>
+
+            <p>
+              Marcas del tipo que solo quedan cuando el cuerpo ha convivido demasiado tiempo con correas o amarres funcionales.
+            </p>
+
+            <p>
+              Adrián las vio.
+            </p>
+
+            <p>
+              El otro notó que las vio.
+            </p>
+
+            <p>
+              Y aun así no las escondió.
+            </p>
+
+            <p>
+              —Me llamo Elías —dijo al fin.
+            </p>
+
+            <p>
+              Adrián no reconoció el nombre.
+            </p>
+
+            <p>
+              O eso quiso creer.
+            </p>
+
+            <p>
+              Porque el sonido de “Elías” no abrió un recuerdo completo,
+              pero sí una emoción precisa:
+            </p>
+
+            <p>
+              culpa.
+            </p>
+
+            <p>
+              Instantánea.
+            </p>
+
+            <p>
+              Injustificable.
+            </p>
+
+            <p>
+              Profunda.
+            </p>
+
+            <div class="quote">A veces no recuerdas a la persona. Recuerdas lo que le hiciste sentir.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Qué eres para mí? —preguntó Adrián.
+            </p>
+
+            <p>
+              Elías tardó solo un segundo.
+            </p>
+
+            <p>
+              —La parte del experimento que no pudieron integrar.
+            </p>
+
+            <p>
+              Adrián frunció el ceño.
+            </p>
+
+            <p>
+              —No te pregunté qué eres para ellos.
+            </p>
+
+            <p>
+              Elías asintió apenas.
+            </p>
+
+            <p>
+              —Entonces peor.
+            </p>
+
+            <p>
+              Se inclinó un poco hacia la mesa.
+            </p>
+
+            <p>
+              Su voz bajó,
+              no en tono de confidencia,
+              sino de precisión.
+            </p>
+
+            <div class="quote">—Yo soy la persona que quedó viva porque tú aprendiste a recordar en lugar mío.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián sintió que el aire desaparecía.
+            </p>
+
+            <p>
+              No metafóricamente.
+            </p>
+
+            <p>
+              De verdad.
+            </p>
+
+            <p>
+              El pecho intentó llenarse dos veces antes de lograrlo.
+            </p>
+
+            <p>
+              —No entiendo.
+            </p>
+
+            <p>
+              Elías apoyó ambas manos sobre la mesa.
+            </p>
+
+            <p>
+              Manos delgadas.
+            </p>
+
+            <p>
+              Firmes.
+            </p>
+
+            <p>
+              Manos de alguien que ya había repetido esa explicación demasiadas veces en su propia cabeza.
+            </p>
+
+            <p>
+              —Nos trajeron a varios.
+            </p>
+
+            <p>
+              —Niños.
+            </p>
+
+            <p>
+              —Después adolescentes.
+            </p>
+
+            <p>
+              —Buscaban una arquitectura de memoria que pudiera fragmentarse sin perder acceso.
+            </p>
+
+            <p>
+              Adrián tragó saliva.
+            </p>
+
+            <p>
+              —¿Acceso a qué?
+            </p>
+
+            <p>
+              Elías miró la caja negra otra vez.
+            </p>
+
+            <p>
+              —A información que no podían guardar en servidores, ni en cajas fuertes, ni en testigos normales.
+            </p>
+
+            <p>
+              —Entonces...
+            </p>
+
+            <p>
+              No terminó la frase.
+            </p>
+
+            <p>
+              No hizo falta.
+            </p>
+
+            <p>
+              Elías la terminó por él.
+            </p>
+
+            <div class="quote">—Sí. Te usaron como archivo humano.</div>
+
+            <p>
+              La palabra lo partió por dentro.
+            </p>
+
+            <p>
+              Archivo.
+            </p>
+
+            <p>
+              No víctima solamente.
+            </p>
+
+            <p>
+              No testigo.
+            </p>
+
+            <p>
+              No sobreviviente.
+            </p>
+
+            <p>
+              Archivo.
+            </p>
+
+            <p>
+              Algo diseñado para contener.
+            </p>
+
+            <p>
+              Para guardar.
+            </p>
+
+            <p>
+              Para ser consultado.
+            </p>
+
+            <div class="quote">Y de pronto todos los rastreos, los códigos, las llaves, las capas y los nombres empezaron a encajar con una lógica monstruosamente limpia.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián se sentó por fin.
+            </p>
+
+            <p>
+              No por obediencia.
+            </p>
+
+            <p>
+              Porque las piernas dejaron de negociar.
+            </p>
+
+            <p>
+              Quedó frente a Elías,
+              con la mesa entre ambos
+              y la caja negra exactamente en el centro,
+              como si todo el nivel 17 hubiera sido construido para llevar la conversación a ese punto.
+            </p>
+
+            <p>
+              —¿Y tú?
+            </p>
+
+            <p>
+              Elías lo entendió.
+            </p>
+
+            <p>
+              —Yo era la prueba espejo.
+            </p>
+
+            <p>
+              —¿Qué significa eso?
+            </p>
+
+            <p>
+              —Que tú aprendías a almacenar. Yo aprendía a soportar la descarga.
+            </p>
+
+            <p>
+              Adrián lo miró fijo.
+            </p>
+
+            <p>
+              No quería entender.
+            </p>
+
+            <p>
+              Pero ya estaba entendiendo.
+            </p>
+
+            <p>
+              —¿Descarga de qué?
+            </p>
+
+            <p>
+              Elías no se movió.
+            </p>
+
+            <p>
+              —De recuerdos que no debían quedar completos en una sola persona.
+            </p>
+
+            <p>
+              El silencio posterior fue insoportable.
+            </p>
+
+            <p>
+              Porque convertía algo abstracto en una crueldad perfectamente diseñada:
+            </p>
+
+            <p>
+              dividir el horror entre dos para que ninguno colapsara del todo.
+            </p>
+
+            <p>
+              O para que ambos fueran útiles por más tiempo.
+            </p>
+
+            <div class="quote">No los entrenaron para olvidar. Los entrenaron para repartir el peso de lo inolvidable.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián bajó la vista a la caja.
+            </p>
+
+            <p>
+              —¿Qué hay aquí?
+            </p>
+
+            <p>
+              Elías no respondió enseguida.
+            </p>
+
+            <p>
+              Cuando habló, el tono había perdido toda dureza.
+            </p>
+
+            <p>
+              Quedaba solo cansancio.
+            </p>
+
+            <div class="quote">—Lo que queda de ti cuando dejas de llamarte Adrián.</div>
+
+            <p>
+              La respuesta fue peor que un enigma.
+            </p>
+
+            <p>
+              Fue un aviso.
+            </p>
+
+            <p>
+              Uno que no amenazaba con muerte,
+              sino con sustitución.
+            </p>
+
+            <p>
+              Adrián tocó el borde de la caja con dos dedos.
+            </p>
+
+            <p>
+              Sintió un estremecimiento instantáneo.
+            </p>
+
+            <p>
+              No eléctrico.
+            </p>
+
+            <p>
+              Reconocible.
+            </p>
+
+            <p>
+              Como tocar una cicatriz por debajo de la piel.
+            </p>
+
+            <p>
+              Elías lo vio.
+            </p>
+
+            <p>
+              —No la abras todavía.
+            </p>
+
+            <p>
+              Adrián alzó la vista de golpe.
+            </p>
+
+            <p>
+              —¿Tú también?
+            </p>
+
+            <p>
+              —Si la abres ahora, no vas a saber cuál de los dos escucha primero.
+            </p>
+
+            <p>
+              —¿Cuál de los dos?
+            </p>
+
+            <p>
+              Elías sostuvo la mirada.
+            </p>
+
+            <div class="quote">—Adrián... o Gael.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El nombre volvió a entrar como una aguja directa al sistema nervioso.
+            </p>
+
+            <p>
+              Esta vez vino con algo más.
+            </p>
+
+            <p>
+              Un cuarto blanco.
+            </p>
+
+            <p>
+              Una luz intermitente.
+            </p>
+
+            <p>
+              Una voz masculina diciendo:
+            </p>
+
+            <p><strong>“Adrián contiene. Gael activa.”</strong></p>
+
+            <p>
+              Después otra:
+            </p>
+
+            <p><strong>“Si uno falla, el otro hereda.”</strong></p>
+
+            <p>
+              El dolor fue tan violento que tuvo que agarrarse del borde de la mesa.
+            </p>
+
+            <p>
+              Elías no se levantó.
+            </p>
+
+            <p>
+              No lo ayudó.
+            </p>
+
+            <p>
+              No por crueldad.
+            </p>
+
+            <p>
+              Porque parecía saber que nadie podía atravesar eso por él.
+            </p>
+
+            <p>
+              —Ya estás entrando —dijo en voz baja.
+            </p>
+
+            <p>
+              Adrián alzó la cabeza,
+              respirando como si acabara de salir de debajo del agua.
+            </p>
+
+            <p>
+              —¿Gael era otro yo?
+            </p>
+
+            <p>
+              Elías negó una vez.
+            </p>
+
+            <p>
+              —No.
+            </p>
+
+            <p>
+              Se inclinó apenas hacia adelante.
+            </p>
+
+            <p>
+              —Gael era el nombre operativo.
+            </p>
+
+            <p>
+              —¿Operativo de qué?
+            </p>
+
+            <p>
+              Elías bajó la vista.
+            </p>
+
+            <p>
+              Tardó demasiado en responder.
+            </p>
+
+            <p>
+              Cuando lo hizo, la frase no sonó improvisada,
+              sino recordada palabra por palabra:
+            </p>
+
+            <div class="quote">—Del niño que aprendió a entrar donde Adrián no soportaba quedarse.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El silencio se rompió desde arriba.
+            </p>
+
+            <p>
+              No por pasos.
+            </p>
+
+            <p>
+              Por un sonido más grave,
+              más industrial.
+            </p>
+
+            <p>
+              Un mecanismo activándose.
+            </p>
+
+            <p>
+              Elías levantó la cabeza de inmediato.
+            </p>
+
+            <p>
+              Por primera vez perdió por completo la compostura.
+            </p>
+
+            <p>
+              —No.
+            </p>
+
+            <p>
+              Adrián giró hacia la puerta.
+            </p>
+
+            <p>
+              —¿Qué pasa?
+            </p>
+
+            <p>
+              Elías se puso de pie.
+            </p>
+
+            <p>
+              Rápido.
+            </p>
+
+            <p>
+              Demasiado rápido para alguien que llevaba tanto tiempo quieto.
+            </p>
+
+            <p>
+              Fue a la pared izquierda,
+              apartó una placa metálica pequeña
+              y dejó ver una hilera de luces diminutas.
+            </p>
+
+            <p>
+              Cuatro apagadas.
+            </p>
+
+            <p>
+              Una encendida en rojo.
+            </p>
+
+            <p>
+              Luego otra.
+            </p>
+
+            <p>
+              Luego una tercera.
+            </p>
+
+            <p>
+              —Subieron la secuencia —dijo.
+            </p>
+
+            <p>
+              Adrián se levantó también.
+            </p>
+
+            <p>
+              —Habla claro.
+            </p>
+
+            <p>
+              Elías giró hacia él,
+              y en su rostro había algo peor que miedo:
+            </p>
+
+            <p>
+              reconocimiento del protocolo.
+            </p>
+
+            <div class="quote">—Si no consiguen sacarte arriba, van a activar la recuperación desde aquí abajo.</div>
+
+            <p>
+              Adrián sintió un frío vertical bajarle por la espalda.
+            </p>
+
+            <p>
+              —¿Recuperación de qué?
+            </p>
+
+            <p>
+              Elías miró la caja negra.
+            </p>
+
+            <p>
+              Luego a él.
+            </p>
+
+            <p>
+              Y ya no dejó espacio para ninguna duda:
+            </p>
+
+            <div class="quote"><strong>—De Gael.</strong></div>
+
+            <p>
+              Las luces rojas siguieron encendiéndose una por una.
+            </p>
+
+            <p>
+              Cuatro.
+            </p>
+
+            <p>
+              Cinco.
+            </p>
+
+            <p>
+              Seis.
+            </p>
+
+            <p>
+              Adrián apenas oyó el zumbido creciente dentro de las paredes,
+              porque otra cosa acababa de volverse insoportablemente clara:
+            </p>
+
+            <p><strong>el nivel 17 no era un escondite.</strong></p>
+
+            <p><strong>Era un mecanismo de reactivación.</strong></p>
+
+            <p>
+              Y él acababa de bajar con la llave correcta,
+              la caja correcta
+              y el nombre incorrecto.
+            </p>
+
+            <div class="quote">Entonces Elías dio un paso atrás, miró la puerta sellada y dijo lo único que terminó de romper la noche:</div>
+
+            <div class="quote"><strong>—Si empiezas a recordarlo todo, no voy a saber si todavía sigues siendo la persona a la que esperé... o la persona que me dejó aquí.</strong></div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué contiene la caja negra, quién fue realmente Gael y por qué Elías teme más el regreso completo de Adrián que a los hombres que ya han tomado la casa.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo4.html" onclick="goBack(event, 'capitulo4.html')" class="btn btn-ghost">← Capítulo 4</a>
+            <a href="capitulo6.html" class="btn btn-primary">Leer capítulo 6 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
