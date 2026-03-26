@@ -425,4 +425,4 @@ window.NEBULA_NOVELS = {
       }
     ]
   }
-};
+}; este igual porfavor o se arregla solo
