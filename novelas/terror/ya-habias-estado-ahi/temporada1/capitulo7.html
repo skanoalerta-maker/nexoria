@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 7 | Ya habías estado ahí</title>
+  <meta
+    name="description"
+    content="Capítulo 7 de Ya habías estado ahí: La recuperación total ya no es una amenaza abstracta. Ahora tiene voz, ruta y una versión de Adrián que sabe exactamente cómo escapar."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">Ya habías estado ahí</p>
+            <p class="brand-sub">Thriller psicológico y misterio</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo6.html" onclick="goBack(event, 'capitulo6.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo8.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 7</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 7</p>
+            <h1>La ruta 9 no era una huida</h1>
+            <p>
+              Cuando la caja se abre y el sistema declara a Gael listo para reintegración, Adrián comprende que la ruta 9 nunca fue un escape simple. Fue el último plan que dejó su versión más peligrosa... para impedir que otros la recuperaran.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">El sistema ya lo reconoció</div>
+              <h2>Hay planes de emergencia que salvan tu vida. Y hay otros que salvan al mundo... de lo que podrías volver a ser.</h2>
+              <p>
+                Con la caja parcialmente abierta, los recuerdos irrumpiendo sin orden y la voz del sistema marcando la recuperación total como disponible, Adrián debe decidir si sigue escuchando a Elías o si confía en la lógica brutal de Gael, la parte de sí mismo que dejó instrucciones para esta exacta noche.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">7 de 12</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 7: La ruta 9 no era una huida</h3>
+            <p>Lectura gratuita · Algunas rutas de escape no están diseñadas para salvarte, sino para contenerte</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              La frase del sistema no terminó de resonar en la habitación. Se incrustó. <strong>“RECUPERACIÓN TOTAL DISPONIBLE. SUJETO GAEL LISTO PARA REINTEGRACIÓN.”</strong> Adrián seguía de pie frente a la mesa, con el corazón desajustado, la respiración irregular y una sensación nueva y atroz expandiéndose por dentro: eficiencia. No fuerza, no rabia, no locura. Eficiencia. Una claridad dura, quirúrgica, que empezaba a ordenar el cuarto no en términos de miedo, sino de uso. Las paredes. La puerta. El panel. La distancia exacta entre Elías y la salida. El peso de la caja. Las posibles trayectorias si la estructura se abría. Lo entendió con una lucidez helada: esa mirada del mundo no era suya. O al menos no de la versión de sí mismo que había vivido hasta ahora llamándose Adrián.
+            </p>
+
+            <p>
+              Elías también lo vio.
+            </p>
+
+            <p>
+              No necesitó que Adrián dijera nada.
+            </p>
+
+            <p>
+              Bastó la manera en que giró la cabeza,
+              evaluando el cuarto en silencios cortos y ángulos útiles,
+              para que todo el rostro de Elías se tensara.
+            </p>
+
+            <p>
+              Dio un paso atrás.
+            </p>
+
+            <p>
+              No por cobardía.
+            </p>
+
+            <p>
+              Por memoria.
+            </p>
+
+            <p>
+              Como alguien que ya había aprendido a leer el instante preciso en que una persona dejaba de estar completamente presente y otra empezaba a ordenar el cuerpo desde adentro.
+            </p>
+
+            <div class="quote">No temía que Adrián se volviera violento. Temía que volviera a volverse exacto.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Adrián —dijo, muy despacio—. Mírame.
+            </p>
+
+            <p>
+              Él lo hizo.
+            </p>
+
+            <p>
+              O al menos sus ojos se dirigieron hacia él.
+            </p>
+
+            <p>
+              Pero la mirada no llegó igual.
+            </p>
+
+            <p>
+              Elías se quedó inmóvil.
+            </p>
+
+            <p>
+              —No le des espacio.
+            </p>
+
+            <p>
+              Adrián frunció apenas el ceño.
+            </p>
+
+            <p>
+              —¿A quién?
+            </p>
+
+            <p>
+              La voz salió correcta.
+            </p>
+
+            <p>
+              Demasiado correcta.
+            </p>
+
+            <p>
+              Sin temblor.
+            </p>
+
+            <p>
+              Sin ruido sobrante.
+            </p>
+
+            <p>
+              Limpia como una herramienta recién afilada.
+            </p>
+
+            <p>
+              Elías tragó saliva.
+            </p>
+
+            <p>
+              —A la parte de ti que ya está armando una respuesta sin preguntarse si debe hacerlo.
+            </p>
+
+            <p>
+              El comentario le provocó algo extraño a Adrián:
+            </p>
+
+            <p>
+              una mezcla de rechazo y comprensión inmediata.
+            </p>
+
+            <p>
+              Porque era verdad.
+            </p>
+
+            <p>
+              Ya estaba pensando en secuencias.
+            </p>
+
+            <p>
+              En rutas.
+            </p>
+
+            <p>
+              En elementos del sistema.
+            </p>
+
+            <p>
+              No en miedo.
+            </p>
+
+            <p>
+              No en trauma.
+            </p>
+
+            <p>
+              No en la dignidad emocional del momento.
+            </p>
+
+            <p>
+              En resolución.
+            </p>
+
+            <div class="quote">Y lo más aterrador no fue sentir esa lógica extraña. Fue lo natural que empezó a parecerle.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián bajó la vista a la caja negra.
+            </p>
+
+            <p>
+              La tapa seguía apenas levantada.
+            </p>
+
+            <p>
+              Lo suficiente para dejar ver el interior.
+            </p>
+
+            <p>
+              No había documentos.
+            </p>
+
+            <p>
+              No había discos.
+            </p>
+
+            <p>
+              No había llaves adicionales.
+            </p>
+
+            <p>
+              Solo un dispositivo del tamaño de una libreta pequeña,
+              negro mate,
+              con una superficie superior táctil y una hilera de marcas luminosas apagadas.
+            </p>
+
+            <p>
+              Junto a él,
+              una jeringa sellada en un compartimento transparente.
+            </p>
+
+            <p>
+              Y debajo,
+              una tarjeta blanca sin texto visible.
+            </p>
+
+            <p>
+              Adrián no tocó nada todavía.
+            </p>
+
+            <p>
+              Pero el estómago se le cerró.
+            </p>
+
+            <p>
+              Porque entendió demasiado deprisa algo que no quería entender:
+            </p>
+
+            <p>
+              eso no era un archivo de recuerdos.
+            </p>
+
+            <p>
+              Era un kit de activación.
+            </p>
+
+            <div class="quote">La caja no guardaba pasado. Guardaba procedimiento.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Qué hace la jeringa? —preguntó.
+            </p>
+
+            <p>
+              Elías no respondió enseguida.
+            </p>
+
+            <p>
+              Miraba el dispositivo negro como se mira una mina activa.
+            </p>
+
+            <p>
+              —No estoy seguro de la versión.
+            </p>
+
+            <p>
+              Adrián volvió la cabeza lentamente.
+            </p>
+
+            <p>
+              —¿Versión?
+            </p>
+
+            <p>
+              —Tu madre intervenía los kits cuando podía.
+            </p>
+
+            <p>
+              —Eso no responde.
+            </p>
+
+            <p>
+              —Puede ser un acelerador de memoria integrada.
+            </p>
+
+            <p>
+              Hizo una pausa.
+            </p>
+
+            <p>
+              Luego añadió lo que de verdad importaba:
+            </p>
+
+            <p>
+              —O puede ser un inhibidor final.
+            </p>
+
+            <p>
+              El cuarto quedó completamente quieto.
+            </p>
+
+            <p>
+              Adrián sintió que el corazón volvía a irrumpir con brutalidad humana,
+              como si esa posible bifurcación lo hubiera sacado de golpe de la eficiencia ajena que empezaba a colonizarlo.
+            </p>
+
+            <p>
+              —¿Inhibidor de qué?
+            </p>
+
+            <p>
+              Elías lo miró de frente.
+            </p>
+
+            <div class="quote">—De Gael. O de Adrián. Ese es el problema.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Un zumbido cruzó el nivel 17.
+            </p>
+
+            <p>
+              No venía de una sola pared.
+            </p>
+
+            <p>
+              Venía del sistema entero.
+            </p>
+
+            <p>
+              Como si la estructura hubiera terminado de recibir una orden global.
+            </p>
+
+            <p>
+              El panel mostró una nueva línea luminosa.
+            </p>
+
+            <p>
+              Ya no roja.
+            </p>
+
+            <p>
+              Blanca.
+            </p>
+
+            <p>
+              Con texto.
+            </p>
+
+            <div class="quote">RUTA DE CONTENCIÓN PRIMARIA DISPONIBLE.</div>
+
+            <p>
+              Adrián se quedó quieto.
+            </p>
+
+            <p>
+              Elías se acercó al panel.
+            </p>
+
+            <p>
+              Leyó una segunda línea que apareció debajo:
+            </p>
+
+            <div class="quote">RUTA 9 ESPERANDO VALIDACIÓN DEL SUJETO.</div>
+
+            <p>
+              El mundo se contrajo alrededor de esas palabras.
+            </p>
+
+            <p>
+              Adrián sintió la información acoplarse adentro con una velocidad insoportable.
+            </p>
+
+            <p>
+              La ruta 9.
+            </p>
+
+            <p>
+              No era una metáfora.
+            </p>
+
+            <p>
+              No era una frase recordada al azar.
+            </p>
+
+            <p>
+              Era un protocolo real.
+            </p>
+
+            <p>
+              Una salida.
+            </p>
+
+            <p>
+              Diseñada por alguien que conocía desde adentro la lógica completa del sistema.
+            </p>
+
+            <p>
+              Y de pronto la certeza vino sola:
+            </p>
+
+            <p><strong>Gael había dejado la ruta 9 para sabotear su propia recuperación futura.</strong></p>
+
+            <div class="quote">No era la ruta de un fugitivo. Era la trampa de alguien que conocía demasiado bien la forma en que volverían a buscarlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La revelación le cayó como un filo exacto.
+            </p>
+
+            <p>
+              Gael no había sido solo una parte útil para ellos.
+            </p>
+
+            <p>
+              En algún punto,
+              esa misma parte había entendido lo suficiente como para prever que algún día sería necesario impedir su propio regreso.
+            </p>
+
+            <p>
+              Eso volvía todo todavía más perturbador.
+            </p>
+
+            <p>
+              Porque significaba que dentro de esa versión funcional y despiadada también había existido una lucidez final.
+            </p>
+
+            <p>
+              Una decisión.
+            </p>
+
+            <p>
+              Una traición interna al sistema.
+            </p>
+
+            <p>
+              Elías lo miró.
+            </p>
+
+            <p>
+              —Ya lo entendiste, ¿cierto?
+            </p>
+
+            <p>
+              Adrián asintió apenas.
+            </p>
+
+            <p>
+              —La ruta 9 no me saca de aquí. Me saca de ellos.
+            </p>
+
+            <p>
+              Elías cerró los ojos un instante.
+            </p>
+
+            <p>
+              —Sí.
+            </p>
+
+            <p>
+              —¿Y por qué no la activaste antes?
+            </p>
+
+            <p>
+              La pregunta le dolió antes de ser dicha.
+            </p>
+
+            <p>
+              Porque una parte de él ya conocía la respuesta.
+            </p>
+
+            <p>
+              Elías lo confirmó igual:
+            </p>
+
+            <div class="quote">—Porque no funciona sin ti. Y si funcionara sin ti, yo no sabría cuál de los dos saldría del otro lado.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián tomó la tarjeta blanca del interior de la caja.
+            </p>
+
+            <p>
+              A simple vista no tenía nada.
+            </p>
+
+            <p>
+              Solo una superficie lisa,
+              impecable,
+              demasiado limpia para haber sido guardada tantos años.
+            </p>
+
+            <p>
+              La giró entre los dedos.
+            </p>
+
+            <p>
+              Nada.
+            </p>
+
+            <p>
+              Después,
+              por un impulso que no supo si atribuirse,
+              la acercó a la luz lateral del panel.
+            </p>
+
+            <p>
+              Una inscripción tenue apareció,
+              como tinta reactiva o relieve oculto:
+            </p>
+
+            <div class="quote"><strong>SI LEES ESTO SIN QUERER MATARME, TODAVÍA LLEGASTE A TIEMPO.</strong></div>
+
+            <p>
+              Adrián sintió la frase como una puñalada invertida.
+            </p>
+
+            <p>
+              Porque la reconoció no como lectura,
+              sino como estilo.
+            </p>
+
+            <p>
+              Esa frase había sido escrita por él.
+            </p>
+
+            <p>
+              O por Gael.
+            </p>
+
+            <p>
+              O por la zona imposible en que ambas cosas alguna vez se habían tocado.
+            </p>
+
+            <p>
+              Debajo de la primera línea apareció otra, más pequeña:
+            </p>
+
+            <div class="quote"><strong>NO CONFÍES EN LA PRIMERA SALIDA. EL SISTEMA SIEMPRE TE OFRECE LA QUE MÁS LE CONVIENE.</strong></div>
+
+            <p>
+              Elías dio un paso más cerca.
+            </p>
+
+            <p>
+              —¿Qué dice?
+            </p>
+
+            <p>
+              Adrián no respondió enseguida.
+            </p>
+
+            <p>
+              Había una tercera línea,
+              apenas visible.
+            </p>
+
+            <p>
+              Tuvo que girar un poco la tarjeta.
+            </p>
+
+            <p>
+              Y cuando la leyó,
+              algo dentro de él se hundió:
+            </p>
+
+            <div class="quote"><strong>SI ELÍAS SIGUE VIVO, NO LE MIENTAS OTRA VEZ.</strong></div>
+
+            <div class="divider"></div>
+
+            <p>
+              Levantó la vista lentamente.
+            </p>
+
+            <p>
+              Elías seguía esperando.
+            </p>
+
+            <p>
+              No parecía sorprendido por el silencio.
+            </p>
+
+            <p>
+              Parecía acostumbrado a él.
+            </p>
+
+            <p>
+              Como si llevara años viviendo con la idea de que la verdad de esa noche no consistía solo en lo que les hicieron,
+              sino en algo que Adrián —o Gael— le había prometido y no cumplió.
+            </p>
+
+            <p>
+              —La escribió Gael —dijo Adrián al fin.
+            </p>
+
+            <p>
+              Elías no preguntó cómo lo sabía.
+            </p>
+
+            <p>
+              —¿Qué dice sobre mí?
+            </p>
+
+            <p>
+              Adrián sostuvo la mirada un segundo de más.
+            </p>
+
+            <p>
+              El impulso de callar estuvo ahí.
+            </p>
+
+            <p>
+              Breve.
+            </p>
+
+            <p>
+              Frío.
+            </p>
+
+            <p>
+              Exactamente del tipo de impulso que habría esperado de la parte más calculadora de sí mismo.
+            </p>
+
+            <p>
+              Y fue justo por eso que eligió decir la verdad.
+            </p>
+
+            <p>
+              —Que no te mienta otra vez.
+            </p>
+
+            <p>
+              Elías quedó quieto.
+            </p>
+
+            <p>
+              No como quien recibe una sorpresa.
+            </p>
+
+            <p>
+              Como quien recibe una confirmación que duele igual aunque ya la supiera.
+            </p>
+
+            <p>
+              Bajó la vista.
+            </p>
+
+            <p>
+              Tardó varios segundos en volver a hablar.
+            </p>
+
+            <p>
+              —Entonces todavía había algo de él intentando corregir lo último.
+            </p>
+
+            <p>
+              Adrián frunció el ceño.
+            </p>
+
+            <p>
+              —¿Qué último?
+            </p>
+
+            <p>
+              Elías no lo miró enseguida.
+            </p>
+
+            <p>
+              —La noche en que prometiste sacarme contigo.
+            </p>
+
+            <p>
+              El recuerdo no llegó entero.
+            </p>
+
+            <p>
+              Llegó como impacto emocional puro.
+            </p>
+
+            <p>
+              Una puerta entreabierta.
+            </p>
+
+            <p>
+              Un pasillo de emergencia.
+            </p>
+
+            <p>
+              Elías mucho más joven, respirando rápido.
+            </p>
+
+            <p>
+              Su propia voz diciendo:
+            </p>
+
+            <div class="quote">“Confía en mí. Si nos dividen, vuelvo.”</div>
+
+            <p>
+              Luego una mano cerrando un seguro del otro lado.
+            </p>
+
+            <p>
+              Y la certeza insoportable de que no había vuelto.
+            </p>
+
+            <div class="quote">La culpa ya no era abstracta. Tenía forma, frase y traición concreta.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Doce.
+            </p>
+
+            <p>
+              La última luz se encendió.
+            </p>
+
+            <p>
+              No hubo alarma sonora.
+            </p>
+
+            <p>
+              No hizo falta.
+            </p>
+
+            <p>
+              El nivel entero vibró una vez,
+              profundamente,
+              como una bestia mecánica acomodándose para abrir los ojos.
+            </p>
+
+            <p>
+              El panel cambió por completo.
+            </p>
+
+            <p>
+              El texto anterior desapareció.
+            </p>
+
+            <p>
+              En su lugar aparecieron dos opciones:
+            </p>
+
+            <div class="quote">1. REINTEGRACIÓN TOTAL<br />2. RUTA 9 · CONTENCIÓN AUTÓNOMA</div>
+
+            <p>
+              Debajo, una línea adicional parpadeaba:
+            </p>
+
+            <div class="quote">VALIDACIÓN MANUAL REQUERIDA.</div>
+
+            <p>
+              Adrián sintió cómo la lógica prestada de Gael volvía a empujar desde adentro.
+            </p>
+
+            <p>
+              La reintegración total prometía claridad completa.
+            </p>
+
+            <p>
+              Acceso.
+            </p>
+
+            <p>
+              Poder.
+            </p>
+
+            <p>
+              Control del sistema.
+            </p>
+
+            <p>
+              La ruta 9, en cambio, no prometía nada agradable.
+            </p>
+
+            <p>
+              Solo contención.
+            </p>
+
+            <p>
+              Pérdida.
+            </p>
+
+            <p>
+              Fragmentación elegida.
+            </p>
+
+            <p>
+              Y aun así,
+              cuanto más lo miraba,
+              más evidente se volvía algo feroz:
+            </p>
+
+            <p><strong>Gael había preferido mutilarse antes que quedar otra vez disponible para ellos.</strong></p>
+
+            <div class="quote">Cuando tu versión más eficiente elige desaparecer antes que volver a ser útil, entiendes por fin el tamaño real del sistema que enfrentabas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Si activas la ruta 9 —dijo Elías—, no sé cuánto de esto conservarás.
+            </p>
+
+            <p>
+              Adrián no apartó la mirada del panel.
+            </p>
+
+            <p>
+              —¿Cuánto de qué?
+            </p>
+
+            <p>
+              —De esta conversación. De mí. De la parte que ya empezó a recordar cómo funciona todo esto.
+            </p>
+
+            <p>
+              La frase dolió más de lo esperado.
+            </p>
+
+            <p>
+              Porque contenía una crueldad mucho más íntima que cualquier amenaza del sistema:
+            </p>
+
+            <p>
+              la posibilidad de perder justo lo que recién empezaba a comprender.
+            </p>
+
+            <p>
+              Perder a Elías otra vez.
+            </p>
+
+            <p>
+              Perder la verdad otra vez.
+            </p>
+
+            <p>
+              Perder incluso la claridad que le permitía ver el horror con nombre técnico.
+            </p>
+
+            <p>
+              —¿Y si activo la reintegración total?
+            </p>
+
+            <p>
+              Elías lo miró con una mezcla insoportable de honestidad y pavor.
+            </p>
+
+            <div class="quote">—Entonces puede que recuperes todo... salvo la razón por la que decidiste esconderlo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Esa fue la frase.
+            </p>
+
+            <p>
+              La definitiva.
+            </p>
+
+            <p>
+              La que partió la lógica del cuarto en dos y dejó solo una verdad viva:
+            </p>
+
+            <p>
+              si recordaba sin contexto completo,
+              podía volver a convertirse en herramienta.
+            </p>
+
+            <p>
+              Si se contenía,
+              quizá sobreviviera menos entero,
+              pero seguiría fuera del alcance directo del sistema.
+            </p>
+
+            <p>
+              Adrián tomó la tarjeta.
+            </p>
+
+            <p>
+              Luego el dispositivo negro.
+            </p>
+
+            <p>
+              La superficie táctil se encendió apenas al contacto con sus dedos.
+            </p>
+
+            <p>
+              No pidió clave.
+            </p>
+
+            <p>
+              No pidió confirmación.
+            </p>
+
+            <p>
+              Solo mostró una línea de texto diminuta:
+            </p>
+
+            <div class="quote"><strong>R9 DISPONIBLE SI EL SUJETO AÚN PREFIERE PERDER ANTES QUE SERVIR.</strong></div>
+
+            <p>
+              Sintió un nudo violento en la garganta.
+            </p>
+
+            <p>
+              No porque la frase fuera críptica.
+            </p>
+
+            <p>
+              Porque no lo era.
+            </p>
+
+            <p>
+              Era la forma exacta en que alguien que se conoce demasiado bien se deja una última prueba.
+            </p>
+
+            <p>
+              Gael no había dejado la ruta 9 para cualquiera.
+            </p>
+
+            <p>
+              La había dejado solo para la versión de sí mismo que todavía eligiera ética por encima de poder.
+            </p>
+
+            <div class="quote">No era una ruta de escape. Era un examen moral dejado por la parte más peligrosa de sí mismo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián levantó la vista.
+            </p>
+
+            <p>
+              Elías seguía frente a él,
+              quieto,
+              herido por demasiadas cosas viejas,
+              pero aún ahí.
+            </p>
+
+            <p>
+              No como enemigo.
+            </p>
+
+            <p>
+              No como simple aliado.
+            </p>
+
+            <p>
+              Como la única persona viva en ese nivel que conocía la diferencia entre que Adrián recordara...
+              y que Gael regresara.
+            </p>
+
+            <p>
+              —Si hago esto —dijo Adrián—, ¿sales conmigo?
+            </p>
+
+            <p>
+              Elías lo miró como si la pregunta le hubiera atravesado el pecho.
+            </p>
+
+            <p>
+              No respondió de inmediato.
+            </p>
+
+            <p>
+              Cuando lo hizo, la voz le salió casi rota:
+            </p>
+
+            <p>
+              —Si de verdad estás preguntándomelo tú, sí.
+            </p>
+
+            <p>
+              La frase era pequeña.
+            </p>
+
+            <p>
+              Pero cargaba años enteros.
+            </p>
+
+            <p>
+              La posibilidad de una promesa repetida.
+            </p>
+
+            <p>
+              La posibilidad de que esta vez no terminara igual.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián volvió la mirada al dispositivo.
+            </p>
+
+            <p>
+              El pulgar quedó suspendido sobre la interfaz.
+            </p>
+
+            <p>
+              Podía sentir a Gael,
+              o lo que quedaba de él,
+              empujando desde atrás con una lógica impecable:
+            </p>
+
+            <p>
+              reintegrar,
+            </p>
+
+            <p>
+              controlar,
+            </p>
+
+            <p>
+              dominar el sistema antes de que el sistema lo dominara a él.
+            </p>
+
+            <p>
+              Era una propuesta terrible.
+            </p>
+
+            <p>
+              Y peligrosamente razonable.
+            </p>
+
+            <p>
+              Pero debajo de esa inteligencia había otra cosa.
+            </p>
+
+            <p>
+              El rastro último de una decisión ya tomada.
+            </p>
+
+            <p>
+              La existencia misma de la ruta 9.
+            </p>
+
+            <p>
+              La renuncia previa.
+            </p>
+
+            <p>
+              La evidencia de que incluso Gael,
+              con toda su precisión fría,
+              había entendido que volver completo equivalía a dejar una puerta abierta para ellos.
+            </p>
+
+            <div class="quote">Entonces Adrián comprendió por fin qué estaba protegiendo realmente la ruta 9: no su memoria, no su vida, sino su capacidad de elegir quién no quería volver a ser.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Presionó.
+            </p>
+
+            <p>
+              No la reintegración.
+            </p>
+
+            <p>
+              La ruta 9.
+            </p>
+
+            <p>
+              El panel entero cambió a azul profundo.
+            </p>
+
+            <p>
+              El zumbido del sistema se cortó un segundo.
+            </p>
+
+            <p>
+              Después,
+              en lugar de alarma,
+              una voz femenina llenó el nivel 17.
+            </p>
+
+            <p>
+              No la del sistema.
+            </p>
+
+            <p>
+              No sintética.
+            </p>
+
+            <p>
+              No institucional.
+            </p>
+
+            <p>
+              Humana.
+            </p>
+
+            <p>
+              Temblorosa.
+            </p>
+
+            <p>
+              Con una calidez destrozada que Adrián reconoció antes de entender:
+            </p>
+
+            <div class="quote"><strong>—Si elegiste esto, hijo, entonces todavía no te perdieron.</strong></div>
+
+            <p>
+              Era su madre.
+            </p>
+
+            <p>
+              No una grabación vieja cualquiera.
+            </p>
+
+            <p>
+              Un mensaje de contingencia.
+            </p>
+
+            <p>
+              Uno escondido precisamente detrás de esa elección.
+            </p>
+
+            <p>
+              Adrián sintió que todo el cuerpo se le quebraba por dentro.
+            </p>
+
+            <p>
+              La voz siguió:
+            </p>
+
+            <div class="quote"><strong>—La ruta 9 no te va a devolver entero. Te va a dejar fuera de su mapa. Eso es lo máximo que pude robarles.</strong></div>
+
+            <p>
+              Elías cerró los ojos.
+            </p>
+
+            <p>
+              Como si también estuviera oyendo una presencia perdida que nunca se había ido del todo.
+            </p>
+
+            <p>
+              La voz continuó,
+              más apurada ahora:
+            </p>
+
+            <div class="quote"><strong>—Cuando empiece la separación, no sigan la puerta que se abra primero. El verdadero acceso no está adelante. Está detrás del nombre que quieran que recuerdes.</strong></div>
+
+            <p>
+              El panel cambió otra vez.
+            </p>
+
+            <p>
+              Los muros vibraron.
+            </p>
+
+            <p>
+              Una sección de la pared lateral empezó a retraerse con un sonido seco de pistones liberados.
+            </p>
+
+            <p>
+              Detrás apareció un corredor angosto,
+              oscuro,
+              sin señalización.
+            </p>
+
+            <p>
+              No blanco.
+            </p>
+
+            <p>
+              No limpio.
+            </p>
+
+            <p>
+              Crudo.
+            </p>
+
+            <p>
+              Como si hubiera sido construido para existir fuera del resto de la arquitectura.
+            </p>
+
+            <p>
+              Al mismo tiempo,
+              otra puerta se abrió al fondo opuesto del cuarto,
+              bañada en luz blanca perfecta.
+            </p>
+
+            <p>
+              Clara.
+            </p>
+
+            <p>
+              Fácil.
+            </p>
+
+            <p>
+              Invitante.
+            </p>
+
+            <p>
+              Y en el mismo instante,
+              la voz del sistema volvió a sonar:
+            </p>
+
+            <div class="quote">RUTA DE REINTEGRACIÓN ESTABILIZADA. INGRESE PARA RECUPERACIÓN COMPLETA.</div>
+
+            <p>
+              Adrián no necesitó pensar demasiado.
+            </p>
+
+            <p>
+              La elección ya estaba escrita en la advertencia de su madre.
+            </p>
+
+            <p>
+              La puerta luminosa era la mentira elegante.
+            </p>
+
+            <p>
+              El corredor oscuro,
+              la salida real.
+            </p>
+
+            <div class="quote">La primera salida era para el sistema. La segunda era para quien todavía quisiera dejar de ser utilizable.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Adrián tomó a Elías del antebrazo.
+            </p>
+
+            <p>
+              No con violencia.
+            </p>
+
+            <p>
+              Con decisión pura.
+            </p>
+
+            <p>
+              —Ahora sí.
+            </p>
+
+            <p>
+              Elías asintió una vez,
+              pero antes de que pudieran correr hacia el corredor oscuro,
+              algo cambió en su rostro.
+            </p>
+
+            <p>
+              No miedo.
+            </p>
+
+            <p>
+              No duda.
+            </p>
+
+            <p>
+              Reconocimiento súbito.
+            </p>
+
+            <p>
+              Miró por encima del hombro de Adrián,
+              hacia la puerta blanca,
+              y el color se le fue del cuerpo.
+            </p>
+
+            <p>
+              Adrián giró.
+            </p>
+
+            <p>
+              Y entonces lo vio.
+            </p>
+
+            <p>
+              Al final de la luz,
+              inmóvil en el umbral de la salida falsa,
+              había una figura masculina.
+            </p>
+
+            <p>
+              Alta.
+            </p>
+
+            <p>
+              Delgada.
+            </p>
+
+            <p>
+              Traje oscuro.
+            </p>
+
+            <p>
+              Manos vacías.
+            </p>
+
+            <p>
+              Rostro en sombra por la luz detrás.
+            </p>
+
+            <p>
+              No necesitaba moverse para imponer control.
+            </p>
+
+            <p>
+              No necesitaba levantar la voz para adueñarse de la habitación.
+            </p>
+
+            <p>
+              Cuando habló,
+              la sangre se le heló a Adrián por una razón que no pudo explicar todavía:
+            </p>
+
+            <div class="quote"><strong>—No vuelvas a cometer el error de elegir por culpa, Gael. La última vez también pensaste que estabas salvando a alguien.</strong></div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir quién es el hombre de la puerta blanca, qué ocurrió realmente la última vez que Gael eligió por culpa y por qué su sola presencia hace que Elías parezca más asustado que ante todo el sistema del nivel 17.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo6.html" onclick="goBack(event, 'capitulo6.html')" class="btn btn-ghost">← Capítulo 6</a>
+            <a href="capitulo8.html" class="btn btn-primary">Leer capítulo 8 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
