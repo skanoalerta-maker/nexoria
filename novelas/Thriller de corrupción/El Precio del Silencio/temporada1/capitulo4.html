@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 4 | El Precio del Silencio</title>
+  <meta
+    name="description"
+    content="Capítulo 4 de El Precio del Silencio: El senador y la cifra."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,0.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,0.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,0.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9, 18, 35, 0.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El Precio del Silencio</p>
+            <p class="brand-sub">Thriller político y empresarial</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo3.html" onclick="goBack(event, 'capitulo3.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo5.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 4</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 4</p>
+            <h1>El senador y la cifra</h1>
+            <p>
+              La versión anterior de los documentos no solo tenía nombres. También tenía montos,
+              fechas y una cifra imposible de justificar que conectaba directamente a la red con el mundo político.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Todo empieza a unirse</div>
+              <h2>Cuando la colusión deja de ser económica y se vuelve política</h2>
+              <p>
+                Tomás sigue la pista de Gabriel hasta una bodega documental en Independencia. Lo que encuentra ahí
+                no confirma solo una manipulación de mercado: confirma que alguien en el Senado recibió dinero para sostener el silencio.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">4 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 4: El senador y la cifra</h3>
+            <p>Lectura gratuita · La red ya tiene un rostro político</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Tomás no tomó locomoción directa a Independencia. Caminó tres cuadras hacia el poniente,
+              se metió a una galería, cruzó por una salida lateral, tomó un taxi sin pedirlo por aplicación
+              y recién ahí dijo una dirección cercana, no la exacta. No sabía si eso servía de algo.
+              Pero después del café, después del hombre del diario y después de lo que Laura le había contado,
+              dejar de pensar como una persona común era casi una obligación.
+            </p>
+
+            <p>
+              Durante el trayecto no miró el teléfono.
+            </p>
+
+            <p>
+              No porque estuviera apagado.
+            </p>
+
+            <p>
+              Porque había decidido no volver a encenderlo hasta que entendiera mejor qué clase de rastros dejaba.
+            </p>
+
+            <p>
+              Miró por la ventana.
+            </p>
+
+            <p>
+              La ciudad seguía operando con su violencia habitual: micros frenando mal,
+              gente apurada, un camión detenido en doble fila, vendedores armando puestos
+              sobre veredas donde nadie pedía permiso.
+            </p>
+
+            <p>
+              Ese ruido cotidiano, lejos de tranquilizarlo, lo hundía más en la idea
+              de que lo que estaba investigando vivía precisamente ahí:
+            </p>
+
+            <p>
+              dentro de la normalidad,
+            </p>
+
+            <p>
+              confundido con ella,
+            </p>
+
+            <p>
+              alimentándose de su costumbre.
+            </p>
+
+            <div class="quote">Los sistemas más peligrosos no son los que se esconden. Son los que aprenden a parecer inevitables.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La bodega documental quedaba en una calle industrial de fachadas cansadas,
+              portones metálicos y letreros empresariales que parecían sobrevivir por inercia.
+            </p>
+
+            <p>
+              No tenía nada cinematográfico.
+            </p>
+
+            <p>
+              Nada que sugiriera una revelación.
+            </p>
+
+            <p>
+              Solo una oficina angosta adelante y, detrás, galpones de archivo donde probablemente dormían
+              miles de cajas llenas de papeles que nadie quería volver a revisar.
+            </p>
+
+            <p>
+              Tomás se bajó del taxi una cuadra antes.
+            </p>
+
+            <p>
+              Caminó el resto.
+            </p>
+
+            <p>
+              El lugar se llamaba <strong>Custodia Metropolitana S.A.</strong>
+            </p>
+
+            <p>
+              Un nombre aburrido.
+            </p>
+
+            <p>
+              Perfecto para esconder cosas importantes.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              En recepción lo atendió una mujer de unos cincuenta años con lentes delgados,
+              voz seca y una costumbre evidente de no entregar más información de la necesaria.
+            </p>
+
+            <p>
+              Tomás improvisó.
+            </p>
+
+            <p>
+              Dijo que estaba buscando respaldo físico de documentación histórica asociada a una consultora
+              para la que había trabajado un ex analista. No mencionó a Gabriel Mena de inmediato.
+              Tanteó primero con razones administrativas, auditoría retroactiva, regularización de inventario.
+            </p>
+
+            <p>
+              La mujer lo escuchó sin interrumpirlo.
+            </p>
+
+            <p>
+              Luego pidió RUT.
+            </p>
+
+            <p>
+              Luego empresa.
+            </p>
+
+            <p>
+              Luego autorización.
+            </p>
+
+            <p>
+              Ahí la improvisación se quebró.
+            </p>
+
+            <p>
+              Tomás se quedó medio segundo en silencio, el suficiente para que la mujer levantara la vista
+              y lo clasificara de inmediato.
+            </p>
+
+            <p>
+              No como peligro.
+            </p>
+
+            <p>
+              Como problema.
+            </p>
+
+            <p>
+              —Sin respaldo interno no puedo mover nada —dijo ella.
+            </p>
+
+            <p>
+              —Ni revisar una caja, ni confirmar si el archivo existe.
+            </p>
+
+            <p>
+              Él tragó saliva.
+            </p>
+
+            <p>
+              Pensó en irse.
+            </p>
+
+            <p>
+              Pensó en insistir.
+            </p>
+
+            <p>
+              Y entonces recordó algo mínimo, casi enterrado por el miedo de los últimos dos días:
+              el nombre de la consultora donde había trabajado como externo años atrás coincidía
+              con el membrete incompleto de la fotocopia de Laura.
+            </p>
+
+            <p>
+              Se inclinó apenas sobre el mesón.
+            </p>
+
+            <p>
+              —Gabriel Mena trabajó con ustedes —dijo—. Y dejó instruido buscar la versión anterior.
+            </p>
+
+            <p>
+              La mujer no parpadeó.
+            </p>
+
+            <p>
+              Pero algo cambió.
+            </p>
+
+            <p>
+              No en el rostro.
+            </p>
+
+            <p>
+              En la pausa.
+            </p>
+
+            <div class="quote">A veces una persona no necesita reaccionar para confirmar que tocaste el nombre correcto.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La recepcionista miró hacia una oficina interior de puerta semiabierta.
+            </p>
+
+            <p>
+              Luego volvió a observarlo.
+            </p>
+
+            <p>
+              —Espere aquí.
+            </p>
+
+            <p>
+              Desapareció por el pasillo con una carpeta en la mano.
+            </p>
+
+            <p>
+              Tomás se quedó inmóvil en la recepción, escuchando el ruido lejano
+              de un ventilador industrial y el paso sordo de montacargas en la zona de galpones.
+            </p>
+
+            <p>
+              Pasaron dos minutos.
+            </p>
+
+            <p>
+              Después cuatro.
+            </p>
+
+            <p>
+              Después siete.
+            </p>
+
+            <p>
+              El tiempo empezó a volverse espeso.
+            </p>
+
+            <p>
+              Justo cuando evaluaba salir antes de quedar atrapado en alguna verificación que no pudiera sostener,
+              apareció un hombre bajo, calvo, con camisa blanca y credencial plástica al cuello.
+            </p>
+
+            <p>
+              No sonreía.
+            </p>
+
+            <p>
+              Tampoco parecía sorprendido de verlo.
+            </p>
+
+            <p>
+              —¿Usted preguntó por Mena? —dijo.
+            </p>
+
+            <p>
+              Tomás asintió.
+            </p>
+
+            <p>
+              El hombre lo estudió unos segundos.
+            </p>
+
+            <p>
+              —Venga.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Lo guió por un corredor estrecho hacia la parte posterior del recinto.
+            </p>
+
+            <p>
+              Atravesaron una puerta cortafuego y entraron a una nave larga, fría, organizada en hileras de racks metálicos
+              con cajas etiquetadas por empresa, año y categoría.
+            </p>
+
+            <p>
+              Había algo casi religioso en ese orden.
+            </p>
+
+            <p>
+              Miles de pedazos de memoria administrativa durmiendo bajo códigos de barras y polvo fino.
+            </p>
+
+            <p>
+              El hombre caminó sin hablar hasta una zona lateral menos iluminada.
+            </p>
+
+            <p>
+              Ahí se detuvo frente a una estantería media vacía.
+            </p>
+
+            <p>
+              —Esto estaba asignado a una consultora externa que dejó de operar hace tres años —dijo.
+              —Hubo retiro parcial, destrucción autorizada y traspaso digital. Pero algunas cajas quedaron rezagadas
+              por una observación de cadena de custodia.
+            </p>
+
+            <p>
+              Tomás sintió un pulso acelerado detrás de los ojos.
+            </p>
+
+            <p>
+              —¿Cadena de custodia por qué?
+            </p>
+
+            <p>
+              El hombre lo miró de reojo.
+            </p>
+
+            <p>
+              —Porque alguien pidió detener la eliminación.
+            </p>
+
+            <p>
+              —¿Gabriel?
+            </p>
+
+            <p>
+              —No dijo nombre.
+            </p>
+
+            <p>
+              Pero esa vez el silencio valió como respuesta.
+            </p>
+
+            <div class="quote">Había estado ahí. Gabriel había llegado hasta ese mismo pasillo.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              El hombre sacó una caja gris y la apoyó sobre una mesa rodante.
+            </p>
+
+            <p>
+              En la etiqueta figuraban siglas, rango de fechas y una referencia interna:
+              <strong>COMITÉ DE AJUSTES / BORRADORES / 2019-2022</strong>.
+            </p>
+
+            <p>
+              Tomás sintió que el aire se le iba y volvía al mismo tiempo.
+            </p>
+
+            <p>
+              Borradores.
+            </p>
+
+            <p>
+              No finales.
+            </p>
+
+            <p>
+              No versiones limpias.
+            </p>
+
+            <p><strong>Borradores.</strong></p>
+
+            <p>
+              El hombre abrió la tapa.
+            </p>
+
+            <p>
+              Adentro había carpetas con folios, minutas impresas, versiones corregidas a mano,
+              anexos financieros, listados de asistencia y hojas con observaciones marginales.
+            </p>
+
+            <p>
+              Nada parecía extraordinario si se miraba por encima.
+            </p>
+
+            <p>
+              Todo parecía explosivo si se entendía lo que significaba.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás empezó a revisar con rapidez contenida.
+            </p>
+
+            <p>
+              Una minuta hablaba de “alineación territorial”.
+            </p>
+
+            <p>
+              Otra de “sostener márgenes antes de ventana legislativa”.
+            </p>
+
+            <p>
+              Otra incluía comentarios manuscritos que reemplazaban apellidos completos por iniciales
+              y tachaban montos específicos, sustituyéndolos por referencias vagas como “aporte validado”.
+            </p>
+
+            <p>
+              Cada hoja confirmaba la misma sensación:
+            </p>
+
+            <p>
+              lo que él había visto en el servidor no era el centro.
+            </p>
+
+            <p>
+              Era solo el residuo digital de una estructura mucho más vieja,
+              mucho más prolija
+              y mucho más física.
+            </p>
+
+            <div class="quote">Los documentos finales mentían. Los borradores todavía se permitían decir la verdad.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Fue en la cuarta carpeta donde apareció.
+            </p>
+
+            <p>
+              Una planilla de dos páginas, impresa con encabezado corporativo, con columnas marcadas
+              como <strong>gestión regulatoria</strong>, <strong>intermediación</strong>,
+              <strong>apoyo externo</strong> y <strong>reserva política</strong>.
+            </p>
+
+            <p>
+              Al final de la segunda página, una fila estaba resaltada con lápiz azul.
+            </p>
+
+            <p>
+              En la primera versión —la visible bajo una corrección a mano— se leía:
+            </p>
+
+            <p>
+              <strong>Senador A. Valdés / comité energía / 240.000.000 / asegurar demora indicación / confirmado.</strong>
+            </p>
+
+            <p>
+              Tomás quedó congelado.
+            </p>
+
+            <p>
+              Miró otra vez.
+            </p>
+
+            <p>
+              No era una insinuación.
+            </p>
+
+            <p>
+              No era una nota ambigua.
+            </p>
+
+            <p>
+              No hablaba de aporte de campaña formal ni de consultoría externa.
+            </p>
+
+            <p>
+              Hablaba de una cifra.
+            </p>
+
+            <p>
+              Una acción.
+            </p>
+
+            <p>
+              Y un objetivo político concreto:
+              <strong>asegurar demora indicación.</strong>
+            </p>
+
+            <div class="quote">Doscientos cuarenta millones.</div>
+
+            <p>
+              La cifra se le quedó pegada en la cabeza con una claridad nauseabunda.
+            </p>
+
+            <p>
+              240.000.000.
+            </p>
+
+            <p>
+              Ni redonda por casualidad.
+            </p>
+
+            <p>
+              Ni pequeña como para encubrirse dentro de un gasto gris.
+            </p>
+
+            <p>
+              Lo bastante grande para comprar voluntad.
+            </p>
+
+            <p>
+              Lo bastante precisa para no ser un error.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Debajo de esa línea había una versión corregida a mano, probablemente posterior,
+              donde “Senador A. Valdés” había sido reemplazado por <strong>enlace legislativo norte</strong>,
+              el monto había desaparecido y el objetivo se reducía a “gestión parlamentaria”.
+            </p>
+
+            <p>
+              Esa era la lógica.
+            </p>
+
+            <p>
+              La verdad primero se escribía.
+            </p>
+
+            <p>
+              Después se limpiaba.
+            </p>
+
+            <p>
+              Después se convertía en lenguaje neutro.
+            </p>
+
+            <p>
+              Después, si había tiempo, se borraba a quien hubiera alcanzado a verla entera.
+            </p>
+
+            <div class="quote">No desaparecían los hechos. Desaparecía la forma de nombrarlos.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás siguió revisando con las manos ya menos firmes.
+            </p>
+
+            <p>
+              Encontró referencias a campañas regionales.
+            </p>
+
+            <p>
+              A cobertura mediática por “estabilidad de mercado”.
+            </p>
+
+            <p>
+              A reuniones en casas privadas.
+            </p>
+
+            <p>
+              A minutas rehechas después de “observación externa”.
+            </p>
+
+            <p>
+              Y en dos documentos diferentes apareció la misma sigla:
+              <strong>CV-7</strong>.
+            </p>
+
+            <p>
+              No sabía qué significaba.
+            </p>
+
+            <p>
+              Pero estaba asociada a decisiones donde coincidían empresas, reguladores y operadores políticos.
+            </p>
+
+            <p>
+              La anotó mentalmente.
+            </p>
+
+            <p>
+              Después, por reflejo, quiso fotografiar la planilla del senador.
+            </p>
+
+            <p>
+              Metió la mano al bolsillo.
+            </p>
+
+            <p>
+              El celular seguía apagado.
+            </p>
+
+            <p>
+              Recordó entonces que incluso si lo encendía no sabía cuánto demoraría en exponerse.
+            </p>
+
+            <p>
+              Miró al hombre de la credencial.
+            </p>
+
+            <p>
+              —Necesito copiar esto.
+            </p>
+
+            <p>
+              El hombre lo observó largamente.
+            </p>
+
+            <p>
+              —No puedo permitir fotos.
+            </p>
+
+            <p>
+              Tomás apretó la mandíbula.
+            </p>
+
+            <p>
+              —Entonces necesito sacar una copia.
+            </p>
+
+            <p>
+              —Tampoco.
+            </p>
+
+            <p>
+              —¿Entonces para qué me mostró esto?
+            </p>
+
+            <p>
+              El hombre sostuvo su mirada sin moverse.
+            </p>
+
+            <p>
+              —Para que supiera que Gabriel no estaba loco.
+            </p>
+
+            <div class="quote">La frase cayó como un golpe seco.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás bajó la vista a los papeles.
+            </p>
+
+            <p>
+              Ya no estaba frente a una sospecha.
+            </p>
+
+            <p>
+              Ya no estaba atando hilos sueltos desde fuera.
+            </p>
+
+            <p>
+              Tenía la prueba delante.
+            </p>
+
+            <p>
+              Una prueba que conectaba dinero privado,
+              decisiones legislativas
+              y maquillaje documental dentro del mismo sistema.
+            </p>
+
+            <p>
+              Pero no podía llevársela.
+            </p>
+
+            <p>
+              Y esa impotencia, más que frustrarlo, le abrió una comprensión nueva:
+            </p>
+
+            <p>
+              la red sobrevivía no solo porque corrompía gente,
+              sino porque fragmentaba el acceso a la verdad.
+            </p>
+
+            <p>
+              Nadie tenía suficiente para derribarla solo.
+            </p>
+
+            <p>
+              Nadie podía salir con la caja completa debajo del brazo.
+            </p>
+
+            <p>
+              Cada testigo veía apenas una pieza,
+              y sobre esa fragmentación se sostenía la impunidad.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —Gabriel vino por esto, ¿verdad? —preguntó.
+            </p>
+
+            <p>
+              El hombre tardó un segundo.
+            </p>
+
+            <p>
+              —Gabriel vino por algo peor.
+            </p>
+
+            <p>
+              Tomás levantó la mirada de inmediato.
+            </p>
+
+            <p>
+              —¿Qué significa eso?
+            </p>
+
+            <p>
+              El hombre cerró una carpeta, luego otra, como si ordenar el papel le ayudara a ordenar
+              también cuánto estaba dispuesto a decir.
+            </p>
+
+            <p>
+              —Significa que cuando revisó esta caja no se detuvo en el senador.
+              Se obsesionó con una planilla de distribución que aparecía citada en varios anexos,
+              pero que no estaba aquí.
+            </p>
+
+            <p>
+              —¿Qué planilla?
+            </p>
+
+            <p>
+              —Una matriz de pagos segmentados por región y actor.
+            </p>
+
+            <p>
+              El tono del hombre no cambió, pero algo en la forma en que dijo “actor” hizo que Tomás
+              sintiera un nuevo escalofrío.
+            </p>
+
+            <p>
+              —¿Actor político?
+            </p>
+
+            <p>
+              —Político, gremial, mediático, técnico. Todos.
+            </p>
+
+            <div class="quote">Como si el país entero pudiera reducirse a una planilla bien ordenada.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás necesitó unos segundos para procesarlo.
+            </p>
+
+            <p>
+              —¿Dónde está esa matriz?
+            </p>
+
+            <p>
+              El hombre cerró definitivamente la caja.
+            </p>
+
+            <p>
+              —Si lo supiera, no estaría trabajando aquí todavía.
+            </p>
+
+            <p>
+              No sonó a ironía.
+            </p>
+
+            <p>
+              Sonó a confesión.
+            </p>
+
+            <p>
+              Después apoyó ambas manos sobre la tapa gris y dijo, casi en un murmullo:
+            </p>
+
+            <p>
+              —Gabriel dejó una nota cuando vino la segunda vez.
+              No escrita aquí. Me la dijo a mí.
+            </p>
+
+            <p>
+              Tomás contuvo el aire.
+            </p>
+
+            <p>
+              —¿Qué te dijo?
+            </p>
+
+            <p>
+              El hombre clavó la vista en la caja cerrada.
+            </p>
+
+            <div class="quote">“Si desaparezco, no busquen quién firmó. Busquen quién demoró la ley.”</div>
+
+            <p>
+              Tomás sintió que todo el capítulo anterior de su vida se reordenaba en torno a esa frase.
+            </p>
+
+            <p>
+              No busquen quién firmó.
+            </p>
+
+            <p>
+              Busquen quién demoró la ley.
+            </p>
+
+            <p>
+              La colusión no se protegía solo comprando decisiones.
+            </p>
+
+            <p>
+              Se protegía también comprando tiempo.
+            </p>
+
+            <p>
+              Cada semana que una indicación se retrasaba.
+            </p>
+
+            <p>
+              Cada mes que una reforma se empantanaba.
+            </p>
+
+            <p>
+              Cada comisión que pedía “más antecedentes”.
+            </p>
+
+            <p>
+              Cada debate que terminaba en nada.
+            </p>
+
+            <p>
+              Todo eso también era parte del negocio.
+            </p>
+
+            <div class="quote">El dinero no compraba leyes. Compraba demora. Y la demora valía millones.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Entonces sonó un teléfono.
+            </p>
+
+            <p>
+              No el suyo.
+            </p>
+
+            <p>
+              El de la credencial.
+            </p>
+
+            <p>
+              El hombre lo miró una vez en pantalla y se tensó apenas, casi nada,
+              pero lo suficiente para que Tomás lo notara.
+            </p>
+
+            <p>
+              No contestó.
+            </p>
+
+            <p>
+              Dejó que vibrara.
+            </p>
+
+            <p>
+              Volvió a guardarlo en el bolsillo.
+            </p>
+
+            <p>
+              Y eso bastó para encender una certeza incómoda:
+            </p>
+
+            <p>
+              el tiempo de esa conversación se estaba acabando.
+            </p>
+
+            <p>
+              —Tienes que irte —dijo el hombre.
+            </p>
+
+            <p>
+              —Todavía no.
+            </p>
+
+            <p>
+              —Sí. Ahora.
+            </p>
+
+            <p>
+              Tomás dio un paso adelante.
+            </p>
+
+            <p>
+              —Dame al menos el nombre completo del senador.
+            </p>
+
+            <p>
+              El hombre lo miró fijo.
+            </p>
+
+            <p>
+              —Ya lo viste.
+            </p>
+
+            <p>
+              Tomás comprendió al instante.
+            </p>
+
+            <p>
+              No iba a volver a decirlo en voz alta.
+            </p>
+
+            <p>
+              Porque nombrarlo hacía más real el riesgo.
+            </p>
+
+            <p>
+              Y porque en ese momento, con alguien llamando desde algún lugar y la caja abierta aún frente a ellos,
+              hasta una sílaba podía convertirse en evidencia de complicidad.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              Salieron del pasillo en silencio.
+            </p>
+
+            <p>
+              El hombre dejó la caja donde la había sacado.
+            </p>
+
+            <p>
+              La recepcionista ya no levantó la vista cuando Tomás pasó frente al mesón.
+            </p>
+
+            <p>
+              Ni se despidió.
+            </p>
+
+            <p>
+              Ni preguntó si había encontrado lo que buscaba.
+            </p>
+
+            <p>
+              Como si, desde el momento en que entró con el nombre de Gabriel Mena en la boca,
+              todos hubieran entendido que esa visita jamás iba a figurar en un libro de ingreso.
+            </p>
+
+            <p>
+              Cuando salió a la calle sintió el golpe del ruido urbano con una fuerza casi física.
+            </p>
+
+            <p>
+              Camiones.
+            </p>
+
+            <p>
+              Bocinas.
+            </p>
+
+            <p>
+              Un vendedor ambulante ofreciendo herramientas chinas.
+            </p>
+
+            <p>
+              Dos perros peleando por algo en una cuneta.
+            </p>
+
+            <p>
+              La ciudad continuaba.
+            </p>
+
+            <p>
+              Y sin embargo, bajo esa continuidad, él acababa de ver la primera prueba concreta
+              de que el sistema estaba aceitado con dinero político.
+            </p>
+
+            <p>
+              No una sospecha general.
+            </p>
+
+            <p>
+              No una intuición moral.
+            </p>
+
+            <p>
+              Una línea impresa.
+            </p>
+
+            <p>
+              Un nombre.
+            </p>
+
+            <p>
+              Una cifra.
+            </p>
+
+            <div class="quote">240.000.000.</div>
+
+            <p>
+              La cifra volvía una y otra vez como si quisiera perforarle la memoria.
+            </p>
+
+            <p>
+              Tomás caminó media cuadra sin dirección clara.
+            </p>
+
+            <p>
+              Recién al llegar a la esquina entendió que lo estaban mirando.
+            </p>
+
+            <p>
+              No fue intuición.
+            </p>
+
+            <p>
+              Fue reflejo.
+            </p>
+
+            <p>
+              En la vitrina sucia de una ferretería cerrada vio el espejo torcido de la calle detrás de él.
+            </p>
+
+            <p>
+              Un hombre cruzó la vereda a su ritmo.
+            </p>
+
+            <p>
+              Camisa celeste.
+            </p>
+
+            <p>
+              Chaqueta liviana.
+            </p>
+
+            <p>
+              Sin apuro.
+            </p>
+
+            <p>
+              No lo había visto en la bodega.
+            </p>
+
+            <p>
+              O tal vez sí y no lo había notado.
+            </p>
+
+            <p>
+              Esa posibilidad fue peor.
+            </p>
+
+            <p><strong>La red ya no solo estaba archivada en cajas. También estaba caminando detrás de él.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia para descubrir qué relación tiene el senador con la periodista que nunca publicó.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo3.html" onclick="goBack(event, 'capitulo3.html')" class="btn btn-ghost">← Capítulo 3</a>
+            <a href="capitulo5.html" class="btn btn-primary">Leer capítulo 5 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
