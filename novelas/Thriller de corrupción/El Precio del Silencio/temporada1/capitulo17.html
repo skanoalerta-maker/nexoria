@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 17 | El Precio del Silencio</title>
+  <meta
+    name="description"
+    content="Capítulo 17 de El Precio del Silencio: El precio final."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/temporada1.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">El Precio del Silencio</p>
+            <p class="brand-sub">Thriller político y empresarial</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo15.html" onclick="goBack(event, 'capitulo15.html')" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo17.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 16</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 16</p>
+            <h1>La noche de la activación</h1>
+            <p>
+              El comité ya no está evaluando si Tomás puede ser reconducido. Ahora decide cómo cerrarlo.
+              Pero cuando Cárdenas rompe la secuencia desde la sala blanca, el sistema enfrenta por primera vez algo que no domina del todo: una verdad saliendo fuera de la ruta.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Penúltimo episodio</div>
+              <h2>La red sigue viva, pero ya no está limpia</h2>
+              <p>
+                Con la activación en curso y el comité perdiendo elegancia frente a una variable fuera de control,
+                Tomás entiende que el final ya no será una revelación. Será una guerra por imponer la versión que sobreviva al amanecer.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">16 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 16: La noche de la activación</h3>
+            <p>Lectura gratuita · La secuencia ya no es perfecta</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Cárdenas seguía en la pantalla. Solo, sentado, cansado, pero ya no vencido. Algo había cambiado en él desde el instante en que levantó la vista a la cámara y dijo sin sonido —antes de que abrieran el audio— que no iba a caer solo. A partir de ese momento dejó de parecer un hombre a punto de ser procesado por el sistema. Empezó a parecer un hombre que había aceptado, por fin, que ya no le quedaba nada que proteger dentro de él. Y ese tipo de personas son las que más miedo dan a las estructuras refinadas: porque ya no negocian bien.
+            </p>
+
+            <p>
+              La sala del comité real seguía en pie.
+            </p>
+
+            <p>
+              Seguía organizada.
+            </p>
+
+            <p>
+              Seguía hablando bajo.
+            </p>
+
+            <p>
+              Pero Tomás ya podía verlo:
+            </p>
+
+            <p>
+              la elegancia estaba herida.
+            </p>
+
+            <p>
+              La mujer de traje marfil continuaba precisa.
+            </p>
+
+            <p>
+              Valdés seguía erguido.
+            </p>
+
+            <p>
+              El experto aún aparentaba control.
+            </p>
+
+            <p>
+              Incluso la figura tras el vidrio negro mantenía la voz medida.
+            </p>
+
+            <p>
+              Pero detrás de esa compostura ya no había perfección.
+            </p>
+
+            <p><strong>Había urgencia encubierta.</strong></p>
+
+            <div class="quote">Tomás descubrió que el verdadero rostro del poder no aparece cuando manda. Aparece cuando algo, por fin, lo obliga a improvisar sin admitir que improvisa.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              —Localiza la ruta externa —dijo la voz del fondo.
+            </p>
+
+            <p>
+              No fue una orden gritaba.
+            </p>
+
+            <p>
+              Fue peor.
+            </p>
+
+            <p>
+              Sonó como una corrección de proceso.
+            </p>
+
+            <p>
+              El experto tomó el teléfono de inmediato.
+            </p>
+
+            <p>
+              La mujer de traje marfil revisó una interfaz lateral en una pantalla secundaria.
+            </p>
+
+            <p>
+              Valdés se acercó un paso más a la imagen de Cárdenas, como si de esa distancia dependiera entender mejor qué tan profunda era la fuga.
+            </p>
+
+            <p>
+              Tomás absorbió cada gesto.
+            </p>
+
+            <p>
+              Ruta externa.
+            </p>
+
+            <p>
+              No hablaban de “filtración”.
+            </p>
+
+            <p>
+              No hablaban de “backup”.
+            </p>
+
+            <p>
+              No hablaban de “prueba escondida”.
+            </p>
+
+            <p>
+              Ruta externa.
+            </p>
+
+            <p>
+              Otra vez la sintaxis del sistema:
+              siempre reducir la amenaza a una pieza logística para no dejarla adquirir tamaño moral.
+            </p>
+
+            <p>
+              Pero lo importante no era el eufemismo.
+            </p>
+
+            <p>
+              Lo importante era que confirmaba que Cárdenas no había improvisado una bravata.
+            </p>
+
+            <p>
+              Había construido una salida real fuera del circuito absorbido por Enerxia y la caja negra.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Cuándo la montó? —preguntó Valdés.
+            </p>
+
+            <p>
+              El experto respondió sin apartar la vista de la pantalla de consulta:
+            </p>
+
+            <p>
+              —No lo sé todavía.
+            </p>
+
+            <p>
+              Ese “todavía” fue una grieta enorme.
+            </p>
+
+            <p>
+              Porque el centro del sistema podía tolerar muchas cosas:
+              demora administrada,
+              ruido público,
+              caídas parciales,
+              incluso nombres expuestos.
+            </p>
+
+            <p>
+              Lo que no toleraba era esto:
+              no saber.
+            </p>
+
+            <p>
+              Una ruta no catalogada.
+            </p>
+
+            <p>
+              Un archivo fuera de la secuencia.
+            </p>
+
+            <p>
+              Un hombre gris saliendo del molde previsto.
+            </p>
+
+            <div class="quote">La red aceptaba el escándalo. Lo que no aceptaba era la opacidad aplicada contra ella misma.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás comprendió en ese momento que el final ya estaba dibujado, aunque todavía nadie en la sala se atreviera a decirlo:
+            </p>
+
+            <p>
+              no ganaría quien tuviera “la verdad”.
+            </p>
+
+            <p>
+              Ganaría quien lograra sacar primero una versión completa, irrefrenable,
+              antes de que el sistema la descompusiera en pedazos útiles.
+            </p>
+
+            <p>
+              La batalla ya no era por descubrir.
+            </p>
+
+            <p>
+              Era por velocidad.
+            </p>
+
+            <p>
+              Por simultaneidad.
+            </p>
+
+            <p>
+              Por contagio.
+            </p>
+
+            <p>
+              La red solo podía reabsorber bien lo que alcanzaba a aislar.
+            </p>
+
+            <p><strong>Si demasiadas piezas salían al mismo tiempo, su gran maquinaria de contención se convertía en una coreografía demasiado lenta.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Cárdenas seguía hablando en la pantalla.
+            </p>
+
+            <p>
+              —…no está en Enerxia. No está en la caja negra. Y no pasa por las fundaciones de siempre.
+            </p>
+
+            <p>
+              Uno de los hombres de la sala blanca intentó cerrar la carpeta que había frente a él.
+            </p>
+
+            <p>
+              Cárdenas la empujó hacia un costado.
+            </p>
+
+            <p>
+              Ya no actuaba como alguien que buscara indulgencia.
+            </p>
+
+            <p>
+              Actuaba como alguien que quería asegurarse de dejar una herida visible.
+            </p>
+
+            <p>
+              La mujer de traje marfil habló por fin con una dureza nueva:
+            </p>
+
+            <p>
+              —Si logra nombrar la ruta, perdemos el orden de activación.
+            </p>
+
+            <p>
+              Otra frase quirúrgica.
+            </p>
+
+            <p>
+              Orden de activación.
+            </p>
+
+            <p>
+              No “control de daños”.
+            </p>
+
+            <p>
+              No “seguridad”.
+            </p>
+
+            <p>
+              Orden.
+            </p>
+
+            <p>
+              Activación.
+            </p>
+
+            <p>
+              El sistema seguía intentando pensarse como maquinaria limpia incluso mientras se tensaba.
+            </p>
+
+            <div class="quote">Hasta en el borde del desorden, el monstruo insistía en llamarse procedimiento.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Entonces Tomás hizo lo único posible.
+            </p>
+
+            <p>
+              Se acercó un paso a la mesa central y dijo:
+            </p>
+
+            <p>
+              —Ya la perdieron.
+            </p>
+
+            <p>
+              El silencio cayó de golpe.
+            </p>
+
+            <p>
+              Nadie le había dado permiso de volver a intervenir.
+            </p>
+
+            <p>
+              Precisamente por eso la frase golpeó tan fuerte.
+            </p>
+
+            <p>
+              Valdés giró lentamente.
+            </p>
+
+            <p>
+              El experto alzó la cabeza con irritación real.
+            </p>
+
+            <p>
+              La mujer de traje marfil lo observó con una intensidad casi quirúrgica.
+            </p>
+
+            <p>
+              Y la figura del fondo dijo:
+            </p>
+
+            <p>
+              —Explícate.
+            </p>
+
+            <p>
+              Tomás habló sin bajar la mirada.
+            </p>
+
+            <p>
+              —Si Cárdenas tiene algo fuera de la ruta y ustedes no saben dónde, ya no controlan el ritmo del relato. Aunque lo callen ahora mismo, el sistema entero acaba de quedar expuesto a su peor escenario: una verdad sin secuencia.
+            </p>
+
+            <p>
+              Dejó que la frase respirara.
+            </p>
+
+            <p>
+              —Y eso ustedes no saben trabajarlo sin volverse visibles.
+            </p>
+
+            <p>
+              El golpe fue directo.
+            </p>
+
+            <p>
+              Porque señalaba el único lugar donde la red era realmente frágil:
+              su dependencia absoluta de la administración correcta del tiempo.
+            </p>
+
+            <p>
+              Si perdían el ritmo,
+              si perdían la jerarquía del goteo,
+              si la verdad dejaba de salir en porciones diseñadas,
+              entonces el sistema empezaba a verse no como arquitectura inevitable,
+              sino como un organismo desesperado intentando tapar demasiados agujeros a la vez.
+            </p>
+
+            <div class="quote">El centro no temía a la verdad completa. Temía a la verdad desordenada.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La mujer de traje marfil lo entendió antes que nadie.
+            </p>
+
+            <p>
+              Se notó en algo mínimo:
+              dejó de mirar la pantalla y miró directamente a la voz del fondo,
+              como si por primera vez ese día necesitara validación inmediata.
+            </p>
+
+            <p>
+              —Necesitamos retenerlo —dijo, refiriéndose a Tomás.
+            </p>
+
+            <p>
+              —Ya está retenido —respondió el experto.
+            </p>
+
+            <p>
+              —No físicamente —corrigió ella—. Narrativamente.
+            </p>
+
+            <p>
+              La frase le heló la sangre.
+            </p>
+
+            <p>
+              Narrativamente.
+            </p>
+
+            <p>
+              Ahí estaba otra vez la esencia brutal del sistema:
+              una persona no queda inmovilizada cuando la encierran en una sala,
+              sino cuando consiguen escribir sobre ella una versión previa a su salida.
+            </p>
+
+            <p><strong>La red no necesitaba apresarlo primero. Necesitaba describirlo antes de que hablara.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás comprendió la amenaza total con una claridad feroz.
+            </p>
+
+            <p>
+              Si Cárdenas se volvía sacrificio útil y él se convertía en analista obsesivo, infiltrado inestable o pieza contaminada,
+              el sistema todavía podía reordenar la explosión.
+            </p>
+
+            <p>
+              No bastaba con que existieran archivos.
+            </p>
+
+            <p>
+              No bastaba con que existiera una ruta externa.
+            </p>
+
+            <p>
+              La salida final exigía algo peor y más grande:
+              una ruptura simultánea de sentido.
+            </p>
+
+            <p>
+              Había que sacar el material
+              y
+              había que romper la capacidad del sistema para nombrar primero a quienes lo sacaban.
+            </p>
+
+            <div class="quote">El último combate no era entre verdad y mentira. Era entre dos capacidades de narrar más rápido que el otro.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En la pantalla, Cárdenas volvió a hablar.
+            </p>
+
+            <p>
+              Esta vez más bajo.
+            </p>
+
+            <p>
+              Más concentrado.
+            </p>
+
+            <p>
+              Como si hubiera aceptado que ya no necesitaba convencer a los hombres frente a él en la sala blanca,
+              sino dejar claves suficientes para otra audiencia.
+            </p>
+
+            <p>
+              —…si llega a las dos copias, no van a poder cerrarlo con una sola cara…
+            </p>
+
+            <p>
+              Dos copias.
+            </p>
+
+            <p>
+              Tomás sintió una descarga total.
+            </p>
+
+            <p>
+              No una.
+            </p>
+
+            <p>
+              Dos.
+            </p>
+
+            <p>
+              Cárdenas había distribuido el material.
+            </p>
+
+            <p>
+              O al menos eso quería que el comité creyera.
+            </p>
+
+            <p>
+              Y si era cierto, la activación acababa de volverse exponencialmente más peligrosa para la red.
+            </p>
+
+            <p>
+              Porque una ruta externa puede perseguirse.
+            </p>
+
+            <p>
+              Dos rutas, sin saber si una es distractora o ambas son reales, obligan al sistema a dividir reflejos.
+            </p>
+
+            <p>
+              Y un sistema dividido se vuelve visible.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —¿Dos copias? —preguntó Valdés, incapaz por fin de sostener su falsa suavidad.
+            </p>
+
+            <p>
+              Cárdenas sonrió otra vez desde la pantalla.
+            </p>
+
+            <p>
+              —Yo aprendí de ustedes.
+            </p>
+
+            <p>
+              La frase atravesó la sala como una forma salvaje de justicia.
+            </p>
+
+            <p>
+              Sí.
+            </p>
+
+            <p>
+              Cárdenas había sido producido por la misma lógica que ahora intentaba devorarlo.
+            </p>
+
+            <p>
+              Había aprendido a duplicar,
+              fraccionar,
+              cubrir,
+              retrasar,
+              sembrar contingencia.
+            </p>
+
+            <p>
+              El monstruo estaba siendo herido con una técnica que le pertenecía.
+            </p>
+
+            <div class="quote">No había nada más peligroso para una máquina perfecta que un hombre mediocre entrenado demasiado tiempo dentro de sus propios reflejos.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              La voz del fondo habló con un peso nuevo:
+            </p>
+
+            <p>
+              —Aislen la ruta blanca. Y encuentren a Nicolás.
+            </p>
+
+            <p>
+              Nicolás.
+            </p>
+
+            <p>
+              El nombre entró como otra detonación.
+            </p>
+
+            <p>
+              Entonces seguía vivo en la ecuación central.
+            </p>
+
+            <p>
+              Entonces el sistema nunca había dejado de considerarlo un factor.
+            </p>
+
+            <p>
+              Y si ahora lo querían encontrar, era porque por fin sospechaban que una de las copias podía estar orbitando su borde.
+            </p>
+
+            <p>
+              Tomás entendió algo decisivo:
+              los últimos movimientos del tablero ya no eran solo entre él y el comité.
+            </p>
+
+            <p>
+              La partida final tenía al menos cuatro vértices activos:
+              él,
+              Cárdenas,
+              Nicolás,
+              y Laura,
+              donde quiera que estuviera.
+            </p>
+
+            <p>
+              Cuatro trayectorias fuera de ruta.
+            </p>
+
+            <p>
+              Cuatro verdades parciales capaces de volverse una sola si lograban sincronizarse antes que el sistema.
+            </p>
+
+            <div class="quote">El final ya no dependía de un héroe. Dependía de que varios fragmentos humanos lograran, por una vez, adelantarse al organismo que los había estudiado durante años.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Tomás sintió algo que llevaba tiempo enterrado por puro instinto de supervivencia:
+              esperanza.
+            </p>
+
+            <p>
+              No una esperanza limpia.
+            </p>
+
+            <p>
+              No optimista.
+            </p>
+
+            <p>
+              Una esperanza brutal, de combate.
+            </p>
+
+            <p>
+              La posibilidad concreta de que el sistema, por primera vez, no alcanzara a ordenar el daño.
+            </p>
+
+            <p>
+              Porque no bastaba con que una pieza cayera.
+            </p>
+
+            <p>
+              Pero si varias piezas decidían caer al mismo tiempo en direcciones distintas,
+              la red tendría que mostrar demasiado de sí para contenerlas.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              —Ya no pueden hacer esto en silencio —dijo Tomás.
+            </p>
+
+            <p>
+              Valdés lo miró con odio abierto.
+            </p>
+
+            <p>
+              El experto guardó por fin toda pretensión de neutralidad.
+            </p>
+
+            <p>
+              La mujer de traje marfil seguía quieta, aunque sus ojos ya no eran de pura administración.
+            </p>
+
+            <p>
+              Eran de cálculo bajo presión.
+            </p>
+
+            <p>
+              Y la voz del fondo respondió:
+            </p>
+
+            <p>
+              —Siempre se puede trabajar con menos silencio del deseable.
+            </p>
+
+            <p>
+              Otra gran verdad del monstruo:
+              no necesitaba perfección para sobrevivir.
+            </p>
+
+            <p>
+              Le bastaba con imponer una versión suficientemente antes que las otras.
+            </p>
+
+            <p>
+              Por eso el episodio final tenía que ser total.
+            </p>
+
+            <p>
+              No una revelación ordenada.
+            </p>
+
+            <p>
+              No una denuncia prudente.
+            </p>
+
+            <p><strong>Una salida masiva, brutal, imposible de jerarquizar a tiempo.</strong></p>
+
+            <div class="quote">Tomás lo supo con nitidez absoluta: el final no podía ser limpio, porque todo final limpio sería reutilizable por la red.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En la pantalla, uno de los hombres de la sala blanca trató de retirar el documento frente a Cárdenas.
+            </p>
+
+            <p>
+              Cárdenas lo sostuvo con violencia inesperada.
+            </p>
+
+            <p>
+              Hubo un forcejeo breve.
+            </p>
+
+            <p>
+              La imagen tembló.
+            </p>
+
+            <p>
+              El audio saturó un segundo.
+            </p>
+
+            <p>
+              Y luego se escuchó, fuerte, claro, desgarrando por fin la elegancia de todo el edificio:
+            </p>
+
+            <div class="quote">—¡Ya lo solté!</div>
+
+            <p>
+              Nadie necesitó preguntar qué.
+            </p>
+
+            <p>
+              La sala entera lo entendió.
+            </p>
+
+            <p>
+              La ruta externa ya no era una amenaza pendiente.
+            </p>
+
+            <p>
+              La ruptura había comenzado.
+            </p>
+
+            <p>
+              Valdés dio un paso abrupto.
+            </p>
+
+            <p>
+              El experto soltó un insulto.
+            </p>
+
+            <p>
+              La mujer de traje marfil habló tres instrucciones a la vez.
+            </p>
+
+            <p>
+              Y por primera vez desde que Tomás entró al centro, la voz del fondo dejó de sonar como arquitectura.
+            </p>
+
+            <p>
+              Sonó humana.
+            </p>
+
+            <p>
+              Apenas un segundo.
+            </p>
+
+            <p>
+              Lo suficiente.
+            </p>
+
+            <div class="quote">Eso fue lo que dejó preparado el final: el monstruo todavía era enorme, sí, pero por fin había sido obligado a sentir tiempo real.</div>
+
+            <p>
+              Y Tomás comprendió, con una claridad feroz, que el último episodio ya no se trataría de descubrir el precio del silencio.
+            </p>
+
+            <p><strong>Se trataría de ver cuánto cuesta, para un sistema entero, cuando el silencio por fin se rompe en demasiadas direcciones al mismo tiempo.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa al capítulo final para ver el colapso de la versión oficial, la salida de la verdad fuera de la ruta y el precio definitivo que cada uno paga cuando el sistema ya no alcanza a escribir primero.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo15.html" onclick="goBack(event, 'capitulo15.html')" class="btn btn-ghost">← Capítulo 15</a>
+            <a href="capitulo17.html" class="btn btn-primary">Leer capítulo 17 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function goBack(event, fallbackUrl){
+      event.preventDefault();
+
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
