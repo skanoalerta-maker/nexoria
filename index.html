@@ -1381,7 +1381,7 @@
           </div>
 
           <p class="section-note">
-            Romance, terror, misterio, fantasía, comedia, historia y más.
+            Romance, terror, historia, futurista y más.
           </p>
         </div>
 
@@ -1470,150 +1470,116 @@
     </div>
   </section>
 
+  <script src="novelas/data.js"></script>
+
   <script>
     const fallbackNovelas = [
-      const fallbackNovelas = [
-  {
-    id: "codigo-nebula",
-    titulo: "Código Nébula",
-    genero: "futurista",
-    portada: "assets/covers/nebula.jpg",
-    descripcion:
-      "Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.",
-    ruta: "novelas/index.html?id=codigo-nebula",
-    carpeta: "codigo-nebula",
-    temporada: "Temporada 1",
-    visitas: 1542,
-    gratis: 3,
-    destacada: true
-  },
-  {
-    id: "codigo-nebula-t2",
-    titulo: "Código Nébula: Temporada 2",
-    genero: "futurista",
-    portada: "assets/covers/temporada2-cover.jpg",
-    descripcion:
-      "La historia continúa.",
-    ruta: "novelas/index.html?id=codigo-nebula",
-    carpeta: "codigo-nebula",
-    temporada: "Temporada 2",
-    visitas: 320,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "no-debi-enamorarme",
-    titulo: "No debí enamorarme de ti",
-    genero: "romance",
-    portada: "assets/covers/no-debi-enamorarme.jpg",
-    descripcion:
-      "Una historia intensa sobre deseo y decisiones equivocadas.",
-    ruta: "novelas/index.html?id=no-debi-enamorarme",
-    carpeta: "no-debi-enamorarme",
-    temporada: "Temporada 1",
-    visitas: 2984,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "no-debi-enamorarme-t2",
-    titulo: "No debí enamorarme de ti: Temporada 2",
-    genero: "romance",
-    portada: "assets/covers/temporada2-cover.jpg",
-    descripcion:
-      "La historia continúa con nuevas consecuencias.",
-    ruta: "novelas/index.html?id=no-debi-enamorarme",
-    carpeta: "no-debi-enamorarme",
-    temporada: "Temporada 2",
-    visitas: 0,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "despues-de-tu-adios",
-    titulo: "Después de tu adiós",
-    genero: "romance",
-    portada: "assets/covers/despues-de-tu-adios.jpg",
-    descripcion:
-      "Una novela emocional sobre recuerdos y ausencia.",
-    ruta: "novelas/index.html?id=despues-de-tu-adios",
-    carpeta: "despues-de-tu-adios",
-    temporada: "Temporada 1",
-    visitas: 1187,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "bajo-la-misma-lluvia",
-    titulo: "Bajo la misma lluvia",
-    genero: "romance",
-    portada: "assets/covers/bajo-la-misma-lluvia.jpg",
-    descripcion:
-      "Dos vidas vuelven a cruzarse en el peor momento.",
-    ruta: "novelas/index.html?id=bajo-la-misma-lluvia",
-    carpeta: "bajo-la-misma-lluvia",
-    temporada: "Temporada 1",
-    visitas: 0,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "la-ultima-conexion",
-    titulo: "La última conexión",
-    genero: "terror",
-    portada: "assets/covers/la-ultima-conexion.jpg",
-    descripcion:
-      "Mensajes desde su propio número a las 02:17.",
-    ruta: "novelas/index.html?id=la-ultima-conexion",
-    carpeta: "la-ultima-conexion",
-    temporada: "Temporada 1",
-    visitas: 842,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "ya-habias-estado-ahi",
-    titulo: "Ya habías estado ahí",
-    genero: "terror",
-    portada: "assets/covers/ya-habias-estado-ahi.jpg",
-    descripcion:
-      "Volver a casa nunca volvió a sentirse normal.",
-    ruta: "novelas/index.html?id=ya-habias-estado-ahi",
-    carpeta: "ya-habias-estado-ahi",
-    temporada: "Temporada 1",
-    visitas: 0,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "golpe-de-estado",
-    titulo: "Golpe de Estado",
-    genero: "historia",
-    portada: "assets/covers/golpe_estado_nebula.png",
-    descripcion:
-      "Una historia política sobre la fractura de un país.",
-    ruta: "novelas/index.html?id=golpe-de-estado",
-    carpeta: "golpe-de-estado",
-    temporada: "Temporada 1",
-    visitas: 0,
-    gratis: 3,
-    destacada: false
-  },
-  {
-    id: "pinochet",
-    titulo: "Pinochet",
-    genero: "historia",
-    portada: "assets/covers/pinochet_nebula_portada.png",
-    descripcion:
-      "Una novela histórica sobre poder y decisiones militares.",
-    ruta: "novelas/index.html?id=pinochet",
-    carpeta: "pinochet",
-    temporada: "Temporada 1",
-    visitas: 0,
-    gratis: 3,
-    destacada: false
-  }
-];
+      {
+        id: "codigo-nebula",
+        titulo: "Código Nébula",
+        genero: "futurista",
+        portada: "assets/covers/nebula.jpg",
+        descripcion: "Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.",
+        ruta: "novelas/index.html?id=codigo-nebula",
+        visitas: 1542,
+        gratis: 3,
+        destacada: true,
+        temporada: "Temporada 1",
+        capitulos: 10
+      },
+      {
+        id: "no-debi-enamorarme",
+        titulo: "No debí enamorarme de ti",
+        genero: "romance",
+        portada: "assets/covers/no-debi-enamorarme.jpg",
+        descripcion: "Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado.",
+        ruta: "novelas/index.html?id=no-debi-enamorarme",
+        visitas: 2984,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 10
+      },
+      {
+        id: "despues-de-tu-adios",
+        titulo: "Después de tu adiós",
+        genero: "romance",
+        portada: "assets/covers/despues-de-tu-adios.jpg",
+        descripcion: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
+        ruta: "novelas/index.html?id=despues-de-tu-adios",
+        visitas: 1187,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 3
+      },
+      {
+        id: "bajo-la-misma-lluvia",
+        titulo: "Bajo la misma lluvia",
+        genero: "romance",
+        portada: "assets/covers/bajo-la-misma-lluvia.jpg",
+        descripcion: "Dos vidas marcadas por heridas distintas vuelven a cruzarse en el peor momento posible.",
+        ruta: "novelas/index.html?id=bajo-la-misma-lluvia",
+        visitas: 0,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 3
+      },
+      {
+        id: "la-ultima-conexion",
+        titulo: "La última conexión",
+        genero: "terror",
+        portada: "assets/covers/la-ultima-conexion.jpg",
+        descripcion: "A las 02:17 de la madrugada, Daniel recibe mensajes desde su propio número.",
+        ruta: "novelas/index.html?id=la-ultima-conexion",
+        visitas: 842,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 10
+      },
+      {
+        id: "ya-habias-estado-ahi",
+        titulo: "Ya habías estado ahí",
+        genero: "terror",
+        portada: "assets/covers/ya-habias-estado-ahi.jpg",
+        descripcion: "Volver a casa nunca volvió a sentirse normal.",
+        ruta: "novelas/index.html?id=ya-habias-estado-ahi",
+        visitas: 0,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 3
+      },
+      {
+        id: "golpe-de-estado",
+        titulo: "Golpe de Estado",
+        genero: "historia",
+        portada: "assets/covers/golpe_estado_nebula.png",
+        descripcion: "Una historia política, social y humana sobre la fractura de un país.",
+        ruta: "novelas/index.html?id=golpe-de-estado",
+        visitas: 0,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 3
+      },
+      {
+        id: "pinochet",
+        titulo: "Pinochet",
+        genero: "historia",
+        portada: "assets/covers/pinochet_nebula_portada.png",
+        descripcion: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano.",
+        ruta: "novelas/index.html?id=pinochet",
+        visitas: 0,
+        gratis: 3,
+        destacada: false,
+        temporada: "Temporada 1",
+        capitulos: 3
+      }
+    ];
+
     let novelas = [];
     let filtradas = [];
 
@@ -1627,16 +1593,112 @@
       return texto.charAt(0).toUpperCase() + texto.slice(1);
     }
 
+    function normalizarGenero(texto) {
+      const value = String(texto || "").trim().toLowerCase();
+      if (!value) return "general";
+
+      if (value.includes("romance")) return "romance";
+      if (value.includes("terror")) return "terror";
+      if (value.includes("historia")) return "historia";
+      if (value.includes("militar")) return "historia";
+      if (value.includes("política")) return "historia";
+      if (value.includes("futur")) return "futurista";
+      if (value.includes("tecnolog")) return "futurista";
+      if (value.includes("suspenso")) return "suspenso";
+      return value;
+    }
+
+    function obtenerGeneroDesdeNovela(novel) {
+      if (Array.isArray(novel.tags) && novel.tags.length) {
+        return normalizarGenero(novel.tags[0]);
+      }
+
+      const folder = String(novel.baseFolder || "").split("/")[0];
+      return normalizarGenero(folder || "general");
+    }
+
+    function obtenerTemporadaLabel(novel) {
+      const chapters = Array.isArray(novel.chapters) ? novel.chapters : [];
+      const labels = [...new Set(chapters.map(ch => ch.seasonLabel || ch.season).filter(Boolean))];
+      if (labels.length > 1) return labels.join(" · ");
+      if (labels.length === 1) return labels[0];
+      return novel.defaultSeasonLabel || "Temporada 1";
+    }
+
+    function obtenerCapitulosCount(novel) {
+      return Array.isArray(novel.chapters) ? novel.chapters.length : 0;
+    }
+
+    function obtenerCover(novel) {
+      const raw = String(novel.cover || "").trim();
+      if (!raw) return "assets/covers/nebula.jpg";
+      return raw.startsWith("../") ? raw.replace("../", "") : raw;
+    }
+
+    function getStorageViewsKey(novelId) {
+      return "nebula-views-" + novelId;
+    }
+
+    function getProgressKey(novelId) {
+      return "nebula-progress-" + novelId;
+    }
+
+    function getPaidKey(novelId) {
+      return "paid-" + novelId;
+    }
+
     function getContinuePath(novela) {
-      const key = "nebula-progress-" + novela.id;
-      return localStorage.getItem(key) || novela.ruta;
+      return localStorage.getItem(getProgressKey(novela.id)) || novela.ruta;
     }
 
     function saveInitialProgress(novela) {
-      const key = "nebula-progress-" + novela.id;
+      const key = getProgressKey(novela.id);
       if (!localStorage.getItem(key)) {
         localStorage.setItem(key, novela.ruta);
       }
+    }
+
+    function getStoredViews(novela) {
+      const key = getStorageViewsKey(novela.id);
+      const stored = Number(localStorage.getItem(key));
+      return Number.isFinite(stored) && stored > 0 ? stored : Number(novela.visitas || 0);
+    }
+
+    function increaseViews(novela) {
+      const key = getStorageViewsKey(novela.id);
+      const current = getStoredViews(novela);
+      const next = current + 1;
+      localStorage.setItem(key, String(next));
+      novela.visitas = next;
+    }
+
+    function buildCatalogFromNebulaData() {
+      const source = window.NEBULA_NOVELS;
+      if (!source || typeof source !== "object") return [];
+
+      return Object.entries(source).map(([id, novel], index) => ({
+        id,
+        titulo: novel.title || id,
+        genero: obtenerGeneroDesdeNovela(novel),
+        portada: obtenerCover(novel),
+        descripcion: novel.description || "Historia disponible en Nébula.",
+        ruta: `novelas/index.html?id=${id}`,
+        visitas: 0,
+        gratis: Number(novel.freeChapters ?? 3),
+        destacada: index === 0,
+        temporada: obtenerTemporadaLabel(novel),
+        capitulos: obtenerCapitulosCount(novel),
+        precio: novel.price || "$1.500 CLP",
+        premium: localStorage.getItem(getPaidKey(id)) === "true"
+      }));
+    }
+
+    function prepararNovelas(data) {
+      return data.map((novela, index) => ({
+        ...novela,
+        visitas: getStoredViews(novela),
+        destacada: typeof novela.destacada === "boolean" ? novela.destacada : index === 0
+      }));
     }
 
     function renderFeatured() {
@@ -1649,12 +1711,19 @@
       document.getElementById("featuredSeasonTag").textContent = destacada.temporada || "Temporada 1";
       document.getElementById("featuredTitle").textContent = destacada.titulo;
       document.getElementById("featuredDescription").textContent = destacada.descripcion;
-      document.getElementById("featuredViews").textContent = destacada.visitas || 0;
+      document.getElementById("featuredViews").textContent = getStoredViews(destacada);
       document.getElementById("featuredFree").textContent = (destacada.gratis || 3) + " capítulos";
       document.getElementById("featuredReadLink").href = destacada.ruta;
 
+      const readLink = document.getElementById("featuredReadLink");
+      readLink.onclick = () => {
+        saveInitialProgress(destacada);
+        increaseViews(destacada);
+      };
+
       const continueBtn = document.getElementById("featuredContinueBtn");
       continueBtn.onclick = () => {
+        saveInitialProgress(destacada);
         window.location.href = getContinuePath(destacada);
       };
     }
@@ -1705,7 +1774,7 @@
           <div class="story-body">
             <div class="story-topline">
               <h3>${novela.titulo}</h3>
-              <small>${novela.visitas || 0} visitas</small>
+              <small>${getStoredViews(novela)} visitas</small>
             </div>
 
             <p>${novela.descripcion}</p>
@@ -1717,8 +1786,8 @@
               </div>
 
               <div>
-                <small>Acceso completo</small>
-                <strong>$1.500 CLP</strong>
+                <small>Capítulos</small>
+                <strong>${novela.capitulos || 0} disponibles</strong>
               </div>
             </div>
 
@@ -1737,18 +1806,22 @@
 
       document.querySelectorAll("[data-read-id]").forEach(link => {
         const novela = novelas.find(n => n.id === link.dataset.readId);
-        if (novela) {
-          link.addEventListener("click", () => saveInitialProgress(novela));
-        }
+        if (!novela) return;
+
+        link.addEventListener("click", () => {
+          saveInitialProgress(novela);
+          increaseViews(novela);
+        });
       });
 
       document.querySelectorAll("[data-continue-id]").forEach(btn => {
         const novela = novelas.find(n => n.id === btn.dataset.continueId);
-        if (novela) {
-          btn.addEventListener("click", () => {
-            window.location.href = getContinuePath(novela);
-          });
-        }
+        if (!novela) return;
+
+        btn.addEventListener("click", () => {
+          saveInitialProgress(novela);
+          window.location.href = getContinuePath(novela);
+        });
       });
     }
 
@@ -1760,7 +1833,9 @@
           n.titulo,
           n.genero,
           n.descripcion,
-          n.temporada || ""
+          n.temporada || "",
+          String(n.capitulos || ""),
+          String(n.gratis || "")
         ].join(" ").toLowerCase();
 
         return texto.includes(q);
@@ -1769,16 +1844,9 @@
       renderStories(filtradas);
     }
 
-    async function cargarNovelas() {
-      try {
-        const res = await fetch("data/novelas.json");
-        if (!res.ok) throw new Error("No se pudo leer data/novelas.json");
-        const data = await res.json();
-        novelas = Array.isArray(data) && data.length ? data : fallbackNovelas;
-      } catch (e) {
-        novelas = fallbackNovelas;
-      }
-
+    function cargarNovelas() {
+      const desdeDataJs = buildCatalogFromNebulaData();
+      novelas = prepararNovelas(desdeDataJs.length ? desdeDataJs : fallbackNovelas);
       filtradas = [...novelas];
       renderFeatured();
       renderGenres();
