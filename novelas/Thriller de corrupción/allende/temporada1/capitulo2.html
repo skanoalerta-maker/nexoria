@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 2 | La Vía y la Ruptura</title>
+  <meta
+    name="description"
+    content="Capítulo 2 de La Vía y la Ruptura: El cerco comienza. La presión económica, política y mediática empieza a cerrar el paso al gobierno."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,.14);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("../assets/allende-portada.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.28;
+      filter:saturate(.9) contrast(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9,18,35,.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">La Vía y la Ruptura</p>
+            <p class="brand-sub">Drama histórico chileno</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo1.html" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo3.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Corrupción y poder / Capítulo 2</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 2</p>
+            <h1>El cerco empieza a cerrarse</h1>
+            <p>
+              El entusiasmo inicial no tarda en chocar con una fuerza más antigua y más organizada:
+              el dinero, la influencia y el miedo de quienes deciden que el experimento chileno no puede resultar.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">La presión invisible</div>
+              <h2>La crisis no llega sola</h2>
+              <p>
+                Mientras el gobierno intenta avanzar, la economía, la prensa y los intereses más poderosos
+                comienzan a operar como un cerco. Lo que parece desorden también empieza a parecer diseño.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Histórico</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Temporada</p>
+                  <p class="meta-v">2 de 17</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 2: El cerco empieza a cerrarse</h3>
+            <p>Lectura gratuita · Cuando la presión deja de ser rumor</p>
+          </div>
+          <div class="reader-badge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              Ningún proyecto desafía al poder sin pagar un precio.
+              Al principio, ese precio no siempre toma forma de violencia.
+              A veces llega como escasez, como sospecha, como desgaste diario.
+              Como una sensación constante de que algo se está rompiendo y nadie puede señalar con precisión quién está tirando de las grietas.
+            </p>
+
+            <p>
+              Chile empezó a vivir así.
+            </p>
+
+            <p>
+              No de un día para otro.
+            </p>
+
+            <p>
+              No con una sola señal.
+            </p>
+
+            <p>
+              Sino con una acumulación lenta de tensiones que se fueron metiendo en las conversaciones familiares,
+              en las filas, en las cuentas, en los almacenes y en los titulares.
+            </p>
+
+            <p>
+              La promesa seguía en pie.
+            </p>
+
+            <p>
+              Pero cada semana parecía costar más sostenerla.
+            </p>
+
+            <div class="quote">El problema no era solo gobernar. Era gobernar mientras otros trabajaban para demostrar que nada podía funcionar.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Desde arriba, el discurso se endurecía.
+            </p>
+
+            <p>
+              Quienes antes hablaban de preocupación empezaron a hablar de amenaza.
+            </p>
+
+            <p>
+              Quienes antes fingían prudencia comenzaron a reclamar orden.
+            </p>
+
+            <p>
+              Las palabras se volvieron armas antes que los fusiles.
+            </p>
+
+            <p>
+              Cada reforma era presentada por unos como reparación y por otros como invasión.
+            </p>
+
+            <p>
+              Cada avance se leía como justicia o como despojo.
+            </p>
+
+            <p>
+              Y entre ambos relatos se iba perdiendo el espacio para cualquier tregua.
+            </p>
+
+            <p><strong>La polarización no se alimenta sola. Necesita voces, intereses y una estrategia capaz de convertir cada problema en prueba de catástrofe.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              En los mercados, la gente empezó a notar ausencias.
+            </p>
+
+            <p>
+              Productos básicos que antes estaban, ahora no siempre aparecían.
+            </p>
+
+            <p>
+              O aparecían tarde.
+            </p>
+
+            <p>
+              O en menor cantidad.
+            </p>
+
+            <p>
+              O a precios que ya nadie podía mirar con calma.
+            </p>
+
+            <p>
+              La escasez tiene un modo particular de entrar en la vida:
+              primero incomoda, después inquieta, finalmente humilla.
+            </p>
+
+            <p>
+              Y cuando esa humillación se vuelve cotidiana, la política deja de discutirse como idea
+              y empieza a medirse en cucharadas, en litros, en pan, en medicamentos, en lo que alcanza y en lo que no.
+            </p>
+
+            <p>
+              En las filas, la rabia crecía.
+            </p>
+
+            <p>
+              Pero no crecía sola.
+            </p>
+
+            <p>
+              Siempre había alguien dispuesto a nombrarla, a orientarla, a convertirla en acusación dirigida.
+            </p>
+
+            <div class="quote">El hambre, el miedo y la frustración son herramientas poderosas cuando alguien sabe dónde empujarlas.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Mientras tanto, en oficinas cerradas y salones discretos, se hablaba otro idioma.
+            </p>
+
+            <p>
+              No el del pueblo.
+            </p>
+
+            <p>
+              No el de las marchas.
+            </p>
+
+            <p>
+              El idioma de los balances, las rutas de distribución, los créditos, la presión externa, los mensajes diplomáticos,
+              la confianza del mercado y la necesidad de impedir que el ejemplo chileno se volviera contagioso.
+            </p>
+
+            <p>
+              Había empresarios que ya no discutían si estaban incómodos.
+            </p>
+
+            <p>
+              Discutían cuánto estaban dispuestos a perder antes de actuar con toda su fuerza.
+            </p>
+
+            <p>
+              Había medios que ya no informaban solo lo que ocurría.
+            </p>
+
+            <p>
+              Aprendían a organizar emocionalmente lo que el país debía sentir sobre lo que ocurría.
+            </p>
+
+            <p>
+              Había actores políticos que ya no pensaban en coexistir con el proceso.
+            </p>
+
+            <p>
+              Empezaban a pensar en sobrevivir a él destruyéndolo.
+            </p>
+
+            <div class="quote">La pregunta dejó de ser si el gobierno resistiría. La nueva pregunta era cuánto daño debía acumularse para que la caída pareciera inevitable.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Allende seguía defendiendo el camino institucional.
+            </p>
+
+            <p>
+              Insistía en que la transformación debía ocurrir dentro del marco democrático.
+            </p>
+
+            <p>
+              Había en eso una convicción profunda.
+            </p>
+
+            <p>
+              Pero también una fe peligrosa:
+              la fe en que quienes se decían defensores de la democracia elegirían salvarla antes que usarla como excusa.
+            </p>
+
+            <p>
+              El gobierno intentaba sostenerse entre presiones contradictorias.
+            </p>
+
+            <p>
+              Por un lado, los sectores populares exigían avanzar más rápido.
+            </p>
+
+            <p>
+              Por otro, la oposición y los poderes económicos operaban para volver cada paso más costoso.
+            </p>
+
+            <p>
+              En medio, la institucionalidad se tensaba como un puente viejo obligado a soportar demasiado peso.
+            </p>
+
+            <p><strong>Gobernar se convirtió en caminar sobre una cuerda tirada desde ambos extremos.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              En las radios, en las portadas, en los comentarios repetidos una y otra vez,
+              empezó a instalarse una idea sencilla y devastadora:
+            </p>
+
+            <p>
+              que el caos tenía un responsable único.
+            </p>
+
+            <p>
+              Y cuando una sociedad acepta esa simplificación, deja de buscar explicaciones complejas.
+            </p>
+
+            <p>
+              Se conforma con un culpable visible.
+            </p>
+
+            <p>
+              Ya no importa quién bloquea, quién presiona, quién especula, quién retiene, quién financia,
+              quién sabotea, quién escribe el relato.
+            </p>
+
+            <p>
+              Importa a quién se puede señalar en público.
+            </p>
+
+            <p>
+              Ese proceso fue uno de los golpes más eficaces.
+            </p>
+
+            <p>
+              Porque ocurrió antes del golpe real.
+            </p>
+
+            <div class="quote">Primero había que convencer al país de que el fracaso era natural. Solo después podría justificarse la fuerza.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Las familias comenzaron a dividirse.
+            </p>
+
+            <p>
+              No siempre por odio.
+            </p>
+
+            <p>
+              A veces por miedo.
+            </p>
+
+            <p>
+              A veces por cansancio.
+            </p>
+
+            <p>
+              A veces porque dos personas podían mirar la misma escena y salir de ella con interpretaciones incompatibles.
+            </p>
+
+            <p>
+              Un padre hablaba de justicia social.
+            </p>
+
+            <p>
+              Un hermano respondía con palabras como desorden, expropiación, amenaza.
+            </p>
+
+            <p>
+              Una madre hacía cálculos para que alcanzara la comida.
+            </p>
+
+            <p>
+              Un hijo universitario volvía a casa convencido de que estaban viviendo un momento irrepetible.
+            </p>
+
+            <p>
+              La política ya no era una discusión distante.
+            </p>
+
+            <p>
+              Se había instalado en la mesa.
+            </p>
+
+            <p>
+              Y cuando una nación discute su sentido a la hora de comer,
+              la calma se vuelve una forma de nostalgia.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              En ese ambiente, cada conflicto tenía eco multiplicado.
+            </p>
+
+            <p>
+              Un paro no era solo un paro.
+            </p>
+
+            <p>
+              Era un mensaje.
+            </p>
+
+            <p>
+              Una señal de fuerza.
+            </p>
+
+            <p>
+              Una demostración de capacidad de daño.
+            </p>
+
+            <p>
+              El transporte, la distribución, el abastecimiento, la conversación pública:
+              todo podía convertirse en palanca.
+            </p>
+
+            <p>
+              Y poco a poco, la sensación de normalidad comenzó a erosionarse.
+            </p>
+
+            <p>
+              La gente aún iba al trabajo.
+            </p>
+
+            <p>
+              Aún compraba.
+            </p>
+
+            <p>
+              Aún esperaba.
+            </p>
+
+            <p>
+              Pero bajo esa rutina había una incomodidad nueva,
+              una intuición áspera de que el país estaba siendo empujado a un punto de no retorno.
+            </p>
+
+            <div class="quote">Lo más cruel del cerco no era solo la escasez. Era obligar a la gente a vivir la crisis sin poder ver todas las manos que la fabricaban.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En los sectores más acomodados, la conversación era distinta.
+            </p>
+
+            <p>
+              Allí no se hablaba de sacrificio.
+            </p>
+
+            <p>
+              Se hablaba de recuperación.
+            </p>
+
+            <p>
+              De cuándo el país volvería a ser “predecible”.
+            </p>
+
+            <p>
+              De cuándo se corregiría el rumbo.
+            </p>
+
+            <p>
+              De cuándo alguien pondría fin a la incertidumbre.
+            </p>
+
+            <p>
+              No siempre se decía cómo.
+            </p>
+
+            <p>
+              Pero el deseo de solución empezaba a volverse más importante que la naturaleza de esa solución.
+            </p>
+
+            <p>
+              Ese es uno de los momentos más peligrosos en cualquier democracia:
+              cuando el miedo ordena tanto la imaginación que la gente empieza a aceptar salidas que antes habría condenado.
+            </p>
+
+            <p><strong>El autoritarismo rara vez entra diciendo su nombre. Primero se ofrece como alivio.</strong></p>
+
+            <div class="divider"></div>
+
+            <p>
+              Allende resistía con discursos, con presencia, con una voluntad que para algunos parecía heroica
+              y para otros obstinada.
+            </p>
+
+            <p>
+              Todavía había multitudes.
+            </p>
+
+            <p>
+              Todavía había lealtad.
+            </p>
+
+            <p>
+              Todavía había una parte inmensa del país que no estaba dispuesta a entregar el proceso sin pelear políticamente por él.
+            </p>
+
+            <p>
+              Pero esa energía convivía con otra evidencia:
+              el gobierno estaba cada vez más cercado.
+            </p>
+
+            <p>
+              Cada frente exigía responder.
+            </p>
+
+            <p>
+              Cada respuesta abría un nuevo frente.
+            </p>
+
+            <p>
+              Cada día obligaba a administrar urgencias mientras al fondo se movían fuerzas mucho más grandes que la coyuntura.
+            </p>
+
+            <div class="quote">No bastaba con ganar elecciones. Había que sobrevivir a quienes no aceptaban haberlas perdido.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              En algún momento, la crisis dejó de sentirse como un accidente.
+            </p>
+
+            <p>
+              Empezó a parecer un clima.
+            </p>
+
+            <p>
+              Una atmósfera fabricada con paciencia.
+            </p>
+
+            <p>
+              Un cansancio nacional que iba debilitando la fe, no solo en un gobierno,
+              sino en la posibilidad misma de resolver el conflicto sin destruir algo esencial en el camino.
+            </p>
+
+            <p>
+              Esa era la victoria parcial del cerco:
+              no convencer a todos de que la transformación era mala,
+              sino convencer a suficientes de que la continuidad era insostenible.
+            </p>
+
+            <p>
+              Y una vez instalada esa percepción, la historia entra en una zona oscura.
+            </p>
+
+            <p>
+              Porque desde allí, cualquier ruptura empieza a parecerle razonable a demasiada gente.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+              En las noches, las radios seguían encendidas.
+            </p>
+
+            <p>
+              Las familias escuchaban noticias como si buscaran en ellas una señal de estabilidad que nunca llegaba completa.
+            </p>
+
+            <p>
+              En las poblaciones, se seguía organizando resistencia cotidiana.
+            </p>
+
+            <p>
+              En las oficinas privadas, se seguía midiendo el momento exacto para ir más lejos.
+            </p>
+
+            <p>
+              Entre una cosa y otra, Chile avanzaba hacia una frontera invisible.
+            </p>
+
+            <p>
+              Todavía no había sido cruzada.
+            </p>
+
+            <p>
+              Pero cada día parecía llevar al país más cerca.
+            </p>
+
+            <p>
+              Más cerca de la ruptura.
+            </p>
+
+            <p>
+              Más cerca del punto en que la democracia dejaría de ser un espacio de disputa para convertirse en una pieza del conflicto.
+            </p>
+
+            <div class="quote">La crisis ya no era solo económica ni política. Era emocional. Un país entero estaba siendo preparado para tolerar lo intolerable.</div>
+
+            <div class="divider"></div>
+
+            <p>
+              Esa noche, en una casa modesta, una mujer repartió el pan con más cuidado que nunca
+              mientras su esposo repetía que aquello no podía seguir así.
+            </p>
+
+            <p>
+              A varias cuadras de distancia, en una oficina con cortinas gruesas, otro hombre dijo exactamente la misma frase,
+              pero con una intención completamente distinta.
+            </p>
+
+            <p>
+              Esa era la tragedia del momento:
+              el mismo cansancio podía alimentar la esperanza de resistir
+              o el deseo de terminar con todo.
+            </p>
+
+            <p>
+              Y en esa ambigüedad, en ese agotamiento compartido pero políticamente opuesto,
+              empezó a construirse el verdadero terreno de la caída.
+            </p>
+
+            <p><strong>El país aún seguía en pie. Pero ya se sentía rodeado.</strong></p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa al capítulo 3 para entrar en la calle, la confrontación abierta y la sensación de que Chile comienza a dividirse sin vuelta atrás.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo1.html" class="btn btn-ghost">← Capítulo 1</a>
+            <a href="capitulo3.html" class="btn btn-primary">Leer capítulo 3 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
