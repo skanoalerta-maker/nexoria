@@ -1249,65 +1249,99 @@
       </article>
     </main>
   </div>
+<script>
+  function goBack(event, fallbackUrl){
+    event.preventDefault();
 
-  <script>
-    function goBack(event, fallbackUrl){
-      event.preventDefault();
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = fallbackUrl;
+    }
+  }
 
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = fallbackUrl;
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    createStars();
+  }
+
+  function createStars(){
+    stars = [];
+    const amount = Math.floor((canvas.width * canvas.height) / 14000);
+    for(let i = 0; i < amount; i++){
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.3,
+        speed: Math.random() * 0.35 + 0.08,
+        alpha: Math.random() * 0.7 + 0.2
+      });
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for(const s of stars){
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      s.y += s.speed;
+
+      if(s.y > canvas.height){
+        s.y = -2;
+        s.x = Math.random() * canvas.width;
       }
     }
 
-    const canvas = document.getElementById("stars");
-    const ctx = canvas.getContext("2d");
-    let stars = [];
+    requestAnimationFrame(animate);
+  }
 
-    function resize(){
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      createStars();
+  window.addEventListener("resize", resize);
+  resize();
+  animate();
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
+    authDomain: "nebula-1955f.firebaseapp.com",
+    projectId: "nebula-1955f",
+    storageBucket: "nebula-1955f.firebasestorage.app",
+    messagingSenderId: "736722257829",
+    appId: "1:736722257829:web:605cab7fde553470454a4c",
+    measurementId: "G-BTF17CDGM7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const chapterId = "el-precio-del-silencio/temporada1/capitulo1";
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+        readChapters: arrayUnion(chapterId)
+      });
+      console.log("📖 Capítulo guardado:", chapterId);
+    } catch (error) {
+      console.error("No se pudo guardar el capítulo leído:", error);
     }
-
-    function createStars(){
-      stars = [];
-      const amount = Math.floor((canvas.width * canvas.height) / 14000);
-      for(let i = 0; i < amount; i++){
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.6 + 0.3,
-          speed: Math.random() * 0.35 + 0.08,
-          alpha: Math.random() * 0.7 + 0.2
-        });
-      }
-    }
-
-    function animate(){
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for(const s of stars){
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-
-        s.y += s.speed;
-
-        if(s.y > canvas.height){
-          s.y = -2;
-          s.x = Math.random() * canvas.width;
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener("resize", resize);
-    resize();
-    animate();
-  </script>
+  });
+</script>
 </body>
 </html>
