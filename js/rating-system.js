@@ -1,162 +1,1084 @@
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-import {
-  doc,
-  getDoc,
-  runTransaction,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <title>Nébula | Novela</title>
+  <meta
+    name="description"
+    content="Explora capítulos, desbloquea historias y sigue leyendo en Nébula."
+  />
+  <meta name="theme-color" content="#07101f" />
 
-export function initNovelRating({
-  novelId,
-  starsSelector = "#ratingStars",
-  averageSelector = "#ratingAverage",
-  totalSelector = "#ratingTotal",
-  statusSelector = "#ratingStatus"
-}) {
-  const starsWrap = document.querySelector(starsSelector);
-  const averageEl = document.querySelector(averageSelector);
-  const totalEl = document.querySelector(totalSelector);
-  const statusEl = document.querySelector(statusSelector);
-
-  if (!starsWrap || !novelId) return;
-
-  const summaryRef = doc(db, "novel_ratings", novelId);
-  let currentUser = null;
-  let currentUserRating = 0;
-
-  function setStatus(message, isError = false) {
-    if (!statusEl) return;
-    statusEl.textContent = message;
-    statusEl.style.color = isError ? "#ffb4b4" : "#b8c4da";
-  }
-
-  function renderStars(selected = 0) {
-    const stars = [...starsWrap.querySelectorAll(".rating-star")];
-    stars.forEach((star, index) => {
-      const value = index + 1;
-      star.classList.toggle("active", value <= selected);
-    });
-  }
-
-  async function loadSummary() {
-    const summarySnap = await getDoc(summaryRef);
-
-    if (!summarySnap.exists()) {
-      if (averageEl) averageEl.textContent = "0.0";
-      if (totalEl) totalEl.textContent = "0";
-      return;
+  <style>
+    :root{
+      --bg:#040816;
+      --bg2:#07101f;
+      --bg3:#0b1730;
+      --panel:rgba(8,18,40,.78);
+      --panel-strong:rgba(10,20,44,.92);
+      --panel-soft:rgba(14,24,48,.62);
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(89,149,255,.22);
+      --text:#f8fbff;
+      --muted:#b8c4da;
+      --muted-2:#8ea3c8;
+      --blue:#3490ff;
+      --blue2:#66b8ff;
+      --violet:#9a66ff;
+      --cyan:#50dbff;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --shadow-soft:0 18px 46px rgba(0,0,0,.24);
+      --radius:26px;
+      --radius-lg:32px;
+      --container:min(1180px, calc(100% - 32px));
     }
 
-    const data = summarySnap.data();
-    if (averageEl) averageEl.textContent = Number(data.avgRating || 0).toFixed(1);
-    if (totalEl) totalEl.textContent = String(data.totalRatings || 0);
-  }
-
-  async function loadUserVote(user) {
-    const voteRef = doc(db, "novel_ratings", novelId, "votes", user.uid);
-    const voteSnap = await getDoc(voteRef);
-
-    currentUserRating = voteSnap.exists() ? Number(voteSnap.data().rating || 0) : 0;
-    renderStars(currentUserRating);
-
-    if (currentUserRating > 0) {
-      setStatus(`Tu voto actual es de ${currentUserRating} estrella${currentUserRating === 1 ? "" : "s"}.`);
-    } else {
-      setStatus("Aún no has votado esta novela.");
-    }
-  }
-
-  async function submitVote(newRating) {
-    if (!currentUser) {
-      setStatus("Debes iniciar sesión para votar.", true);
-      return;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    const voteRef = doc(db, "novel_ratings", novelId, "votes", currentUser.uid);
+    html{
+      scroll-behavior:smooth;
+    }
 
-    try {
-      await runTransaction(db, async (transaction) => {
-        const summarySnap = await transaction.get(summaryRef);
-        const voteSnap = await transaction.get(voteRef);
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(76,109,255,.16), transparent 24%),
+        radial-gradient(circle at 84% 18%, rgba(166,90,255,.16), transparent 28%),
+        radial-gradient(circle at 26% 76%, rgba(67,201,255,.10), transparent 24%),
+        linear-gradient(180deg, #040816 0%, #07101f 42%, #09162e 100%);
+      overflow-x:hidden;
+      position:relative;
+    }
 
-        let totalRatings = 0;
-        let ratingSum = 0;
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
-        if (summarySnap.exists()) {
-          const summaryData = summarySnap.data();
-          totalRatings = Number(summaryData.totalRatings || 0);
-          ratingSum = Number(summaryData.ratingSum || 0);
-        }
+    button{
+      font:inherit;
+    }
 
-        const previousRating = voteSnap.exists() ? Number(voteSnap.data().rating || 0) : 0;
+    img{
+      display:block;
+      max-width:100%;
+    }
 
-        if (previousRating > 0) {
-          ratingSum = ratingSum - previousRating + newRating;
-        } else {
-          ratingSum += newRating;
-          totalRatings += 1;
-        }
+    .container{
+      width:var(--container);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
 
-        const avgRating = totalRatings > 0 ? ratingSum / totalRatings : 0;
+    #stars-canvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-35;
+      pointer-events:none;
+    }
 
-        transaction.set(summaryRef, {
-          novelId,
-          avgRating,
-          totalRatings,
-          ratingSum,
-          updatedAt: serverTimestamp()
-        }, { merge: true });
+    .galaxy-bg,
+    .galaxy-bg::before,
+    .galaxy-bg::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      display:block;
+    }
 
-        transaction.set(voteRef, {
-          userId: currentUser.uid,
-          rating: newRating,
-          createdAt: voteSnap.exists()
-            ? (voteSnap.data().createdAt || serverTimestamp())
-            : serverTimestamp(),
-          updatedAt: serverTimestamp()
-        }, { merge: true });
+    .galaxy-bg{
+      z-index:-30;
+      overflow:hidden;
+    }
+
+    .galaxy-bg::before{
+      background-image:
+        radial-gradient(2px 2px at 8% 11%, rgba(255,255,255,.94), transparent 62%),
+        radial-gradient(1.5px 1.5px at 18% 67%, rgba(255,255,255,.88), transparent 62%),
+        radial-gradient(2px 2px at 27% 37%, rgba(255,255,255,.86), transparent 62%),
+        radial-gradient(1px 1px at 35% 82%, rgba(255,255,255,.72), transparent 62%),
+        radial-gradient(2px 2px at 46% 18%, rgba(255,255,255,.88), transparent 62%),
+        radial-gradient(1.5px 1.5px at 56% 56%, rgba(255,255,255,.74), transparent 62%),
+        radial-gradient(2px 2px at 66% 26%, rgba(255,255,255,.90), transparent 62%),
+        radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.70), transparent 62%),
+        radial-gradient(2px 2px at 85% 45%, rgba(255,255,255,.86), transparent 62%),
+        radial-gradient(1.5px 1.5px at 94% 14%, rgba(255,255,255,.82), transparent 62%);
+      opacity:.7;
+      animation: starsFloat 120s linear infinite;
+    }
+
+    .galaxy-bg::after{
+      background:
+        radial-gradient(circle at 18% 22%, rgba(75,122,255,.12), transparent 20%),
+        radial-gradient(circle at 78% 22%, rgba(174,84,255,.12), transparent 22%),
+        radial-gradient(circle at 68% 70%, rgba(58,194,255,.10), transparent 25%),
+        radial-gradient(circle at 30% 82%, rgba(124,255,220,.07), transparent 18%);
+      filter:blur(38px);
+      opacity:.95;
+      animation: nebulaDrift 22s ease-in-out infinite alternate;
+    }
+
+    .galaxy-layer{
+      position:fixed;
+      inset:0;
+      z-index:-29;
+      pointer-events:none;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.42), transparent 62%),
+        radial-gradient(1px 1px at 22% 40%, rgba(255,255,255,.34), transparent 62%),
+        radial-gradient(1px 1px at 34% 70%, rgba(255,255,255,.42), transparent 62%),
+        radial-gradient(1px 1px at 48% 30%, rgba(255,255,255,.34), transparent 62%),
+        radial-gradient(1px 1px at 59% 60%, rgba(255,255,255,.38), transparent 62%),
+        radial-gradient(1px 1px at 72% 16%, rgba(255,255,255,.44), transparent 62%),
+        radial-gradient(1px 1px at 82% 48%, rgba(255,255,255,.32), transparent 62%),
+        radial-gradient(1px 1px at 92% 78%, rgba(255,255,255,.35), transparent 62%);
+      opacity:.55;
+      animation: starsFloatReverse 180s linear infinite;
+    }
+
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      z-index:-28;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:64px 64px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);
+      opacity:.26;
+    }
+
+    .bg-orb{
+      position:fixed;
+      pointer-events:none;
+      border-radius:50%;
+      filter:blur(48px);
+      z-index:-27;
+      opacity:.36;
+    }
+
+    .orb-1{
+      width:420px;
+      height:420px;
+      top:14%;
+      right:-120px;
+      background:radial-gradient(circle, rgba(123,78,255,.36), transparent 68%);
+      animation: orbMove1 18s ease-in-out infinite alternate;
+    }
+
+    .orb-2{
+      width:360px;
+      height:360px;
+      left:-120px;
+      top:34%;
+      background:radial-gradient(circle, rgba(61,173,255,.28), transparent 68%);
+      animation: orbMove2 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes starsFloat{
+      from{ transform:translateY(0); }
+      to{ transform:translateY(-120px); }
+    }
+
+    @keyframes starsFloatReverse{
+      from{ transform:translateY(0); }
+      to{ transform:translateY(85px); }
+    }
+
+    @keyframes nebulaDrift{
+      0%{ transform:scale(1) translate3d(0,0,0); }
+      100%{ transform:scale(1.07) translate3d(-1.5%, 1.5%, 0); }
+    }
+
+    @keyframes orbMove1{
+      from{ transform:translate3d(0,0,0); }
+      to{ transform:translate3d(-30px, 35px, 0); }
+    }
+
+    @keyframes orbMove2{
+      from{ transform:translate3d(0,0,0); }
+      to{ transform:translate3d(35px, -22px, 0); }
+    }
+
+    .page-header{
+      padding:24px 0 14px;
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(16px);
+      background:linear-gradient(180deg, rgba(4,10,24,.90), rgba(4,10,24,.64));
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .page-header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:700;
+    }
+
+    .mini-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dce8ff;
+      font-size:.88rem;
+      font-weight:700;
+    }
+
+    .hero{
+      padding:32px 0 26px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(330px, 420px) minmax(0, 1fr);
+      gap:26px;
+      align-items:stretch;
+    }
+
+    .hero-cover-card,
+    .hero-content{
+      border-radius:30px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(8,18,40,.86), rgba(8,18,40,.62));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-cover-wrap{
+      width:100%;
+      aspect-ratio:4 / 5.1;
+      background:#050b1a;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+    }
+
+    .hero-cover{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .hero-content{
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .story-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .story-tags span{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:700;
+      color:#eff6ff;
+    }
+
+    .hero-content h1{
+      font-size:clamp(2rem, 4vw, 3.5rem);
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
+
+    .story-description{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:1.05rem;
+      max-width:70ch;
+    }
+
+    .hero-meta{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .meta-card{
+      padding:16px 16px 14px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .meta-card small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.82rem;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .meta-card strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.3;
+    }
+
+    .novel-rating-box{
+      margin-top:6px;
+      padding:20px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .novel-rating-box h3{
+      margin:0 0 10px;
+      color:#f5f8ff;
+      font-size:1.05rem;
+    }
+
+    .rating-stars{
+      display:flex;
+      gap:8px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+
+    .rating-star{
+      border:none;
+      background:transparent;
+      color:rgba(255,255,255,.22);
+      font-size:2rem;
+      line-height:1;
+      cursor:pointer;
+      transition:transform .15s ease, color .15s ease;
+      padding:0;
+    }
+
+    .rating-star:hover{
+      transform:scale(1.08);
+    }
+
+    .rating-star.active{
+      color:#ffd54a;
+    }
+
+    .rating-meta{
+      margin:0 0 8px;
+      color:#b8c4da;
+      font-size:.95rem;
+    }
+
+    .rating-status{
+      margin:0;
+      color:#8ea3c8;
+      font-size:.92rem;
+      line-height:1.5;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:auto;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:54px;
+      padding:0 22px;
+      border-radius:18px;
+      border:1px solid transparent;
+      font-weight:800;
+      font-size:1rem;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
+      box-shadow:0 18px 34px rgba(38,121,255,.24);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+    }
+
+    .chapters-section{
+      padding:10px 0 60px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+
+    .section-head h2{
+      font-size:clamp(1.5rem, 3vw, 2.6rem);
+      line-height:1;
+    }
+
+    .section-note{
+      color:var(--muted);
+      max-width:560px;
+      line-height:1.7;
+    }
+
+    .chapters-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .chapter-card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding:22px;
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(8,18,40,.88), rgba(8,18,40,.68));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow-soft);
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+      overflow:hidden;
+    }
+
+    .chapter-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(90,160,255,.24);
+    }
+
+    .chapter-card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .chapter-number{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dbe9ff;
+      font-weight:800;
+      font-size:.88rem;
+    }
+
+    .chapter-status{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.84rem;
+      letter-spacing:.03em;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .status-free{
+      background:rgba(49,166,105,.14);
+      color:#b5ffd1;
+    }
+
+    .status-premium{
+      background:rgba(69,126,255,.14);
+      color:#d8e7ff;
+    }
+
+    .status-locked{
+      background:rgba(255,255,255,.08);
+      color:#f3f7ff;
+    }
+
+    .chapter-card h3{
+      font-size:1.38rem;
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+
+    .chapter-card p{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:.98rem;
+      flex:1;
+    }
+
+    .chapter-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+
+    .chapter-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:16px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.09);
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .chapter-link:hover{
+      transform:translateY(-1px);
+    }
+
+    .chapter-link.primary{
+      color:#fff;
+      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
+      border-color:transparent;
+    }
+
+    .chapter-link.secondary{
+      color:#fff;
+      background:rgba(255,255,255,.05);
+    }
+
+    .chapter-card.locked{
+      overflow:hidden;
+    }
+
+    .chapter-card.locked .chapter-lock-target{
+      filter:blur(4px);
+      opacity:.48;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .chapter-card.locked::after{
+      content:"🔒 Contenido premium";
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(10,16,28,.82);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:800;
+      font-size:.86rem;
+      backdrop-filter:blur(10px);
+      z-index:2;
+    }
+
+    .premium-box{
+      margin-top:26px;
+      padding:24px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(8,18,40,.92), rgba(8,18,40,.72));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .premium-box h3{
+      font-size:1.35rem;
+      margin-bottom:8px;
+    }
+
+    .premium-box p{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:720px;
+    }
+
+    .error-box{
+      width:var(--container);
+      margin:48px auto;
+      padding:28px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(8,18,40,.92), rgba(8,18,40,.72));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      position:relative;
+      z-index:2;
+    }
+
+    .error-box h1{
+      font-size:clamp(1.7rem, 4vw, 2.6rem);
+      margin-bottom:12px;
+    }
+
+    .error-box p{
+      color:var(--muted);
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+
+    .footer-space{
+      height:20px;
+    }
+
+    @media (max-width: 1100px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-cover-wrap{
+        aspect-ratio:16 / 10;
+      }
+    }
+
+    @media (max-width: 900px){
+      .hero-meta{
+        grid-template-columns:1fr;
+      }
+
+      .chapters-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 680px){
+      :root{
+        --container:min(100% - 18px, 1000px);
+      }
+
+      .hero{
+        padding:22px 0 18px;
+      }
+
+      .hero-content{
+        padding:20px 18px;
+      }
+
+      .chapter-card{
+        padding:18px;
+      }
+
+      .hero-actions,
+      .chapter-actions{
+        flex-direction:column;
+      }
+
+      .hero-actions .btn,
+      .chapter-actions .chapter-link,
+      .premium-box .btn{
+        width:100%;
+      }
+
+      .chapter-card-top{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .premium-box{
+        padding:20px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars-canvas"></canvas>
+  <div class="galaxy-bg"></div>
+  <div class="galaxy-layer"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <div id="app"></div>
+
+  <script src="./data.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const novelId = params.get("id");
+    const app = document.getElementById("app");
+
+    function escapeHtml(text){
+      return String(text ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getSeasonOrderValue(season){
+      const match = String(season || "").match(/\d+/);
+      return match ? Number(match[0]) : 999;
+    }
+
+    function getOrderedChapters(chapters){
+      return [...(Array.isArray(chapters) ? chapters : [])].sort((a, b) => {
+        const seasonDiff = getSeasonOrderValue(a.season) - getSeasonOrderValue(b.season);
+        if (seasonDiff !== 0) return seasonDiff;
+        return Number(a.num || 0) - Number(b.num || 0);
       });
-
-      currentUserRating = newRating;
-      renderStars(currentUserRating);
-      await loadSummary();
-      setStatus(`Votaste con ${newRating} estrella${newRating === 1 ? "" : "s"}.`);
-    } catch (error) {
-      console.error(error);
-      setStatus("No se pudo guardar tu votación.", true);
-    }
-  }
-
-  const stars = [...starsWrap.querySelectorAll(".rating-star")];
-
-  stars.forEach((star) => {
-    const value = Number(star.dataset.value || 0);
-
-    star.addEventListener("mouseenter", () => {
-      renderStars(value);
-    });
-
-    star.addEventListener("mouseleave", () => {
-      renderStars(currentUserRating);
-    });
-
-    star.addEventListener("click", () => {
-      submitVote(value);
-    });
-  });
-
-  onAuthStateChanged(auth, async (user) => {
-    currentUser = user || null;
-    await loadSummary();
-
-    if (!user) {
-      currentUserRating = 0;
-      renderStars(0);
-      setStatus("Inicia sesión para votar esta novela.");
-      return;
     }
 
-    await loadUserVote(user);
-  });
-}
+    if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
+      app.innerHTML = `
+        <section class="error-box">
+          <h1>Novela no encontrada</h1>
+          <p>
+            No se encontró una novela asociada a este enlace. Revisa el parámetro
+            <strong>id</strong> o vuelve al catálogo principal.
+          </p>
+          <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
+        </section>
+      `;
+    } else {
+      const novel = window.NEBULA_NOVELS[novelId];
+      const chapters = getOrderedChapters(novel.chapters);
+      const freeChapters = Number(novel.freeChapters ?? 3);
+      const paidKey = "paid-" + novelId;
+      const progressKey = "nebula-progress-" + novelId;
+      const paid = localStorage.getItem(paidKey) === "true";
+
+      if (!chapters.length) {
+        app.innerHTML = `
+          <section class="error-box">
+            <h1>${escapeHtml(novel.title)}</h1>
+            <p>
+              Esta novela existe, pero todavía no tiene capítulos cargados en
+              <strong>data.js</strong>.
+            </p>
+            <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
+          </section>
+        `;
+      } else {
+        function getChapterPath(chapter){
+          const seasonFolder = chapter.season || novel.defaultSeason || "temporada1";
+          return `./${novel.baseFolder}/${seasonFolder}/capitulo${chapter.num}.html`;
+        }
+
+        function getContinuePath(){
+          return localStorage.getItem(progressKey) || getChapterPath(chapters[0]);
+        }
+
+        function saveInitialProgress(){
+          if (!localStorage.getItem(progressKey)) {
+            localStorage.setItem(progressKey, getChapterPath(chapters[0]));
+          }
+        }
+
+        function buildChapterCard(chapter, index){
+          const position = index + 1;
+          const isFree = position <= freeChapters;
+          const isLocked = position > freeChapters && !paid;
+
+          const statusClass = isLocked
+            ? "status-locked"
+            : isFree
+              ? "status-free"
+              : "status-premium";
+
+          const statusText = isLocked
+            ? "Bloqueado"
+            : isFree
+              ? "Gratis"
+              : "Premium";
+
+          const chapterPath = getChapterPath(chapter);
+
+          return `
+            <article class="chapter-card ${isLocked ? "locked" : ""}">
+              <div class="chapter-lock-target">
+                <div class="chapter-card-top">
+                  <span class="chapter-number">
+                    ${escapeHtml(chapter.seasonLabel || chapter.season || novel.defaultSeasonLabel || "Temporada 1")} · Capítulo ${escapeHtml(chapter.num)}
+                  </span>
+                  <span class="chapter-status ${statusClass}">${statusText}</span>
+                </div>
+
+                <h3>${escapeHtml(chapter.title)}</h3>
+                <p>${escapeHtml(chapter.description)}</p>
+
+                <div class="chapter-actions">
+                  ${
+                    isLocked
+                      ? `<span class="chapter-link secondary">Disponible con premium</span>`
+                      : `<a class="chapter-link primary" href="${chapterPath}" data-chapter-path="${chapterPath}">Leer capítulo</a>`
+                  }
+                </div>
+              </div>
+            </article>
+          `;
+        }
+
+        app.innerHTML = `
+          <header class="page-header">
+            <div class="container page-header-inner">
+              <a class="back-link" href="../index.html">← Volver a Nébula</a>
+              <div class="mini-badge">Lectura por capítulos</div>
+            </div>
+          </header>
+
+          <main>
+            <section class="hero">
+              <div class="container hero-grid">
+                <div class="hero-cover-card">
+                  <div class="hero-cover-wrap">
+                    <img
+                      class="hero-cover"
+                      src="${escapeHtml(novel.cover)}"
+                      alt="${escapeHtml(novel.title)}"
+                    />
+                  </div>
+                </div>
+
+                <div class="hero-content">
+                  <div class="story-tags">
+                    ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
+                    <span>${chapters.length} capítulos</span>
+                  </div>
+
+                  <h1>${escapeHtml(novel.title)}</h1>
+
+                  <p class="story-description">${escapeHtml(novel.description)}</p>
+
+                  <div class="hero-meta">
+                    <div class="meta-card">
+                      <small>Lectura gratis</small>
+                      <strong>Primeros ${freeChapters} capítulos</strong>
+                    </div>
+
+                    <div class="meta-card">
+                      <small>Acceso completo</small>
+                      <strong>${escapeHtml(novel.price || "$1.500 CLP")}</strong>
+                    </div>
+
+                    <div class="meta-card">
+                      <small>Estado</small>
+                      <strong id="accessState">${paid ? "Historia desbloqueada" : `Solo primeros ${freeChapters} capítulos`}</strong>
+                    </div>
+                  </div>
+
+                  <section class="novel-rating-box">
+                    <h3>Valora esta novela</h3>
+
+                    <div id="ratingStars" class="rating-stars">
+                      <button class="rating-star" data-value="1" type="button">★</button>
+                      <button class="rating-star" data-value="2" type="button">★</button>
+                      <button class="rating-star" data-value="3" type="button">★</button>
+                      <button class="rating-star" data-value="4" type="button">★</button>
+                      <button class="rating-star" data-value="5" type="button">★</button>
+                    </div>
+
+                    <p class="rating-meta">
+                      Promedio: <strong id="ratingAverage">0.0</strong>
+                      · Votos: <strong id="ratingTotal">0</strong>
+                    </p>
+
+                    <p id="ratingStatus" class="rating-status">Cargando votación...</p>
+                  </section>
+
+                  <div class="hero-actions">
+                    <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">Comenzar lectura</a>
+                    <button class="btn btn-secondary" type="button" id="continueBtn">Seguir leyendo</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="chapters-section">
+              <div class="container">
+                <div class="section-head">
+                  <div>
+                    <h2>Capítulos disponibles</h2>
+                  </div>
+
+                  <p class="section-note">
+                    Los primeros ${freeChapters} capítulos están disponibles gratis.
+                    Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
+                  </p>
+                </div>
+
+                <div class="chapters-grid" id="chaptersGrid">
+                  ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
+                </div>
+
+                <div class="premium-box" id="premiumBox">
+                  <div>
+                    <h3>Desbloquea la historia completa</h3>
+                    <p>
+                      Continúa leyendo sin restricciones y accede a todos los capítulos de
+                      ${escapeHtml(novel.title)}.
+                    </p>
+                  </div>
+
+                  <button class="btn btn-primary" type="button" id="buyBtn">
+                    ${paid ? "Historia ya desbloqueada" : "Desbloquear historia completa"}
+                  </button>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <div class="footer-space"></div>
+        `;
+
+        saveInitialProgress();
+
+        const continueBtn = document.getElementById("continueBtn");
+        const buyBtn = document.getElementById("buyBtn");
+        const startBtn = document.getElementById("startBtn");
+        const accessState = document.getElementById("accessState");
+
+        startBtn.addEventListener("click", () => {
+          localStorage.setItem(progressKey, getChapterPath(chapters[0]));
+        });
+
+        continueBtn.addEventListener("click", () => {
+          window.location.href = getContinuePath();
+        });
+
+        document.querySelectorAll("[data-chapter-path]").forEach(link => {
+          link.addEventListener("click", (e) => {
+            localStorage.setItem(progressKey, e.currentTarget.dataset.chapterPath);
+          });
+        });
+
+        buyBtn.addEventListener("click", () => {
+          if (localStorage.getItem(paidKey) === "true") return;
+          localStorage.setItem(paidKey, "true");
+          if (accessState) accessState.textContent = "Historia desbloqueada";
+          buyBtn.textContent = "Historia ya desbloqueada";
+          location.reload();
+        });
+
+        document.title = `${novel.title} | Nébula`;
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { initNovelRating } from "./js/rating-system.js";
+
+    const params = new URLSearchParams(window.location.search);
+    const novelId = params.get("id");
+
+    initNovelRating({ novelId });
+  </script>
+
+  <script>
+    const canvas = document.getElementById("stars-canvas");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resizeStarsCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createStars();
+    }
+
+    function createStars() {
+      stars = [];
+      const area = window.innerWidth * window.innerHeight;
+      const amount = Math.max(70, Math.floor(area / 14000));
+
+      for (let i = 0; i < amount; i++) {
+        stars.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 1.5 + 0.4,
+          speed: Math.random() * 0.25 + 0.05,
+          alpha: Math.random() * 0.7 + 0.15
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if (s.y > window.innerHeight + 2) {
+          s.y = -2;
+          s.x = Math.random() * window.innerWidth;
+        }
+      }
+
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener("resize", resizeStarsCanvas);
+    resizeStarsCanvas();
+    animateStars();
+  </script>
+</body>
+</html>
