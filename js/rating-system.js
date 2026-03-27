@@ -1051,6 +1051,8 @@
       const freeChapters = Number(novel.freeChapters ?? 3);
       const paidKey = "paid-" + novelId;
       const progressKey = "nebula-progress-" + novelId;
+      const ratingKey = "nebula-rating-" + novelId;
+      const userVoteKey = "nebula-rating-user-" + novelId;
       const paid = localStorage.getItem(paidKey) === "true";
 
       if (!chapters.length) {
@@ -1078,6 +1080,22 @@
           if (!localStorage.getItem(progressKey)) {
             localStorage.setItem(progressKey, getChapterPath(chapters[0]));
           }
+        }
+
+        function getRatingData(){
+          try{
+            const raw = localStorage.getItem(ratingKey);
+            if (!raw) return { votes: [] };
+            const parsed = JSON.parse(raw);
+            if (!Array.isArray(parsed.votes)) return { votes: [] };
+            return parsed;
+          }catch{
+            return { votes: [] };
+          }
+        }
+
+        function saveRatingData(data){
+          localStorage.setItem(ratingKey, JSON.stringify(data));
         }
 
         function buildChapterCard(chapter, index){
@@ -1227,11 +1245,11 @@
                     <h3>Valora esta novela</h3>
 
                     <div id="ratingStars" class="rating-stars">
-                      <button class="rating-star" data-value="1" type="button">★</button>
-                      <button class="rating-star" data-value="2" type="button">★</button>
-                      <button class="rating-star" data-value="3" type="button">★</button>
-                      <button class="rating-star" data-value="4" type="button">★</button>
-                      <button class="rating-star" data-value="5" type="button">★</button>
+                      <button class="rating-star" data-value="1" type="button" aria-label="1 estrella">★</button>
+                      <button class="rating-star" data-value="2" type="button" aria-label="2 estrellas">★</button>
+                      <button class="rating-star" data-value="3" type="button" aria-label="3 estrellas">★</button>
+                      <button class="rating-star" data-value="4" type="button" aria-label="4 estrellas">★</button>
+                      <button class="rating-star" data-value="5" type="button" aria-label="5 estrellas">★</button>
                     </div>
 
                     <p class="rating-meta">
@@ -1291,7 +1309,7 @@
                   </div>
 
                   <button class="btn btn-primary" type="button" id="buyBtn">
-                    ${paid ? "Historia ya desbloqueada" : "Desbloquear historia completa"}
+                    ${paid ? "Historia ya desbloqueada" : "Pagar con Mercado Pago"}
                   </button>
                 </div>
               </div>
@@ -1307,6 +1325,81 @@
         const buyBtn = document.getElementById("buyBtn");
         const startBtn = document.getElementById("startBtn");
         const accessState = document.getElementById("accessState");
+        const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
+        const ratingAverage = document.getElementById("ratingAverage");
+        const ratingTotal = document.getElementById("ratingTotal");
+        const ratingStatus = document.getElementById("ratingStatus");
+
+        function paintStars(value){
+          ratingStars.forEach(star => {
+            const starValue = Number(star.dataset.value);
+            star.classList.toggle("active", starValue <= value);
+          });
+        }
+
+        function renderRating(){
+          const data = getRatingData();
+          const votes = data.votes || [];
+          const total = votes.length;
+
+          if (!total) {
+            ratingAverage.textContent = "0.0";
+            ratingTotal.textContent = "0";
+            ratingStatus.textContent = "Sé el primero en valorar esta novela.";
+            paintStars(0);
+            return;
+          }
+
+          const sum = votes.reduce((acc, value) => acc + Number(value || 0), 0);
+          const average = sum / total;
+
+          ratingAverage.textContent = average.toFixed(1);
+          ratingTotal.textContent = String(total);
+
+          const userVote = Number(localStorage.getItem(userVoteKey) || 0);
+
+          if (userVote > 0) {
+            ratingStatus.textContent = `Tu valoración actual es de ${userVote} estrella${userVote === 1 ? "" : "s"}.`;
+            paintStars(userVote);
+          } else {
+            ratingStatus.textContent = "Valora esta novela para ayudar a otros lectores.";
+            paintStars(Math.round(average));
+          }
+        }
+
+        ratingStars.forEach(star => {
+          star.addEventListener("mouseenter", () => {
+            const value = Number(star.dataset.value);
+            paintStars(value);
+          });
+
+          star.addEventListener("mouseleave", () => {
+            const userVote = Number(localStorage.getItem(userVoteKey) || 0);
+            if (userVote > 0) {
+              paintStars(userVote);
+              return;
+            }
+
+            const data = getRatingData();
+            const votes = data.votes || [];
+            if (!votes.length) {
+              paintStars(0);
+              return;
+            }
+
+            const avg = votes.reduce((acc, value) => acc + Number(value || 0), 0) / votes.length;
+            paintStars(Math.round(avg));
+          });
+
+          star.addEventListener("click", () => {
+            const value = Number(star.dataset.value);
+            const data = getRatingData();
+            data.votes.push(value);
+            saveRatingData(data);
+            localStorage.setItem(userVoteKey, String(value));
+            renderRating();
+          });
+        });
 
         startBtn.addEventListener("click", () => {
           localStorage.setItem(progressKey, getChapterPath(chapters[0]));
@@ -1330,18 +1423,10 @@
           location.reload();
         });
 
+        renderRating();
         document.title = `${novel.title} | Nébula`;
       }
     }
-  </script>
-
-  <script type="module">
-    import { initNovelRating } from "./js/rating-system.js";
-
-    const params = new URLSearchParams(window.location.search);
-    const novelId = params.get("id");
-
-    initNovelRating({ novelId });
   </script>
 
   <script>
