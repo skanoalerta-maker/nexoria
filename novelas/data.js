@@ -132,7 +132,13 @@ window.NEBULA_NOVELS = {
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Algo no está igual", description: "Volver a casa se siente distinto desde el primer segundo, aunque todavía no hay una razón clara." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El cajón abierto", description: "Un detalle mínimo basta para sembrar la idea de que alguien tocó lo que no debía." },
       { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "La puerta mal cerrada", description: "La rutina deja de ser confiable cuando cada objeto parece contar una versión distinta de lo ocurrido." },
-      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La tensión sigue aumentando." }
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La tensión sigue aumentando." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "Lo que parecía paranoia empieza a sentirse demasiado real." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "Cada rincón de la casa guarda una señal imposible de ignorar." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La idea de que alguien estuvo ahí deja de ser una sospecha." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La verdad detrás de la presencia empieza a revelarse." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "Escapar ya no parece una opción real." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El final de temporada confirma que nada fue una coincidencia." }
     ]
   },
 
@@ -171,7 +177,11 @@ window.NEBULA_NOVELS = {
       { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La historia continúa." },
       { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La historia continúa." },
       { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
-      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." }
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La tensión alcanza un punto irreversible." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El poder se consolida mientras el país cambia para siempre." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Las consecuencias humanas ya no pueden ocultarse." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." }
     ]
   },
 
@@ -195,7 +205,12 @@ window.NEBULA_NOVELS = {
       { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La historia continúa." },
-      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "La historia alcanza su clímax." }
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "La historia alcanza su clímax." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La presión política y social alcanza un nivel insoportable." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Los acontecimientos avanzan hacia un desenlace histórico." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La historia entra en su etapa más oscura y decisiva." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 15", description: "El país enfrenta el peso total de sus fracturas." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "El cierre deja marcada para siempre la memoria de Chile." }
     ]
   },
 
@@ -220,7 +235,12 @@ window.NEBULA_NOVELS = {
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "Las piezas encajan demasiado tarde." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La caída ya no puede detenerse." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El sistema revela su verdadero rostro." },
-      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Nada vuelve a ser igual." }
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Nada vuelve a ser igual." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La presión ya no deja espacio para errores." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Cada decisión empuja la red más cerca del colapso." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La verdad empieza a filtrarse donde más duele." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "Todo se prepara para el golpe final." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 17", description: "El cierre de la historia revela el verdadero precio del silencio." }
     ]
   }
 };
