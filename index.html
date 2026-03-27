@@ -30,6 +30,9 @@
       --blue2:#66b8ff;
       --violet:#9a66ff;
       --cyan:#50dbff;
+      --gold:#ffd54a;
+      --gold-2:#ffbf1f;
+      --green:#4ee7a8;
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --shadow-soft:0 18px 46px rgba(0,0,0,.24);
       --radius:26px;
@@ -240,19 +243,20 @@
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:16px;
       min-width:0;
       flex-shrink:0;
     }
 
     .brand-logo{
-      width:120px;
+      width:180px;
       height:auto;
       object-fit:contain;
       flex-shrink:0;
       filter:
-        drop-shadow(0 0 18px rgba(118,160,255,.24))
-        drop-shadow(0 0 28px rgba(62,123,255,.18));
+        drop-shadow(0 0 18px rgba(118,160,255,.30))
+        drop-shadow(0 0 34px rgba(62,123,255,.24))
+        drop-shadow(0 0 54px rgba(133,102,255,.18));
     }
 
     .brand-copy{
@@ -263,21 +267,21 @@
     }
 
     .brand-copy strong{
-      font-size:.78rem;
+      font-size:.66rem;
       line-height:1;
-      letter-spacing:.14em;
+      letter-spacing:.13em;
       white-space:nowrap;
       text-shadow:0 0 18px rgba(76,142,255,.12);
-      opacity:.95;
+      opacity:.92;
     }
 
     .brand-copy span{
       color:var(--muted);
-      font-size:.48rem;
+      font-size:.40rem;
       margin-top:4px;
       white-space:nowrap;
       letter-spacing:.03em;
-      opacity:.86;
+      opacity:.78;
     }
 
     .top-nav{
@@ -361,7 +365,7 @@
     }
 
     .hero{
-      padding:42px 0 38px;
+      padding:42px 0 26px;
     }
 
     .hero-grid{
@@ -431,11 +435,123 @@
       line-height:1.75;
     }
 
+    .weekly-launch-banner{
+      margin-top:24px;
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(94,125,255,.18), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(155,102,255,.18), transparent 34%),
+        linear-gradient(135deg, rgba(15,27,62,.98), rgba(9,16,38,.92));
+      box-shadow:
+        0 24px 50px rgba(0,0,0,.26),
+        0 0 0 1px rgba(255,255,255,.03) inset;
+      padding:22px 22px 20px;
+    }
+
+    .weekly-launch-banner::after{
+      content:"";
+      position:absolute;
+      inset:auto -30px -40px auto;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(80,219,255,.16), transparent 68%);
+      filter:blur(12px);
+      pointer-events:none;
+    }
+
+    .weekly-launch-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .weekly-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eaf3ff;
+      font-weight:800;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .weekly-pulse{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(78,231,168,.72);
+      animation:pulseDot 1.7s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    @keyframes pulseDot{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.35); opacity:.7; }
+    }
+
+    .weekly-launch-banner h3{
+      font-size:clamp(1.25rem, 2vw, 1.9rem);
+      line-height:1.08;
+      margin-bottom:10px;
+    }
+
+    .weekly-launch-banner p{
+      margin-top:0;
+      max-width:none;
+      color:#d6e4fb;
+      font-size:1rem;
+      line-height:1.75;
+    }
+
+    .weekly-launch-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .weekly-launch-points > div{
+      padding:16px 16px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.07);
+      min-width:0;
+    }
+
+    .weekly-launch-points small{
+      display:block;
+      color:#9fb5db;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:.78rem;
+      margin-bottom:7px;
+    }
+
+    .weekly-launch-points strong{
+      font-size:1rem;
+      line-height:1.35;
+      display:block;
+    }
+
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
       gap:14px;
-      margin-top:28px;
+      margin-top:24px;
     }
 
     .hero-stats{
@@ -548,6 +664,39 @@
       font-size:1rem;
     }
 
+    .feature-rating{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .stars{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      line-height:1;
+    }
+
+    .star{
+      font-size:1.15rem;
+      color:rgba(255,255,255,.16);
+      text-shadow:none;
+      transition:.2s ease;
+    }
+
+    .star.active{
+      color:var(--gold);
+      text-shadow:0 0 10px rgba(255,213,74,.24);
+    }
+
+    .rating-label{
+      color:#dfe9fb;
+      font-weight:700;
+      font-size:.95rem;
+    }
+
     .feature-meta{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -655,6 +804,142 @@
       font-size:.92rem;
     }
 
+    .user-section{
+      padding:10px 0 16px;
+    }
+
+    .user-shell{
+      display:grid;
+      grid-template-columns:minmax(0, 1.1fr) minmax(290px, .9fr);
+      gap:20px;
+      padding:26px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(11,20,46,.86), rgba(10,18,40,.64));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+
+    .user-main{
+      min-width:0;
+    }
+
+    .user-top{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .user-avatar{
+      width:76px;
+      height:76px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:2rem;
+      font-weight:800;
+      background:linear-gradient(135deg, rgba(52,144,255,.24), rgba(154,102,255,.22));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 0 28px rgba(52,144,255,.18);
+      flex-shrink:0;
+    }
+
+    .user-copy h3{
+      font-size:1.45rem;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+
+    .user-copy p{
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .user-status-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .user-pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#e5efff;
+      font-weight:700;
+      font-size:.92rem;
+    }
+
+    .user-stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .user-stat{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      min-width:0;
+    }
+
+    .user-stat small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.82rem;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .user-stat strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.3;
+      word-break:break-word;
+    }
+
+    .user-side{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .user-login-box,
+    .user-cta-card{
+      padding:20px;
+      border-radius:24px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .user-login-box h4,
+    .user-cta-card h4{
+      font-size:1.1rem;
+      margin-bottom:8px;
+    }
+
+    .user-login-box p,
+    .user-cta-card p{
+      color:var(--muted);
+      line-height:1.7;
+      margin-bottom:14px;
+    }
+
+    .hidden-panel{
+      display:none !important;
+    }
+
     .catalog-tools{
       display:flex;
       align-items:center;
@@ -693,6 +978,38 @@
 
     .search-box input::placeholder{
       color:#91a6c7;
+    }
+
+    .catalog-announcement{
+      margin:-4px 0 22px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .catalog-announcement-box{
+      width:100%;
+      padding:18px 20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(82,140,255,.14), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(154,102,255,.14), transparent 34%),
+        linear-gradient(135deg, rgba(10,18,42,.94), rgba(8,15,34,.92));
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+    }
+
+    .catalog-announcement-box strong{
+      display:block;
+      font-size:1.08rem;
+      line-height:1.35;
+      margin-bottom:6px;
+    }
+
+    .catalog-announcement-box span{
+      color:var(--muted);
+      line-height:1.7;
+      display:block;
     }
 
     .story-grid{
@@ -800,6 +1117,20 @@
       white-space:nowrap;
     }
 
+    .story-rating-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .story-rating-line .rating-label{
+      font-size:.9rem;
+      color:#d5e3fb;
+    }
+
     .story-body p{
       color:var(--muted);
       line-height:1.72;
@@ -842,6 +1173,113 @@
       flex-wrap:wrap;
       gap:12px;
       margin-top:auto;
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .pricing-card{
+      padding:26px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-width:0;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .pricing-card.featured{
+      border-color:rgba(255,213,74,.18);
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.34),
+        0 0 0 1px rgba(255,213,74,.08) inset;
+    }
+
+    .pricing-card h3{
+      font-size:1.55rem;
+      line-height:1.08;
+      margin-bottom:8px;
+    }
+
+    .pricing-card p{
+      color:var(--muted);
+      line-height:1.72;
+      margin-bottom:16px;
+    }
+
+    .pricing-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#edf4ff;
+      font-weight:800;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:14px;
+    }
+
+    .pricing-value{
+      display:flex;
+      align-items:flex-end;
+      gap:10px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+
+    .pricing-value strong{
+      font-size:clamp(2rem, 3vw, 3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .pricing-value span{
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:3px;
+    }
+
+    .pricing-list{
+      display:grid;
+      gap:12px;
+      margin-bottom:20px;
+    }
+
+    .pricing-list div{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#e5efff;
+      line-height:1.6;
+    }
+
+    .payment-trust{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .payment-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:800;
+      font-size:.92rem;
     }
 
     .empty-state{
@@ -922,9 +1360,9 @@
     }
 
     .made-by-logo-box{
-      width:220px;
-      min-width:220px;
-      height:140px;
+      width:240px;
+      min-width:240px;
+      height:152px;
       background:#ffffff;
       border-radius:22px;
       padding:14px;
@@ -938,7 +1376,7 @@
     }
 
     .made-by-logo{
-      width:92%;
+      width:96%;
       height:auto;
       object-fit:contain;
       background:none;
@@ -995,8 +1433,13 @@
         grid-template-columns:repeat(2, minmax(0, 1fr));
       }
 
-      .story-grid{
+      .story-grid,
+      .pricing-grid{
         grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+
+      .user-shell{
+        grid-template-columns:1fr;
       }
     }
 
@@ -1019,15 +1462,15 @@
       }
 
       .brand-logo{
-        width:100px;
+        width:150px;
       }
 
       .brand-copy strong{
-        font-size:.7rem;
+        font-size:.6rem;
       }
 
       .brand-copy span{
-        font-size:.44rem;
+        font-size:.38rem;
       }
 
       .top-nav{
@@ -1049,7 +1492,9 @@
         padding:22px;
       }
 
-      .hero-stats{
+      .weekly-launch-points,
+      .hero-stats,
+      .user-stats{
         grid-template-columns:1fr;
       }
 
@@ -1066,9 +1511,9 @@
       }
 
       .made-by-logo-box{
-        width:200px;
-        min-width:200px;
-        height:128px;
+        width:220px;
+        min-width:220px;
+        height:138px;
       }
 
       .made-by-copy h3{
@@ -1090,16 +1535,16 @@
       }
 
       .brand-logo{
-        width:88px;
+        width:128px;
       }
 
       .brand-copy strong{
-        font-size:.62rem;
-        letter-spacing:.12em;
+        font-size:.54rem;
+        letter-spacing:.11em;
       }
 
       .brand-copy span{
-        font-size:.4rem;
+        font-size:.34rem;
       }
 
       .top-nav{
@@ -1145,14 +1590,13 @@
         padding:18px;
       }
 
-      .feature-meta{
+      .feature-meta,
+      .story-mini-meta,
+      .pricing-grid{
         grid-template-columns:1fr;
       }
 
-      .genre-grid{
-        grid-template-columns:1fr;
-      }
-
+      .genre-grid,
       .story-grid{
         grid-template-columns:1fr;
       }
@@ -1166,16 +1610,13 @@
         white-space:normal;
       }
 
-      .story-mini-meta{
-        grid-template-columns:1fr;
-      }
-
       .catalog-tools{
         width:100%;
       }
 
       .footer-shell,
-      .made-by-shell{
+      .made-by-shell,
+      .user-shell{
         padding:20px 18px;
       }
 
@@ -1185,9 +1626,9 @@
       }
 
       .made-by-logo-box{
-        width:190px;
-        min-width:190px;
-        height:122px;
+        width:205px;
+        min-width:205px;
+        height:128px;
       }
     }
 
@@ -1199,15 +1640,15 @@
       }
 
       .brand-logo{
-        width:76px;
+        width:116px;
       }
 
       .brand-copy strong{
-        font-size:.56rem;
+        font-size:.48rem;
       }
 
       .brand-copy span{
-        font-size:.36rem;
+        font-size:.31rem;
       }
 
       .story-badges{
@@ -1229,9 +1670,9 @@
       }
 
       .made-by-logo-box{
-        width:175px;
-        min-width:175px;
-        height:114px;
+        width:186px;
+        min-width:186px;
+        height:118px;
       }
 
       .made-by-copy h3{
@@ -1240,6 +1681,12 @@
 
       .made-by-copy p{
         font-size:.92rem;
+      }
+
+      .user-avatar{
+        width:64px;
+        height:64px;
+        font-size:1.7rem;
       }
     }
   </style>
@@ -1266,10 +1713,12 @@
         <a href="#destacada">Destacada</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#generos">Géneros</a>
+        <a href="#membresia">Membresía</a>
+        <a href="#usuario-nebula">Mi espacio</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="btn btn-ghost">Iniciar sesión</a>
+        <a href="login.html" class="btn btn-ghost" id="headerSessionBtn">Iniciar sesión</a>
       </div>
     </div>
   </header>
@@ -1291,9 +1740,47 @@
             experiencia moderna, limpia y adictiva.
           </p>
 
+          <div class="weekly-launch-banner">
+            <div class="weekly-launch-top">
+              <div class="weekly-chip">
+                <span class="weekly-pulse"></span>
+                Novedades semanales
+              </div>
+
+              <div class="weekly-chip">
+                Membresía activa = contenido constante
+              </div>
+            </div>
+
+            <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
+
+            <p>
+              Suspenso, romance, terror, historia y más. En Nébula siempre habrá
+              algo nuevo que leer para que tu membresía siga valiendo la pena
+              semana tras semana.
+            </p>
+
+            <div class="weekly-launch-points">
+              <div>
+                <small>Ritmo fijo</small>
+                <strong>Cada jueves tendrás contenido nuevo esperándote</strong>
+              </div>
+
+              <div>
+                <small>Más valor</small>
+                <strong>2 nuevas novelas para mantener viva la plataforma</strong>
+              </div>
+
+              <div>
+                <small>Acceso total</small>
+                <strong>Con tu membresía desbloqueas toda la experiencia</strong>
+              </div>
+            </div>
+          </div>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="#catalogo">Explorar historias</a>
-            <a class="btn btn-secondary" href="#generos">Ver géneros</a>
+            <a class="btn btn-secondary" href="#membresia">Ver membresía</a>
           </div>
 
           <div class="hero-stats">
@@ -1333,6 +1820,11 @@
 
             <h2 id="featuredTitle">Código Nébula</h2>
 
+            <div class="feature-rating">
+              <div class="stars" id="featuredStars" aria-label="Calificación 5 de 5"></div>
+              <span class="rating-label" id="featuredRatingLabel">5.0 / 5</span>
+            </div>
+
             <p id="featuredDescription">
               Una historia futurista donde nada es lo que parece y cada capítulo
               abre una nueva grieta en el sistema.
@@ -1369,6 +1861,147 @@
             </div>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section class="section user-section" id="usuario-nebula">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Tu cuenta</p>
+            <h2>Mi espacio Nébula</h2>
+          </div>
+
+          <p class="section-note">
+            Tu lectura, tu avance y tu acceso en un solo lugar.
+          </p>
+        </div>
+
+        <div class="user-shell">
+          <div class="user-main">
+            <div class="user-top">
+              <div class="user-avatar" id="userAvatar">🌌</div>
+
+              <div class="user-copy">
+                <h3 id="userGreeting">Usuario Nébula</h3>
+                <p id="userEmailText">
+                  Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.
+                </p>
+              </div>
+            </div>
+
+            <div class="user-status-row">
+              <span class="user-pill" id="userPlanPill">Suscripción: Free</span>
+              <span class="user-pill" id="userStatePill">Estado: Invitado</span>
+              <span class="user-pill" id="userProgressPill">Capítulos leídos: 0</span>
+            </div>
+
+            <div class="user-stats">
+              <div class="user-stat">
+                <small>Novelas vistas</small>
+                <strong id="userViewedStories">0 registradas</strong>
+              </div>
+
+              <div class="user-stat">
+                <small>Último avance</small>
+                <strong id="userLastProgress">Aún sin progreso</strong>
+              </div>
+
+              <div class="user-stat">
+                <small>Membresía</small>
+                <strong id="userMembershipText">Puedes desbloquear temporadas completas</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-side">
+            <div class="user-login-box" id="userGuestBox">
+              <h4>Accede a tu cuenta</h4>
+              <p>
+                Crea o inicia tu sesión para que Nébula recuerde en qué capítulo ibas,
+                qué contenido desbloqueaste y cuál es tu estado de membresía.
+              </p>
+              <a href="login.html" class="btn btn-primary">Iniciar sesión / Crear cuenta</a>
+            </div>
+
+            <div class="user-cta-card hidden-panel" id="userLoggedBox">
+              <h4>Tu cuenta está activa</h4>
+              <p>
+                Ya puedes seguir leyendo desde donde quedaste, revisar tu plan actual
+                y mantener tu experiencia sincronizada.
+              </p>
+              <div class="made-by-actions">
+                <a href="novelas/index.html?id=codigo-nebula" class="btn btn-secondary">Seguir leyendo</a>
+                <button type="button" class="btn btn-primary" id="logoutBtn">Cerrar sesión</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="membresia">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Valores y acceso</p>
+            <h2>Membresía Nébula</h2>
+          </div>
+
+          <p class="section-note">
+            Desbloquea más capítulos y mantén acceso constante al contenido nuevo.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="pricing-card featured">
+            <div class="pricing-chip">Plan principal</div>
+            <h3>Acceso Premium por novela / temporada</h3>
+            <p>
+              Ideal para quienes quieren desbloquear la experiencia completa y seguir
+              leyendo sin límites después de los capítulos gratuitos.
+            </p>
+
+            <div class="pricing-value">
+              <strong>$1.500 CLP</strong>
+              <span>por desbloqueo</span>
+            </div>
+
+            <div class="pricing-list">
+              <div>🔓 Acceso completo a la novela o temporada desbloqueada</div>
+              <div>📖 Primeros 3 capítulos gratis para enganchar al lector</div>
+              <div>🚀 Contenido nuevo cada semana para mantener el valor de la membresía</div>
+              <div>📱 Lectura optimizada para celular, tablet, notebook y PC</div>
+            </div>
+
+            <div class="payment-trust">
+              <span class="payment-badge">Pago con Mercado Pago</span>
+              <span class="payment-badge">Método seguro</span>
+              <span class="payment-badge">Acceso inmediato</span>
+            </div>
+          </article>
+
+          <article class="pricing-card">
+            <div class="pricing-chip">Modo de acceso</div>
+            <h3>¿Cómo funciona?</h3>
+            <p>
+              Nébula está pensada para que el lector pruebe primero y luego decida
+              si quiere seguir con la historia completa.
+            </p>
+
+            <div class="pricing-list">
+              <div><strong>Gratis:</strong> puedes leer los primeros 3 capítulos.</div>
+              <div><strong>Premium:</strong> desbloqueas el resto del contenido.</div>
+              <div><strong>Mercado Pago:</strong> pago claro, rápido y confiable.</div>
+              <div><strong>Retención:</strong> todos los jueves se suman 2 nuevas novelas.</div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="login.html" class="btn btn-primary">Crear cuenta</a>
+              <a href="#catalogo" class="btn btn-secondary">Ver historias</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1414,6 +2047,15 @@
           </div>
         </div>
 
+        <div class="catalog-announcement">
+          <div class="catalog-announcement-box">
+            <strong>Todos los jueves se subirán 2 nuevas novelas para mantener Nébula siempre viva.</strong>
+            <span>
+              Mantén tu membresía activa y sigue descubriendo nuevas historias todas las semanas.
+            </span>
+          </div>
+        </div>
+
         <div class="story-grid" id="storyGrid"></div>
 
         <div class="empty-state hidden" id="emptyState">
@@ -1434,6 +2076,7 @@
         <a href="#destacada">Inicio</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#generos">Géneros</a>
+        <a href="#membresia">Membresía</a>
       </div>
     </div>
   </footer>
@@ -1485,7 +2128,8 @@
         gratis: 3,
         destacada: true,
         temporada: "Temporada 1",
-        capitulos: 10
+        capitulos: 10,
+        rating: 5
       },
       {
         id: "no-debi-enamorarme",
@@ -1498,7 +2142,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 10
+        capitulos: 10,
+        rating: 5
       },
       {
         id: "despues-de-tu-adios",
@@ -1511,7 +2156,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 3
+        capitulos: 3,
+        rating: 4
       },
       {
         id: "bajo-la-misma-lluvia",
@@ -1524,7 +2170,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 3
+        capitulos: 3,
+        rating: 4
       },
       {
         id: "la-ultima-conexion",
@@ -1537,7 +2184,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 10
+        capitulos: 10,
+        rating: 5
       },
       {
         id: "ya-habias-estado-ahi",
@@ -1550,7 +2198,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 3
+        capitulos: 3,
+        rating: 4
       },
       {
         id: "golpe-de-estado",
@@ -1563,7 +2212,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 3
+        capitulos: 3,
+        rating: 5
       },
       {
         id: "pinochet",
@@ -1576,7 +2226,8 @@
         gratis: 3,
         destacada: false,
         temporada: "Temporada 1",
-        capitulos: 3
+        capitulos: 3,
+        rating: 5
       }
     ];
 
@@ -1602,6 +2253,7 @@
       if (value.includes("historia")) return "historia";
       if (value.includes("militar")) return "historia";
       if (value.includes("política")) return "historia";
+      if (value.includes("politica")) return "historia";
       if (value.includes("futur")) return "futurista";
       if (value.includes("tecnolog")) return "futurista";
       if (value.includes("suspenso")) return "suspenso";
@@ -1614,7 +2266,7 @@
       }
 
       const folder = String(novel.baseFolder || "").split("/")[0];
-      return normalizarGenero(folder || "general");
+      return normalizarGenero(folder || novel.genero || "general");
     }
 
     function obtenerTemporadaLabel(novel) {
@@ -1622,15 +2274,17 @@
       const labels = [...new Set(chapters.map(ch => ch.seasonLabel || ch.season).filter(Boolean))];
       if (labels.length > 1) return labels.join(" · ");
       if (labels.length === 1) return labels[0];
-      return novel.defaultSeasonLabel || "Temporada 1";
+      return novel.defaultSeasonLabel || novel.temporada || "Temporada 1";
     }
 
     function obtenerCapitulosCount(novel) {
-      return Array.isArray(novel.chapters) ? novel.chapters.length : 0;
+      if (Array.isArray(novel.chapters)) return novel.chapters.length;
+      if (Number.isFinite(Number(novel.capitulos))) return Number(novel.capitulos);
+      return 0;
     }
 
     function obtenerCover(novel) {
-      const raw = String(novel.cover || "").trim();
+      const raw = String(novel.cover || novel.portada || "").trim();
       if (!raw) return "assets/covers/nebula.jpg";
       return raw.startsWith("../") ? raw.replace("../", "") : raw;
     }
@@ -1672,24 +2326,38 @@
       novela.visitas = next;
     }
 
+    function getRating(novela) {
+      const val = Number(novela.rating || 5);
+      if (!Number.isFinite(val)) return 5;
+      return Math.max(1, Math.min(5, Math.round(val)));
+    }
+
+    function renderStarsHTML(rating) {
+      const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5)));
+      return Array.from({ length: 5 }, (_, i) => {
+        return `<span class="star ${i < safe ? "active" : ""}">★</span>`;
+      }).join("");
+    }
+
     function buildCatalogFromNebulaData() {
       const source = window.NEBULA_NOVELS;
       if (!source || typeof source !== "object") return [];
 
       return Object.entries(source).map(([id, novel], index) => ({
         id,
-        titulo: novel.title || id,
+        titulo: novel.title || novel.titulo || id,
         genero: obtenerGeneroDesdeNovela(novel),
         portada: obtenerCover(novel),
-        descripcion: novel.description || "Historia disponible en Nébula.",
+        descripcion: novel.description || novel.descripcion || "Historia disponible en Nébula.",
         ruta: `novelas/index.html?id=${id}`,
-        visitas: 0,
-        gratis: Number(novel.freeChapters ?? 3),
-        destacada: index === 0,
+        visitas: Number(novel.visitas || 0),
+        gratis: Number(novel.freeChapters ?? novel.gratis ?? 3),
+        destacada: typeof novel.destacada === "boolean" ? novel.destacada : index === 0,
         temporada: obtenerTemporadaLabel(novel),
         capitulos: obtenerCapitulosCount(novel),
-        precio: novel.price || "$1.500 CLP",
-        premium: localStorage.getItem(getPaidKey(id)) === "true"
+        precio: novel.price || novel.precio || "$1.500 CLP",
+        premium: localStorage.getItem(getPaidKey(id)) === "true",
+        rating: Number(novel.rating || 5)
       }));
     }
 
@@ -1697,7 +2365,8 @@
       return data.map((novela, index) => ({
         ...novela,
         visitas: getStoredViews(novela),
-        destacada: typeof novela.destacada === "boolean" ? novela.destacada : index === 0
+        destacada: typeof novela.destacada === "boolean" ? novela.destacada : index === 0,
+        rating: getRating(novela)
       }));
     }
 
@@ -1714,6 +2383,8 @@
       document.getElementById("featuredViews").textContent = getStoredViews(destacada);
       document.getElementById("featuredFree").textContent = (destacada.gratis || 3) + " capítulos";
       document.getElementById("featuredReadLink").href = destacada.ruta;
+      document.getElementById("featuredStars").innerHTML = renderStarsHTML(destacada.rating);
+      document.getElementById("featuredRatingLabel").textContent = `${destacada.rating}.0 / 5`;
 
       const readLink = document.getElementById("featuredReadLink");
       readLink.onclick = () => {
@@ -1777,6 +2448,13 @@
               <small>${getStoredViews(novela)} visitas</small>
             </div>
 
+            <div class="story-rating-line">
+              <div class="stars" aria-label="Calificación ${novela.rating} de 5">
+                ${renderStarsHTML(novela.rating)}
+              </div>
+              <span class="rating-label">${novela.rating}.0 / 5</span>
+            </div>
+
             <p>${novela.descripcion}</p>
 
             <div class="story-mini-meta">
@@ -1835,7 +2513,8 @@
           n.descripcion,
           n.temporada || "",
           String(n.capitulos || ""),
-          String(n.gratis || "")
+          String(n.gratis || ""),
+          String(n.rating || "")
         ].join(" ").toLowerCase();
 
         return texto.includes(q);
@@ -1851,6 +2530,45 @@
       renderFeatured();
       renderGenres();
       renderStories(filtradas);
+      updateUserReadingStats();
+    }
+
+    function getAllProgressEntries() {
+      const entries = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith("nebula-progress-")) {
+          entries.push({
+            key,
+            value: localStorage.getItem(key)
+          });
+        }
+      }
+      return entries;
+    }
+
+    function updateUserReadingStats() {
+      const progressEntries = getAllProgressEntries();
+      const viewedStories = progressEntries.length;
+      const readChapters = progressEntries.reduce((acc, item) => {
+        const match = String(item.value || "").match(/capitulo(\d+)\.html/i);
+        if (match) return acc + Number(match[1] || 0);
+        return acc;
+      }, 0);
+
+      let lastProgressText = "Aún sin progreso";
+
+      if (progressEntries.length) {
+        const last = progressEntries[progressEntries.length - 1];
+        const matchedNovel = novelas.find(n => last.key === getProgressKey(n.id));
+        if (matchedNovel) {
+          lastProgressText = matchedNovel.titulo;
+        }
+      }
+
+      document.getElementById("userViewedStories").textContent = `${viewedStories} registradas`;
+      document.getElementById("userProgressPill").textContent = `Capítulos leídos: ${readChapters}`;
+      document.getElementById("userLastProgress").textContent = lastProgressText;
     }
 
     storySearch.addEventListener("input", filtrarHistorias);
@@ -1915,7 +2633,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -1937,6 +2655,97 @@
     window.firebaseDb = db;
 
     console.log("🔥 Firebase conectado correctamente");
+
+    const headerSessionBtn = document.getElementById("headerSessionBtn");
+    const userGreeting = document.getElementById("userGreeting");
+    const userEmailText = document.getElementById("userEmailText");
+    const userPlanPill = document.getElementById("userPlanPill");
+    const userStatePill = document.getElementById("userStatePill");
+    const userMembershipText = document.getElementById("userMembershipText");
+    const userAvatar = document.getElementById("userAvatar");
+    const userGuestBox = document.getElementById("userGuestBox");
+    const userLoggedBox = document.getElementById("userLoggedBox");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    function getLocalProfile() {
+      try {
+        const raw = localStorage.getItem("nebula-user-profile");
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function getMembershipLabel() {
+      const raw = localStorage.getItem("nebula-membership") || "free";
+      if (raw === "premium") return "Premium";
+      return "Free";
+    }
+
+    function resolveAvatar(user) {
+      const localProfile = getLocalProfile();
+      if (localProfile.icon) return localProfile.icon;
+      if (user?.displayName) return user.displayName.trim().charAt(0).toUpperCase();
+      if (user?.email) return user.email.trim().charAt(0).toUpperCase();
+      return "🌌";
+    }
+
+    function updateLoggedOutUI() {
+      headerSessionBtn.textContent = "Iniciar sesión";
+      headerSessionBtn.href = "login.html";
+
+      userGreeting.textContent = "Usuario Nébula";
+      userEmailText.textContent = "Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.";
+      userPlanPill.textContent = "Suscripción: Free";
+      userStatePill.textContent = "Estado: Invitado";
+      userMembershipText.textContent = "Puedes desbloquear temporadas completas";
+      userAvatar.textContent = "🌌";
+
+      userGuestBox.classList.remove("hidden-panel");
+      userLoggedBox.classList.add("hidden-panel");
+    }
+
+    function updateLoggedInUI(user) {
+      const profile = getLocalProfile();
+      const membership = getMembershipLabel();
+      const displayName =
+        profile.name ||
+        user.displayName ||
+        (user.email ? user.email.split("@")[0] : "Usuario Nébula");
+
+      headerSessionBtn.textContent = displayName;
+      headerSessionBtn.href = "#usuario-nebula";
+
+      userGreeting.textContent = displayName;
+      userEmailText.textContent = user.email || "Tu cuenta está conectada correctamente.";
+      userPlanPill.textContent = `Suscripción: ${membership}`;
+      userStatePill.textContent = "Estado: Activo";
+      userMembershipText.textContent =
+        membership === "Premium"
+          ? "Tu acceso premium está activo"
+          : "Aún puedes mejorar a Premium";
+      userAvatar.textContent = resolveAvatar(user);
+
+      userGuestBox.classList.add("hidden-panel");
+      userLoggedBox.classList.remove("hidden-panel");
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        updateLoggedInUI(user);
+      } else {
+        updateLoggedOutUI();
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        updateLoggedOutUI();
+      } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+      }
+    });
   </script>
 </body>
 </html>
