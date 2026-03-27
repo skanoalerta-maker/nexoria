@@ -30,6 +30,9 @@
       --blue2:#66b8ff;
       --violet:#9a66ff;
       --cyan:#50dbff;
+      --gold:#ffd54a;
+      --gold-2:#ffbf1f;
+      --green:#4ee7a8;
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --shadow-soft:0 18px 46px rgba(0,0,0,.24);
       --radius:26px;
@@ -216,7 +219,7 @@
     }
 
     .page-header{
-      padding:24px 0 14px;
+      padding:16px 0 14px;
       position:sticky;
       top:0;
       z-index:30;
@@ -229,7 +232,60 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand-wrap{
+      display:flex;
+      align-items:center;
       gap:16px;
+      min-width:0;
+    }
+
+    .brand-link{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:142px;
+      height:auto;
+      object-fit:contain;
+      flex-shrink:0;
+      filter:
+        drop-shadow(0 0 18px rgba(118,160,255,.26))
+        drop-shadow(0 0 34px rgba(62,123,255,.20));
+    }
+
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+
+    .brand-copy strong{
+      font-size:.74rem;
+      line-height:1;
+      letter-spacing:.14em;
+      white-space:nowrap;
+      opacity:.96;
+    }
+
+    .brand-copy span{
+      color:var(--muted);
+      font-size:.46rem;
+      margin-top:4px;
+      letter-spacing:.04em;
+      white-space:nowrap;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
       flex-wrap:wrap;
     }
 
@@ -259,8 +315,21 @@
       font-weight:700;
     }
 
+    .user-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#edf4ff;
+      font-size:.92rem;
+      font-weight:800;
+    }
+
     .hero{
-      padding:32px 0 26px;
+      padding:32px 0 22px;
     }
 
     .hero-grid{
@@ -364,57 +433,119 @@
       line-height:1.3;
     }
 
-    .novel-rating-box{
-      margin-top:6px;
-      padding:20px;
-      border-radius:22px;
+    .value-strip{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin-top:2px;
+    }
+
+    .value-card{
+      padding:16px 16px 14px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .value-card small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.8rem;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .value-card strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.35;
+      color:#fff;
+    }
+
+    .weekly-banner{
+      position:relative;
+      overflow:hidden;
+      padding:22px 22px 20px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(82,140,255,.16), transparent 30%),
+        radial-gradient(circle at 86% 20%, rgba(154,102,255,.16), transparent 34%),
+        linear-gradient(135deg, rgba(12,22,52,.96), rgba(8,16,38,.94));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .weekly-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .weekly-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eaf3ff;
+      font-weight:800;
+      font-size:.84rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .weekly-dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 16px rgba(78,231,168,.72);
+      animation:pulseDot 1.7s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    @keyframes pulseDot{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.35); opacity:.7; }
+    }
+
+    .weekly-banner h3{
+      font-size:1.28rem;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+
+    .weekly-banner p{
+      color:#d7e5fb;
+      line-height:1.72;
+      font-size:.98rem;
+    }
+
+    .access-banner{
+      padding:16px 18px;
+      border-radius:20px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
     }
 
-    .novel-rating-box h3{
-      margin:0 0 10px;
-      color:#f5f8ff;
-      font-size:1.05rem;
+    .access-banner strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:1rem;
     }
 
-    .rating-stars{
-      display:flex;
-      gap:8px;
-      margin-bottom:10px;
-      flex-wrap:wrap;
-    }
-
-    .rating-star{
-      border:none;
-      background:transparent;
-      color:rgba(255,255,255,.22);
-      font-size:2rem;
-      line-height:1;
-      cursor:pointer;
-      transition:transform .15s ease, color .15s ease;
-      padding:0;
-    }
-
-    .rating-star:hover{
-      transform:scale(1.08);
-    }
-
-    .rating-star.active{
-      color:#ffd54a;
-    }
-
-    .rating-meta{
-      margin:0 0 8px;
-      color:#b8c4da;
+    .access-banner span{
+      display:block;
+      color:var(--muted);
+      line-height:1.65;
       font-size:.95rem;
-    }
-
-    .rating-status{
-      margin:0;
-      color:#8ea3c8;
-      font-size:.92rem;
-      line-height:1.5;
     }
 
     .hero-actions{
@@ -655,6 +786,47 @@
       max-width:720px;
     }
 
+    .premium-details{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .premium-pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    .premium-note{
+      margin-top:16px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .premium-note strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:1rem;
+    }
+
+    .premium-note span{
+      display:block;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.96rem;
+    }
+
     .error-box{
       width:var(--container);
       margin:48px auto;
@@ -693,7 +865,8 @@
     }
 
     @media (max-width: 900px){
-      .hero-meta{
+      .hero-meta,
+      .value-strip{
         grid-template-columns:1fr;
       }
 
@@ -705,6 +878,22 @@
     @media (max-width: 680px){
       :root{
         --container:min(100% - 18px, 1000px);
+      }
+
+      .page-header-inner{
+        align-items:flex-start;
+      }
+
+      .brand-logo{
+        width:124px;
+      }
+
+      .brand-copy strong{
+        font-size:.64rem;
+      }
+
+      .brand-copy span{
+        font-size:.40rem;
       }
 
       .hero{
@@ -738,6 +927,16 @@
       .premium-box{
         padding:20px 18px;
       }
+
+      .header-actions{
+        width:100%;
+      }
+
+      .back-link,
+      .user-chip{
+        width:100%;
+        justify-content:center;
+      }
     }
   </style>
 </head>
@@ -753,7 +952,25 @@
 
   <script src="./data.js"></script>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
+      authDomain: "nebula-1955f.firebaseapp.com",
+      projectId: "nebula-1955f",
+      storageBucket: "nebula-1955f.firebasestorage.app",
+      messagingSenderId: "736722257829",
+      appId: "1:736722257829:web:605cab7fde553470454a4c",
+      measurementId: "G-BTF17CDGM7"
+    };
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const db = getFirestore(firebaseApp);
+
     const params = new URLSearchParams(window.location.search);
     const novelId = params.get("id");
     const app = document.getElementById("app");
@@ -780,24 +997,92 @@
       });
     }
 
-    if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
-      app.innerHTML = `
-        <section class="error-box">
-          <h1>Novela no encontrada</h1>
-          <p>
-            No se encontró una novela asociada a este enlace. Revisa el parámetro
-            <strong>id</strong> o vuelve al catálogo principal.
-          </p>
-          <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
-        </section>
-      `;
-    } else {
+    function getLocalUserName(){
+      try{
+        const raw = localStorage.getItem("nebula-user-profile");
+        if (!raw) return "Mi espacio";
+        const parsed = JSON.parse(raw);
+        return parsed?.name || "Mi espacio";
+      }catch{
+        return "Mi espacio";
+      }
+    }
+
+    function getLocalUserIcon(){
+      try{
+        const raw = localStorage.getItem("nebula-user-profile");
+        if (!raw) return "🌌";
+        const parsed = JSON.parse(raw);
+        return parsed?.icon || "🌌";
+      }catch{
+        return "🌌";
+      }
+    }
+
+    async function getUserAccessState(user){
+      if (!user) {
+        return {
+          isLogged: false,
+          isPremium: false,
+          plan: "free",
+          subscription: "free"
+        };
+      }
+
+      try{
+        const userRef = doc(db, "users", user.uid);
+        const snap = await getDoc(userRef);
+
+        if (!snap.exists()) {
+          return {
+            isLogged: true,
+            isPremium: false,
+            plan: "free",
+            subscription: "free"
+          };
+        }
+
+        const data = snap.data();
+        const plan = String(data.plan || "free").toLowerCase();
+        const subscription = String(data.subscription || plan || "free").toLowerCase();
+        const isPremium = plan === "premium" || subscription === "premium";
+
+        return {
+          isLogged: true,
+          isPremium,
+          plan,
+          subscription
+        };
+      }catch(error){
+        console.error("Error leyendo acceso del usuario:", error);
+        return {
+          isLogged: true,
+          isPremium: false,
+          plan: "free",
+          subscription: "free"
+        };
+      }
+    }
+
+    function renderNovel(accessState){
+      if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
+        app.innerHTML = `
+          <section class="error-box">
+            <h1>Novela no encontrada</h1>
+            <p>
+              No se encontró una novela asociada a este enlace. Revisa el parámetro
+              <strong>id</strong> o vuelve al catálogo principal.
+            </p>
+            <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
+          </section>
+        `;
+        return;
+      }
+
       const novel = window.NEBULA_NOVELS[novelId];
       const chapters = getOrderedChapters(novel.chapters);
       const freeChapters = Number(novel.freeChapters ?? 3);
-      const paidKey = "paid-" + novelId;
       const progressKey = "nebula-progress-" + novelId;
-      const paid = localStorage.getItem(paidKey) === "true";
 
       if (!chapters.length) {
         app.innerHTML = `
@@ -810,219 +1095,290 @@
             <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
           </section>
         `;
-      } else {
-        function getChapterPath(chapter){
-          const seasonFolder = chapter.season || novel.defaultSeason || "temporada1";
-          return `./${novel.baseFolder}/${seasonFolder}/capitulo${chapter.num}.html`;
+        return;
+      }
+
+      function getChapterPath(chapter){
+        const seasonFolder = chapter.season || novel.defaultSeason || "temporada1";
+        return `./${novel.baseFolder}/${seasonFolder}/capitulo${chapter.num}.html`;
+      }
+
+      function getContinuePath(){
+        return localStorage.getItem(progressKey) || getChapterPath(chapters[0]);
+      }
+
+      function saveInitialProgress(){
+        if (!localStorage.getItem(progressKey)) {
+          localStorage.setItem(progressKey, getChapterPath(chapters[0]));
         }
+      }
 
-        function getContinuePath(){
-          return localStorage.getItem(progressKey) || getChapterPath(chapters[0]);
-        }
+      function chapterIsAccessible(index){
+        const position = index + 1;
+        if (accessState.isPremium) return true;
+        return position <= freeChapters;
+      }
 
-        function saveInitialProgress(){
-          if (!localStorage.getItem(progressKey)) {
-            localStorage.setItem(progressKey, getChapterPath(chapters[0]));
-          }
-        }
+      function buildChapterCard(chapter, index){
+        const position = index + 1;
+        const isFree = position <= freeChapters;
+        const isAccessible = chapterIsAccessible(index);
+        const isLocked = !isAccessible;
 
-        function buildChapterCard(chapter, index){
-          const position = index + 1;
-          const isFree = position <= freeChapters;
-          const isLocked = position > freeChapters && !paid;
+        const statusClass = isLocked
+          ? "status-locked"
+          : isFree
+            ? "status-free"
+            : "status-premium";
 
-          const statusClass = isLocked
-            ? "status-locked"
-            : isFree
-              ? "status-free"
-              : "status-premium";
+        const statusText = isLocked
+          ? "Bloqueado"
+          : isFree
+            ? "Gratis"
+            : "Premium";
 
-          const statusText = isLocked
-            ? "Bloqueado"
-            : isFree
-              ? "Gratis"
-              : "Premium";
+        const chapterPath = getChapterPath(chapter);
 
-          const chapterPath = getChapterPath(chapter);
-
-          return `
-            <article class="chapter-card ${isLocked ? "locked" : ""}">
-              <div class="chapter-lock-target">
-                <div class="chapter-card-top">
-                  <span class="chapter-number">
-                    ${escapeHtml(chapter.seasonLabel || chapter.season || novel.defaultSeasonLabel || "Temporada 1")} · Capítulo ${escapeHtml(chapter.num)}
-                  </span>
-                  <span class="chapter-status ${statusClass}">${statusText}</span>
-                </div>
-
-                <h3>${escapeHtml(chapter.title)}</h3>
-                <p>${escapeHtml(chapter.description)}</p>
-
-                <div class="chapter-actions">
-                  ${
-                    isLocked
-                      ? `<span class="chapter-link secondary">Disponible con premium</span>`
-                      : `<a class="chapter-link primary" href="${chapterPath}" data-chapter-path="${chapterPath}">Leer capítulo</a>`
-                  }
-                </div>
+        return `
+          <article class="chapter-card ${isLocked ? "locked" : ""}">
+            <div class="chapter-lock-target">
+              <div class="chapter-card-top">
+                <span class="chapter-number">
+                  ${escapeHtml(chapter.seasonLabel || chapter.season || novel.defaultSeasonLabel || "Temporada 1")} · Capítulo ${escapeHtml(chapter.num)}
+                </span>
+                <span class="chapter-status ${statusClass}">${statusText}</span>
               </div>
-            </article>
-          `;
-        }
 
-        app.innerHTML = `
-          <header class="page-header">
-            <div class="container page-header-inner">
+              <h3>${escapeHtml(chapter.title)}</h3>
+              <p>${escapeHtml(chapter.description)}</p>
+
+              <div class="chapter-actions">
+                ${
+                  isLocked
+                    ? `<a class="chapter-link secondary" href="../login.html">Hazte premium o inicia sesión</a>`
+                    : `<a class="chapter-link primary" href="${chapterPath}" data-chapter-path="${chapterPath}">Leer capítulo</a>`
+                }
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      const accessTitle = accessState.isPremium
+        ? "Tu acceso premium está activo"
+        : accessState.isLogged
+          ? "Tu cuenta está en modo free"
+          : "Estás explorando como visitante";
+
+      const accessText = accessState.isPremium
+        ? "Puedes leer todos los capítulos de esta novela sin restricciones."
+        : accessState.isLogged
+          ? `Tienes acceso gratis a los primeros ${freeChapters} capítulos. El resto se desbloquea con Premium.`
+          : `Puedes leer gratis los primeros ${freeChapters} capítulos. Para seguir, inicia sesión y luego activa Premium o compra acceso cuando conectemos pagos.`;
+
+      const accessStateLabel = accessState.isPremium
+        ? "Historia desbloqueada"
+        : `Solo primeros ${freeChapters} capítulos`;
+
+      const mainActionLabel = accessState.isPremium
+        ? "Seguir leyendo"
+        : "Comenzar lectura";
+
+      const premiumBtnLabel = accessState.isPremium
+        ? "Ya eres Premium"
+        : "Hazte Premium $6.990";
+
+      app.innerHTML = `
+        <header class="page-header">
+          <div class="container page-header-inner">
+            <div class="brand-wrap">
+              <a class="brand-link" href="../index.html" aria-label="Volver a Nébula">
+                <img class="brand-logo" src="../assets/logo/nebula-logo.png" alt="Logo Nébula" />
+                <div class="brand-copy">
+                  <strong>NÉBULA</strong>
+                  <span>Historias por capítulos</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="header-actions">
               <a class="back-link" href="../index.html">← Volver a Nébula</a>
               <div class="mini-badge">Lectura por capítulos</div>
+              <div class="user-chip">${escapeHtml(getLocalUserIcon())} ${escapeHtml(getLocalUserName())}</div>
             </div>
-          </header>
+          </div>
+        </header>
 
-          <main>
-            <section class="hero">
-              <div class="container hero-grid">
-                <div class="hero-cover-card">
-                  <div class="hero-cover-wrap">
-                    <img
-                      class="hero-cover"
-                      src="${escapeHtml(novel.cover)}"
-                      alt="${escapeHtml(novel.title)}"
-                    />
-                  </div>
-                </div>
-
-                <div class="hero-content">
-                  <div class="story-tags">
-                    ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
-                    <span>${chapters.length} capítulos</span>
-                  </div>
-
-                  <h1>${escapeHtml(novel.title)}</h1>
-
-                  <p class="story-description">${escapeHtml(novel.description)}</p>
-
-                  <div class="hero-meta">
-                    <div class="meta-card">
-                      <small>Lectura gratis</small>
-                      <strong>Primeros ${freeChapters} capítulos</strong>
-                    </div>
-
-                    <div class="meta-card">
-                      <small>Acceso completo</small>
-                      <strong>${escapeHtml(novel.price || "$1.500 CLP")}</strong>
-                    </div>
-
-                    <div class="meta-card">
-                      <small>Estado</small>
-                      <strong id="accessState">${paid ? "Historia desbloqueada" : `Solo primeros ${freeChapters} capítulos`}</strong>
-                    </div>
-                  </div>
-
-                  <section class="novel-rating-box">
-                    <h3>Valora esta novela</h3>
-
-                    <div id="ratingStars" class="rating-stars">
-                      <button class="rating-star" data-value="1" type="button">★</button>
-                      <button class="rating-star" data-value="2" type="button">★</button>
-                      <button class="rating-star" data-value="3" type="button">★</button>
-                      <button class="rating-star" data-value="4" type="button">★</button>
-                      <button class="rating-star" data-value="5" type="button">★</button>
-                    </div>
-
-                    <p class="rating-meta">
-                      Promedio: <strong id="ratingAverage">0.0</strong>
-                      · Votos: <strong id="ratingTotal">0</strong>
-                    </p>
-
-                    <p id="ratingStatus" class="rating-status">Cargando votación...</p>
-                  </section>
-
-                  <div class="hero-actions">
-                    <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">Comenzar lectura</a>
-                    <button class="btn btn-secondary" type="button" id="continueBtn">Seguir leyendo</button>
-                  </div>
+        <main>
+          <section class="hero">
+            <div class="container hero-grid">
+              <div class="hero-cover-card">
+                <div class="hero-cover-wrap">
+                  <img
+                    class="hero-cover"
+                    src="${escapeHtml(novel.cover)}"
+                    alt="${escapeHtml(novel.title)}"
+                  />
                 </div>
               </div>
-            </section>
 
-            <section class="chapters-section">
-              <div class="container">
-                <div class="section-head">
-                  <div>
-                    <h2>Capítulos disponibles</h2>
+              <div class="hero-content">
+                <div class="story-tags">
+                  ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
+                  <span>${chapters.length} capítulos</span>
+                </div>
+
+                <h1>${escapeHtml(novel.title)}</h1>
+
+                <p class="story-description">${escapeHtml(novel.description)}</p>
+
+                <div class="hero-meta">
+                  <div class="meta-card">
+                    <small>Lectura gratis</small>
+                    <strong>Primeros ${freeChapters} capítulos</strong>
                   </div>
 
-                  <p class="section-note">
-                    Los primeros ${freeChapters} capítulos están disponibles gratis.
-                    Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
+                  <div class="meta-card">
+                    <small>Acceso completo</small>
+                    <strong>${escapeHtml(novel.price || "$1.500 CLP")} o Premium</strong>
+                  </div>
+
+                  <div class="meta-card">
+                    <small>Estado</small>
+                    <strong id="accessState">${accessStateLabel}</strong>
+                  </div>
+                </div>
+
+                <div class="value-strip">
+                  <div class="value-card">
+                    <small>Pago</small>
+                    <strong>Mercado Pago</strong>
+                  </div>
+
+                  <div class="value-card">
+                    <small>Acceso</small>
+                    <strong>Premium desbloquea toda la novela</strong>
+                  </div>
+
+                  <div class="value-card">
+                    <small>Experiencia</small>
+                    <strong>Lectura optimizada para móvil, tablet y PC</strong>
+                  </div>
+                </div>
+
+                <section class="weekly-banner">
+                  <div class="weekly-top">
+                    <div class="weekly-chip">
+                      <span class="weekly-dot"></span>
+                      Plataforma activa
+                    </div>
+
+                    <div class="weekly-chip">
+                      Membresía con valor constante
+                    </div>
+                  </div>
+
+                  <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
+
+                  <p>
+                    Nébula no se queda quieta. Tu acceso premium no solo desbloquea esta historia:
+                    también te conecta a una plataforma que seguirá creciendo cada semana con
+                    nuevas novelas para mantener viva la membresía.
                   </p>
-                </div>
+                </section>
 
-                <div class="chapters-grid" id="chaptersGrid">
-                  ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
-                </div>
+                <section class="access-banner">
+                  <strong>${accessTitle}</strong>
+                  <span>${accessText}</span>
+                </section>
 
-                <div class="premium-box" id="premiumBox">
-                  <div>
-                    <h3>Desbloquea la historia completa</h3>
-                    <p>
-                      Continúa leyendo sin restricciones y accede a todos los capítulos de
-                      ${escapeHtml(novel.title)}.
-                    </p>
-                  </div>
-
-                  <button class="btn btn-primary" type="button" id="buyBtn">
-                    ${paid ? "Historia ya desbloqueada" : "Desbloquear historia completa"}
-                  </button>
+                <div class="hero-actions">
+                  <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">${mainActionLabel}</a>
+                  <button class="btn btn-secondary" type="button" id="continueBtn">Seguir donde ibas</button>
                 </div>
               </div>
-            </section>
-          </main>
+            </div>
+          </section>
 
-          <div class="footer-space"></div>
-        `;
+          <section class="chapters-section">
+            <div class="container">
+              <div class="section-head">
+                <div>
+                  <h2>Capítulos disponibles</h2>
+                </div>
 
-        saveInitialProgress();
+                <p class="section-note">
+                  Los primeros ${freeChapters} capítulos están disponibles gratis.
+                  Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
+                </p>
+              </div>
 
-        const continueBtn = document.getElementById("continueBtn");
-        const buyBtn = document.getElementById("buyBtn");
-        const startBtn = document.getElementById("startBtn");
-        const accessState = document.getElementById("accessState");
+              <div class="chapters-grid" id="chaptersGrid">
+                ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
+              </div>
 
-        startBtn.addEventListener("click", () => {
-          localStorage.setItem(progressKey, getChapterPath(chapters[0]));
+              <div class="premium-box" id="premiumBox">
+                <div>
+                  <h3>Desbloquea la historia completa</h3>
+                  <p>
+                    Continúa leyendo sin restricciones y accede a todos los capítulos de
+                    ${escapeHtml(novel.title)}.
+                  </p>
+
+                  <div class="premium-details">
+                    <span class="premium-pill">Premium mensual $6.990</span>
+                    <span class="premium-pill">Pago con Mercado Pago</span>
+                    <span class="premium-pill">Más adelante: compra individual ${escapeHtml(novel.price || "$1.500 CLP")}</span>
+                  </div>
+
+                  <div class="premium-note">
+                    <strong>En este paso estamos bloqueando bien el contenido</strong>
+                    <span>
+                      Después conectaremos la compra individual por novela y el backend real de pago,
+                      pero desde ya la experiencia queda separada entre visitante, free y premium.
+                    </span>
+                  </div>
+                </div>
+
+                ${
+                  accessState.isPremium
+                    ? `<button class="btn btn-primary" type="button" disabled>${premiumBtnLabel}</button>`
+                    : `<a class="btn btn-primary" href="../login.html">${premiumBtnLabel}</a>`
+                }
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <div class="footer-space"></div>
+      `;
+
+      saveInitialProgress();
+
+      const continueBtn = document.getElementById("continueBtn");
+      const startBtn = document.getElementById("startBtn");
+
+      startBtn.addEventListener("click", () => {
+        localStorage.setItem(progressKey, getChapterPath(chapters[0]));
+      });
+
+      continueBtn.addEventListener("click", () => {
+        window.location.href = getContinuePath();
+      });
+
+      document.querySelectorAll("[data-chapter-path]").forEach(link => {
+        link.addEventListener("click", (e) => {
+          localStorage.setItem(progressKey, e.currentTarget.dataset.chapterPath);
         });
+      });
 
-        continueBtn.addEventListener("click", () => {
-          window.location.href = getContinuePath();
-        });
-
-        document.querySelectorAll("[data-chapter-path]").forEach(link => {
-          link.addEventListener("click", (e) => {
-            localStorage.setItem(progressKey, e.currentTarget.dataset.chapterPath);
-          });
-        });
-
-        buyBtn.addEventListener("click", () => {
-          if (localStorage.getItem(paidKey) === "true") return;
-          localStorage.setItem(paidKey, "true");
-          if (accessState) accessState.textContent = "Historia desbloqueada";
-          buyBtn.textContent = "Historia ya desbloqueada";
-          location.reload();
-        });
-
-        document.title = `${novel.title} | Nébula`;
-      }
+      document.title = `${novel.title} | Nébula`;
     }
-  </script>
 
-  <script type="module">
-    import { initNovelRating } from "./js/rating-system.js";
-
-    const params = new URLSearchParams(window.location.search);
-    const novelId = params.get("id");
-
-    initNovelRating({ novelId });
+    onAuthStateChanged(auth, async (user) => {
+      const accessState = await getUserAccessState(user);
+      renderNovel(accessState);
+    });
   </script>
 
   <script>
