@@ -1155,25 +1155,20 @@
       }
     }
 
-    function renderMercadoPagoBrand(){
-      return `
-        <div class="payment-brand">
-          <div class="mp-logo" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#00B1EA"/>
-              <ellipse cx="32" cy="32" rx="22" ry="14" fill="#FFE600"/>
-              <path d="M21 33c2.8-4.1 6.2-6.1 10.2-6.1c2.8 0 5.1 1 7.2 3.1l2 2c1.1 1.1 2.2 1.7 3.5 1.7c1.3 0 2.6-.6 4.1-1.8" stroke="#0D3768" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M43 31c-2.8 4.1-6.2 6.1-10.2 6.1c-2.8 0-5.1-1-7.2-3.1l-2-2c-1.1-1.1-2.2-1.7-3.5-1.7c-1.3 0-2.6.6-4.1 1.8" stroke="#0D3768" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="payment-brand-copy">
-            <strong>Pago seguro con Mercado Pago</strong>
-            <span>Checkout confiable para novela individual y suscripción premium.</span>
-          </div>
-        </div>
-      `;
-    }
+function renderMercadoPagoBrand(){
+  return `
+    <div class="payment-brand">
+      <div class="mp-logo">
+        <img src="../assets/covers/mercado-pago.png" alt="Mercado Pago" />
+      </div>
 
+      <div class="payment-brand-copy">
+        <strong>Pago seguro con Mercado Pago</strong>
+        <span>Checkout confiable para novela individual y suscripción premium.</span>
+      </div>
+    </div>
+  `;
+}
     function renderNovel(accessState){
       if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
         app.innerHTML = `
