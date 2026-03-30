@@ -33,6 +33,8 @@
       --gold:#ffd54a;
       --gold-2:#ffbf1f;
       --green:#4ee7a8;
+      --danger:#ff5d5d;
+      --danger-2:#ff2e2e;
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --shadow-soft:0 18px 46px rgba(0,0,0,.24);
       --radius:26px;
@@ -588,11 +590,17 @@
       backdrop-filter:blur(10px);
     }
 
+    .btn-launch{
+      color:#fff;
+      background:linear-gradient(135deg, var(--danger), var(--danger-2));
+      box-shadow:0 18px 34px rgba(255,46,46,.26);
+    }
+
     .payment-buttons{
       display:flex;
       flex-direction:column;
       gap:12px;
-      min-width:min(100%, 320px);
+      min-width:min(100%, 340px);
     }
 
     .chapters-section{
@@ -813,6 +821,24 @@
       font-size:.9rem;
     }
 
+    .premium-pill.launch{
+      background:linear-gradient(135deg, var(--danger), var(--danger-2));
+      border-color:rgba(255,255,255,.12);
+      color:#fff;
+      box-shadow:0 12px 24px rgba(255,46,46,.20);
+    }
+
+    .premium-pill.strike{
+      text-decoration:line-through;
+      opacity:.6;
+    }
+
+    .premium-pill.gold{
+      color:#ffd54a;
+      border-color:rgba(255,213,74,.18);
+      background:rgba(255,213,74,.07);
+    }
+
     .premium-note{
       margin-top:16px;
       padding:18px;
@@ -832,6 +858,53 @@
       color:var(--muted);
       line-height:1.7;
       font-size:.96rem;
+    }
+
+    .payment-brand{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.08);
+      width:max-content;
+      max-width:100%;
+    }
+
+    .mp-logo{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      background:#00b1ea;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 10px 20px rgba(0,177,234,.20);
+      flex-shrink:0;
+      overflow:hidden;
+    }
+
+    .mp-logo svg{
+      width:34px;
+      height:34px;
+      display:block;
+    }
+
+    .payment-brand-copy strong{
+      display:block;
+      font-size:.98rem;
+      line-height:1.1;
+      color:#fff;
+    }
+
+    .payment-brand-copy span{
+      display:block;
+      color:var(--muted);
+      font-size:.88rem;
+      margin-top:4px;
+      line-height:1.35;
     }
 
     .error-box{
@@ -949,6 +1022,10 @@
         min-width:100%;
         width:100%;
       }
+
+      .payment-brand{
+        width:100%;
+      }
     }
   </style>
 </head>
@@ -970,13 +1047,13 @@
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
-      authDomain: "nebula-1955f.firebaseapp.com",
-      projectId: "nebula-1955f",
-      storageBucket: "nebula-1955f.firebasestorage.app",
-      messagingSenderId: "736722257829",
-      appId: "1:736722257829:web:605cab7fde553470454a4c",
-      measurementId: "G-BTF17CDGM7"
+      apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
+      authDomain: "dyh-nebula.firebaseapp.com",
+      projectId: "dyh-nebula",
+      storageBucket: "dyh-nebula.firebasestorage.app",
+      messagingSenderId: "230506596749",
+      appId: "1:230506596749:web:d7ffcf38de039c9629d5c4",
+      measurementId: "G-KD5ZRFR8C9"
     };
 
     const firebaseApp = initializeApp(firebaseConfig);
@@ -1076,6 +1153,25 @@
           subscription: "free"
         };
       }
+    }
+
+    function renderMercadoPagoBrand(){
+      return `
+        <div class="payment-brand">
+          <div class="mp-logo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#00B1EA"/>
+              <ellipse cx="32" cy="32" rx="22" ry="14" fill="#FFE600"/>
+              <path d="M21 33c2.8-4.1 6.2-6.1 10.2-6.1c2.8 0 5.1 1 7.2 3.1l2 2c1.1 1.1 2.2 1.7 3.5 1.7c1.3 0 2.6-.6 4.1-1.8" stroke="#0D3768" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M43 31c-2.8 4.1-6.2 6.1-10.2 6.1c-2.8 0-5.1-1-7.2-3.1l-2-2c-1.1-1.1-2.2-1.7-3.5-1.7c-1.3 0-2.6.6-4.1 1.8" stroke="#0D3768" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="payment-brand-copy">
+            <strong>Pago seguro con Mercado Pago</strong>
+            <span>Checkout confiable para novela individual y suscripción premium.</span>
+          </div>
+        </div>
+      `;
     }
 
     function renderNovel(accessState){
@@ -1231,8 +1327,8 @@
       const accessText = accessState.isPremium
         ? "Puedes leer todos los capítulos de esta novela sin restricciones."
         : accessState.isLogged
-          ? `Tienes acceso gratis a los primeros ${freeChapters} capítulos. El resto se desbloquea con Premium.`
-          : `Puedes leer gratis los primeros ${freeChapters} capítulos. Para seguir, inicia sesión y luego activa Premium o compra acceso cuando conectemos pagos.`;
+          ? `Tienes acceso gratis a los primeros ${freeChapters} capítulos. El resto se desbloquea con compra individual o Premium.`
+          : `Puedes leer gratis los primeros ${freeChapters} capítulos. Para seguir, inicia sesión y luego activa Premium o compra esta novela.`;
 
       const accessStateLabel = accessState.isPremium
         ? "Historia desbloqueada"
@@ -1244,7 +1340,7 @@
 
       const premiumBtnLabel = accessState.isPremium
         ? "Ya eres Premium"
-        : "Hazte Premium $6.990";
+        : "🔥 Obtener Premium $4.990";
 
       app.innerHTML = `
         <header class="page-header">
@@ -1297,8 +1393,8 @@
                   </div>
 
                   <div class="meta-card">
-                    <small>Acceso completo</small>
-                    <strong>${escapeHtml(novel.price || "$1.500 CLP")} o Premium</strong>
+                    <small>Compra individual</small>
+                    <strong>${escapeHtml(novel.individualPriceLabel || "$1.500 CLP")}</strong>
                   </div>
 
                   <div class="meta-card">
@@ -1309,18 +1405,18 @@
 
                 <div class="value-strip">
                   <div class="value-card">
-                    <small>Pago</small>
-                    <strong>Mercado Pago</strong>
+                    <small>Premium normal</small>
+                    <strong>$6.990 mensual</strong>
                   </div>
 
                   <div class="value-card">
-                    <small>Acceso</small>
-                    <strong>Premium desbloquea toda la novela</strong>
+                    <small>Oferta actual</small>
+                    <strong>$4.990 lanzamiento</strong>
                   </div>
 
                   <div class="value-card">
-                    <small>Experiencia</small>
-                    <strong>Lectura optimizada para móvil, tablet y PC</strong>
+                    <small>Beneficio</small>
+                    <strong>Acceso premium a toda la plataforma</strong>
                   </div>
                 </div>
 
@@ -1367,7 +1463,7 @@
 
                 <p class="section-note">
                   Los primeros ${freeChapters} capítulos están disponibles gratis.
-                  Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
+                  Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con compra individual o Premium.
                 </p>
               </div>
 
@@ -1377,25 +1473,28 @@
 
               <div class="premium-box" id="premiumBox">
                 <div>
-                  <h3>Desbloquea la historia completa</h3>
+                  <h3>Desbloquea la historia completa o entra a Premium</h3>
                   <p>
                     Continúa leyendo sin restricciones y accede a todos los capítulos de
-                    ${escapeHtml(novel.title)}.
+                    ${escapeHtml(novel.title)}. También puedes entrar a Nébula Premium y desbloquear toda la plataforma.
                   </p>
 
                   <div class="premium-details">
-                    <span class="premium-pill">Premium mensual $6.990</span>
-                    <span class="premium-pill">Pago con Mercado Pago</span>
+                    <span class="premium-pill launch">🔥 Precio lanzamiento $4.990</span>
+                    <span class="premium-pill strike">Precio normal $6.990</span>
+                    <span class="premium-pill gold">Solo primeros 300 suscriptores</span>
                     <span class="premium-pill">Compra individual ${escapeHtml(novel.individualPriceLabel || "$1.500 CLP")}</span>
                   </div>
 
                   <div class="premium-note">
-                    <strong>Ya estamos listos para conectar pagos reales</strong>
+                    <strong>Oferta de lanzamiento con urgencia real</strong>
                     <span>
-                      Premium mensual desbloquea toda la plataforma y también podrás comprar
-                      esta novela de forma individual.
+                      Los primeros 300 usuarios premium entran pagando $4.990. Después de eso,
+                      el valor normal de la membresía será $6.990 al mes.
                     </span>
                   </div>
+
+                  ${renderMercadoPagoBrand()}
                 </div>
 
                 ${
@@ -1403,7 +1502,7 @@
                     ? `<button class="btn btn-primary" type="button" disabled>${premiumBtnLabel}</button>`
                     : `
                       <div class="payment-buttons">
-                        <button class="btn btn-primary" type="button" id="premiumPayBtn">${premiumBtnLabel}</button>
+                        <button class="btn btn-launch" type="button" id="premiumPayBtn">${premiumBtnLabel}</button>
                         <button class="btn btn-secondary" type="button" id="novelPayBtn">Comprar esta novela ${escapeHtml(novel.individualPriceLabel || "$1.500 CLP")}</button>
                       </div>
                     `
@@ -1454,7 +1553,7 @@
             console.error(error);
             alert(error.message || "No se pudo iniciar el pago premium.");
             premiumPayBtn.disabled = false;
-            premiumPayBtn.textContent = "Hazte Premium $6.990";
+            premiumPayBtn.textContent = "🔥 Obtener Premium $4.990";
           }
         });
       }
