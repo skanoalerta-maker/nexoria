@@ -1108,51 +1108,60 @@
       }
     }
 
-    async function getUserAccessState(user){
-      if (!user) {
-        return {
-          isLogged: false,
-          isPremium: false,
-          plan: "free",
-          subscription: "free"
-        };
-      }
+   async function getUserAccessState(user){
+  if (!user) {
+    return {
+      isLogged: false,
+      isPremium: false,
+      hasNovelAccess: false,
+      plan: "free",
+      subscription: "free"
+    };
+  }
 
-      try{
-        const userRef = doc(db, "users", user.uid);
-        const snap = await getDoc(userRef);
+  try{
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
 
-        if (!snap.exists()) {
-          return {
-            isLogged: true,
-            isPremium: false,
-            plan: "free",
-            subscription: "free"
-          };
-        }
-
-        const data = snap.data();
-        const plan = String(data.plan || "free").toLowerCase();
-        const subscription = String(data.subscription || plan || "free").toLowerCase();
-        const isPremium = plan === "premium" || subscription === "premium";
-
-        return {
-          isLogged: true,
-          isPremium,
-          plan,
-          subscription
-        };
-      }catch(error){
-        console.error("Error leyendo acceso del usuario:", error);
-        return {
-          isLogged: true,
-          isPremium: false,
-          plan: "free",
-          subscription: "free"
-        };
-      }
+    if (!snap.exists()) {
+      return {
+        isLogged: true,
+        isPremium: false,
+        hasNovelAccess: false,
+        plan: "free",
+        subscription: "free"
+      };
     }
 
+    const data = snap.data() || {};
+    const plan = String(data.plan || "free").toLowerCase();
+    const subscription = String(data.subscription || plan || "free").toLowerCase();
+    const isPremium = plan === "premium" || subscription === "premium";
+
+    const purchasedNovels = Array.isArray(data.purchasedNovels)
+      ? data.purchasedNovels
+      : [];
+
+    const hasNovelAccess = purchasedNovels.includes(novelId);
+
+    return {
+      isLogged: true,
+      isPremium,
+      hasNovelAccess,
+      plan,
+      subscription
+    };
+  }catch(error){
+    console.error("Error leyendo acceso del usuario:", error);
+    return {
+      isLogged: true,
+      isPremium: false,
+      hasNovelAccess: false,
+      plan: "free",
+      subscription: "free"
+    };
+  }
+}
 function renderMercadoPagoBrand(){
   return `
     <div class="payment-brand">
