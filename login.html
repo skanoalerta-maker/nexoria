@@ -235,7 +235,7 @@
     .btn:hover{ transform:translateY(-1px); }
     .btn-primary{ color:#fff; background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%); box-shadow:0 18px 34px rgba(38,121,255,.24); }
     .btn-primary:hover{ box-shadow:0 20px 36px rgba(38,121,255,.30); }
-    .btn-secondary{ color:#fff; background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); backdrop-filter:blur(10px); }
+    .btn-secondary{ color:#fff; background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); }
 
     .divider{ display:flex; align-items:center; gap:12px; color:var(--muted-2); font-size:.9rem; margin:4px 0; }
     .divider::before,.divider::after{ content:""; flex:1; height:1px; background:rgba(255,255,255,.08); }
@@ -289,7 +289,7 @@
 
         <p>
           Regístrate para guardar tu progreso, seguir leyendo desde cualquier
-          dispositivo y prepararte para desbloquear temporadas y capítulos premium.
+          dispositivo y mantener tu cuenta lista para desbloquear capítulos y temporadas premium.
         </p>
 
         <div class="benefits">
@@ -304,8 +304,8 @@
           </div>
 
           <div class="benefit">
-            <small>Próximo paso</small>
-            <strong>Tu cuenta quedará lista para compras y biblioteca premium.</strong>
+            <small>Preparado para comprar</small>
+            <strong>Tu sesión quedará lista para pagar y desbloquear historias premium.</strong>
           </div>
         </div>
 
@@ -467,7 +467,7 @@
         </div>
 
         <p class="footer-help">
-          Al continuar, tu cuenta quedará vinculada a Nébula para futuras funciones como biblioteca, compras y progreso sincronizado.
+          Al continuar, tu cuenta quedará vinculada a Nébula para funciones como biblioteca, compras y progreso sincronizado.
         </p>
       </section>
     </div>
@@ -614,6 +614,16 @@
       });
     }
 
+    function savePurchaseIdentity(user) {
+      localStorage.setItem("nebula_user_uid", user.uid || "");
+      localStorage.setItem("nebula_user_email", user.email || "");
+    }
+
+    function clearPurchaseIdentity() {
+      localStorage.removeItem("nebula_user_uid");
+      localStorage.removeItem("nebula_user_email");
+    }
+
     paintAvatarPreviews();
 
     function showStatus(message, type = "success") {
@@ -713,6 +723,13 @@
       const data = snap.data();
       const readCount = Array.isArray(data.readChapters) ? data.readChapters.length : 0;
 
+      savePurchaseIdentity(user);
+
+      localStorage.setItem("nebula-user-profile", JSON.stringify({
+        name: data.name || user.displayName || "Lector Nébula",
+        icon: data.avatar || "navigator"
+      }));
+
       sessionAvatar.innerHTML = renderAvatarMarkup(data.avatar || "navigator");
       sessionName.textContent = data.name || user.displayName || "Lector Nébula";
       sessionEmail.textContent = data.email || user.email || "";
@@ -743,6 +760,7 @@
       try {
         const cred = await signInWithEmailAndPassword(auth, email, password);
         await ensureUserDocument(cred.user);
+        savePurchaseIdentity(cred.user);
         showStatus("Sesión iniciada correctamente.", "success");
       } catch (error) {
         showStatus(getFriendlyError(error), "error");
@@ -773,6 +791,7 @@
           readChapters: []
         });
 
+        savePurchaseIdentity(cred.user);
         showStatus("Cuenta creada correctamente. Ya puedes entrar a tu universo Nébula.", "success");
       } catch (error) {
         showStatus(getFriendlyError(error), "error");
@@ -794,6 +813,7 @@
           readChapters: []
         });
 
+        savePurchaseIdentity(result.user);
         showStatus("Acceso con Google completado correctamente.", "success");
       } catch (error) {
         showStatus(getFriendlyError(error), "error");
@@ -806,6 +826,8 @@
     logoutBtn.addEventListener("click", async () => {
       try {
         await signOut(auth);
+        clearPurchaseIdentity();
+        localStorage.removeItem("nebula-user-profile");
         showAuthMode();
         showStatus("Sesión cerrada correctamente.", "success");
       } catch (error) {
@@ -822,6 +844,7 @@
           showStatus("Tu sesión está activa, pero hubo un problema cargando tu perfil.", "error");
         }
       } else {
+        clearPurchaseIdentity();
         showAuthMode();
       }
     });
