@@ -3,7 +3,6 @@ import cors from "cors";
 import admin from "firebase-admin";
 import { onRequest } from "firebase-functions/v2/https";
 import { defineSecret } from "firebase-functions/params";
-import { MercadoPagoConfig, Preference } from "mercadopago";
 
 if (!admin.apps.length) {
   admin.initializeApp();
@@ -92,41 +91,51 @@ app.post("/create-preference", async (req, res) => {
       Date.now(),
     ].join("_");
 
-    const mpClient = new MercadoPagoConfig({
-      accessToken: MP_ACCESS_TOKEN,
+    const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${MP_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({
+        items: [
+          {
+            title: String(title),
+            quantity: numericQuantity,
+            unit_price: numericPrice,
+            currency_id: "CLP",
+          },
+        ],
+        external_reference: externalReference,
+        payer: {
+          email: String(email),
+        },
+        back_urls: {
+          success: `${FRONTEND_URL}/?mp_status=success`,
+          failure: `${FRONTEND_URL}/?mp_status=failure`,
+          pending: `${FRONTEND_URL}/?mp_status=pending`,
+        },
+        auto_return: "approved",
+        notification_url: WEBHOOK_URL || undefined,
+        metadata: {
+          type,
+          novelId,
+          userId,
+          email,
+        },
+      }),
     });
 
-    const preferenceClient = new Preference(mpClient);
+    const result = await mpResponse.json();
 
-    const preferenceData = {
-      items: [
-        {
-          title: String(title),
-          quantity: numericQuantity,
-          unit_price: numericPrice,
-          currency_id: "CLP",
-        },
-      ],
-      external_reference: externalReference,
-      payer: {
-        email: String(email),
-      },
-      back_urls: {
-        success: `${FRONTEND_URL}/?mp_status=success`,
-        failure: `${FRONTEND_URL}/?mp_status=failure`,
-        pending: `${FRONTEND_URL}/?mp_status=pending`,
-      },
-      auto_return: "approved",
-      notification_url: WEBHOOK_URL || undefined,
-      metadata: {
-        type,
-        novelId,
-        userId,
-        email,
-      },
-    };
-
-    const result = await preferenceClient.create({ body: preferenceData });
+    if (!mpResponse.ok) {
+      console.error("Mercado Pago error:", result);
+      return res.status(500).json({
+        ok: false,
+        error: "No se pudo crear la preferencia de pago.",
+        detail: result,
+      });
+    }
 
     await db.collection("mp_preferences").add({
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
