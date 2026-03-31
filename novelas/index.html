@@ -1067,9 +1067,8 @@
 
     function normalizeBaseFolder(baseFolder){
       return String(baseFolder || "")
-        .replace(/^\.?\//, "")
-        .replace(/^novelas\//, "")
-        .replace(/\/+$/, "");
+       .replace(/^\.?\//, "")
+       .replace(/\/+$/, "");
     }
 
     function resolveAssetPath(path){
