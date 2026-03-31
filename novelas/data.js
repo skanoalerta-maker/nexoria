@@ -118,36 +118,35 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "no-debi-enamorarme-t2": {
-    id: "no-debi-enamorarme-t2",
-    title: "No debí enamorarme de ti — Temporada 2",
-    sagaTitle: "No debí enamorarme de ti",
-    description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
-    cover: "../assets/covers/no-debi-enamorarme.jpg",
-    baseFolder: "romance/no-debi-enamorarme",
-    defaultSeason: "temporada2",
-    defaultSeasonLabel: "Temporada 2",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 4,
-    visitas: 1300,
-    tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
-    chapters: [
-      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
-      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
-      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Las heridas del pasado siguen marcando cada paso." },
-      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "La distancia no logra apagar lo que todavía sigue vivo." },
-      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Una nueva decisión amenaza con empeorarlo todo." },
-      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "El deseo vuelve justo cuando más daño puede causar." },
-      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "La relación entra en una etapa más oscura y más intensa." },
-      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "El miedo a perderlo todo deja de ser una amenaza lejana." },
-      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Las emociones acumuladas explotan en el peor momento." },
-      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Lo que parecía control vuelve a romperse por completo." },
-      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "El cierre de temporada deja a los protagonistas frente a su verdad final." }
-    ]
-  },
-
+"no-debi-enamorarme-t2": {
+  id: "no-debi-enamorarme-t2",
+  title: "No debí enamorarme de ti — Temporada 2",
+  sagaTitle: "No debí enamorarme de ti",
+  description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
+  cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
+  baseFolder: "romance/no-debi-enamorarme",
+  defaultSeason: "temporada2",
+  defaultSeasonLabel: "Temporada 2",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 4,
+  visitas: 1300,
+  tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
+  chapters: [
+    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
+    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
+    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
+    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Las heridas del pasado siguen marcando cada paso." },
+    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "La distancia no logra apagar lo que todavía sigue vivo." },
+    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Una nueva decisión amenaza con empeorarlo todo." },
+    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "El deseo vuelve justo cuando más daño puede causar." },
+    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "La relación entra en una etapa más oscura y más intensa." },
+    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "El miedo a perderlo todo deja de ser una amenaza lejana." },
+    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Las emociones acumuladas explotan en el peor momento." },
+    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Lo que parecía control vuelve a romperse por completo." },
+    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "El cierre de temporada deja a los protagonistas frente a su verdad final." }
+  ]
+},
   "la-ultima-conexion-t1": {
     id: "la-ultima-conexion-t1",
     title: "La última conexión — Temporada 1",
