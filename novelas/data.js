@@ -37,35 +37,35 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "codigo-nebula-t2": {
-    id: "codigo-nebula-t2",
-    title: "Código Nébula — Temporada 2",
-    sagaTitle: "Código Nébula",
-    description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
-    cover: "../assets/covers/temporada2-cover.jpg",
-    baseFolder: "futurista/codigo-nebula",
-    defaultSeason: "temporada2",
-    defaultSeasonLabel: "Temporada 2",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 5,
-    visitas: 980,
-    tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
-    chapters: [
-      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
-      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Ecos residuales", description: "Viejos rastros del sistema empiezan a reaparecer en zonas que debían estar muertas." },
-      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "El observador", description: "Una nueva presencia parece mirar desde dentro con más control que antes." },
-      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Punto ciego", description: "Un sector fuera del mapa oculta respuestas que nadie estaba listo para encontrar." },
-      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Memoria falsa", description: "Los recuerdos dejan de ser confiables cuando la red empieza a reescribir versiones de la verdad." },
-      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "La segunda llave", description: "Un nuevo acceso abre puertas que parecían selladas para siempre." },
-      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "El nodo profundo", description: "Más abajo del sistema existe una capa que nadie había logrado tocar." },
-      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Frecuencia cero", description: "La señal desaparece del mundo visible y reaparece en un canal imposible." },
-      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "La red responde", description: "Nébula deja de reaccionar y comienza a actuar por voluntad propia." },
-      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Umbral", description: "El grupo descubre que cruzar cierto límite implica ya no poder volver." },
-      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Sin retorno", description: "La ofensiva final obliga a elegir entre destruir la red o desaparecer con ella." },
-      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Nébula despierta", description: "El cierre de temporada revela que el sistema nunca estuvo dormido: solo estaba esperando." }
-    ]
-  },
+"codigo-nebula-t2": {
+  id: "codigo-nebula-t2",
+  title: "Código Nébula — Temporada 2",
+  sagaTitle: "Código Nébula",
+  description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
+  cover: "../assets/covers/codigo-nebula-t2.jpg",
+  baseFolder: "futurista/codigo-nebula",
+  defaultSeason: "temporada2",
+  defaultSeasonLabel: "Temporada 2",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 980,
+  tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
+  chapters: [
+    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
+    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Ecos residuales", description: "Viejos rastros del sistema empiezan a reaparecer en zonas que debían estar muertas." },
+    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "El observador", description: "Una nueva presencia parece mirar desde dentro con más control que antes." },
+    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Punto ciego", description: "Un sector fuera del mapa oculta respuestas que nadie estaba listo para encontrar." },
+    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Memoria falsa", description: "Los recuerdos dejan de ser confiables cuando la red empieza a reescribir versiones de la verdad." },
+    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "La segunda llave", description: "Un nuevo acceso abre puertas que parecían selladas para siempre." },
+    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "El nodo profundo", description: "Más abajo del sistema existe una capa que nadie había logrado tocar." },
+    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Frecuencia cero", description: "La señal desaparece del mundo visible y reaparece en un canal imposible." },
+    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "La red responde", description: "Nébula deja de reaccionar y comienza a actuar por voluntad propia." },
+    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Umbral", description: "El grupo descubre que cruzar cierto límite implica ya no poder volver." },
+    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Sin retorno", description: "La ofensiva final obliga a elegir entre destruir la red o desaparecer con ella." },
+    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Nébula despierta", description: "El cierre de temporada revela que el sistema nunca estuvo dormido: solo estaba esperando." }
+  ]
+},
 
   "despues-de-tu-adios-t1": {
     id: "despues-de-tu-adios-t1",
