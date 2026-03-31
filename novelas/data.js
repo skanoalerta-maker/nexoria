@@ -16,7 +16,8 @@ window.NEBULA_NOVELS = {
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Código Nébula",
+    title: "Código Nébula — Temporada 1",
+    sagaTitle: "Código Nébula",
     description: "Temporada 1. Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema. A medida que avanzas, descubres que la red no solo observa: también recuerda, manipula y espera.",
     cover: "./assets/covers/nebula.jpg",
     baseFolder: "novelas/futurista/codigo-nebula",
@@ -46,7 +47,8 @@ window.NEBULA_NOVELS = {
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Código Nébula",
+    title: "Código Nébula — Temporada 2",
+    sagaTitle: "Código Nébula",
     description: "Temporada 2. Continúa la historia en una nueva temporada con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
     cover: "./assets/covers/temporada2-cover.jpg",
     baseFolder: "novelas/futurista/codigo-nebula",
@@ -71,22 +73,23 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "no-debi-enamorarme": {
-    id: "no-debi-enamorarme",
+  "no-debi-enamorarme-t1": {
+    id: "no-debi-enamorarme-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "No debí enamorarme de ti",
-    description: "Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado. Cada capítulo aprieta más la tensión entre lo que se quiere y lo que no se debería sentir.",
+    title: "No debí enamorarme de ti — Temporada 1",
+    sagaTitle: "No debí enamorarme de ti",
+    description: "Temporada 1. Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado. Cada capítulo aprieta más la tensión entre lo que se quiere y lo que no se debería sentir.",
     cover: "./assets/covers/no-debi-enamorarme.jpg",
     baseFolder: "novelas/romance/no-debi-enamorarme",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Romance", "Drama", "Pasión"],
+    tags: ["Romance", "Drama", "Pasión", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La primera mirada", description: "Todo parece normal hasta que una mirada cambia el ritmo de lo que ambos creían controlar." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Demasiado cerca", description: "La cercanía empieza a incomodar justo cuando ignorarla ya no parece una opción real." },
@@ -99,8 +102,28 @@ window.NEBULA_NOVELS = {
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La caída", description: "Las decisiones se acumulan y el punto de no retorno aparece sin aviso." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "No debí enamorarme de ti", description: "El final de temporada obliga a elegir entre protegerse o aceptar que ya no hay manera de retroceder." },
       { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La historia sigue escalando." },
-      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La historia sigue escalando." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La historia sigue escalando." }
+    ]
+  },
 
+  "no-debi-enamorarme-t2": {
+    id: "no-debi-enamorarme-t2",
+    productType: "single_novel",
+    allowIndividualPurchase: true,
+    premiumIncluded: true,
+    individualPrice: 1500,
+    individualPriceLabel: "$1.500 CLP",
+    title: "No debí enamorarme de ti — Temporada 2",
+    sagaTitle: "No debí enamorarme de ti",
+    description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
+    cover: "./assets/covers/no-debi-enamorarme.jpg",
+    baseFolder: "novelas/romance/no-debi-enamorarme",
+    defaultSeason: "temporada2",
+    defaultSeasonLabel: "Temporada 2",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
+    chapters: [
       { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
       { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "Nueva temporada, nuevas consecuencias." },
       { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Nueva temporada, nuevas consecuencias." },
@@ -116,14 +139,15 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "despues-de-tu-adios": {
-    id: "despues-de-tu-adios",
+  "despues-de-tu-adios-t1": {
+    id: "despues-de-tu-adios-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Después de tu adiós",
+    title: "Después de tu adiós — Temporada 1",
+    sagaTitle: "Después de tu adiós",
     description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida. Una historia marcada por la nostalgia, la pérdida y aquello que cuesta soltar.",
     cover: "./assets/covers/despues-de-tu-adios.jpg",
     baseFolder: "novelas/romance/despues-de-tu-adios",
@@ -131,7 +155,7 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Romance", "Emocional", "Drama"],
+    tags: ["Romance", "Emocional", "Drama", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El peso del recuerdo", description: "Cada objeto, cada rincón y cada silencio empiezan a devolver escenas que todavía duelen." },
@@ -139,14 +163,15 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "la-ultima-conexion": {
-    id: "la-ultima-conexion",
+  "la-ultima-conexion-t1": {
+    id: "la-ultima-conexion-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "La última conexión",
+    title: "La última conexión — Temporada 1",
+    sagaTitle: "La última conexión",
     description: "A las 02:17 de la madrugada, Daniel recibe mensajes desde su propio número. Lo peor no es quién escribe, sino que esos mensajes saben exactamente lo que está ocurriendo dentro de su habitación.",
     cover: "./assets/covers/la-ultima-conexion.jpg",
     baseFolder: "novelas/terror/la-ultima-conexion",
@@ -154,7 +179,7 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Terror", "Tecnológico", "Suspenso"],
+    tags: ["Terror", "Tecnológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "02:17", description: "El primer mensaje llega a una hora exacta y con una información que nadie más podría tener." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Desde mi propio número", description: "Responder parece un error, pero ignorarlo es todavía peor." },
@@ -171,14 +196,15 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "ya-habias-estado-ahi": {
-    id: "ya-habias-estado-ahi",
+  "ya-habias-estado-ahi-t1": {
+    id: "ya-habias-estado-ahi-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Ya habías estado ahí",
+    title: "Ya habías estado ahí — Temporada 1",
+    sagaTitle: "Ya habías estado ahí",
     description: "Volver a casa nunca volvió a sentirse normal. Un cajón abierto, una puerta distinta, objetos fuera de lugar. Al principio parecen detalles mínimos, hasta que entiendes algo peor: alguien ya había estado ahí.",
     cover: "./assets/covers/ya-habias-estado-ahi.jpg",
     baseFolder: "novelas/terror/ya-habias-estado-ahi",
@@ -186,7 +212,7 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Terror", "Psicológico", "Suspenso"],
+    tags: ["Terror", "Psicológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Algo no está igual", description: "Volver a casa se siente distinto desde el primer segundo, aunque todavía no hay una razón clara." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El cajón abierto", description: "Un detalle mínimo basta para sembrar la idea de que alguien tocó lo que no debía." },
@@ -201,45 +227,23 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "bajo-la-misma-lluvia": {
-    id: "bajo-la-misma-lluvia",
+  "pinochet-t1": {
+    id: "pinochet-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Bajo la misma lluvia",
-    description: "Dos vidas marcadas por heridas distintas vuelven a cruzarse en el peor momento posible. Bajo la lluvia, lo que parecía casual empieza a sentirse inevitable.",
-    cover: "./assets/covers/bajo-la-misma-lluvia.jpg",
-    baseFolder: "novelas/romance/bajo-la-misma-lluvia",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    tags: ["Romance", "Drama", "Emocional"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La lluvia de esa tarde", description: "Un encuentro inesperado bajo la lluvia despierta emociones que ambos creían enterradas." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que no dijimos", description: "Las palabras no dichas pesan más que cualquier silencio cuando el pasado vuelve a tocar la puerta." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Otra vez tú", description: "El destino insiste en cruzarlos justo cuando intentar olvidar parecía la única salida." }
-    ]
-  },
-
-  "pinochet": {
-    id: "pinochet",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Pinochet",
+    title: "Pinochet — Temporada 1",
+    sagaTitle: "Pinochet",
     description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
     cover: "./assets/covers/pinochet_nebula_portada.png",
-    baseFolder: "novelas/historia/pinochet",
+    baseFolder: "novelas/Pinochet",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Historia", "Militar", "Política"],
+    tags: ["Historia", "Militar", "Política", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "La tensión política crece." },
@@ -256,22 +260,23 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "allende": {
-    id: "allende",
+  "allende-t1": {
+    id: "allende-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "Allende",
+    title: "Allende — Temporada 1",
+    sagaTitle: "Allende",
     description: "Una historia política y humana sobre liderazgo, convicción y uno de los periodos más decisivos de la historia de Chile.",
     cover: "./assets/covers/allende_portada_nebula.png",
-    baseFolder: "novelas/historia/allende",
+    baseFolder: "novelas/allende",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Historia", "Política", "Drama"],
+    tags: ["Historia", "Política", "Drama", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Comienza una historia marcada por ideales y tensión." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Las decisiones empiezan a cambiarlo todo." },
@@ -291,22 +296,23 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "el-precio-del-silencio": {
-    id: "el-precio-del-silencio",
+  "el-precio-del-silencio-t1": {
+    id: "el-precio-del-silencio-t1",
     productType: "single_novel",
     allowIndividualPurchase: true,
     premiumIncluded: true,
     individualPrice: 1500,
     individualPriceLabel: "$1.500 CLP",
-    title: "El Precio del Silencio",
+    title: "El Precio del Silencio — Temporada 1",
+    sagaTitle: "El Precio del Silencio",
     description: "Una historia de corrupción, secretos y una red de poder que empieza a quebrarse desde dentro.",
     cover: "./assets/covers/portada-nebula.jpg",
-    baseFolder: "novelas/thriller/el-precio-del-silencio",
+    baseFolder: "novelas/Thriller de corrupción/El Precio del Silencio",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Thriller", "Corrupción", "Suspenso"],
+    tags: ["Thriller", "Corrupción", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Una grieta aparece en el sistema." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Los nombres comienzan a salir a la luz." },
