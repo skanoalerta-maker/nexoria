@@ -2682,6 +2682,16 @@
       if (raw === "premium") return "Premium";
       return "Free";
     }
+    function getLastProgressPath() {
+  const entries = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith("nebula-progress-")) {
+      entries.push(localStorage.getItem(key));
+    }
+  }
+  return entries.length ? entries[entries.length - 1] : "novelas/index.html?id=codigo-nebula-t1";
+}
 
     function resolveAvatar(user) {
       const localProfile = getLocalProfile();
