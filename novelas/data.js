@@ -204,5 +204,102 @@ window.NEBULA_NOVELS = {
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "Escapar ya no parece una opción real." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El final de temporada confirma que nada fue una coincidencia." }
     ]
+  },
+
+  "pinochet-t1": {
+    id: "pinochet-t1",
+    title: "Pinochet — Temporada 1",
+    sagaTitle: "Pinochet",
+    description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
+    cover: "./assets/covers/pinochet_nebula_portada.png",
+    baseFolder: "novelas/Pinochet",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 2000,
+    tags: ["Historia", "Militar", "Política", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "La tensión política crece." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 3", description: "La historia entra en un punto de no retorno." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La historia continúa." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La historia continúa." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La historia continúa." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La tensión alcanza un punto irreversible." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El poder se consolida mientras el país cambia para siempre." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Las consecuencias humanas ya no pueden ocultarse." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." }
+    ]
+  },
+
+  "allende-t1": {
+    id: "allende-t1",
+    title: "Allende — Temporada 1",
+    sagaTitle: "Allende",
+    description: "Una historia política y humana sobre liderazgo, convicción y uno de los periodos más decisivos de la historia de Chile.",
+    cover: "./assets/covers/allende_portada_nebula.png",
+    baseFolder: "novelas/allende",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 1800,
+    tags: ["Historia", "Política", "Drama", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Comienza una historia marcada por ideales y tensión." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Las decisiones empiezan a cambiarlo todo." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 3", description: "La presión política se vuelve insoportable." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La historia continúa." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La historia continúa." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La historia continúa." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La historia continúa." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "La historia alcanza su clímax." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La presión política y social alcanza un nivel insoportable." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Los acontecimientos avanzan hacia un desenlace histórico." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La historia entra en su etapa más oscura y decisiva." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 15", description: "El país enfrenta el peso total de sus fracturas." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "El cierre deja marcada para siempre la memoria de Chile." }
+    ]
+  },
+
+  "el-precio-del-silencio-t1": {
+    id: "el-precio-del-silencio-t1",
+    title: "El Precio del Silencio — Temporada 1",
+    sagaTitle: "El Precio del Silencio",
+    description: "Una historia de corrupción, secretos y una red de poder que empieza a quebrarse desde dentro.",
+    cover: "./assets/covers/portada-nebula.jpg",
+    baseFolder: "novelas/Thriller de corrupción/El Precio del Silencio",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 1600,
+    tags: ["Thriller", "Corrupción", "Suspenso", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Una grieta aparece en el sistema." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Los nombres comienzan a salir a la luz." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 3", description: "El silencio empieza a costar demasiado." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La red empieza a desmoronarse." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "Nadie sabe ya de qué lado está." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La investigación se intensifica." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "El costo de hablar se vuelve real." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "Las piezas encajan demasiado tarde." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La caída ya no puede detenerse." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El sistema revela su verdadero rostro." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Nada vuelve a ser igual." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La presión ya no deja espacio para errores." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Cada decisión empuja la red más cerca del colapso." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La verdad empieza a filtrarse donde más duele." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "Todo se prepara para el golpe final." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 17", description: "El cierre de la historia revela el verdadero precio del silencio." }
+    ]
   }
 };
